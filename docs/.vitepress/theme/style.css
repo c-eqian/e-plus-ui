@@ -1,0 +1,49 @@
+div[class*="vp-doc _co-utils-vue_examples_utils"] img {
+    display: initial !important;
+}
+html {
+    /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+        background-color: #f5f5f5;
+    }
+    /*定义滚动条轨道 内阴影+圆角*/
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: #f5f5f5;
+    }
+    /*定义滑块 内阴影+圆角*/
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #c8c8c8;
+    }
+}
+div[class*="vp-doc _co-utils-vue_examples_utils"] sup {
+    border-radius: 9999px;
+    border-color: #409eff;
+    margin-left: 0.5rem;
+    padding: 0 7px;
+    height: 20px;
+    background-color: #ffffff;
+    color: #409eff;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 12px;
+    line-height: 1;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+:root {
+       --text-color: var(--el-text-color-primary);
+       --text-color-light: var(--el-text-color-regular);
+       --text-color-lighter: var(--el-text-color-secondary);
+   }

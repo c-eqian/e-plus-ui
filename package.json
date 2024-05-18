@@ -10,11 +10,15 @@
       "stylelint --fix \"packages/components/src/**/*.{css,less}\""
     ]
   },
+  "workspaces": [
+    "packages/*",
+    "play",
+    "docs"
+  ],
   "scripts": {
     "build:e-ui": "gulp -f packages/components/script/build/index.ts & pnpm run --filter ./packages/utils build",
     "publish:e-ui": "gulp -f packages/components/script/publish/index.ts",
     "publish:easayestutils": "gulp -f packages/utils/publish/index.ts",
-    "docs:dev": "pnpm run --filter site docs:dev",
     "docs:build": "pnpm run --filter site docs:build",
     "docs:deploy": "pnpm run --filter site docs:deploy",
     "e-ui:dev": "pnpm run --filter ./play dev",
