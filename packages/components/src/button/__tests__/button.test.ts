@@ -7,12 +7,12 @@ describe('test button', () => {
   it('should render slot', () => {
     const wrapper = mount(button, {
       slots: {
-        default: 'easyest'
+        default: 'e-ui'
       }
     });
 
     // Assert the rendered text of the component
-    expect(wrapper.text()).toContain('easyest');
+    expect(wrapper.text()).toContain('e-ui');
   });
   it('should have class', () => {
     const wrapper = mount(button, {

@@ -1,4 +1,5 @@
 **.d.ts
-/packages/easyest
+/packages/e-ui
 dist
 node_modules
+*.config.ts

@@ -1,5 +1,5 @@
 {
-  "name": "easyest",
+  "name": "e-ui",
   "version": "1.0.7",
   "main": "lib/index.js",
   "module": "es/index.mjs",
@@ -8,21 +8,19 @@
     "lib"
   ],
   "keywords": [
-    "easyest",
+    "e-ui",
+    "vite",
     "vue3组件库"
   ],
   "sideEffects": [
     "**/*.css"
   ],
-  "author": "小月",
+  "author": "eqian",
   "license": "MIT",
   "description": "",
   "typings": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qddidi/easyest"
-  },
-  "dependencies": {
-    "@easyest/utils": "^1.0.2"
+    "url": "https://gitee.com/cyq13/e-vue-ui.git"
   }
 }

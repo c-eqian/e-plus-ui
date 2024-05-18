@@ -1,5 +1,5 @@
 {
-  "name": "easyest",
+  "name": "e-ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,13 +11,13 @@
     ]
   },
   "scripts": {
-    "build:easyest": "gulp -f packages/components/script/build/index.ts & pnpm run --filter ./packages/utils build",
-    "publish:easyest": "gulp -f packages/components/script/publish/index.ts",
+    "build:e-ui": "gulp -f packages/components/script/build/index.ts & pnpm run --filter ./packages/utils build",
+    "publish:e-ui": "gulp -f packages/components/script/publish/index.ts",
     "publish:easayestutils": "gulp -f packages/utils/publish/index.ts",
     "docs:dev": "pnpm run --filter site docs:dev",
     "docs:build": "pnpm run --filter site docs:build",
     "docs:deploy": "pnpm run --filter site docs:deploy",
-    "easyest:dev": "pnpm run --filter ./play dev",
+    "e-ui:dev": "pnpm run --filter ./play dev",
     "lint:script": "eslint --ext .js,.jsx,.vue,.ts,.tsx --fix --quiet ./",
     "lint:style": "stylelint --fix \"packages/components/src/**/*.{css,less}\"",
     "prepare": "husky install",
@@ -44,6 +44,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.9.0",
+    "lint-staged": "^15.2.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-less": "^5.0.0",

@@ -18,7 +18,7 @@
 
 ## 官网地址
 
-[Easyest](https://easyestui.github.io/easyest/)
+[Easyest](https://e-uiui.github.io/e-ui/)
 
 ## 技术交流群
 
@@ -41,13 +41,13 @@ pnpm install
 - 打包组件库与工具库
 
 ```
-pnpm run build:easyest
+pnpm run build:e-ui
 ```
 
 - 启动测试项目
 
 ```
-pnpm run easyest:dev
+pnpm run e-ui:dev
 ```
 
 - 启动静态文档站点

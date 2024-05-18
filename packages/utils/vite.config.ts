@@ -30,7 +30,7 @@ export default defineConfig({
     },
     lib: {
       entry: './index.ts',
-      name: 'easyestutils'
+      name: 'e-uiutils'
     }
   },
 
