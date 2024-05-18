@@ -1,11 +1,11 @@
 <template>
   <div
     class="demo-block"
-    :class="[blockClass, { 'hover': hovering }]"
+    :class="[blockClass, { hover: hovering }]"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
-    <div style="padding:24px" class="source-bg">
+    <div style="padding: 24px" class="source-bg">
       <slot name="source" />
     </div>
     <div ref="meta" class="meta">
@@ -22,7 +22,7 @@
       @click="isExpanded = !isExpanded"
     >
       <transition name="arrow-slide">
-        <i :class="[iconClass, { 'hovering': hovering }]" />
+        <i :class="[iconClass, { hovering: hovering }]" />
       </transition>
       <transition name="text-slide">
         <span v-show="hovering">{{ controlText }}</span>
@@ -33,7 +33,6 @@
 
 <script type="text/babel">
 export default {
-
   props: {
     jsfiddle: Object,
     default() {
@@ -59,7 +58,9 @@ export default {
     },
 
     blockClass() {
-      return `demo-${this.lang} demo-${this.$router.currentRoute.path.split('/').pop()}`;
+      return `demo-${this.lang} demo-${this.$router.currentRoute.path
+        .split('/')
+        .pop()}`;
     },
 
     iconClass() {
@@ -67,7 +68,9 @@ export default {
     },
 
     controlText() {
-      return this.isExpanded ? this.langConfig['hide-text'] : this.langConfig['show-text'];
+      return this.isExpanded
+        ? this.langConfig['hide-text']
+        : this.langConfig['show-text'];
     },
 
     codeArea() {
@@ -76,8 +79,11 @@ export default {
 
     codeAreaHeight() {
       if (this.$el.getElementsByClassName('description').length > 0) {
-        return this.$el.getElementsByClassName('description')[0].clientHeight
-            + this.$el.getElementsByClassName('sourceCode')[0].clientHeight + 20;
+        return (
+          this.$el.getElementsByClassName('description')[0].clientHeight +
+          this.$el.getElementsByClassName('sourceCode')[0].clientHeight +
+          20
+        );
       }
       return this.$el.getElementsByClassName('sourceCode')[0].clientHeight;
     }
@@ -93,8 +99,11 @@ export default {
         return;
       }
       setTimeout(() => {
-        this.scrollParent = document.querySelector('.page-component__scroll > .el-scrollbar__wrap');
-        this.scrollParent && this.scrollParent.addEventListener('scroll', this.scrollHandler);
+        this.scrollParent = document.querySelector(
+          '.page-component__scroll > .el-scrollbar__wrap'
+        );
+        this.scrollParent &&
+          this.scrollParent.addEventListener('scroll', this.scrollHandler);
         this.scrollHandler();
       }, 200);
     }
@@ -117,12 +126,14 @@ export default {
   methods: {
     scrollHandler() {
       const { top, bottom, left } = this.$refs.meta.getBoundingClientRect();
-      this.fixedControl = bottom > document.documentElement.clientHeight
-          && top + 44 <= document.documentElement.clientHeight;
+      this.fixedControl =
+        bottom > document.documentElement.clientHeight &&
+        top + 44 <= document.documentElement.clientHeight;
     },
 
     removeScrollHandler() {
-      this.scrollParent && this.scrollParent.removeEventListener('scroll', this.scrollHandler);
+      this.scrollParent &&
+        this.scrollParent.removeEventListener('scroll', this.scrollHandler);
     }
   }
 };
@@ -132,11 +143,12 @@ export default {
 .demo-block {
   border: solid 1px #ebebeb;
   border-radius: 3px;
-  transition: .2s;
+  transition: 0.2s;
   margin-bottom: 1.5rem;
 
   &.hover {
-    box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5);
+    box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
+      0 2px 4px 0 rgba(232, 237, 250, 0.5);
   }
 
   code {
@@ -149,11 +161,11 @@ export default {
 
   .source-bg {
     background-image: linear-gradient(
-            -89deg,
-            rgba(10, 18, 43, 0.4) 0%,
-            rgba(10, 18, 43, 0.5) 26%,
-            rgba(26, 33, 55, 0.6) 54%,
-            #121524 100%
+      -89deg,
+      rgba(10, 18, 43, 0.4) 0%,
+      rgba(10, 18, 43, 0.5) 26%,
+      rgba(26, 33, 55, 0.6) 54%,
+      #121524 100%
     );
   }
 
@@ -166,7 +178,7 @@ export default {
     border-top: solid 1px #eaeefb;
     overflow: hidden;
     height: 0;
-    transition: height .2s;
+    transition: height 0.2s;
   }
 
   .description {
@@ -210,7 +222,7 @@ export default {
       max-height: none;
       border-radius: 0;
       line-height: 1.8;
-      color:black;
+      color: black;
       &::before {
         content: none;
       }
@@ -239,7 +251,7 @@ export default {
     i {
       font-size: 16px;
       line-height: 44px;
-      transition: .3s;
+      transition: 0.3s;
       &.hovering {
         transform: translateX(-40px);
       }
@@ -250,12 +262,12 @@ export default {
       transform: translateX(-30px);
       font-size: 14px;
       line-height: 44px;
-      transition: .3s;
+      transition: 0.3s;
       display: inline-block;
     }
 
     &:hover {
-      color: #409EFF;
+      color: #409eff;
       background-color: #f9fafc;
     }
 
