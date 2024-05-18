@@ -16,7 +16,7 @@
     "docs"
   ],
   "scripts": {
-    "build:e-ui": "gulp -f packages/components/script/build/index.ts & pnpm run --filter ./packages/utils build",
+    "build:e-ui": "gulp -f packages/components/script/build/index.ts",
     "publish:e-ui": "gulp -f packages/components/script/publish/index.ts",
     "publish:easayestutils": "gulp -f packages/utils/publish/index.ts",
     "docs:build": "pnpm run --filter site docs:build",
