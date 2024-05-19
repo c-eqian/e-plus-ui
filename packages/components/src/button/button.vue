@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import './style/index.scss';
 import { computed } from 'vue';
-defineOptions({ name: 'ea-button' });
+defineOptions({ name: 'CzButton' });
 type ButtonProps = {
   type?: string;
   size?: string;
@@ -15,6 +15,6 @@ type ButtonProps = {
 const buttonProps = defineProps<ButtonProps>();
 
 const buttonStyle = computed(() => {
-  return { [`ea-button--${buttonProps.type}`]: buttonProps.type };
+  return { [`cz-button--${buttonProps.type}`]: buttonProps.type };
 });
 </script>
