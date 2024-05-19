@@ -27,7 +27,7 @@ module.exports = {
     'prettier/prettier': 'error',
     '@typescript-eslint/ban-ts-comment': 'off',
     "@typescript-eslint/no-explicit-any": 'off',
-    "semi": "always",
+    'semi': ["error", "always"],
     'vue/multi-word-component-names': 'off'
   }
 };
