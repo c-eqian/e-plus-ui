@@ -45,6 +45,5 @@ export const carouselProps = {
   }
 };
 export type ICarouselProps = ExtractPropTypes<typeof carouselProps>;
-export const carouselInjectionKey: InjectionKey<ICarouselProps> = Symbol(
-  'ECarousel'
-);
+export const carouselInjectionKey: InjectionKey<ICarouselProps> =
+  Symbol('ECarousel');

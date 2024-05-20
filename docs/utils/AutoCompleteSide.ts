@@ -9,18 +9,21 @@
 import fs from 'fs';
 import path from 'path';
 
-export const getFiles = (dir: string = path.resolve(__dirname, '../components')): string[] => {
+export const getFiles = (
+  dir: string = path.resolve(__dirname, '../components')
+): string[] => {
   const mdList: string[] = [];
   const isDir = (d: string) => {
     const stat = fs.statSync(d);
     if (stat.isDirectory()) {
       // 判断是不是目录
       const dirs = fs.readdirSync(d);
-      dirs.forEach((value:any) => {
+      dirs.forEach((value: any) => {
         // console.log('路径',path.resolve(dir,value));
         isDir(path.join(d, value));
       });
-    } else if (stat.isFile()) { // 判断是不是文件
+    } else if (stat.isFile()) {
+      // 判断是不是文件
       const _file = d.split('\\');
       const mdFile = _file[_file.length - 1];
       if (mdFile.endsWith('.md') && !mdFile.startsWith('install')) {
@@ -28,7 +31,9 @@ export const getFiles = (dir: string = path.resolve(__dirname, '../components'))
       }
     }
   };
-  if (fs.statSync(dir).isDirectory()) { isDir(dir); }
+  if (fs.statSync(dir).isDirectory()) {
+    isDir(dir);
+  }
   return mdList;
 };
 

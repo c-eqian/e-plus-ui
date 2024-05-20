@@ -1,4 +1,4 @@
-import run from '../../components/script/utils/run';
+import run from '../../../script/utils/run';
 import { series } from 'gulp';
 export const publishComponent = async () => {
   run('release-it', `.`);

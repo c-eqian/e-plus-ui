@@ -1,44 +1,44 @@
 // ref https://github.com/vuejs/vitepress/blob/main/src/node/markdown/plugins/highlight.ts
 // import chalk from 'chalk'
-import escapeHtml from 'escape-html'
-import prism from 'prismjs'
-import _console from 'consola'
+import escapeHtml from 'escape-html';
+import prism from 'prismjs';
+import _console from 'consola';
 // import loadLanguages from ''
 
 // prism is listed as actual dep so it's ok to require
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import loadLanguages from 'prismjs/components/index'
+import loadLanguages from 'prismjs/components/index';
 // required to make embedded highlighting work...
-loadLanguages(['markup', 'css', 'javascript'])
+loadLanguages(['markup', 'css', 'javascript']);
 
 function wrap(code: string, lang: string): string {
   if (lang === 'text') {
-    code = escapeHtml(code)
+    code = escapeHtml(code);
   }
-  return `<pre v-pre><code>${code}</code></pre>`
+  return `<pre v-pre><code>${code}</code></pre>`;
 }
 
 export const highlight = (str: string, lang: string) => {
   if (!lang) {
-    return wrap(str, 'text')
+    return wrap(str, 'text');
   }
-  lang = lang.toLowerCase()
-  const rawLang = lang
+  lang = lang.toLowerCase();
+  const rawLang = lang;
   if (lang === 'vue' || lang === 'html') {
-    lang = 'markup'
+    lang = 'markup';
   }
   if (lang === 'md') {
-    lang = 'markdown'
+    lang = 'markdown';
   }
   if (lang === 'ts') {
-    lang = 'typescript'
+    lang = 'typescript';
   }
   if (lang === 'py') {
-    lang = 'python'
+    lang = 'python';
   }
   if (!prism.languages[lang]) {
     try {
-      loadLanguages([lang])
+      loadLanguages([lang]);
     } catch {
       // eslint-disable-next-line no-console
       // _console.warn(
@@ -49,8 +49,8 @@ export const highlight = (str: string, lang: string) => {
     }
   }
   if (prism.languages[lang]) {
-    const code = prism.highlight(str, prism.languages[lang], lang)
-    return wrap(code, rawLang)
+    const code = prism.highlight(str, prism.languages[lang], lang);
+    return wrap(code, rawLang);
   }
-  return wrap(str, 'text')
-}
+  return wrap(str, 'text');
+};

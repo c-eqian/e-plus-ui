@@ -16,8 +16,8 @@
     "docs"
   ],
   "scripts": {
-    "build:e-ui": "gulp -f packages/components/script/build/index.ts",
-    "publish:e-ui": "gulp -f packages/components/script/publish/index.ts",
+    "build:e-ui": "gulp -f script/build/index.ts",
+    "publish:e-ui": "gulp -f script/publish/index.ts",
     "publish:easayestutils": "gulp -f packages/utils/publish/index.ts",
     "docs:build": "pnpm run --filter docs docs:build",
     "docs:dev": "pnpm run -C docs docs:dev",
@@ -67,6 +67,7 @@
     "vue": "^3.4.27"
   },
   "dependencies": {
+    "gulp-sass": "^5.1.0",
     "sass": "^1.77.2"
   }
 }
