@@ -53,6 +53,8 @@
     "@vueuse/core": "8.7.3",
     "cropperjs": "^1.5.12",
     "jsbarcode": "3.11.5",
+    "vue-router": "4.3.2",
+    "element-plus": "^2.7.3",
     "qrcode": "1.5.0"
   },
   "files": [

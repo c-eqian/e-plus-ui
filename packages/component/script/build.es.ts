@@ -111,7 +111,7 @@ export default (): UserConfigExport => {
           },
           assetFileNames: "[name]/index.css",
         },
-        external: ["vue"],
+        external: ["vue", 'vue-router', 'element-plus'],
       },
     },
   };

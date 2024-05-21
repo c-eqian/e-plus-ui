@@ -2,9 +2,11 @@ import type { App, Plugin } from "vue";
 
 import "./theme/index.less";
 import EpButton from "./component/button/index";
+import EpCard from "./component/card/index";
 
 const components: Record<string, Plugin> = {
   EpButton,
+  EpCard,
 };
 
 const install = (app: App, options?: any): void => {
@@ -13,7 +15,7 @@ const install = (app: App, options?: any): void => {
   }
 };
 
-export { EpButton, install };
+export { EpButton, EpCard, install };
 
 export default { install };
 

@@ -1,8 +1,8 @@
 <template>
   <div class="demo-mr">
-    <cz-card>这是卡片</cz-card>
+    <EpCard>这是卡片</EpCard>
     <div style="width: 500px; height: 600px">
-      <cz-carousel></cz-carousel>
+      <EpCard shadow="always">这是阴影卡片</EpCard>
     </div>
   </div>
 </template>
@@ -13,3 +13,5 @@
   }
 }
 </style>
+<script setup lang="ts">
+</script>

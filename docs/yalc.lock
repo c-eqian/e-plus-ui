@@ -1,9 +1,0 @@
-{
-  "version": "v1",
-  "packages": {
-    "e-plus-ui": {
-      "signature": "409f22f3353034a2f825f0daee3e597e",
-      "file": true
-    }
-  }
-}

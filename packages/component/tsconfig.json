@@ -12,6 +12,11 @@
       "esModuleInterop": true,
       "declarationDir": "../e-plus-ui/types",
       "jsx": "preserve",
+      "paths": {
+        "element-plus": ["node_modules/element-plus"],
+      },
+      "types": ["vite/client", "element-plus/global"],
+      "skipLibCheck": true,
       "lib": ["ESNext","DOM"]
     },
     "include": ["src/**/*","shims-vue.d.ts"],
