@@ -1,5 +1,13 @@
-**.d.ts
-/packages/e-ui
 dist
 node_modules
-*.config.ts
+public
+.husky
+.bin
+docs
+html
+.vscode
+.idea
+*.sh
+*.md
+vite.config.mts
+play

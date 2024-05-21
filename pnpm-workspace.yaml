@@ -1,4 +1,6 @@
 packages:
-  - "packages/**"
-  - "play"
-  - "docs"
+  - packages/*
+  - docs/*
+  - play
+ignore:
+  - 'packages/e-plus-ui/*'

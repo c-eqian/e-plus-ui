@@ -1,4 +1,25 @@
-node_modules
-cache
-es
-lib
+.DS_Store
+node_modules/
+package-lock.json
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+packages/e-plus-ui/lib
+packages/e-plus-ui/es
+packages/e-plus-ui/types
+packages/e-plus-ui/umd
+# yarn
+yarn-lock
+yarn-error.log
+
+# docs
+docs/.vitepress/cache
+.yalc
+yalc.lock
+docs/.yalc
+docs/yalc.lock

@@ -5,7 +5,8 @@ import DefaultTheme from "vitepress/theme";
 import { AntDesignContainer } from '@vitepress-demo-preview/component'
 // import '@vitepress-demo-preview/component/dist/style.css'
 import { globals } from '../vitepress';
-import cz from '@e-ui/components';
+import cz from 'e-plus-ui';
+import 'e-plus-ui/lib/index.css'
 // import '../vitepress/styles/code.scss'
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';

@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-pnpm run lint-staged
+npm run lint:prettier
+npx --no -- commitlint --edit $1

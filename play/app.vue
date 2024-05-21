@@ -1,15 +1,21 @@
-<!--
- * @Description:
- * @Date: 2023-02-09 14:28:42
- * @Author: didi
- * @LastEditTime: 2023-05-24 11:29:22
--->
 <template>
   <div>
-    <ea-button>按钮</ea-button>
-    <Button>123</Button>
+    <ep-button  type="normal">测试111</ep-button>
   </div>
+
 </template>
-<script lang="ts" setup>
-import { Button } from '@e-ui/components';
+<script setup lang="ts">
 </script>
+<style setup>
+html, body, #app{
+  width: 100%;
+  height: 100%;
+}
+div{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

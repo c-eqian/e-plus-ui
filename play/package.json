@@ -1,21 +1,14 @@
 {
-  "name": "play",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "name": "@e-ui/play",
   "scripts": {
     "dev": "vite"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "vite": "^4.1.1"
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.11"
   },
   "dependencies": {
-    "@e-ui/components": "workspace:^1.0.0",
-    "e-ui": "workspace:^1.0.5"
   }
 }

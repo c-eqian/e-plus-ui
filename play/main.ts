@@ -1,6 +1,7 @@
-import { createApp } from 'vue';
-import App from './app.vue';
-import eui from '@e-ui/components';
+import { createApp } from "vue"
+import App from './app.vue'
+import EPlusUI from '../packages/component/src/index'
 const app = createApp(App);
-app.use(eui);
-app.mount('#app');
+
+app.use(EPlusUI)
+app.mount('#app')
