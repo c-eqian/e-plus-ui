@@ -7,6 +7,6 @@
       "emitDecoratorMetadata": false,
       "types": ["vite/client", "element-plus/global"]
     },
-    "include": ["src/**/*","shims-vue.d.ts"],
+    "include": ["./src/**/*","shims-vue.d.ts"],
     "exclude": ["node_modules"]
   }
