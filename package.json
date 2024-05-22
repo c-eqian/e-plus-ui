@@ -4,7 +4,7 @@
   "workspaces": [
     "packages/*",
     "!packages/e-plus-ui",
-    "docs/*"
+    "play"
   ],
   "scripts": {
     "dev": "pnpm -C play dev",

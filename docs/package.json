@@ -23,7 +23,6 @@
     "chalk": "^4.1.2",
     "consola": "^3.2.3",
     "e-plus-ui": "file:.yalc/e-plus-ui",
-    "e-ui": "file:.yalc/e-ui",
     "element-plus": "^2.3.12",
     "escape-html": "^1.0.3",
     "markdown-it": "^13.0.1",

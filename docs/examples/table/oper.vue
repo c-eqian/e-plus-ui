@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { defineTableColumns } from 'e-plus-ui'
   import { ref } from 'vue'
   import { ElMessage } from 'element-plus'
+  import {defineTableColumns} from "e-plus-ui";
   const advTableRef = ref()
   const tableData = ref([
     {
@@ -13,7 +13,7 @@
       name: 'Tom'
     }
   ])
-  const column = defineTableColumns<typeof tableData.value[0]>([
+  const column = defineTableColumns([
     {
       label: '名称',
       prop: 'name',

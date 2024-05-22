@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import { defineTableColumns } from 'e-plus-ui'
+  import {defineTableColumns} from "e-plus-ui";
+
   const tableData = [
     {
       date: '2016-05-03',
@@ -22,7 +23,7 @@
       address: '北京',
     },
   ]
-  const column = defineTableColumns<typeof tableData[0]>([
+  const column = defineTableColumns([
     {
       label: '名称',
       prop: 'name',
