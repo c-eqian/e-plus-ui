@@ -147,7 +147,7 @@ export default defineComponent({
               if (item.type) {
                 return (
                   <EpComponent
-                    name={camelCase(`Ep-${item.type}`)}
+                    name={camelCase(`Ep-form-${item.type}`)}
                     item={{ ...item }}
                     key={item.type}
                   ></EpComponent>

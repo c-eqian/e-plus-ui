@@ -4,7 +4,7 @@ import { inject, onMounted, ref, watch } from 'vue';
 import { formContextDefault } from './model';
 import { ElSelect, ElOption } from 'element-plus';
 defineOptions({
-  name: 'EpFromSelect',
+  name: 'EpFormSelect',
 });
 interface IPropsItem {
   item: IFormItemConfig;

@@ -5,5 +5,5 @@ export { default as EpFormDateTimeRange } from './datetimerange-picker.vue';
 export { default as EpFormInput } from './input.vue';
 export { default as EpFormInputNumber } from './input-number.vue';
 export { default as EpFormRadioGroup } from './radio-group.vue';
-export { default as EpFromSelect } from './select.vue';
+export { default as EpFormSelect } from './select.vue';
 export { default as EpFormTextarea } from './textarea.vue';
