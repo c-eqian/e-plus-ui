@@ -1,8 +1,8 @@
-import { UserConfigExport } from "vite";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from "@vitejs/plugin-vue-jsx";
-import { resolve } from "path";
-import terser from "@rollup/plugin-terser";
+import { UserConfigExport } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import { resolve } from 'path';
+import terser from '@rollup/plugin-terser';
 
 export default (): UserConfigExport => {
   return {
@@ -10,31 +10,31 @@ export default (): UserConfigExport => {
     resolve: {
       alias: [
         {
-          find: "@",
-          replacement: resolve(process.cwd(), "./"),
+          find: '@',
+          replacement: resolve(process.cwd(), './'),
         },
       ],
     },
     plugins: [vue(), vueJsx()],
     build: {
       cssCodeSplit: false,
-      outDir: "../e-plus-ui/lib",
+      outDir: '../e-plus-ui/lib',
       emptyOutDir: true,
       lib: {
-        entry: resolve(process.cwd(), "./src/index.ts"),
-        name: "e-plus-ui",
-        formats: ["es"],
+        entry: resolve(process.cwd(), './src/index.ts'),
+        name: 'e-plus-ui',
+        formats: ['es'],
         fileName: (name) => `index.js`,
       },
       rollupOptions: {
         output: {
           globals: {
-            vue: "Vue",
+            vue: 'Vue',
           },
-          assetFileNames: "index.css",
+          assetFileNames: 'index.css',
         },
         plugins: [terser()],
-        external: ["vue"],
+        external: ['vue'],
       },
     },
   };

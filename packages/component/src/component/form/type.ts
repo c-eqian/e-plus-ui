@@ -1,33 +1,33 @@
-import type { ColProps, FormItemRule } from "element-plus";
-import { Ref } from "vue";
+import type { ColProps, FormItemRule } from 'element-plus';
+import { Ref } from 'vue';
 
 export type FormItemType =
-  | ""
-  | "text"
-  | "number"
-  | "input-number"
-  | "input"
-  | "select"
-  | "switch"
-  | "textarea" // el-基础控件
-  | "date"
-  | "date-time"
-  | "daterange"
-  | "time-picker"
-  | "time-range"
-  | "date-time-range"
-  | "checkbox-group"
-  | "radio-group"
-  | "uploader"
-  | "uploader-file"
-  | "cascade";
+  | ''
+  | 'text'
+  | 'number'
+  | 'input-number'
+  | 'input'
+  | 'select'
+  | 'switch'
+  | 'textarea' // el-基础控件
+  | 'date'
+  | 'date-time'
+  | 'daterange'
+  | 'time-picker'
+  | 'time-range'
+  | 'date-time-range'
+  | 'checkbox-group'
+  | 'radio-group'
+  | 'uploader'
+  | 'uploader-file'
+  | 'cascade';
 export interface IOptions {
   value: any;
   label: string;
   [k: string]: any;
 }
 export type ICol = Partial<
-  Pick<ColProps, "span" | "sm" | "xs" | "md" | "lg" | "xl">
+  Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>
 >;
 /**
  * 级联数据
@@ -51,7 +51,7 @@ export interface IZkFormConfig<T = any> {
   /**
    * 用于控制该表单内组件的尺寸
    */
-  size?: "" | "large" | "default" | "small";
+  size?: '' | 'large' | 'default' | 'small';
 }
 
 /**
@@ -197,8 +197,8 @@ export interface IZkFormItemConfig<T = any> {
   ) => void;
 }
 export interface FormContext {
-  model: IZkFormConfig["model"]; // form 数据对象
+  model: IZkFormConfig['model']; // form 数据对象
 }
 export const formContextDefault = {
-  model: {} as IZkFormConfig["model"],
+  model: {} as IZkFormConfig['model'],
 };

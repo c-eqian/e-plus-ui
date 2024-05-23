@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useMerge } from "co-utils-vue";
-import { ElInput } from "element-plus";
-import { FormContext, formContextDefault, IZkFormItemConfig } from "../type";
-import { inject } from "vue";
+import { useMerge } from 'co-utils-vue';
+import { ElInput } from 'element-plus';
+import { FormContext, formContextDefault, IZkFormItemConfig } from '../type';
+import { inject } from 'vue';
 
 interface IPropsItem {
   item: IZkFormItemConfig;
@@ -10,13 +10,13 @@ interface IPropsItem {
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IZkFormItemConfig),
 });
-const { model } = inject<FormContext>("form-context", formContextDefault);
+const { model } = inject<FormContext>('form-context', formContextDefault);
 const handleEnter = (v: string | number | boolean) => props.item?.enter?.(v);
 defineExpose({
   handleEnter,
 });
 defineOptions({
-  name: "EpFormInput",
+  name: 'EpFormInput',
 });
 </script>
 

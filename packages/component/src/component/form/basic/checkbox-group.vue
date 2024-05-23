@@ -4,22 +4,22 @@ import {
   formContextDefault,
   type IOptions,
   type IZkFormItemConfig,
-} from "../type";
-import { inject, onMounted, ref, watch } from "vue";
-import { ElCheckboxButton, ElCheckbox } from "element-plus";
+} from '../type';
+import { inject, onMounted, ref, watch } from 'vue';
+import { ElCheckboxButton, ElCheckbox } from 'element-plus';
 interface IPropsItem {
   item: IZkFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IZkFormItemConfig),
 });
-const { model } = inject<FormContext>("form-context", formContextDefault);
+const { model } = inject<FormContext>('form-context', formContextDefault);
 const handleChange = (v: string | number | boolean) => props.item?.change?.(v);
 defineExpose({
   handleChange,
 });
 defineOptions({
-  name: "EpFormCheckboxGroup",
+  name: 'EpFormCheckboxGroup',
 });
 const optionsList = ref<IOptions[]>([]);
 const initOptions = () => {

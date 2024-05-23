@@ -18,9 +18,9 @@
 </template>
 
 <script lang="ts">
-import { CopyDocument } from "@element-plus/icons-vue";
-import { ElMessage } from "element-plus";
-import type { PropType } from "vue";
+import { CopyDocument } from '@element-plus/icons-vue';
+import { ElMessage } from 'element-plus';
+import type { PropType } from 'vue';
 import {
   computed,
   defineComponent,
@@ -29,30 +29,30 @@ import {
   onUnmounted,
   onUpdated,
   ref,
-} from "vue";
+} from 'vue';
 
 export default defineComponent({
-  name: "EpCopyText",
+  name: 'EpCopyText',
   components: { CopyDocument },
   props: {
     // 实际拷贝值，不传默认拷贝 slot 的文字
     text: {
       type: String,
-      default: "",
+      default: '',
     },
     type: {
-      type: String as PropType<"flex">,
-      default: "",
+      type: String as PropType<'flex'>,
+      default: '',
     },
     justify: {
       type: String as PropType<
-        "start" | "end" | "center" | "space-around" | "space-between"
+        'start' | 'end' | 'center' | 'space-around' | 'space-between'
       >,
-      default: "start",
+      default: 'start',
     },
     align: {
-      type: String as PropType<"top" | "middle" | "bottom">,
-      default: "top",
+      type: String as PropType<'top' | 'middle' | 'bottom'>,
+      default: 'top',
     },
   },
   setup(props) {
@@ -63,7 +63,7 @@ export default defineComponent({
     // ref
     const textRef = ref<HTMLElement>();
 
-    const textRefInnerText = ref("");
+    const textRefInnerText = ref('');
     // 文本，是否是空
     const textComputedRef = computed(() => {
       return fromAttr.value ? val.value : textRefInnerText.value;
@@ -71,15 +71,15 @@ export default defineComponent({
 
     const handleTextUpdate = () => {
       nextTick(() => {
-        textRefInnerText.value = textRef.value?.innerText ?? "";
+        textRefInnerText.value = textRef.value?.innerText ?? '';
       });
     };
 
     // 生成 textarea
     const createFakeElement = (v: string) => {
-      const fakeElement = document.createElement("textarea");
-      fakeElement.setAttribute("readonly", "");
-      fakeElement.setAttribute("opacity", "0");
+      const fakeElement = document.createElement('textarea');
+      fakeElement.setAttribute('readonly', '');
+      fakeElement.setAttribute('opacity', '0');
       fakeElement.value = v;
       return fakeElement;
     };
@@ -92,13 +92,13 @@ export default defineComponent({
       document.body.appendChild(fakeEle);
       fakeEle.select();
       try {
-        document.execCommand("copy");
+        document.execCommand('copy');
 
         messageHandler?.close();
         messageHandler = ElMessage({
           showClose: true,
-          message: "已复制",
-          type: "success",
+          message: '已复制',
+          type: 'success',
           duration: 1000,
         });
       } catch (err) {

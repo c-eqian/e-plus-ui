@@ -1,4 +1,4 @@
-import { App, Component, Plugin } from "vue";
+import { App, Component, Plugin } from 'vue';
 
 export const withInstall = <T>(comp: T): T & Plugin => {
   const component = comp as T & Component & Plugin;

@@ -1,4 +1,4 @@
-import { execa } from "execa";
+import { execa } from 'execa';
 
 buildTypes();
 
@@ -8,16 +8,16 @@ async function buildTypes() {
 }
 
 async function removeTypes() {
-  const { stdout } = await execa("rimraf", ["types"]);
+  const { stdout } = await execa('rimraf', ['types']);
 }
 
 async function rollupTypes() {
   try {
-    const { stdout } = await execa("vue-tsc", [
-      "--declaration",
-      "--emitDeclarationOnly",
+    const { stdout } = await execa('vue-tsc', [
+      '--declaration',
+      '--emitDeclarationOnly',
     ]);
-    console.log("generate types successfully.");
+    console.log('generate types successfully.');
   } catch (error) {
     console.error(`ERROR: The command failed. stdout:${error.stdout}`);
   }

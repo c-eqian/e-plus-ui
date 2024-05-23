@@ -1,1 +1,1 @@
-export type Shadow = "always" | "never" | "hover";
+export type Shadow = 'always' | 'never' | 'hover';

@@ -3,22 +3,22 @@ import {
   type FormContext,
   formContextDefault,
   type IZkFormItemConfig,
-} from "../type";
-import { inject } from "vue";
-import { ElInputNumber } from "element-plus";
+} from '../type';
+import { inject } from 'vue';
+import { ElInputNumber } from 'element-plus';
 interface IPropsItem {
   item: IZkFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IZkFormItemConfig),
 });
-const { model } = inject<FormContext>("form-context", formContextDefault);
+const { model } = inject<FormContext>('form-context', formContextDefault);
 const handleEnter = (v: string | number | boolean) => props.item?.enter?.(v);
 defineExpose({
   handleEnter,
 });
 defineOptions({
-  name: "EpFormInputNumber",
+  name: 'EpFormInputNumber',
 });
 </script>
 

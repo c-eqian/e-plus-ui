@@ -3,7 +3,7 @@ import {
   useFormatDate,
   useLabelByVal,
   useOmit,
-} from "co-utils-vue";
+} from 'co-utils-vue';
 import {
   ElButton,
   ElForm,
@@ -11,7 +11,7 @@ import {
   ElTable,
   ElTableColumn,
   FormValidateCallback,
-} from "element-plus";
+} from 'element-plus';
 import {
   computed,
   defineComponent,
@@ -21,13 +21,13 @@ import {
   unref,
   watch,
   watchEffect,
-} from "vue";
-import CopyText from "../copy-text/index.vue";
-import "./index.less";
-import type { ITableColumnConfig, OperationType, TRender } from "./type";
+} from 'vue';
+import CopyText from '../copy-text/index.vue';
+import './index.less';
+import type { ITableColumnConfig, OperationType, TRender } from './type';
 type FormInstance = InstanceType<typeof ElForm>;
 const EpTable = defineComponent({
-  name: "EpTable",
+  name: 'EpTable',
   props: {
     data: {
       type: Array as PropType<any[] /** 不知道数据的格式 */>,
@@ -35,11 +35,11 @@ const EpTable = defineComponent({
     },
     height: {
       type: [Number, String],
-      default: "100%",
+      default: '100%',
     },
     tooltipEffect: {
       type: String,
-      default: "dark",
+      default: 'dark',
     },
     border: {
       type: Boolean,
@@ -55,7 +55,7 @@ const EpTable = defineComponent({
      */
     idKey: {
       type: String,
-      default: "",
+      default: '',
     },
     column: {
       type: Array as PropType<ITableColumnConfig[]>,
@@ -80,14 +80,14 @@ const EpTable = defineComponent({
     },
   },
   emits: [
-    "current-change",
-    "selection-change",
-    "click-row",
-    "click-row-delete",
-    "click-row-add",
-    "click-row-view",
-    "click-row-edit",
-    "dbClick-row",
+    'current-change',
+    'selection-change',
+    'click-row',
+    'click-row-delete',
+    'click-row-add',
+    'click-row-view',
+    'click-row-edit',
+    'dbClick-row',
   ],
   setup(props, { emit }) {
     const zkFormRef = ref<FormInstance>();
@@ -97,7 +97,7 @@ const EpTable = defineComponent({
       return props.column.filter((columnsItem) => {
         if (
           unref(columnsItem.columnsExtra) &&
-          typeof unref(columnsItem.columnsExtra)?.visible === "boolean"
+          typeof unref(columnsItem.columnsExtra)?.visible === 'boolean'
         ) {
           return unref(columnsItem.columnsExtra)?.visible;
         }
@@ -105,7 +105,7 @@ const EpTable = defineComponent({
       });
     });
     const currentRow = ref<any>(null);
-    const currentId = ref<string | number>("");
+    const currentId = ref<string | number>('');
     // const dictValue = ref<Record<string, IDict[]>>()
     // const dictList = columnsComputed.value.map(item => item.dictKey).filter(Boolean)
     // if (dictList.length) {
@@ -135,9 +135,9 @@ const EpTable = defineComponent({
       (zkFormRef.value?.$el as HTMLElement)
         ?.querySelector(`[field="${field}"]`)
         ?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "center",
+          behavior: 'smooth',
+          block: 'center',
+          inline: 'center',
         });
     };
     /**
@@ -164,7 +164,7 @@ const EpTable = defineComponent({
         } catch (error) {
           const fieldModel = error as Record<
             string,
-            ITableColumnConfig["rules"]
+            ITableColumnConfig['rules']
           >;
           // 取出第一个校验失败的数据
           const errId = Object.keys(fieldModel)[0];
@@ -179,9 +179,9 @@ const EpTable = defineComponent({
      * 校验表单某个字段验证
      * @param arg
      */
-    const validateField: FormInstance["validateField"] = (...arg) => {
+    const validateField: FormInstance['validateField'] = (...arg) => {
       if (!zkFormRef.value) {
-        console.warn("表单启用失败，useFormValidation 是否配置正确");
+        console.warn('表单启用失败，useFormValidation 是否配置正确');
         return Promise.resolve(true);
       }
       return zkFormRef.value?.validateField(...arg);
@@ -190,18 +190,18 @@ const EpTable = defineComponent({
      * 重置表单
      * @param arg
      */
-    const resetFields: FormInstance["resetFields"] = (...arg) => {
+    const resetFields: FormInstance['resetFields'] = (...arg) => {
       if (!zkFormRef.value)
-        console.warn("表单启用失败，useFormValidation 是否配置正确");
+        console.warn('表单启用失败，useFormValidation 是否配置正确');
       return zkFormRef.value?.resetFields(...arg);
     };
     /**
      * 清空某个字段的表单有验证信息
      * @param arg
      */
-    const clearValidate: FormInstance["clearValidate"] = (...arg) => {
+    const clearValidate: FormInstance['clearValidate'] = (...arg) => {
       if (!zkFormRef.value) {
-        console.warn("表单启用失败，useFormValidation 是否配置正确");
+        console.warn('表单启用失败，useFormValidation 是否配置正确');
       }
       return zkFormRef.value?.clearValidate(...arg);
     };
@@ -226,16 +226,16 @@ const EpTable = defineComponent({
      * @param list
      */
     const handleSelectionChange = (list: any[]) => {
-      emit("selection-change", list);
+      emit('selection-change', list);
     };
     const handleRowDbClick = (row: any) => {
-      emit("dbClick-row", row);
+      emit('dbClick-row', row);
     };
     /** 不知道数据的格式 */
     const handleCurrentChange = (row: any) => {
       currentRow.value = row;
-      currentId.value = row?.[props.idKey!] ?? "";
-      emit("current-change", row);
+      currentId.value = row?.[props.idKey!] ?? '';
+      emit('current-change', row);
     };
     return {
       zkFormRef,
@@ -270,9 +270,9 @@ const EpTable = defineComponent({
      */
     const setTableProps = () => {
       const _props = Object.assign({}, this.$props, this.$attrs);
-      Reflect.deleteProperty(_props, "column");
-      Reflect.deleteProperty(_props, "formModelExtender");
-      Reflect.deleteProperty(_props, "useFormValidation");
+      Reflect.deleteProperty(_props, 'column');
+      Reflect.deleteProperty(_props, 'formModelExtender');
+      Reflect.deleteProperty(_props, 'useFormValidation');
       return _props;
     };
     /**
@@ -289,66 +289,66 @@ const EpTable = defineComponent({
       const operationTypeLabel = Object.assign(
         {},
         {
-          add: "新增",
-          edit: "编辑",
-          delete: "删除",
-          view: "查看",
+          add: '新增',
+          edit: '编辑',
+          delete: '删除',
+          view: '查看',
         },
         this.$props.operationLabel
       );
       const operationMap: Record<OperationType, any> = {
         add: (
           <ElButton
-            type={"primary"}
+            type={'primary'}
             link
-            icon={"Plus"}
-            onClick={() => this.$emit("click-row-add", row, $index)}
+            icon={'Plus'}
+            onClick={() => this.$emit('click-row-add', row, $index)}
           >
             {operationTypeLabel.add}
           </ElButton>
         ),
         edit: (
           <ElButton
-            type={"info"}
+            type={'info'}
             link
-            icon={"Edit"}
-            onClick={() => this.$emit("click-row-edit", row, $index)}
+            icon={'Edit'}
+            onClick={() => this.$emit('click-row-edit', row, $index)}
           >
             {operationTypeLabel.edit}
           </ElButton>
         ),
         view: (
           <ElButton
-            type={"primary"}
+            type={'primary'}
             link
-            icon={"ZoomIn"}
-            onClick={() => this.$emit("click-row-view", row, $index)}
+            icon={'ZoomIn'}
+            onClick={() => this.$emit('click-row-view', row, $index)}
           >
             {operationTypeLabel.view}
           </ElButton>
         ),
         delete: (
           <ElButton
-            type={"danger"}
+            type={'danger'}
             link
-            icon={"Delete"}
-            onClick={() => this.$emit("click-row-delete", row, $index)}
+            icon={'Delete'}
+            onClick={() => this.$emit('click-row-delete', row, $index)}
           >
             {operationTypeLabel.delete}
           </ElButton>
         ),
       };
-      if (item.type === "operation" || item.fixed) {
+      if (item.type === 'operation' || item.fixed) {
         if (!item.operationType) {
-          item.operationType = ["add", "edit", "view", "delete"];
+          item.operationType = ['add', 'edit', 'view', 'delete'];
         }
         if (!item.fixed) item.fixed = !!item;
-        if (!item.width) item.width = "200";
+        if (!item.width) item.width = '200';
         return (
           <div>
             {item.operationType
               .map((operationItem) => {
-                if (typeof operationItem === "string")
+                if (typeof operationItem === 'string')
                   return operationMap[operationItem];
                 const { type } = operationItem;
                 return operationMap[type];
@@ -385,7 +385,7 @@ const EpTable = defineComponent({
               <ElButton
                 link
                 type="primary"
-                onClick={() => this.$emit("click-row-view", row)}
+                onClick={() => this.$emit('click-row-view', row)}
               >
                 {render()}
               </ElButton>
@@ -399,11 +399,11 @@ const EpTable = defineComponent({
         const formItemProp = Object.create(null);
         if (this.useFormValidation && item.rules) {
           const field = `data[${index}].${item.prop as string}`;
-          if (typeof item.rules === "boolean") {
+          if (typeof item.rules === 'boolean') {
             formItemProp.rules = {
               required: item.rules,
               message: `${item.label} 为必填项`,
-              trigger: "blur",
+              trigger: 'blur',
             };
           } else {
             formItemProp.rules = item?.rules;
@@ -449,7 +449,7 @@ const EpTable = defineComponent({
        */
       const deepObjectValue = (row: ITableColumnConfig, prop: string): any => {
         if (!prop) return prop;
-        const keys = prop.split(".");
+        const keys = prop.split('.');
         return keys.reduce((obj, k) => (obj || {})[k], row);
       };
       return {
@@ -471,12 +471,12 @@ const EpTable = defineComponent({
               if (Array.isArray(item.rules)) {
                 return item.rules?.some((_i) => _i.required);
               }
-              if (typeof item.rules === "boolean") return item.rules;
+              if (typeof item.rules === 'boolean') return item.rules;
               return !!item.rules?.required;
             })();
             return () =>
               h(
-                "div",
+                'div',
                 {
                   class: {
                     required: isRequired && this.useFormValidation,
@@ -489,7 +489,7 @@ const EpTable = defineComponent({
         })(),
         default:
           !item.type ||
-          ["operation", "expand"].includes(item.type) ||
+          ['operation', 'expand'].includes(item.type) ||
           item.dictKey
             ? ({ row, $index }: any) => {
                 if ($index < 0) return deepObjectValue(row, item.prop!);
@@ -516,7 +516,7 @@ const EpTable = defineComponent({
                       /**
                        * 校验是否是表格的操作
                        */
-                      if (item.fixed || item.type === "operation") {
+                      if (item.fixed || item.type === 'operation') {
                         // 是操作，但是没有自定义插槽, 使用内置操作
                         if (!item.slotKey)
                           return renderOperation(item, row, $index);
@@ -565,7 +565,7 @@ const EpTable = defineComponent({
                           item.dictEnum,
                           deepObjectValue(row, item.prop!),
                           {
-                            labelKey: "tagType",
+                            labelKey: 'tagType',
                           }
                         );
                         if (tagType) {
@@ -586,17 +586,17 @@ const EpTable = defineComponent({
                       /**
                        * 格式化数据
                        */
-                      if (typeof item.format === "function") {
+                      if (typeof item.format === 'function') {
                         return item.format(row);
                       }
                       if (item.isFormatTime) {
                         return useFormatDate(
-                          deepObjectValue(row, item.prop!) || "",
-                          "yyyy-MM-dd HH:mm:ss"
+                          deepObjectValue(row, item.prop!) || '',
+                          'yyyy-MM-dd HH:mm:ss'
                         );
                       }
                       const _res = deepObjectValue(row, item.prop!);
-                      return !_res && _res !== 0 ? "-" : _res;
+                      return !_res && _res !== 0 ? '-' : _res;
                     };
                     return renderCtx();
                   },
@@ -612,11 +612,11 @@ const EpTable = defineComponent({
      */
     const renderColumns = (item: ITableColumnConfig) => {
       const _columnItemOpts = {
-        ...useOmit(item, ["children", "columnsExtra"]),
+        ...useOmit(item, ['children', 'columnsExtra']),
       };
       const unrefExtra = unref(item.columnsExtra);
       if (unrefExtra && unrefExtra.visible) {
-        const extra = useOmit(unrefExtra, ["visible"]);
+        const extra = useOmit(unrefExtra, ['visible']);
         Object.assign(_columnItemOpts, extra);
       } else {
         Object.assign(_columnItemOpts, unrefExtra);

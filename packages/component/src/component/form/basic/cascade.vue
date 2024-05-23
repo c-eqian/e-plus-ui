@@ -10,11 +10,11 @@
 </template>
 
 <script lang="ts" setup>
-import { FormContext, formContextDefault, IZkFormItemConfig } from "../type";
-import { computed, inject, unref } from "vue";
-import { ElCascader } from "element-plus";
+import { FormContext, formContextDefault, IZkFormItemConfig } from '../type';
+import { computed, inject, unref } from 'vue';
+import { ElCascader } from 'element-plus';
 defineOptions({
-  name: "EpFormCascade",
+  name: 'EpFormCascade',
 });
 export interface IPropsItem {
   item: IZkFormItemConfig;
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IZkFormItemConfig),
 });
 const optionsList = computed(() => unref(props.item.treeOptions));
-const { model } = inject<FormContext>("form-context", formContextDefault);
+const { model } = inject<FormContext>('form-context', formContextDefault);
 </script>
 <style lang="less">
 :deep(.el-cascader) {

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import "./index.less";
-import { computed } from "vue";
+import './index.less';
+import { computed } from 'vue';
 import {
   ButtonBorder,
   ButtonEmits,
   ButtonNativeType,
   ButtonSize,
   ButtonType,
-} from "./interface";
-import useProps from "./index.hooks";
+} from './interface';
+import useProps from './index.hooks';
 
 export interface ButtonProps {
   type?: ButtonType;
@@ -26,14 +26,14 @@ export interface ButtonProps {
 }
 
 defineOptions({
-  name: "EpButton",
+  name: 'EpButton',
 });
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  borderStyle: "soild",
+  borderStyle: 'soild',
   radius: false,
-  loadingIcon: "ep-icon-loading-one",
-  nativeType: "button",
+  loadingIcon: 'ep-icon-loading-one',
+  nativeType: 'button',
   fluid: false,
   loading: false,
 });
@@ -44,7 +44,7 @@ const emits = defineEmits(ButtonEmits);
 
 const onClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
-    emits("click", event);
+    emits('click', event);
   }
 };
 
@@ -57,13 +57,13 @@ const styles = computed(() => {
 const classes = computed(() => {
   return [
     {
-      "ep-btn-fluid": props.fluid,
-      "ep-btn-radius": props.radius,
-      "ep-btn-disabled": props.disabled,
+      'ep-btn-fluid': props.fluid,
+      'ep-btn-radius': props.radius,
+      'ep-btn-disabled': props.disabled,
     },
-    props.type ? `ep-btn-${props.type}` : "",
-    size.value ? `ep-btn-${size.value}` : "",
-    props.border ? `ep-border-${props.border}` : "",
+    props.type ? `ep-btn-${props.type}` : '',
+    size.value ? `ep-btn-${size.value}` : '',
+    props.border ? `ep-border-${props.border}` : '',
   ];
 });
 </script>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
-import { Shadow } from "./type";
-import { ElCard } from "element-plus";
+import type { PropType } from 'vue';
+import { Shadow } from './type';
+import { ElCard } from 'element-plus';
 defineOptions({
-  name: "EpCard",
+  name: 'EpCard',
 });
 const props = defineProps({
   shadow: {
     type: String as PropType<Shadow>,
-    default: "never",
+    default: 'never',
   },
 });
 </script>

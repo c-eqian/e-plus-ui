@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useMerge } from "co-utils-vue";
+import { useMerge } from 'co-utils-vue';
 
 import {
   type FormContext,
   formContextDefault,
   type IZkFormItemConfig,
-} from "../type";
-import { inject } from "vue";
+} from '../type';
+import { inject } from 'vue';
 
-const { model } = inject<FormContext>("form-context", formContextDefault);
+const { model } = inject<FormContext>('form-context', formContextDefault);
 interface IPropsItem {
   item: IZkFormItemConfig;
 }
@@ -20,15 +20,15 @@ defineExpose({
   handleChange,
 });
 defineOptions({
-  name: "EpFormDateTime",
+  name: 'EpFormDateTime',
 });
 /**
  * 处理默认参数，比如时间日期的格式化格式
  */
 const _default = {
-  format: "YYYY-MM-DD HH:mm:ss",
-  "date-format": "MMM DD, YYYY",
-  "time-format": "HH:mm",
+  format: 'YYYY-MM-DD HH:mm:ss',
+  'date-format': 'MMM DD, YYYY',
+  'time-format': 'HH:mm',
 };
 </script>
 

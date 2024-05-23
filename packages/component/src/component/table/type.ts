@@ -1,5 +1,5 @@
-import type { FormItemRule } from "element-plus";
-import type { Ref, VNode } from "vue";
+import type { FormItemRule } from 'element-plus';
+import type { Ref, VNode } from 'vue';
 
 export interface IEnumItem {
   /**
@@ -14,7 +14,7 @@ export interface IEnumItem {
    * 是否禁用
    */
   disabled?: boolean;
-  tagType?: "primary" | "success" | "info" | "warning" | "danger";
+  tagType?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
   [k: string]: any;
 }
 export interface IColumnsExtra {
@@ -44,7 +44,7 @@ interface IRenderData<T = any> {
 export interface TRender<T = any> {
   (scoped: IRenderData<T>): VNode | null | string | number;
 }
-export type OperationType = "add" | "edit" | "delete" | "view";
+export type OperationType = 'add' | 'edit' | 'delete' | 'view';
 export type OperationTypeMap = {
   type: OperationType;
   permission: string[];
@@ -57,7 +57,7 @@ export interface ITableColumnConfig<T = any> {
   /**
    * 对齐方式
    */
-  align?: "left" | "center" | "right";
+  align?: 'left' | 'center' | 'right';
   /**
    * 自定义插槽名称
    * 优先级高于prop
@@ -131,7 +131,7 @@ export interface ITableColumnConfig<T = any> {
    * 拓展operation，用于数据操作 默认支持 add(新增) edit(修改) delete(删除) view(查看)
    * 当使用operation类型时，fixed默认启用
    */
-  type?: "index" | "selection" | "expand" | "operation";
+  type?: 'index' | 'selection' | 'expand' | 'operation';
   /**
    * 需要type=operation
    * 操作类型， 默认add(新增) edit(修改) delete(删除) view(查看)

@@ -1,18 +1,18 @@
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from 'vue';
 
-import * as customComponent from "./basic";
-import { IZkFormItemConfig } from "./type";
+import * as customComponent from './basic';
+import { IZkFormItemConfig } from './type';
 
 export default defineComponent({
-  name: "ZkComponent",
+  name: 'ZkComponent',
   components: {
     ...customComponent,
   },
   props: {
     name: {
       type: String,
-      default: "",
+      default: '',
     },
     item: {
       type: Object as PropType<IZkFormItemConfig>,

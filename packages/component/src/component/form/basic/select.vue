@@ -4,11 +4,11 @@ import {
   formContextDefault,
   type IOptions,
   type IZkFormItemConfig,
-} from "../type";
-import { inject, onMounted, ref, watch } from "vue";
+} from '../type';
+import { inject, onMounted, ref, watch } from 'vue';
 
 defineOptions({
-  name: "EpFromSelect",
+  name: 'EpFromSelect',
 });
 interface IPropsItem {
   item: IZkFormItemConfig;
@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IZkFormItemConfig),
 });
 const handleChange = (v: string | number | boolean) => props.item?.change?.(v);
-const { model } = inject<FormContext>("form-context", formContextDefault);
+const { model } = inject<FormContext>('form-context', formContextDefault);
 
 const optionsList = ref<IOptions[]>([]);
 const initOptions = () => {

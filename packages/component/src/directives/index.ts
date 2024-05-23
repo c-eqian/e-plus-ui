@@ -1,1 +1,1 @@
-export { vRepeatClick } from "./repeat-click";
+export { vRepeatClick } from './repeat-click';

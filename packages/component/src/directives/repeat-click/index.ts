@@ -1,5 +1,5 @@
-import type { ObjectDirective } from "vue";
-import { isFunction } from "../../utils";
+import type { ObjectDirective } from 'vue';
+import { isFunction } from '../../utils';
 
 export const REPEAT_INTERVAL = 100;
 export const REPEAT_DELAY = 600;
@@ -12,7 +12,7 @@ export interface RepeatClickOptions {
 
 export const vRepeatClick: ObjectDirective<
   HTMLElement,
-  RepeatClickOptions | RepeatClickOptions["handler"]
+  RepeatClickOptions | RepeatClickOptions['handler']
 > = {
   beforeMount(el, binding) {
     const value = binding.value;
@@ -38,12 +38,12 @@ export const vRepeatClick: ObjectDirective<
       }
     };
 
-    el.addEventListener("mousedown", (evt: MouseEvent) => {
+    el.addEventListener('mousedown', (evt: MouseEvent) => {
       if (evt.button !== 0) return;
       clear();
       handler();
 
-      document.addEventListener("mouseup", () => clear(), {
+      document.addEventListener('mouseup', () => clear(), {
         once: true,
       });
 

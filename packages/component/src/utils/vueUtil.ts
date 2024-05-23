@@ -1,4 +1,4 @@
-import { Component, ComponentInternalInstance, VNode, VNodeTypes } from "vue";
+import { Component, ComponentInternalInstance, VNode, VNodeTypes } from 'vue';
 
 export enum ShapeFlags {
   ELEMENT = 1,
@@ -27,7 +27,7 @@ export const isComponent = (
 
 export const isArrayChildren = (
   vn: VNode,
-  children: VNode["children"]
+  children: VNode['children']
 ): children is VNode[] => {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.ARRAY_CHILDREN);
 };
@@ -48,21 +48,21 @@ export function convertSlotName(vm: ComponentInternalInstance, name: string) {
 }
 
 export function camelCase(str: string) {
-  return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ""));
+  return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''));
 }
 
 export function kebabCase(key: string) {
-  const result = key.replace(/([A-Z])/g, " $1").trim();
-  return result.split(" ").join("-").toLowerCase();
+  const result = key.replace(/([A-Z])/g, ' $1').trim();
+  return result.split(' ').join('-').toLowerCase();
 }
 
 export const isFunction = (val: unknown): val is Function =>
-  typeof val === "function";
+  typeof val === 'function';
 
 export const isUndefined = (val: any): val is undefined => val === undefined;
 
-export const isNumber = (val: any): val is number => typeof val === "number";
+export const isNumber = (val: any): val is number => typeof val === 'number';
 
-export const isString = (val: any): val is string => typeof val === "string";
+export const isString = (val: any): val is string => typeof val === 'string';
 export const isDate = (val: Date): boolean =>
   val instanceof Date && !isNaN(val.valueOf());

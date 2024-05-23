@@ -1,37 +1,37 @@
-import { useMerge, useOmit } from "co-utils-vue";
+import { useMerge, useOmit } from 'co-utils-vue';
 import {
   ElCol,
   ElForm,
   ElFormItem,
   ElRow,
   FormValidateCallback,
-} from "element-plus";
-import { defineComponent, PropType } from "vue";
+} from 'element-plus';
+import { defineComponent, PropType } from 'vue';
 
-import { IOperationType } from "@/constant";
-import { toCamelCased } from "@/hooks/use-utils";
+import { IOperationType } from '@/constant';
+import { toCamelCased } from '@/hooks/use-utils';
 
-import { FormContext, IZkFormConfig, IZkFormItemConfig } from "./type";
-import ZkComponent from "./ZkComponent.vue";
+import { FormContext, IZkFormConfig, IZkFormItemConfig } from './type';
+import ZkComponent from './ZkComponent.vue';
 
 type FormInstance = InstanceType<typeof ElForm>;
 export default defineComponent({
-  name: "ZkForm",
+  name: 'ZkForm',
   components: {
     ZkComponent,
   },
   props: {
     model: {
-      type: Object as PropType<IZkFormConfig["model"]>,
+      type: Object as PropType<IZkFormConfig['model']>,
       default: () => {},
     },
     labelWidth: {
-      type: String as PropType<IZkFormConfig["labelWidth"]>,
-      default: "",
+      type: String as PropType<IZkFormConfig['labelWidth']>,
+      default: '',
     },
     optType: {
       type: String as PropType<IOperationType>,
-      default: "",
+      default: '',
     },
     formItems: {
       type: Array as PropType<IZkFormItemConfig[]>,
@@ -43,7 +43,7 @@ export default defineComponent({
     const toRefOptType = toRef(props.optType);
     const zkFormRef = ref<FormInstance>();
     // 将model注入，供子组件使用
-    provide<FormContext>("form-context", {
+    provide<FormContext>('form-context', {
       model: toRefModel,
       optType: toRefOptType,
     });
@@ -55,9 +55,9 @@ export default defineComponent({
       (zkFormRef.value?.$el as HTMLElement)
         ?.querySelector(`[field="${field}"]`)
         ?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "center",
+          behavior: 'smooth',
+          block: 'center',
+          inline: 'center',
         });
     };
     /**
@@ -75,7 +75,7 @@ export default defineComponent({
         } catch (error) {
           const fieldModel = error as Record<
             string,
-            IZkFormItemConfig["rules"]
+            IZkFormItemConfig['rules']
           >;
           // 取出第一个校验失败的数据
           const errId = Object.keys(fieldModel)[0];
@@ -90,9 +90,9 @@ export default defineComponent({
      * 校验表单某个字段验证
      * @param arg
      */
-    const validateField: FormInstance["validateField"] = (...arg) => {
+    const validateField: FormInstance['validateField'] = (...arg) => {
       if (!zkFormRef.value) {
-        console.warn("表单启用失败");
+        console.warn('表单启用失败');
         return Promise.resolve(true);
       }
       return zkFormRef.value?.validateField(...arg);
@@ -101,15 +101,15 @@ export default defineComponent({
      * 重置表单
      * @param arg
      */
-    const resetFields: FormInstance["resetFields"] = (...arg) => {
-      if (!zkFormRef.value) console.warn("表单启用失败");
+    const resetFields: FormInstance['resetFields'] = (...arg) => {
+      if (!zkFormRef.value) console.warn('表单启用失败');
       return zkFormRef.value?.resetFields(...arg);
     };
     /**
      * 清空某个字段的表单有验证信息
      * @param arg
      */
-    const clearValidate: FormInstance["clearValidate"] = (...arg) => {
+    const clearValidate: FormInstance['clearValidate'] = (...arg) => {
       return zkFormRef.value?.clearValidate(...arg);
     };
     watchEffect(() => {
@@ -164,16 +164,16 @@ export default defineComponent({
     };
     const setFormProps = () => {
       return useMerge(
-        useOmit(this.$props, ["formItems", "model"]),
+        useOmit(this.$props, ['formItems', 'model']),
         this.$attrs
       );
     };
     const handleFormItemRule = (item: IZkFormItemConfig) => {
-      if (typeof item.rules === "boolean") {
+      if (typeof item.rules === 'boolean') {
         return {
           required: item.rules,
           message: `${item.label} 为必填项`,
-          trigger: "blur",
+          trigger: 'blur',
         };
       }
       return item.rules;
