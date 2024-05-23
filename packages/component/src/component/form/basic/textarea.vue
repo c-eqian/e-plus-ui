@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { ElInput } from 'element-plus';
-import {
-  type FormContext,
-  formContextDefault,
-  type IZkFormItemConfig,
-} from '../type';
+import type { FormContext, IFormItemConfig } from '../type';
 import { inject } from 'vue';
+import { formContextDefault } from './model';
 
 defineOptions({
   name: 'EpFormTextarea',
 });
 interface IPropsItem {
-  item: IZkFormItemConfig;
+  item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
-  item: () => ({} as IZkFormItemConfig),
+  item: () => ({} as IFormItemConfig),
 });
 const { model } = inject<FormContext>('form-context', formContextDefault);
 </script>

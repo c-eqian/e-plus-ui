@@ -1,8 +1,7 @@
 import type { ColProps, FormItemRule } from 'element-plus';
-import { Ref } from 'vue';
+import type { Ref } from 'vue';
 
 export type FormItemType =
-  | ''
   | 'text'
   | 'number'
   | 'input-number'
@@ -18,8 +17,6 @@ export type FormItemType =
   | 'date-time-range'
   | 'checkbox-group'
   | 'radio-group'
-  | 'uploader'
-  | 'uploader-file'
   | 'cascade';
 export interface IOptions {
   value: any;
@@ -39,7 +36,7 @@ export interface ICascadeNode {
   [k: string]: any;
 }
 export type CascadeTree = ICascadeNode[];
-export interface IZkFormConfig<T = any> {
+export interface IFormConfig<T = any> {
   model: Ref<{
     [P in keyof T]: T[P];
   }>;
@@ -57,7 +54,7 @@ export interface IZkFormConfig<T = any> {
 /**
  * form-item配置
  */
-export interface IZkFormItemConfig<T = any> {
+export interface IFormItemConfig<T = any> {
   /**
    * 标签名称
    */
@@ -197,8 +194,5 @@ export interface IZkFormItemConfig<T = any> {
   ) => void;
 }
 export interface FormContext {
-  model: IZkFormConfig['model']; // form 数据对象
+  model: IFormConfig['model']; // form 数据对象
 }
-export const formContextDefault = {
-  model: {} as IZkFormConfig['model'],
-};

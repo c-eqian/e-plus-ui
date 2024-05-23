@@ -1,11 +1,11 @@
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, type PropType } from 'vue';
 
 import * as customComponent from './basic';
-import { IZkFormItemConfig } from './type';
+import { IFormItemConfig } from './type';
 
 export default defineComponent({
-  name: 'ZkComponent',
+  name: 'EpComponent',
   components: {
     ...customComponent,
   },
@@ -15,8 +15,8 @@ export default defineComponent({
       default: '',
     },
     item: {
-      type: Object as PropType<IZkFormItemConfig>,
-      default: () => ({} as IZkFormItemConfig),
+      type: Object as PropType<IFormItemConfig>,
+      default: () => ({} as IFormItemConfig),
     },
   },
   setup(props) {
@@ -30,5 +30,3 @@ export default defineComponent({
 <template>
   <component :is="props.name" :key="props.name" :item="props.item" />
 </template>
-
-<style scoped lang="scss"></style>

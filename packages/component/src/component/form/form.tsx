@@ -4,55 +4,54 @@ import {
   ElForm,
   ElFormItem,
   ElRow,
-  FormValidateCallback,
+  type FormValidateCallback,
 } from 'element-plus';
-import { defineComponent, PropType } from 'vue';
+import {
+  defineComponent,
+  type PropType,
+  provide,
+  ref,
+  toRef,
+  watchEffect,
+} from 'vue';
 
-import { IOperationType } from '@/constant';
-import { toCamelCased } from '@/hooks/use-utils';
-
-import { FormContext, IZkFormConfig, IZkFormItemConfig } from './type';
-import ZkComponent from './ZkComponent.vue';
+import { FormContext, IFormConfig, IFormItemConfig } from './type';
+import EpComponent from './EpComponent.vue';
+import { camelCase } from '../../utils';
 
 type FormInstance = InstanceType<typeof ElForm>;
 export default defineComponent({
-  name: 'ZkForm',
+  name: 'EpForm',
   components: {
-    ZkComponent,
+    EpComponent,
   },
   props: {
     model: {
-      type: Object as PropType<IZkFormConfig['model']>,
+      type: Object as PropType<IFormConfig['model']>,
       default: () => {},
     },
     labelWidth: {
-      type: String as PropType<IZkFormConfig['labelWidth']>,
-      default: '',
-    },
-    optType: {
-      type: String as PropType<IOperationType>,
+      type: String as PropType<IFormConfig['labelWidth']>,
       default: '',
     },
     formItems: {
-      type: Array as PropType<IZkFormItemConfig[]>,
+      type: Array as PropType<IFormItemConfig[]>,
       default: () => [],
     },
   },
   setup(props) {
     const toRefModel = toRef(props.model);
-    const toRefOptType = toRef(props.optType);
-    const zkFormRef = ref<FormInstance>();
+    const epFormRef = ref<FormInstance>();
     // 将model注入，供子组件使用
     provide<FormContext>('form-context', {
       model: toRefModel,
-      optType: toRefOptType,
     });
     /**
      * 自定义平滑滚动定位到对应的视图
      * @param field
      */
     const scrollIntoView = (field: string) => {
-      (zkFormRef.value?.$el as HTMLElement)
+      (epFormRef.value?.$el as HTMLElement)
         ?.querySelector(`[field="${field}"]`)
         ?.scrollIntoView({
           behavior: 'smooth',
@@ -71,12 +70,9 @@ export default defineComponent({
     ) => {
       if (isScrollToField) {
         try {
-          return await zkFormRef.value?.validate(callback);
+          return await epFormRef.value?.validate(callback);
         } catch (error) {
-          const fieldModel = error as Record<
-            string,
-            IZkFormItemConfig['rules']
-          >;
+          const fieldModel = error as Record<string, IFormItemConfig['rules']>;
           // 取出第一个校验失败的数据
           const errId = Object.keys(fieldModel)[0];
           scrollIntoView(errId);
@@ -84,33 +80,33 @@ export default defineComponent({
           return Promise.reject(error);
         }
       }
-      return zkFormRef.value?.validate(callback);
+      return epFormRef.value?.validate(callback);
     };
     /**
      * 校验表单某个字段验证
      * @param arg
      */
     const validateField: FormInstance['validateField'] = (...arg) => {
-      if (!zkFormRef.value) {
+      if (!epFormRef.value) {
         console.warn('表单启用失败');
         return Promise.resolve(true);
       }
-      return zkFormRef.value?.validateField(...arg);
+      return epFormRef.value?.validateField(...arg);
     };
     /**
      * 重置表单
      * @param arg
      */
     const resetFields: FormInstance['resetFields'] = (...arg) => {
-      if (!zkFormRef.value) console.warn('表单启用失败');
-      return zkFormRef.value?.resetFields(...arg);
+      if (!epFormRef.value) console.warn('表单启用失败');
+      return epFormRef.value?.resetFields(...arg);
     };
     /**
      * 清空某个字段的表单有验证信息
      * @param arg
      */
     const clearValidate: FormInstance['clearValidate'] = (...arg) => {
-      return zkFormRef.value?.clearValidate(...arg);
+      return epFormRef.value?.clearValidate(...arg);
     };
     watchEffect(() => {
       if (!(props.formItems.length < 1)) {
@@ -118,7 +114,7 @@ export default defineComponent({
       }
     });
     return {
-      zkFormRef,
+      epFormRef,
       toRefModel,
       validate,
       resetFields,
@@ -131,7 +127,7 @@ export default defineComponent({
      * 获取插槽
      * @param item
      */
-    const getSlots = (item: IZkFormItemConfig) => {
+    const getSlots = (item: IFormItemConfig) => {
       return {
         default: item
           ? () => {
@@ -150,11 +146,11 @@ export default defineComponent({
                */
               if (item.type) {
                 return (
-                  <ZkComponent
-                    name={toCamelCased(`Zk-${item.type}`)}
+                  <EpComponent
+                    name={camelCase(`Ep-${item.type}`)}
                     item={{ ...item }}
                     key={item.type}
-                  ></ZkComponent>
+                  ></EpComponent>
                 );
               }
               return null;
@@ -168,7 +164,7 @@ export default defineComponent({
         this.$attrs
       );
     };
-    const handleFormItemRule = (item: IZkFormItemConfig) => {
+    const handleFormItemRule = (item: IFormItemConfig) => {
       if (typeof item.rules === 'boolean') {
         return {
           required: item.rules,
@@ -212,7 +208,7 @@ export default defineComponent({
     };
     return (
       <section>
-        <ElForm ref="zkFormRef" model={this.toRefModel} {...setFormProps()}>
+        <ElForm ref="epFormRef" model={this.toRefModel} {...setFormProps()}>
           <ElRow>{renderFormItem()}</ElRow>
           {this.$slots.default ? (
             <ElRow>

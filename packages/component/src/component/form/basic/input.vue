@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { useMerge } from 'co-utils-vue';
 import { ElInput } from 'element-plus';
-import { FormContext, formContextDefault, IZkFormItemConfig } from '../type';
+import type { FormContext, IFormItemConfig } from '../type';
 import { inject } from 'vue';
+import { formContextDefault } from './model';
 
 interface IPropsItem {
-  item: IZkFormItemConfig;
+  item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
-  item: () => ({} as IZkFormItemConfig),
+  item: () => ({} as IFormItemConfig),
 });
 const { model } = inject<FormContext>('form-context', formContextDefault);
 const handleEnter = (v: string | number | boolean) => props.item?.enter?.(v);

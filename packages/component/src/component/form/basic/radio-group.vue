@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import {
-  type FormContext,
-  formContextDefault,
-  type IOptions,
-  type IZkFormItemConfig,
-} from '../type';
+import type { FormContext, IOptions, IFormItemConfig } from '../type';
 import { inject, onMounted, ref, watch } from 'vue';
 import { ElRadioGroup, ElRadio } from 'element-plus';
+import { formContextDefault } from './model';
 interface IPropsItem {
-  item: IZkFormItemConfig;
+  item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
-  item: () => ({} as IZkFormItemConfig),
+  item: () => ({} as IFormItemConfig),
 });
 const { model } = inject<FormContext>('form-context', formContextDefault);
 const handleChange = (v: string | number | boolean | undefined) =>

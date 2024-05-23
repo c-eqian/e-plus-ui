@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import {
-  type FormContext,
-  formContextDefault,
-  type IZkFormItemConfig,
-} from '../type';
+import type { FormContext, IFormItemConfig } from '../type';
 import { inject } from 'vue';
 import { ElInputNumber } from 'element-plus';
+import { formContextDefault } from './model';
 interface IPropsItem {
-  item: IZkFormItemConfig;
+  item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
-  item: () => ({} as IZkFormItemConfig),
+  item: () => ({} as IFormItemConfig),
 });
 const { model } = inject<FormContext>('form-context', formContextDefault);
 const handleEnter = (v: string | number | boolean) => props.item?.enter?.(v);

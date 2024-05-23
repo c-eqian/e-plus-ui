@@ -1,19 +1,16 @@
 <script setup lang="ts">
 import { useMerge } from 'co-utils-vue';
 
-import {
-  type FormContext,
-  formContextDefault,
-  type IZkFormItemConfig,
-} from '../type';
+import type { FormContext, IFormItemConfig } from '../type';
 import { inject } from 'vue';
+import { formContextDefault } from './model';
 
 const { model } = inject<FormContext>('form-context', formContextDefault);
 interface IPropsItem {
-  item: IZkFormItemConfig;
+  item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
-  item: () => ({} as IZkFormItemConfig),
+  item: () => ({} as IFormItemConfig),
 });
 const handleChange = (v: string | number | boolean) => props.item?.change?.(v);
 defineExpose({
