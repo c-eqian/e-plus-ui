@@ -1,19 +1,18 @@
 <template>
   <ElCascader
-    v-model="model[props.item.prop!]"
-    :placeholder="props.item.placeholder || `请选择 ${props.item.label}`"
+    v-model="model[prop!]"
+    :placeholder="placeholder || `请选择 ${label}`"
     :options="optionsList"
-    :disabled="props.item.disabled"
-    :props="props.item.extraPros?.warehouseProps"
-    v-bind="props.item.extraPros"
+    :disabled="disabled"
+    v-bind="elExtraPros"
   />
 </template>
 
 <script lang="ts" setup>
-import type { FormContext, IFormItemConfig } from '../type';
-import { computed, inject, unref } from 'vue';
+import type { IFormItemConfig } from '../type';
+import { computed, unref } from 'vue';
 import { ElCascader } from 'element-plus';
-import { formContextDefault } from './model';
+import { useContextProps, useProps } from './index.hooks';
 defineOptions({
   name: 'EpFormCascade',
 });
@@ -23,8 +22,11 @@ export interface IPropsItem {
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
-const optionsList = computed(() => unref(props.item.treeOptions));
-const { model } = inject<FormContext>('form-context', formContextDefault);
+const { prop, placeholder, label, disabled, elExtraPros } = useProps(
+  props.item
+).value;
+const optionsList = computed(() => unref(props.item.options));
+const { model } = useContextProps().value;
 </script>
 <style lang="less">
 :deep(.el-cascader) {
