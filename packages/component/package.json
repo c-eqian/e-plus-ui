@@ -4,7 +4,6 @@
   "author": "Eqian",
   "license": "MIT",
   "description": "a component library for Vue 3",
-  "type": "module",
   "main": "es/index.js",
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",

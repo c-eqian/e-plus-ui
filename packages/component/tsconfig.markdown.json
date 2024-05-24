@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "module": "esnext",
+      "target": "es2015",
+      "moduleResolution": "Node",
+      "strict": true,
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "esModuleInterop": true
+    },
+    "include": ["example.ts"],
+    "exclude": ["node_modules", "**/__tests__/**"]
+}

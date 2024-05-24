@@ -97,7 +97,6 @@ export default (): UserConfigExport => {
                 id.toString().split('node_modules/')[2].split('/')[0].toString()
               );
             } else if (arr.length >= 2) {
-              console.log('未知入库', arr);
               const entryPoint = arr[arr.length - 2].toString();
               if (matchModule.includes(entryPoint)) {
                 return entryPoint;
