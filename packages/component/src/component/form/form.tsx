@@ -134,8 +134,8 @@ export default defineComponent({
               /**
                * 有插槽, 默认使用插槽
                */
-              if (item.slot || this.$slots[item.prop!]) {
-                return this.$slots[item.slot || item.prop!]?.({
+              if (item.slotKey || this.$slots[item.prop!]) {
+                return this.$slots[item.slotKey || item.prop!]?.({
                   item,
                   model: this.toRefModel,
                 });

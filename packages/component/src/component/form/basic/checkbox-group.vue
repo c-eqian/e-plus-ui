@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { FormContext, IOptions, IFormItemConfig } from '../type';
-import { inject, onMounted, ref, watch } from 'vue';
+import type { IFormOptions, IFormItemConfig } from '../type';
+import { onMounted, ref, watch } from 'vue';
 import { ElCheckboxButton, ElCheckbox } from 'element-plus';
-import { formContextDefault } from './model';
+import { useContextProps, useProps } from './index.hooks';
 interface IPropsItem {
   item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
-const { model } = inject<FormContext>('form-context', formContextDefault);
+const { prop, label, disabled, elExtraPros = {} } = useProps(props.item).value;
+const { model } = useContextProps().value;
 const handleChange = (v: string | number | boolean) => props.item?.change?.(v);
 defineExpose({
   handleChange,
@@ -17,9 +18,9 @@ defineExpose({
 defineOptions({
   name: 'EpFormCheckboxGroup',
 });
-const optionsList = ref<IOptions[]>([]);
+const optionsList = ref<IFormOptions[]>([]);
 const initOptions = () => {
-  optionsList.value = (props.item.options as unknown as IOptions[]) || [];
+  optionsList.value = (props.item.options as unknown as IFormOptions[]) || [];
 };
 watch(
   () => [props.item.options],
@@ -34,10 +35,10 @@ onMounted(() => {
 
 <template>
   <ElCheckboxButton
-    v-if="props.item.options"
-    v-model="model[props.item.prop!]"
-    v-bind="props.item.extraPros"
-    :disabled="props.item.disabled"
+    v-if="optionsList"
+    v-model="model[prop!]"
+    v-bind="elExtraPros"
+    :disabled="disabled"
     @change="handleChange"
   >
     <ElCheckbox
@@ -50,13 +51,8 @@ onMounted(() => {
     </ElCheckbox>
   </ElCheckboxButton>
   <template v-else>
-    <ElCheckbox
-      v-model="model[props.item.prop!]"
-      v-bind="props.item.extraPros"
-      :true-label="props.item.extraPros?.trueLabel || 1"
-      :false-label="props.item.extraPros?.falseLabel || 0"
-    >
-      {{ props.item.label }}
+    <ElCheckbox v-model="model[prop!]" v-bind="elExtraPros">
+      {{ label }}
     </ElCheckbox>
   </template>
 </template>

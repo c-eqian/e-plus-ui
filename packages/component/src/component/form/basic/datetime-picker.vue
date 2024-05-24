@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import { useMerge } from 'co-utils-vue';
 
-import type { FormContext, IFormItemConfig } from '../type';
-import { inject } from 'vue';
-import { formContextDefault } from './model';
+import type { IFormItemConfig } from '../type';
+import { useContextProps, useProps } from './index.hooks';
 
-const { model } = inject<FormContext>('form-context', formContextDefault);
+const { model } = useContextProps().value;
 interface IPropsItem {
   item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
+const {
+  prop,
+  placeholder,
+  label,
+  disabled,
+  elExtraPros = {},
+} = useProps(props.item).value;
 const handleChange = (v: string | number | boolean) => props.item?.change?.(v);
 defineExpose({
   handleChange,
@@ -31,11 +37,11 @@ const _default = {
 
 <template>
   <el-date-picker
-    v-model="model[props.item.prop!]"
-    :placeholder="props.item.placeholder || `请选择 ${props.item.label}`"
-    v-bind="useMerge(_default, props.item.extraPros as any)"
+    v-model="model[prop!]"
+    :placeholder="placeholder || `请选择 ${label}`"
+    v-bind="useMerge({}, _default, elExtraPros)"
     type="datetime"
-    :disabled="props.item.disabled"
+    :disabled="disabled"
     @change="handleChange"
   />
 </template>

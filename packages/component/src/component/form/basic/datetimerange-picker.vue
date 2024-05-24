@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { isFunction } from 'co-utils-vue';
 
-import type { FormContext, IFormItemConfig } from '../type';
-import { inject } from 'vue';
-import { formContextDefault } from './model';
+import type { IFormItemConfig } from '../type';
+import { useContextProps, useProps } from './index.hooks';
 
-const { model } = inject<FormContext>('form-context', formContextDefault);
+const { model } = useContextProps().value;
 interface IPropsItem {
   item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
+const {
+  prop,
+  placeholder,
+  label,
+  disabled,
+  elExtraPros = {},
+  dateTimeRange = [],
+  disableDateTimeRange,
+} = useProps(props.item).value;
 const handleChange = (v: string | number | boolean) => props.item?.change?.(v);
 defineExpose({
   handleChange,
@@ -34,8 +42,8 @@ const handleDisable = (date: Date) => {
   if (props.item.isLessNow) {
     return date.getTime() > Date.now();
   }
-  if (isFunction(props.item.disableDateTimeRange)) {
-    return props.item.disableDateTimeRange?.(date);
+  if (isFunction(disableDateTimeRange)) {
+    return disableDateTimeRange?.(date);
   }
   return false;
 };
@@ -43,14 +51,14 @@ const handleDisable = (date: Date) => {
 
 <template>
   <el-date-picker
-    v-model="model[props.item.prop!]"
-    :placeholder="props.item.placeholder || `请选择 ${props.item.label}`"
-    v-bind="Object.assign({}, _default, props.item.extraPros)"
+    v-model="model[prop!]"
+    :placeholder="placeholder || `请选择 ${label}`"
+    v-bind="Object.assign({}, _default, elExtraPros)"
     type="datetimerange"
-    :start-placeholder="props.item.dateTimeRange?.[0] || '开始日期'"
-    :end-placeholder="props.item.dateTimeRange?.[1] || '结束日期'"
+    :start-placeholder="dateTimeRange?.[0] || '开始日期'"
+    :end-placeholder="dateTimeRange?.[1] || '结束日期'"
     :disabled-date="handleDisable"
-    :disabled="props.item.disabled"
+    :disabled="disabled"
     @change="handleChange"
   />
 </template>

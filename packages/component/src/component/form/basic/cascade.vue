@@ -22,9 +22,13 @@ export interface IPropsItem {
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
-const { prop, placeholder, label, disabled, elExtraPros } = useProps(
-  props.item
-).value;
+const {
+  prop,
+  placeholder,
+  label,
+  disabled,
+  elExtraPros = {},
+} = useProps(props.item).value;
 const optionsList = computed(() => unref(props.item.options));
 const { model } = useContextProps().value;
 </script>

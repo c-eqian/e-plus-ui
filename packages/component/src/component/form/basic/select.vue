@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { FormContext, IOptions, IFormItemConfig } from '../type';
-import { inject, onMounted, ref, watch } from 'vue';
-import { formContextDefault } from './model';
+import type { IFormOptions, IFormItemConfig } from '../type';
+import { onMounted, ref, watch } from 'vue';
 import { ElSelect, ElOption } from 'element-plus';
+import { useContextProps, useProps } from './index.hooks';
 defineOptions({
   name: 'EpFormSelect',
 });
@@ -13,14 +13,22 @@ const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
 const handleChange = (v: string | number | boolean) => props.item?.change?.(v);
-const { model } = inject<FormContext>('form-context', formContextDefault);
-
-const optionsList = ref<IOptions[]>([]);
+const { model } = useContextProps().value;
+const {
+  prop,
+  placeholder,
+  label,
+  disabled,
+  width,
+  options = [],
+  elExtraPros = {},
+} = useProps(props.item).value;
+const optionsList = ref<IFormOptions[]>([]);
 const initOptions = () => {
-  optionsList.value = props.item.options as unknown as IOptions[];
+  optionsList.value = options as unknown as IFormOptions[];
 };
 watch(
-  () => props.item.options,
+  () => options,
   () => {
     initOptions();
   }
@@ -32,11 +40,11 @@ onMounted(() => {
 
 <template>
   <ElSelect
-    v-model.trim="model[props.item.prop!]"
-    :placeholder="props.item.placeholder || `请选择 ${props.item.label}`"
-    v-bind="props.item.extraPros"
-    :style="{ width: props.item.width }"
-    :disabled="props.item.disabled"
+    v-model.trim="model[prop!]"
+    :placeholder="placeholder || `请选择 ${label}`"
+    v-bind="elExtraPros"
+    :style="{ width }"
+    :disabled="disabled"
     @change="handleChange"
   >
     <ElOption
@@ -48,5 +56,3 @@ onMounted(() => {
     />
   </ElSelect>
 </template>
-
-<style scoped lang="scss"></style>

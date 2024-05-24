@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { useMerge } from 'co-utils-vue';
 import { ElInput } from 'element-plus';
-import type { FormContext, IFormItemConfig } from '../type';
-import { inject } from 'vue';
-import { formContextDefault } from './model';
+import type { IFormItemConfig } from '../type';
+import { useContextProps, useProps } from './index.hooks';
 
 interface IPropsItem {
   item: IFormItemConfig;
@@ -11,7 +10,15 @@ interface IPropsItem {
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
-const { model } = inject<FormContext>('form-context', formContextDefault);
+const {
+  prop,
+  placeholder,
+  label,
+  readOnly,
+  disabled,
+  elExtraPros = {},
+} = useProps(props.item).value;
+const { model } = useContextProps().value;
 const handleEnter = (v: string | number | boolean) => props.item?.enter?.(v);
 defineExpose({
   handleEnter,
@@ -23,24 +30,24 @@ defineOptions({
 
 <template>
   <ElInput
-    v-model.trim="model[props.item.prop!]"
-    :placeholder="props.item.placeholder || `请输入 ${props.item.label}`"
-    v-bind="useMerge({clearable:true,},props.item.extraPros as any|| {})"
-    :disabled="props.item.disabled"
-    :readonly="props.item.readOnly"
-    @keyup.enter="() => handleEnter(model[props.item.prop!])"
+    v-model.trim="model[prop!]"
+    :placeholder="placeholder || `请输入 ${label}`"
+    v-bind="useMerge({}, { clearable: true }, elExtraPros)"
+    :disabled="disabled"
+    :readonly="readOnly"
+    @keyup.enter="() => handleEnter(model[prop!])"
   >
-    <template v-if="props.item.extraPros?.prefix" #prefix>
-      {{ props.item.extraPros?.prefix }}
+    <template v-if="elExtraPros?.prefix" #prefix>
+      {{ elExtraPros?.prefix }}
     </template>
-    <template v-if="props.item.extraPros?.suffix" #suffix>
-      {{ props.item.extraPros?.suffix }}
+    <template v-if="elExtraPros?.suffix" #suffix>
+      {{ elExtraPros?.suffix }}
     </template>
-    <template v-if="props.item.extraPros?.prepend" #prepend>
-      {{ props.item.extraPros?.prepend }}
+    <template v-if="elExtraPros?.prepend" #prepend>
+      {{ elExtraPros?.prepend }}
     </template>
-    <template v-if="props.item.extraPros?.append" #append>
-      {{ props.item.extraPros?.append }}
+    <template v-if="elExtraPros?.append" #append>
+      {{ elExtraPros?.append }}
     </template>
   </ElInput>
 </template>

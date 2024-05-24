@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import type { FormContext, IOptions, IFormItemConfig } from '../type';
-import { inject, onMounted, ref, watch } from 'vue';
+import type { IFormOptions, IFormItemConfig } from '../type';
+import { onMounted, ref, watch } from 'vue';
 import { ElRadioGroup, ElRadio } from 'element-plus';
-import { formContextDefault } from './model';
+import { useContextProps, useProps } from './index.hooks';
 interface IPropsItem {
   item: IFormItemConfig;
 }
 const props = withDefaults(defineProps<IPropsItem>(), {
   item: () => ({} as IFormItemConfig),
 });
-const { model } = inject<FormContext>('form-context', formContextDefault);
+const { model } = useContextProps().value;
+const {
+  prop,
+  label,
+  disabled,
+  elExtraPros = {},
+  options,
+} = useProps(props.item).value;
 const handleChange = (v: string | number | boolean | undefined) =>
   props.item?.change?.(v);
 defineExpose({
@@ -18,12 +25,12 @@ defineExpose({
 defineOptions({
   name: 'EpFormRadioGroup',
 });
-const optionsList = ref<IOptions[]>([]);
+const optionsList = ref<IFormOptions[]>([]);
 const initOptions = async () => {
-  optionsList.value = (props.item.options as unknown as IOptions[]) || [];
+  optionsList.value = (props.item.options as unknown as IFormOptions[]) || [];
 };
 watch(
-  () => [props.item.options],
+  () => options,
   () => {
     initOptions();
   }
@@ -35,10 +42,10 @@ onMounted(() => {
 
 <template>
   <ElRadioGroup
-    v-if="props.item.dictKey || props.item.options"
-    v-model="model[props.item.prop!]"
-    v-bind="props.item.extraPros"
-    :disabled="props.item.disabled"
+    v-if="options"
+    v-model="model[prop!]"
+    v-bind="elExtraPros"
+    :disabled="disabled"
     @change="handleChange"
   >
     <ElRadio
@@ -51,11 +58,7 @@ onMounted(() => {
     </ElRadio>
   </ElRadioGroup>
   <template v-else>
-    <ElRadio
-      v-model="model[props.item.prop!]"
-      :label="props.item.extraPros?.label || true"
-      v-bind="props.item.extraPros"
-    >
+    <ElRadio v-model="model[prop!]" :label="label" v-bind="elExtraPros">
       {{ props.item.label }}
     </ElRadio>
   </template>

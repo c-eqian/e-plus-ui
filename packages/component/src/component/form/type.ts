@@ -33,7 +33,7 @@ export interface IFormOptions {
 /**
  * 列宽
  */
-export type IFormCol = Partial<
+export type IFormItemCol = Partial<
   Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>
 >;
 export interface IFormConfig<T = any> {
@@ -79,7 +79,7 @@ export interface IFormItemConfig<T = any> {
   /**
    * 栅格的布局方式
    */
-  col?: IFormCol;
+  col?: IFormItemCol;
   /**
    * 表单校验规则
    */
