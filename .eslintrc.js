@@ -46,6 +46,12 @@ module.exports = {
     'vue/require-default-prop': 'off',
     // 关闭驼峰命名规则
     'vue/multi-word-component-names': 'off',
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+      },
+    ],
     'vue/script-setup-uses-vars': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
