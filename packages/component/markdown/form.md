@@ -4,18 +4,21 @@
 组件， select、cascade
 
 ### value
+配置项值
 
 
 - **Type:** `any`
 
 
 ### label
+标签
 
 
 - **Type:** `string`
 
 
 ### children
+子节点
 
 
 - **Type:** `IFormOptions[]`
@@ -26,11 +29,11 @@
 
 
 ### model
+表单model
+建议使用响应式方法
 
 
-- **Type:** `Ref<{
-    [P in keyof T]: T[P];
-  }>`
+- **Type:** `Ref<{ [P in keyof T]: T[P] }>`
 
 
 ### labelWidth
@@ -137,14 +140,7 @@ form-item表单的类型
 el 额外参数
 
 
-- **Type:** `{
-    /**
-     * 是否开启多选
-     * 主要用于多选框类组件
-     */
-    multiple?: boolean;
-    [k: string]: any;
-  }`
+- **Type:** `ExtraPropsType`
 
 
 ### alwaysDisabled
@@ -194,30 +190,36 @@ el 额外参数
 回车
 
 
-- **Type:** `(
-    value: any // 当前值
-  ) => void`
+- **Type:** `(value: any) => void`
 
 
 ### change
+值改变时的方法
 
 
-- **Type:** `(
-    value: any // 当前值
-  ) => void`
+- **Type:** `(value: any) => void`
 
 
 ## FormContext 
 
-
+表达上下文
 
 ### model
+form 数据对象
 
 
 - **Type:** `IFormConfig['model']`
 
 
+## ExtraPropsType
+扩展参数
+
+
+- **Type:**
+ `{ [k: string]: any }`
+
 ## FormItemType
+el-基础控件
 
 
 - **Type:**
@@ -227,7 +229,7 @@ el 额外参数
   | 'input'
   | 'select'
   | 'switch'
-  | 'textarea' // el-基础控件
+  | 'textarea'
   | 'date'
   | 'date-time'
   | 'daterange'
@@ -239,7 +241,7 @@ el 额外参数
   | 'cascade'`
 
 ## IFormItemCol
-列宽
+列宽配置
 
 
 - **Type:**

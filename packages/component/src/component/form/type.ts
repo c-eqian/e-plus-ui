@@ -1,6 +1,13 @@
 import type { ColProps, FormItemRule } from 'element-plus';
 import type { Ref } from 'vue';
 
+/**
+ * 扩展参数
+ */
+export type ExtraPropsType = { [k: string]: any };
+/**
+ * el-基础控件
+ */
 export type FormItemType =
   | 'text'
   | 'number'
@@ -8,7 +15,7 @@ export type FormItemType =
   | 'input'
   | 'select'
   | 'switch'
-  | 'textarea' // el-基础控件
+  | 'textarea'
   | 'date'
   | 'date-time'
   | 'daterange'
@@ -23,23 +30,33 @@ export type FormItemType =
  * 配置数据
  * 组件， select、cascade
  */
-export interface IFormOptions {
+export interface IFormOptions extends ExtraPropsType {
+  /**
+   * 配置项值
+   */
   value: any;
+  /**
+   * 标签
+   */
   label: string;
+  /**
+   * 子节点
+   */
   children?: IFormOptions[];
-  [k: string]: any;
 }
 
 /**
- * 列宽
+ * 列宽配置
  */
 export type IFormItemCol = Partial<
   Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>
 >;
 export interface IFormConfig<T = any> {
-  model: Ref<{
-    [P in keyof T]: T[P];
-  }>;
+  /**
+   * 表单model
+   * 建议使用响应式方法
+   */
+  model: Ref<{ [P in keyof T]: T[P] }>;
   /**
    * 标签的长度，例如 '50px'。 作为 Form 直接子元素的 form-item 会继承该值。
    * 可以使用 auto。
@@ -106,14 +123,7 @@ export interface IFormItemConfig<T = any> {
   /**
    * el 额外参数
    */
-  elExtraPros?: {
-    /**
-     * 是否开启多选
-     * 主要用于多选框类组件
-     */
-    multiple?: boolean;
-    [k: string]: any;
-  };
+  elExtraPros?: ExtraPropsType;
   /**
    * 是否一直禁用，为true时，处于不可编辑状态，disabled将会失效
    */
@@ -142,15 +152,22 @@ export interface IFormItemConfig<T = any> {
   disableDateTimeRange?: (time: Date) => boolean;
   /**
    * 回车
-   * @param value
+   * @param value 当前值
    */
-  enter?: (
-    value: any // 当前值
-  ) => void;
-  change?: (
-    value: any // 当前值
-  ) => void;
+  enter?: (value: any) => void;
+  /**
+   * 值改变时的方法
+   * @param value 当前值
+   */
+  change?: (value: any) => void;
 }
+
+/**
+ * 表达上下文
+ */
 export interface FormContext {
-  model: IFormConfig['model']; // form 数据对象
+  /**
+   * form 数据对象
+   */
+  model: IFormConfig['model'];
 }

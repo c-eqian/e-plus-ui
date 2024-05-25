@@ -131,5 +131,5 @@ function run(isReset = false) {
     }
   });
 }
-run();
+run(true);
 console.log('转换成功!!!!!');

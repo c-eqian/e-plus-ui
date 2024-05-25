@@ -24,6 +24,7 @@
 
 
 ### tagType
+枚举标签类型，应用于el-tag组件
 
 
 - **Type:** `'primary' | 'success' | 'info' | 'warning' | 'danger'`
@@ -50,21 +51,24 @@
 
 ## IRenderData 
 
-
+自定义渲染方法参数类型
 
 ### row
+数据行
 
 
 - **Type:** `T`
 
 
 ### index
+数据索引
 
 
 - **Type:** `number`
 
 
 ### column
+数据列
 
 
 - **Type:** `ITableColumnConfig<T>`
@@ -80,7 +84,7 @@
 
 ## TRender 
 
-
+自定义渲染
 
 
 
@@ -120,23 +124,27 @@ column key
 
 
 ### label
+表头名称
 
 
 - **Type:** `string`
 
 
 ### prop
+数据键
 
 
 - **Type:** `keyof T extends infer E ? (E extends string ? E : string) : string`
 
 
 ### tooltip
-是否显示提示，默认false
+是否显示提示
 
 
 - **Type:** `boolean`
 
+
+- **Default:** `false`
 
 ### render
 自定义渲染器
@@ -176,6 +184,7 @@ dictKey 优先级高于 dictEnum
 
 
 ### children
+子节点数据
 
 
 - **Type:** `ITableColumnConfig[]`
@@ -196,6 +205,7 @@ dictKey 优先级高于 dictEnum
 
 
 ### fixed
+操作栏固定方法
 
 
 - **Type:** `string | boolean`
@@ -241,17 +251,33 @@ dictKey 优先级高于 dictEnum
 - **Type:** `(OperationType | OperationTypeMap)[]`
 
 
+## ExtraPropsType
+扩展参数
+
+
+- **Type:**
+ `{ [k: string]: any }`
+
 ## OperationType
+操作类型
 
 
 - **Type:**
  `'add' | 'edit' | 'delete' | 'view'`
 
 ## OperationTypeMap
+操作类型
+支持配置权限
 
 
 - **Type:**
  `{
+  /**
+   * 操作类型
+   */
   type: OperationType;
+  /**
+   * 权限标识
+   */
   permission: string[];
 }`
