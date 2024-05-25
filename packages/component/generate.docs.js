@@ -89,24 +89,47 @@ async function getTypeAliases(file) {
 }
 // 获取项目中的所有源文件
 const sourceFiles = project.getSourceFiles();
-function createTypeMdFile(file, data) {
+function getFilePathName(file) {
   let pathObject = parse(file.getFilePath());
   let lastDirName = basename(pathObject.dir);
+  return `markdown/${lastDirName}.md`;
+}
+function createTypeMdFile(file, data) {
+  const savePath = getFilePathName(file);
   // 检查目录是否存在
   if (!existsSync(`markdown`)) {
     // 如果目录不存在，则创建它（包括任何不存在的父目录）
     mkdirSync(`markdown`, { recursive: true });
     console.log(`Directory ${`markdown`} has been created.`);
   }
-  writeFileSync(`markdown/${lastDirName}.md`, data);
+  writeFileSync(savePath, data);
 }
-sourceFiles.forEach(async (file) => {
-  const classList = await getClasses(file);
-  const interfaceList = await getAllInterfaces(file);
-  const typeAliasesList = await getTypeAliases(file);
-  const data = [...classList, ...interfaceList, ...typeAliasesList].join(
-    '\n\n'
-  );
-  createTypeMdFile(file, data);
-  console.log('转换成功!!!!!');
-});
+function checkerIsHas(file) {
+  const savePath = getFilePathName(file);
+  return existsSync(savePath);
+}
+function run(isReset = false) {
+  sourceFiles.forEach(async (file) => {
+    if (!isReset) {
+      if (!checkerIsHas(file)) {
+        const classList = await getClasses(file);
+        const interfaceList = await getAllInterfaces(file);
+        const typeAliasesList = await getTypeAliases(file);
+        const data = [...classList, ...interfaceList, ...typeAliasesList].join(
+          '\n\n'
+        );
+        createTypeMdFile(file, data);
+      }
+    } else {
+      const classList = await getClasses(file);
+      const interfaceList = await getAllInterfaces(file);
+      const typeAliasesList = await getTypeAliases(file);
+      const data = [...classList, ...interfaceList, ...typeAliasesList].join(
+        '\n\n'
+      );
+      createTypeMdFile(file, data);
+    }
+  });
+}
+run();
+console.log('转换成功!!!!!');
