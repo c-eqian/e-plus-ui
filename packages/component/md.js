@@ -1,34 +1,14 @@
-const { Project, SourceFile, InterfaceDeclaration } = require('ts-morph');
+const { Project, Node, SourceFile, InterfaceDeclaration } = require('ts-morph');
 const { writeFileSync } = require('node:fs');
-
-/**
- * 处理外部引入问题
- * @param typeText
- * @returns {*}
- */
-function simplifyTypeText(typeText) {
-  function processType(_typePart) {
-    // 匹配 import(...) 表达式，包括其内部的类型和可能的泛型、数组
-    const importRegex =
-      /import\(["'][^'"]*["']\)\.([^<>()\[\]|]+)(<[^>]*>)?(\[[^\]]*\])?/;
-
-    // 替换匹配的 import(...) 部分，仅保留类型名称、泛型和数组
-    return _typePart.replace(importRegex, (match, typeName, generic, array) => {
-      return `${typeName}${generic || ''}${array || ''}`;
-    });
-  }
-  // 分割联合类型并处理每个部分
-  const parts = typeText.split(/\s*\|\s*/).map((item)=> processType(item));
-  // 处理可能存在的undefined并合并所有部分
-  return parts
-    .filter((part) => (part !== 'undefined'))
-    .join(' | ');
+// 判断是否是除了基本类型
+function isObjectTypeNode(property) {
+  return Node.isTypeNode(property.getTypeNode());
 }
+
 function extractPropertyInfoWithComments(property) {
   // 提取属性的名称和类型等信息
   const propertyName = property.getName();
-  const propertyType = property.getType().getText();
-  // console.log(propertyType);
+  const propertyType = property.getTypeNode().getText().replace(/\r?\n/g, '');
   const isOptional = property.hasQuestionToken(); // 检查属性是否可选
 
   // 提取 JSDoc 注释
@@ -60,7 +40,7 @@ function generateInterfaceMarkdown(interfaceNode) {
   markdownContent += '| --- | --- | --- | --- |\n';
   properties.forEach((property) => {
     markdownContent +=
-      `| ${property.name} | \`${simplifyTypeText(property.type)}\` | ${
+      `| ${property.name} | \`${property.type}\` | ${
         property.isOptional ? '是' : '否'
       } | ${property.comments.trim().replace(/\n/g, '；') || '-'}` + '\n';
   });
