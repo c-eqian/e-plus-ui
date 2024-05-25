@@ -1,5 +1,6 @@
 const { Project } = require('ts-morph');
-const { writeFileSync } = require('node:fs');
+const { writeFileSync, existsSync, mkdirSync } = require('node:fs');
+const { dirname, parse, basename } = require('path');
 
 // 创建一个TypeScript项目对象
 const project = new Project({
@@ -14,7 +15,7 @@ const project = new Project({
  * @param file
  * @returns {string[]}
  */
-function getClasses(file) {
+async function getClasses(file) {
   const classes = file.getClasses();
   return classes.map((cls) => {
     const doc = cls.getJsDocs()[0]?.getDescription().trim() || '';
@@ -41,7 +42,7 @@ function getClasses(file) {
  * @param file
  * @returns {string[]}
  */
-function getAllInterfaces(file) {
+async function getAllInterfaces(file) {
   const interfaces = file.getInterfaces();
   return interfaces.map((_interfaces) => {
     const doc = _interfaces.getJsDocs()[0]?.getDescription().trim() || '';
@@ -75,7 +76,7 @@ function getAllInterfaces(file) {
     return [`## ${_interfaces.getName()} \n\n${doc}`, memberList].join('\n\n');
   });
 }
-function getTypeAliases(file) {
+async function getTypeAliases(file) {
   // 获取所有类型别名并检查名称
   const typeAliases = file.getTypeAliases();
   return typeAliases.map((typeAlias) => {
@@ -88,10 +89,24 @@ function getTypeAliases(file) {
 }
 // 获取项目中的所有源文件
 const sourceFiles = project.getSourceFiles();
-const data = sourceFiles.map((file) => {
-  const classList = getClasses(file);
-  const interfaceList = getAllInterfaces(file);
-  const typeAliasesList = getTypeAliases(file);
-  return [...classList, ...interfaceList, ...typeAliasesList].join('\n\n');
+function createTypeMdFile(file, data) {
+  let pathObject = parse(file.getFilePath());
+  let lastDirName = basename(pathObject.dir);
+  // 检查目录是否存在
+  if (!existsSync(`markdown`)) {
+    // 如果目录不存在，则创建它（包括任何不存在的父目录）
+    mkdirSync(`markdown`, { recursive: true });
+    console.log(`Directory ${`markdown`} has been created.`);
+  }
+  writeFileSync(`markdown/${lastDirName}.md`, data);
+}
+sourceFiles.forEach(async (file) => {
+  const classList = await getClasses(file);
+  const interfaceList = await getAllInterfaces(file);
+  const typeAliasesList = await getTypeAliases(file);
+  const data = [...classList, ...interfaceList, ...typeAliasesList].join(
+    '\n\n'
+  );
+  createTypeMdFile(file, data);
+  console.log('转换成功!!!!!');
 });
-writeFileSync('output.md', data.join('\n'));
