@@ -7,7 +7,7 @@ const project = new Project({
 });
 
 // 从文件系统加载tsconfig.json文件，并将其中的所有源文件添加到项目中
-project.addSourceFilesAtPaths('example.ts');
+// project.addSourceFilesAtPaths('example.ts');
 
 /**
  * 获取类
@@ -24,7 +24,7 @@ function getClasses(file) {
       const description =
         property.getJsDocs()[0]?.getDescription().trim() || '';
       const type = property.getTypeNode()
-        ? `\n\n**Type:** \`${property.getTypeNode()?.getText()}\``
+        ? `\n\n- **Type:** \`${property.getTypeNode()?.getText()}\``
         : '';
       return [signature, description, type].filter(Boolean).join('\n');
     });
@@ -48,13 +48,23 @@ function getAllInterfaces(file) {
     // Get properties
     const propertyList = _interfaces.getProperties().map((property) => {
       const signature = `### ${property.getName()}`;
+      const _default = property.getJsDocs().map((item) => {
+        const defaultList = item?.getTags().map((tag) => {
+          const paramName = tag.getTagName(); // 这通常是参数的名称
+          if (paramName === 'default') {
+            const paramDescription = tag.getComment(); // 这通常是参数的描述
+            return `\n\n- **Default:** \`${paramDescription}\``;
+          }
+        });
+        return defaultList[0];
+      });
       const description =
         property.getJsDocs()[0]?.getDescription().trim() || '';
       const type = property.getTypeNode()
-        ? `\n\n**Type:** \`${property.getTypeNode()?.getText()}\``
+        ? `\n\n- **Type:** \`${property.getTypeNode()?.getText()}\``
         : '';
       const readonly = property.isReadonly() ? '\n\n**Readonly**' : '';
-      return [signature, description, type, readonly]
+      return [signature, description, type, _default, readonly]
         .filter(Boolean)
         .join('\n');
     });
@@ -72,7 +82,7 @@ function getTypeAliases(file) {
     const signature = `## ${typeAlias.getName()}`;
     const description = typeAlias.getJsDocs()[0]?.getDescription().trim() || '';
     const alias = typeAlias.getTypeNode();
-    const type = alias ? `\n\n**Type:**\n \`${alias.getText()}\`` : '';
+    const type = alias ? `\n\n- **Type:**\n \`${alias.getText()}\`` : '';
     return [signature, description, type].filter(Boolean).join('\n');
   });
 }

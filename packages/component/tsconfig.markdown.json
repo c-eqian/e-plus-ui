@@ -11,6 +11,6 @@
       "emitDeclarationOnly": true,
       "esModuleInterop": true
     },
-    "include": ["./src/**/*/type.ts", "example.ts"],
+    "include": ["./src/component/table/type.ts"],
     "exclude": ["node_modules", "**/__tests__/**"]
 }

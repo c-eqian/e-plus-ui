@@ -63,6 +63,7 @@ export interface IFormItemConfig<T = any> {
   prop?: keyof T extends infer E ? (E extends string ? E : string) : string;
   /**
    * 表单组件宽度
+   * @default 100px
    */
   width?: string; // 100%  100px,
   /**
