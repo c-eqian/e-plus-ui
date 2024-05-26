@@ -3,8 +3,8 @@ import type { Ref, VNode } from 'vue';
 /**
  * 扩展参数
  */
-export type ExtraPropsType = { [k: string]: any };
-export interface IEnumItem extends ExtraPropsType {
+export type TableExtraPropsType = { [k: string]: any };
+export interface IEnumItem extends TableExtraPropsType {
   /**
    * 选择框显示的标签
    */
@@ -22,7 +22,7 @@ export interface IEnumItem extends ExtraPropsType {
    */
   tagType?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
 }
-export interface IColumnsExtra extends ExtraPropsType {
+export interface IColumnsExtra extends TableExtraPropsType {
   /**
    * 显示隐藏状态
    */
@@ -82,7 +82,7 @@ export type OperationTypeMap = {
    */
   permission: string[];
 };
-export interface ITableColumnConfig<T = any> extends ExtraPropsType {
+export interface ITableColumnConfig<T = any> extends TableExtraPropsType {
   /**
    * 列宽
    */

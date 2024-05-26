@@ -40,7 +40,7 @@ onMounted(() => {
 
 <template>
   <ElSelect
-    v-model.trim="model[prop!]"
+    v-model="model[prop!]"
     :placeholder="placeholder || `请选择 ${label}`"
     v-bind="elExtraPros"
     :style="{ width }"

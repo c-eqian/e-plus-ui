@@ -43,7 +43,7 @@ export default defineComponent({
     const toRefModel = toRef(props.model);
     const epFormRef = ref<FormInstance>();
     // 将model注入，供子组件使用
-    provide<FormContext>('form-context', {
+    provide<FormContext>('EP-FORM-CONTEXT', {
       model: toRefModel,
     });
     /**

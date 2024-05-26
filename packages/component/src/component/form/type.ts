@@ -4,7 +4,7 @@ import type { Ref } from 'vue';
 /**
  * 扩展参数
  */
-export type ExtraPropsType = { [k: string]: any };
+export type FormExtraPropsType = { [k: string]: any };
 /**
  * el-基础控件
  */
@@ -30,7 +30,7 @@ export type FormItemType =
  * 配置数据
  * 组件， select、cascade
  */
-export interface IFormOptions extends ExtraPropsType {
+export interface IFormOptions extends FormExtraPropsType {
   /**
    * 配置项值
    */
@@ -123,7 +123,7 @@ export interface IFormItemConfig<T = any> {
   /**
    * el 额外参数
    */
-  elExtraPros?: ExtraPropsType;
+  elExtraPros?: FormExtraPropsType;
   /**
    * 是否一直禁用，为true时，处于不可编辑状态，disabled将会失效
    */
