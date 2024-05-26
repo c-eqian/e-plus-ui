@@ -6,21 +6,24 @@
  * @LastEditors: 十三
  * @LastEditTime: 2022-10-18 22:14:16
 -->
+# 介绍
+`EPlus-UI`，一个精心打造的基于`element-plus`的组件库，`EPlus-UI`旨在消除冗余代码，让开发过程变得更为高效、流畅，强调灵活性和可配置性。
+它允许开发者通过简单的配置操作，轻松调整组件的行为和交互逻辑。在开发过程中，EPlus-UI提供了丰富的文档和示例代码，帮助开发者快速上手并理解组件的使用方法和最佳实践
 
 # 安装使用
 
-本节将介绍如何在项目中使用 cz-coco
+本节将介绍如何在项目中使用 EPlus-UI
 
 ## 安装
 
 使用 npm 或 yarn 安装
 
 ```
-npm install cz-coco
-yarn add cz-coco
+npm install e-plus-ui
+yarn add e-plus-ui
 ```
 
-## 引入 cz-coco
+## 引入 e-plus-ui
 
 ### 完整引入
 
@@ -32,11 +35,11 @@ yarn add cz-coco
 import { createApp } from 'vue';
 import App from './App.vue';
 // 导入组件库
-import CzUi from 'cz-coco';
-import 'cz-coco/lib/cz-coco.css';
+import EPlusUI from 'e-plus-ui';
+import 'e-plus-ui/lib/index.css'
 
 const app = createApp(App);
-app.use(CzUi);
+app.use(EPlusUI);
 app.mount('#app');
 ```
 
@@ -44,12 +47,12 @@ app.mount('#app');
 
 ## 愉快开始
 
-#### 至此 cz-coco 就引入完成并且可以使用了。
+#### 至此 EPlus-UI 就引入完成并且可以使用了。
 
 ```html
 <!-- html -->
-<cz-button>默认按钮</-button>
-<cz-button type="primary">主要按钮</-button>
+<ep-button>默认按钮</ep-button>
+<ep-button type="primary">主要按钮</ep-button>
 ```
 
 <br/>
@@ -60,14 +63,14 @@ app.mount('#app');
 
 ```js
 /*js*/
-import { CzButton } from 'cz-coco';
+import { EpButton } from 'e-plus-ui';
 ```
 
 <br/>
 
 ```html
 <!-- html -->
-<cz-button>点击</cz-button>
+<ep-button>点击</ep-button>
 ```
 
 <br/>

@@ -3,16 +3,16 @@ import { mdPlugin } from './configs/plugins';
 import {generateSidebar} from "./configs/siderbars";
 export default defineConfig({
     lang: 'zh-CN',
-    title: 'cz-coco',
-    description: '组件库&工具库',
-    head: [['link', { rel: 'icon', href: '/logo.png' }]],
+    title: 'EPlus-UI',
+    description: '组件库',
+    head: [['link', { rel: 'icon', href: 'https://s3.bmp.ovh/imgs/2022/12/21/0aedf538ece60a2f.png' }]],
     markdown: {
         lineNumbers: true,
         config: (md) => mdPlugin(md as any),
     },
     themeConfig: {
         // logo: 'https://s1.ax1x.com/2022/09/10/vOVha6.jpg',
-        logo: 'https://s1.ax1x.com/2022/10/15/x0Q84P.png',
+        logo: 'https://s3.bmp.ovh/imgs/2022/12/21/0aedf538ece60a2f.png',
         nav: [
             {
                 text: '指南',
