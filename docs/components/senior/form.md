@@ -10,7 +10,23 @@
    :::demo
    form/index
    :::
+## 表单校验用法
 
+配置表单校验，需要将`rules`配置为`true`即可
+1. 基础的表单校验配置
+   :::demo
+   form/verify
+   :::
+2. 自定义校验信息
+可以通过配置`rules`属性，接收一个对象或者数组进行校验配置，用法与`el-form`一致
+   :::demo
+   form/verify2
+   :::
+## 自定义插槽
+如果想要进行组件自定义或者没有符合你的需求，可以使用`slotKey`属性进行自定义，
+   :::demo
+   form/slot
+   :::
 ## 配置项
 ## IFormOptions
 
