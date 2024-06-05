@@ -3,6 +3,7 @@
 import EpButton from './component/button/index';
 import EpCard from './component/card/index';
 import EpTable from './component/table/index';
+import EpVirtualList from './component/virtual-list/index';
 import EpCopyText from './component/copy-text/index';
 import EpForm from './component/form/index';
 declare module '@vue/runtime-core' {
@@ -13,6 +14,7 @@ declare module '@vue/runtime-core' {
     EpCopyText: typeof EpCopyText;
     EpTable: typeof EpTable;
     EpForm: typeof EpForm;
+    EpVirtualList: typeof EpVirtualList;
   }
 }
 

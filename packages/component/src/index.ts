@@ -7,10 +7,12 @@ import EpButton from './component/button/index';
 import EpCard from './component/card/index';
 import EpTable from './component/table/index';
 import EpForm from './component/form/index';
+import EpVirtualList from './component/virtual-list/index';
 import EpCopyText from './component/copy-text/index';
 const components: Record<string, Plugin> = {
   EpButton,
   EpCard,
+  EpVirtualList,
   EpCopyText,
   EpTable,
   EpForm,
@@ -22,7 +24,15 @@ const install = (app: App, options?: any): void => {
   }
 };
 
-export { EpButton, EpCard, EpCopyText, EpTable, EpForm, install };
+export {
+  EpButton,
+  EpCard,
+  EpCopyText,
+  EpTable,
+  EpForm,
+  EpVirtualList,
+  install,
+};
 
 export default { install };
 
