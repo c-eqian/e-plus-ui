@@ -80,6 +80,9 @@ export default defineComponent({
               extra = {} as any,
               render,
             } = item;
+            const isRender = () => {
+              return isFunction(permission) ? permission() : true;
+            };
             if (isFunction(render)) {
               return render({
                 row,
@@ -88,19 +91,16 @@ export default defineComponent({
               });
             }
             if (['add', 'edit', 'view', 'delete'].includes(type)) {
-              return createBaseOperation(type as OperationType, label, extra);
+              return isRender()
+                ? createBaseOperation(type as OperationType, label, extra)
+                : null;
             } else {
-              return isFunction(permission)
-                ? permission()
-                  ? dynamicButtons(label, {
-                      ...extra,
-                      onClick: () => handleClickEvents(type),
-                    })
-                  : null
-                : dynamicButtons(label, {
+              return isRender()
+                ? dynamicButtons(label, {
                     ...extra,
                     onClick: () => handleClickEvents(type),
-                  });
+                  })
+                : null;
             }
           } else {
             console.warn('The operationType type is incorrect');
@@ -118,7 +118,7 @@ export default defineComponent({
         edit: '编辑',
         delete: '删除',
         view: '查看',
-      }
+      };
       return {
         add: dynamicButtons(label || operationTypeLabel.add, {
           ...{
