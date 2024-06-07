@@ -3,10 +3,21 @@ const { writeFileSync, existsSync, mkdirSync } = require('node:fs');
 const { dirname, parse, basename } = require('path');
 const path = require('path');
 // 创建一个TypeScript项目对象
+const tsconfigMarkdown = path.resolve(
+  __dirname,
+  '..',
+  'tsconfig.markdown.json'
+);
 const project = new Project({
-  tsConfigFilePath: './tsconfig.markdown.json',
+  tsConfigFilePath: tsconfigMarkdown,
 });
-const docsRoot = path.resolve(__dirname, '..', '..', 'docs/components/type');
+const docsRoot = path.resolve(
+  __dirname,
+  '..',
+  '..',
+  '..',
+  'docs/components/type'
+);
 // 从文件系统加载tsconfig.json文件，并将其中的所有源文件添加到项目中
 // project.addSourceFilesAtPaths('example.ts');
 
@@ -93,32 +104,35 @@ function getFilePathName(file) {
   let pathObject = parse(file.getFilePath());
   return basename(pathObject.dir);
 }
-function createTypeMdFile(file, data) {
+function createTypeMdFile(fileName, data) {
   // // 检查目录是否存在
   // if (!existsSync(`markdown`)) {
   //   // 如果目录不存在，则创建它（包括任何不存在的父目录）
   //   mkdirSync(`markdown`, { recursive: true });
   //   console.log(`Directory ${`markdown`} has been created.`);
   // }
-  const fileName = getFilePathName(file);
   const savePath = path.join(docsRoot, `${fileName}.md`);
   writeFileSync(savePath, data);
 }
-function checkerIsHas(file) {
-  const fileName = getFilePathName(file);
+function checkerIsHas(fileName) {
   const savePath = path.join(docsRoot, `${fileName}.md`);
   return existsSync(savePath);
 }
+const createHeader = () => {
+  return `::: tip 提示
+类型定义说明通过自动生成
+:::`;
+};
 function run(isReset = false) {
   sourceFiles.forEach(async (file) => {
     const fileName = getFilePathName(file);
     const _header = [
       `# ${fileName.toLowerCase().replace(/\b[a-z]/g, function (match) {
         return match.toUpperCase();
-      })}`,
+      })} 组件定义 \n\n ${createHeader()}`,
     ];
     if (!isReset) {
-      if (!checkerIsHas(file)) {
+      if (!checkerIsHas(fileName)) {
         const classList = await getClasses(file);
         const interfaceList = await getAllInterfaces(file);
         const typeAliasesList = await getTypeAliases(file);
@@ -128,7 +142,7 @@ function run(isReset = false) {
           ...interfaceList,
           ...typeAliasesList,
         ].join('\n\n');
-        createTypeMdFile(file, data);
+        createTypeMdFile(fileName, data);
       }
     } else {
       const classList = await getClasses(file);
@@ -140,9 +154,9 @@ function run(isReset = false) {
         ...interfaceList,
         ...typeAliasesList,
       ].join('\n\n');
-      createTypeMdFile(file, data);
+      createTypeMdFile(fileName, data);
     }
+    console.log('转换------>', fileName);
   });
 }
 run(true);
-console.log('转换成功!!!!!');

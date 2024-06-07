@@ -14,6 +14,8 @@
     "build": "pnpm run build:component",
     "build:component": "pnpm -C packages/component build",
     "publish:component": "pnpm -C packages/component publish",
+    "build:types": " pnpm -C packages/component build:types",
+    "build:table": " pnpm -C packages/component build:table",
     "generate:icons": "pnpm -C packages/icons generate",
     "lint:eslint": "eslint \"packages/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
