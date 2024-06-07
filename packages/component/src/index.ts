@@ -45,4 +45,4 @@ export {
 
 export default { install };
 
-export type {} from './components.ts';
+export type {} from './components';
