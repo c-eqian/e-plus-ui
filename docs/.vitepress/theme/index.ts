@@ -8,6 +8,9 @@ import { globals } from '../vitepress';
 import cz from 'e-plus-ui';
 // import 'e-plus-ui'
 // import '../vitepress/styles/code.scss'
+import 'tailwindcss/base.css';
+import 'tailwindcss/components.css';
+import 'tailwindcss/utilities.css';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 // 图标并进行全局注册

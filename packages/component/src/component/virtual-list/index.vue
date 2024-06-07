@@ -12,15 +12,7 @@
 
 <script lang="ts" setup>
 import { isNumber } from 'co-utils-vue';
-import {
-  computed,
-  onUpdated,
-  reactive,
-  ref,
-  unref,
-  watchEffect,
-  defineProps,
-} from 'vue';
+import { computed, onUpdated, reactive, ref, unref, watchEffect } from 'vue';
 import { IVirtualList } from './type';
 
 const props = withDefaults(defineProps<IVirtualList>(), {

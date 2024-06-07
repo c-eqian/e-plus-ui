@@ -1,6 +1,7 @@
 <template>
   <div class="play">
-    <div class="main-container">
+    <ep-button>哈哈哈</ep-button>
+    <div class="main-container cz-bg-sky-400">
       <ep-form :model="formModel" :form-items="formSchema" label-width="70px">
       </ep-form>
     </div>

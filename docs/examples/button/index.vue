@@ -1,6 +1,6 @@
 <template>
-  <div class="demo-mr">
-    <EpButton type="primary">primary</EpButton>
+  <div class="demo-mr cz-bg-sky-400">
+    <EpButton type="primary">哈哈哈</EpButton>
     <EpButton type="normal">normal</EpButton>
     <EpButton type="danger">danger</EpButton>
 
