@@ -70,7 +70,7 @@ const classes = computed(() => {
 
 <template>
   <button
-    class="ep-btn cz-text-3xl"
+    class="ep-btn"
     :class="classes"
     :style="styles"
     :type="nativeType"

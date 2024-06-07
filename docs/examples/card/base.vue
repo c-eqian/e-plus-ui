@@ -1,9 +1,6 @@
 <template>
-  <div class="demo-mr">
+  <div class="cz-h-full">
     <EpCard>这是卡片</EpCard>
-    <div style="width: 500px; height: 600px">
-      <EpCard shadow="always">这是阴影卡片</EpCard>
-    </div>
   </div>
 </template>
 <script setup lang="ts">

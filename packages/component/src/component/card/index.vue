@@ -1,23 +1,16 @@
 <script setup lang="ts">
-import type { PropType } from 'vue';
-import { Shadow } from './type';
-import { ElCard } from 'element-plus';
+// import type { PropType } from 'vue';
 defineOptions({
   name: 'EpCard',
-});
-const props = defineProps({
-  shadow: {
-    type: String as PropType<Shadow>,
-    default: 'never',
-  },
 });
 </script>
 
 <template>
-  <el-card :shadow="props.shadow">
-    测试66
-    <slot></slot>
-  </el-card>
+  <div class="cz-h-full cz-p-5">
+    <div class="cz-min-h-96 cz-shadow-md cz-rounded-2xl">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss"></style>
