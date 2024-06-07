@@ -1,5 +1,6 @@
-import Table from './table';
+import Table from './packages/Table';
+import TableColumn from './packages/TableColumn';
 import { withInstall } from '../../utils';
 const EpTable = withInstall(Table);
-export default EpTable;
-export * from './type';
+const EpTableColumn = withInstall(TableColumn);
+export { EpTable, EpTableColumn };

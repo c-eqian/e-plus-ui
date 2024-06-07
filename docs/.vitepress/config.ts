@@ -51,7 +51,12 @@ export default defineConfig({
                     text: 'Senior 高级组件',
                     link: '',
                     items: generateSidebar('senior')
-                }
+                },
+              {
+                text: 'Type 字段类型',
+                link: '',
+                items: generateSidebar('type')
+              }
             ]
         },
         outline: {

@@ -1,48 +1,50 @@
 <script setup lang="ts">
   import { defineTableColumns } from 'e-plus-ui'
-  import { ref } from 'vue'
-  import { ElMessage } from 'element-plus'
+  import { h, ref } from 'vue'
+  import { ElTableColumn } from 'element-plus'
   const epTableRef = ref()
   const tableData = ref([
     {
       date: '2016-05-03',
       name: 'Tom',
+      age:18,
+      address: '深圳'
     },
     {
       date: '2016-05-02',
-      name: 'Tom'
+      name: 'Tom',
+      age:18,
+      address: '北京'
     }
   ])
   const column = defineTableColumns<typeof tableData.value[0]>([
     {
-      label: '名称',
-      prop: 'name',
-      // 设置必填校验
-      rules: true
+      label: '用户信息',
+      prop: '',
+      render: ()=> [
+        h(ElTableColumn, {
+          label: '姓名',
+          prop: 'name'
+        }),
+        h(ElTableColumn, {
+          label: '年龄1',
+          prop: 'age'
+        })
+      ]
     },
     {
       label: '日期',
       prop: 'date'
     }
   ])
-  const handleEdit = async () =>{
-    console.log(tableData)
-   await epTableRef.value?.validate()
-    ElMessage.success('检验通过')
-  }
 </script>
 
 <template>
-  <el-button type="primary" @click="handleEdit">提交</el-button>
   <ep-table
     ref="epTableRef"
-    use-form-validation
     :data="tableData"
     :column
   >
-    <template #name="scope">
-      <el-input clearable v-model="scope.row.name"></el-input>
-    </template>
   </ep-table>
 </template>
 

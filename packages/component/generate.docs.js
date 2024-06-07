@@ -1,12 +1,12 @@
 const { Project } = require('ts-morph');
 const { writeFileSync, existsSync, mkdirSync } = require('node:fs');
 const { dirname, parse, basename } = require('path');
-
+const path = require('path');
 // 创建一个TypeScript项目对象
 const project = new Project({
   tsConfigFilePath: './tsconfig.markdown.json',
 });
-
+const docsRoot = path.resolve(__dirname, '..', '..', 'docs/components/type');
 // 从文件系统加载tsconfig.json文件，并将其中的所有源文件添加到项目中
 // project.addSourceFilesAtPaths('example.ts');
 
@@ -91,42 +91,55 @@ async function getTypeAliases(file) {
 const sourceFiles = project.getSourceFiles();
 function getFilePathName(file) {
   let pathObject = parse(file.getFilePath());
-  let lastDirName = basename(pathObject.dir);
-  return `markdown/${lastDirName}.md`;
+  return basename(pathObject.dir);
 }
 function createTypeMdFile(file, data) {
-  const savePath = getFilePathName(file);
-  // 检查目录是否存在
-  if (!existsSync(`markdown`)) {
-    // 如果目录不存在，则创建它（包括任何不存在的父目录）
-    mkdirSync(`markdown`, { recursive: true });
-    console.log(`Directory ${`markdown`} has been created.`);
-  }
+  // // 检查目录是否存在
+  // if (!existsSync(`markdown`)) {
+  //   // 如果目录不存在，则创建它（包括任何不存在的父目录）
+  //   mkdirSync(`markdown`, { recursive: true });
+  //   console.log(`Directory ${`markdown`} has been created.`);
+  // }
+  const fileName = getFilePathName(file);
+  const savePath = path.join(docsRoot, `${fileName}.md`);
   writeFileSync(savePath, data);
 }
 function checkerIsHas(file) {
-  const savePath = getFilePathName(file);
+  const fileName = getFilePathName(file);
+  const savePath = path.join(docsRoot, `${fileName}.md`);
   return existsSync(savePath);
 }
 function run(isReset = false) {
   sourceFiles.forEach(async (file) => {
+    const fileName = getFilePathName(file);
+    const _header = [
+      `# ${fileName.toLowerCase().replace(/\b[a-z]/g, function (match) {
+        return match.toUpperCase();
+      })}`,
+    ];
     if (!isReset) {
       if (!checkerIsHas(file)) {
         const classList = await getClasses(file);
         const interfaceList = await getAllInterfaces(file);
         const typeAliasesList = await getTypeAliases(file);
-        const data = [...classList, ...interfaceList, ...typeAliasesList].join(
-          '\n\n'
-        );
+        const data = [
+          _header,
+          ...classList,
+          ...interfaceList,
+          ...typeAliasesList,
+        ].join('\n\n');
         createTypeMdFile(file, data);
       }
     } else {
       const classList = await getClasses(file);
       const interfaceList = await getAllInterfaces(file);
       const typeAliasesList = await getTypeAliases(file);
-      const data = [...classList, ...interfaceList, ...typeAliasesList].join(
-        '\n\n'
-      );
+      const data = [
+        _header,
+        ...classList,
+        ...interfaceList,
+        ...typeAliasesList,
+      ].join('\n\n');
       createTypeMdFile(file, data);
     }
   });

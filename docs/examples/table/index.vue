@@ -1,7 +1,5 @@
 <script setup lang="ts">
-  import * as Ep from 'e-plus-ui';
-  import {defineTableColumns} from "e-plus-ui";
-  console.log(3333, Ep)
+  import { defineTableColumns } from 'e-plus-ui'
   const tableData = [
     {
       date: '2016-05-03',
@@ -24,7 +22,7 @@
       address: 'No. 189, Grove St, Los Angeles',
     },
   ]
-  const column =defineTableColumns( [
+  const column = defineTableColumns<typeof tableData[0]>([
     {
       label: '名称',
       prop: 'name'
@@ -41,9 +39,9 @@
 </script>
 
 <template>
-  <EpTable :data="tableData" :column>
+  <ep-table :data="tableData" :column>
 
-  </EpTable>
+  </ep-table>
 </template>
 
 <style scoped lang="scss">

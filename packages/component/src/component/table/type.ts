@@ -1,10 +1,14 @@
 import type { FormItemRule } from 'element-plus';
 import type { Ref, VNode } from 'vue';
+export type TagType = 'primary' | 'success' | 'info' | 'warning' | 'danger';
 /**
- * 扩展参数
+ * 额外参数
+ * 主要是组件库的相关参数
  */
-export type TableExtraPropsType = { [k: string]: any };
-export interface IEnumItem extends TableExtraPropsType {
+export type ExtraParameters = {
+  [k: string]: any;
+};
+export interface IEnumItem extends ExtraParameters {
   /**
    * 选择框显示的标签
    */
@@ -20,9 +24,9 @@ export interface IEnumItem extends TableExtraPropsType {
   /**
    * 枚举标签类型，应用于el-tag组件
    */
-  tagType?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
+  tagType?: TagType;
 }
-export interface IColumnsExtra extends TableExtraPropsType {
+export interface IColumnsExtra extends ExtraParameters {
   /**
    * 显示隐藏状态
    */
@@ -33,22 +37,9 @@ export interface IColumnsExtra extends TableExtraPropsType {
    */
   width?: number | string;
 }
-
-/**
- * 自定义渲染方法参数类型
- */
-export interface IRenderData<T = any> {
-  /**
-   * 数据行
-   */
+interface IRenderData<T = any> {
   row: T;
-  /**
-   * 数据索引
-   */
   index: number;
-  /**
-   * 数据列
-   */
   column: ITableColumnConfig<T>;
   /**
    * 自定义返回一个检验器的数据键
@@ -58,31 +49,50 @@ export interface IRenderData<T = any> {
 }
 
 /**
- * 自定义渲染
+ * 渲染器
  */
-export interface TRender<T = any> {
-  (scoped: IRenderData<T>): VNode | null | string | number;
-}
+export type TRender<T = any> = (
+  scoped: IRenderData<T>
+) =>
+  | VNode<any, any, any>
+  | VNode<any, any, any>[]
+  | null
+  | string
+  | number
+  | undefined;
 
-/**
- * 操作类型
- */
 export type OperationType = 'add' | 'edit' | 'delete' | 'view';
-/**
- * 操作类型
- * 支持配置权限
- */
-export type OperationTypeMap = {
+export type PermissionFn = () => boolean;
+export type Permission = string[] | PermissionFn;
+export interface OperationTypeMap {
   /**
-   * 操作类型
+   * 操作类型，可以使用内置、亦可以使用自定义
+   * 如果使用自定义时，type的值将会作为事件的回调参数
    */
-  type: OperationType;
+  type: OperationType | string;
   /**
-   * 权限标识
+   * 自定义操作名称，如果使用内置时可以为空，默认使用内置标签
+   * 优先级高于operationTypeLabel
    */
-  permission: string[];
-};
-export interface ITableColumnConfig<T = any> extends TableExtraPropsType {
+  label?: string;
+  /**
+   * 自定义渲染
+   * 优先级高于type
+   */
+  render?: TRender;
+  /**
+   * 权限
+   * 接收一个数组（预留-使用接口权限校验）
+   * 或接收一个具有返回布尔值的方法，false将不会显示该操作
+   */
+  permission?: Permission;
+  /**
+   * 额外参数
+   * el组件参数
+   */
+  extra?: ExtraParameters;
+}
+export interface ITableColumnConfig<T = any> extends ExtraParameters {
   /**
    * 列宽
    */
@@ -103,7 +113,7 @@ export interface ITableColumnConfig<T = any> extends TableExtraPropsType {
    */
   key?: string;
   /**
-   * 表头名称
+   * 显示名
    */
   label: string;
   /**
@@ -111,14 +121,13 @@ export interface ITableColumnConfig<T = any> extends TableExtraPropsType {
    */
   prop?: keyof T extends infer E ? (E extends string ? E : string) : string;
   /**
-   * 是否显示提示
-   * @default false
+   * 是否显示提示，默认false
    */
   tooltip?: boolean;
   /**
    * 自定义渲染器
    */
-  render?: TRender<T>;
+  render?: TRender<T> | TRender<T>[];
   /**
    * 表头渲染器
    */
@@ -137,9 +146,6 @@ export interface ITableColumnConfig<T = any> extends TableExtraPropsType {
    * 表单校验:主要用于表格内的表单编辑
    */
   rules?: FormItemRule | FormItemRule[] | boolean;
-  /**
-   * 子节点数据
-   */
   children?: ITableColumnConfig[];
   /**
    * 文本溢出显示...
@@ -150,9 +156,6 @@ export interface ITableColumnConfig<T = any> extends TableExtraPropsType {
    * @param row
    */
   format?: (row: T) => void;
-  /**
-   * 操作栏固定方法
-   */
   fixed?: string | boolean;
   /**
    * 扩展参数，基本作用于 el-table的参数
@@ -178,21 +181,15 @@ export interface ITableColumnConfig<T = any> extends TableExtraPropsType {
    * 需要type=operation
    * 操作类型， 默认add(新增) edit(修改) delete(删除) view(查看)
    */
-  operationType?: (OperationType | OperationTypeMap)[];
+  operationType?: (OperationType | OperationTypeMap)[] | TRender;
 }
 
 /**
- * 定义表格数据列
+ * 定义表格辅助函数
  * @param columns
  */
-export const defineTableColumns = <T = any>(columns: ITableColumnConfig<T>[]) =>
-  columns;
-/**
- * 操作类型名称
- * 默认局限于 add(新增) edit(修改) delete(删除) view(查看)
- */
-export const defineTableConfigOperationLabel = (
-  operationTypeLabel: Record<OperationType, string>
+export const defineTableColumns = <T = any>(
+  columns: ITableColumnConfig<T>[]
 ) => {
-  return operationTypeLabel;
+  return columns;
 };

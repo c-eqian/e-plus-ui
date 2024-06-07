@@ -1,8 +1,8 @@
 <script setup lang="ts">
+  import { defineTableColumns } from 'e-plus-ui'
   import { ref } from 'vue'
   import { ElMessage } from 'element-plus'
-  import {defineTableColumns} from "e-plus-ui";
-  const advTableRef = ref()
+  const epTableRef = ref()
   const tableData = ref([
     {
       date: '2016-05-03',
@@ -13,7 +13,7 @@
       name: 'Tom'
     }
   ])
-  const column = defineTableColumns([
+  const column = defineTableColumns<typeof tableData.value[0]>([
     {
       label: '名称',
       prop: 'name',
@@ -33,7 +33,7 @@
   ])
   const handleEdit = async () =>{
     console.log(tableData)
-   await advTableRef.value?.validate()
+   await epTableRef.value?.validate()
   }
   const handleClickedEdit = (row, index) =>{
     ElMessage.success(`修改-${row.name}-${index}`)
@@ -50,7 +50,7 @@
 </script>
 
 <template>
-  <EpTable
+  <ep-table
     ref="advTableRef"
     :data="tableData"
     :column
@@ -59,7 +59,7 @@
     @click-row-delete="handleClickedDelete"
     @clickRowView="handleClickedView"
   >
-  </EpTable>
+  </ep-table>
 </template>
 
 <style scoped lang="scss">

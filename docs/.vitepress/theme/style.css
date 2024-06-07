@@ -47,3 +47,6 @@ div[class*="vp-doc _co-utils-vue_examples_utils"] sup {
        --text-color-light: var(--el-text-color-regular);
        --text-color-lighter: var(--el-text-color-secondary);
    }
+.vp-doc table {
+  margin:0 !important;
+}
