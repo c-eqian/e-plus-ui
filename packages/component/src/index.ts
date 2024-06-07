@@ -6,7 +6,7 @@ import './theme/index.less';
  */
 export * from './component/table/type';
 export * from './component/form/index';
-
+export * from './component/virtual-list/type';
 /**
  * 导出工具函数
  */

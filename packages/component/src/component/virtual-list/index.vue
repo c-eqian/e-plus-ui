@@ -11,12 +11,28 @@
 </template>
 
 <script lang="ts" setup>
-import { isNumber, isString } from 'co-utils-vue';
-import { computed, onUpdated, reactive, ref, unref, watchEffect } from 'vue';
+import { isNumber } from 'co-utils-vue';
+import {
+  computed,
+  onUpdated,
+  reactive,
+  ref,
+  unref,
+  watchEffect,
+  defineProps,
+} from 'vue';
+import { IVirtualList } from './type';
 
-import virtualProps from './props';
-
-const props = defineProps(virtualProps);
+const props = withDefaults(defineProps<IVirtualList>(), {
+  height: 500,
+  width: '100%',
+  itemHeight: 30,
+  isDynamic: false,
+  cache: 2,
+  data: () => {
+    return [];
+  },
+});
 defineOptions({
   name: 'EpVirtualList',
 });
@@ -29,14 +45,12 @@ const state = reactive<any>({
 const virtualListRef = ref();
 
 const getWrapperStyle = computed(() => {
-  const { style, height, width } = props;
-  const styleObj = isString(style) ? JSON.parse(style) : { ...style };
+  const { height, width } = props;
   return {
     height: `${height}px`,
     position: 'relative',
     'overflow-y': ' auto',
     width: isNumber(width) ? `${width}px` : width,
-    ...styleObj,
   };
 });
 
@@ -61,7 +75,7 @@ const total = computed(() => {
 
 // 总体高度
 const getTotalHeight = computed(() => {
-  if (!props.dynamic) return unref(total) * props.itemHeight;
+  if (!props.isDynamic) return unref(total) * props.itemHeight;
   return getCurrentTop(unref(total));
 });
 
@@ -78,10 +92,10 @@ const clientData = computed(() => {
 const onScroll = (e: any) => {
   const { scrollTop } = e.target;
   if (state.scrollOffset === scrollTop) return;
-  const { cache, dynamic, itemHeight } = props;
+  const { cache, isDynamic, itemHeight } = props;
   const cacheCount = Math.max(1, cache);
 
-  let startIndex = dynamic
+  let startIndex = isDynamic
     ? getStartIndex(scrollTop)
     : Math.floor(scrollTop / itemHeight);
 
@@ -95,7 +109,7 @@ const onScroll = (e: any) => {
   }
 
   // 偏移量
-  const offset = dynamic
+  const offset = isDynamic
     ? getCurrentTop(startIndex)
     : scrollTop - (scrollTop % itemHeight);
 
@@ -147,7 +161,7 @@ const getCurrentTop = (index: number) => {
 };
 
 onUpdated(() => {
-  if (!props.dynamic) return;
+  if (!props.isDynamic) return;
   const childrenList = virtualListRef.value.children || [];
   [...childrenList].forEach((node: any, index: number) => {
     const height = node.getBoundingClientRect().height;

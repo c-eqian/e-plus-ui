@@ -159,4 +159,4 @@ function run(isReset = false) {
     console.log('转换------>', fileName);
   });
 }
-run(true);
+run(false);
