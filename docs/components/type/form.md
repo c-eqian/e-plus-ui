@@ -252,5 +252,4 @@ el-基础控件
 
 - **Type:**
  `Partial<
-  Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>
->`
+  Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>>`
