@@ -19,13 +19,13 @@ export interface ILineProps {
    */
   borderWidth?: string;
   /**
-   * 边框样式
-   * @default solid
+   * 是否为虚线
+   * @default false
    */
-  borderType?: string;
+  dashed?: boolean;
   /**
    * 偏移量
-   * @default 25
+   * 当设置position=`center`时，该值无效
    */
   offset?: string;
   /**
@@ -37,4 +37,10 @@ export interface ILineProps {
    * @default 8
    */
   margin?: string;
+  /**
+   * 是否使用渐变
+   * 只有在position=`center`或者每天default slot时有效
+   * @default false
+   */
+  linear?: boolean;
 }
