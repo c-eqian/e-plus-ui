@@ -231,7 +231,7 @@ export default defineComponent({
                         });
                       }
                       if (item?.children) {
-                        // eslint-disable-next-line no-use-before-define
+                        // eslint-disable-next-line.md no-use-before-define
                         return item.children.map((it) => columnRender(it));
                       }
                       /**

@@ -1,10 +1,10 @@
 
 import { defineConfig } from 'vite';
-// eslint-disable-next-line import/extensions
+// eslint-disable-next-line.md import/extensions
 // import vue from '@vitejs/plugin-vue';
 // import DefineOptions from 'unplugin-vue-define-options/vite';
 // import vueSetupExtend from 'vite-plugin-vue-setup-extend'
-// eslint-disable-next-line import/extensions
+// eslint-disable-next-line.md import/extensions
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import path from 'path';
 // import path from "path";

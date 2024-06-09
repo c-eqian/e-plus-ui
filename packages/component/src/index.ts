@@ -10,17 +10,27 @@ export * from './component/virtual-list/type';
 /**
  * 导出工具函数
  */
+/**
+ * 基础组件
+ */
 import EpButton from './component/button/index';
 import EpCard from './component/card/index';
+import EpCopyText from './component/copy-text/index';
+import EpLine from './component/line/index';
+/**
+ * 高级组件
+ */
 import { EpTable, EpTableColumn } from './component/table/index';
 import EpForm from './component/form/index';
 import EpVirtualList from './component/virtual-list/index';
-import EpCopyText from './component/copy-text/index';
+
 const components: Record<string, Plugin> = {
   EpButton,
   EpCard,
-  EpVirtualList,
+  EpLine,
   EpCopyText,
+
+  EpVirtualList,
   EpTable,
   EpTableColumn,
   EpForm,
@@ -36,6 +46,7 @@ export {
   EpButton,
   EpCard,
   EpCopyText,
+  EpLine,
   EpTable,
   EpTableColumn,
   EpForm,

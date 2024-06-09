@@ -6,7 +6,7 @@ import _console from 'consola';
 // import loadLanguages from ''
 
 // prism is listed as actual dep so it's ok to require
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line.md @typescript-eslint/no-var-requires
 import loadLanguages from 'prismjs/components/index';
 // required to make embedded highlighting work...
 loadLanguages(['markup', 'css', 'javascript']);
@@ -40,7 +40,7 @@ export const highlight = (str: string, lang: string) => {
     try {
       loadLanguages([lang]);
     } catch {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line.md no-console
       // _console.warn(
       //   chalk.yellow(
       //     `[vitepress] Syntax highlight for language "${lang}" is not supported.`
