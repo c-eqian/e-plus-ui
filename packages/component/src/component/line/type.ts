@@ -27,7 +27,7 @@ export interface ILineProps {
    * 偏移量
    * 当设置position=`center`时，该值无效
    */
-  offset?: string;
+  offset?: string | number;
   /**
    * 边框颜色
    */
@@ -39,7 +39,7 @@ export interface ILineProps {
   margin?: string;
   /**
    * 是否使用渐变
-   * 只有在position=`center`或者每天default slot时有效
+   * 只有在position=`center`或者没有default slot时有效
    * @default false
    */
   linear?: boolean;
