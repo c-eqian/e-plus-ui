@@ -13,7 +13,7 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        base: '2px 2px 5px 1px rgba(229,231,235,1)',
+        base: '0px 0px 12px rgba(0, 0, 0, .12)',
       },
       textColor: {
         sub: '#a0a0a0',

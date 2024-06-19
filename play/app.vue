@@ -1,92 +1,12 @@
 <template>
   <div class="play">
-    <ep-button>哈哈哈</ep-button>
-    <div class="main-container cz-bg-sky-400">
-      <ep-form :model="formModel" :form-items="formSchema" label-width="70px">
-      </ep-form>
-    </div>
+    <ep-card>
+      如果要监听 current-page 和 page-size 的改变，使用 v-model 双向绑定是个更好的选择。
+    </ep-card>
   </div>
 
 </template>
 <script setup lang="ts">
-import { defineFormSchema } from "../packages/component/src";
-import {ref} from "vue";
-const formSchema = defineFormSchema([
-  {
-    label: '名称',
-    type: 'input',
-    rules: true,
-    col: {
-      span: 24,
-    },
-    prop: 'name'
-  },
-  {
-    label: '文本框',
-    type: 'textarea',
-    prop: 'textarea',
-    col: {
-      span: 24,
-    },
-  },
-  {
-    label: '下拉框',
-    type: 'select',
-    prop: 'selectProp',
-    col: {
-      span: 24,
-    },
-    options: [
-      {
-        label: 'vue',
-        value: 'vue'
-      },
-      {
-        label: 'react',
-        value: 'react'
-      }
-    ]
-  },
-  {
-    label: '级联',
-    type: 'cascade',
-    prop: 'cascade',
-    col: {
-      span: 24,
-    },
-    options: [
-      {
-        label: '前端',
-        value: 'frontend',
-        children: [
-          {
-            label: 'vue',
-            value: 'vue'
-          },
-          {
-            label: 'react',
-            value: 'react'
-          }
-        ]
-      },
-    ]
-  },
-  {
-    label: '时间范围',
-    type: 'date-time-range',
-    col: {
-      span: 24,
-    },
-    prop: 'daterange',
-  }
-])
-const formModel = ref({
-  name: '111',
-  textarea: '',
-  daterange: '',
-  cascade: '',
-  selectProp: ''
-})
 </script>
 <style lang="less">
 html, body, #app{

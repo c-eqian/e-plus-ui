@@ -4,7 +4,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'path';
 import * as fs from 'fs';
 import terser from '@rollup/plugin-terser';
-
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 const inputDir = resolve(process.cwd(), './src/component');
 
 const inputsArray = fs.readdirSync(inputDir).filter((name) => {
@@ -70,7 +71,10 @@ export default (): UserConfigExport => {
           javascriptEnabled: true,
         },
       },
-      postcss: {},
+      postcss: {
+        tailwindcss,
+        autoprefixer,
+      },
     },
     plugins: [vue(), vueJsx()],
     build: {
