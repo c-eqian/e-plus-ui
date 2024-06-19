@@ -5,6 +5,13 @@ import type { Ref } from 'vue';
  * 扩展参数
  */
 export type FormExtraPropsType = { [k: string]: any };
+
+/**
+ * 扩展validator方法，支持自定义校验前置
+ */
+export interface FormItemRules<T = any> extends FormItemRule {
+  validatorFn?: (model: T) => FormItemRule['validator'];
+}
 /**
  * el-基础控件
  */
@@ -100,7 +107,7 @@ export interface IFormItemConfig<T = any> {
   /**
    * 表单校验规则
    */
-  rules?: FormItemRule | FormItemRule[] | boolean;
+  rules?: FormItemRules<T> | FormItemRules<T>[] | boolean;
   /**
    * 输入框描述
    */

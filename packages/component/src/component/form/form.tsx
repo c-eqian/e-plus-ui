@@ -1,4 +1,4 @@
-import { useMerge, useOmit } from 'co-utils-vue';
+import { useMerge, useOmit, isArray, isFunction } from 'co-utils-vue';
 import {
   ElCol,
   ElForm,
@@ -15,7 +15,12 @@ import {
   watchEffect,
 } from 'vue';
 
-import { FormContext, IFormConfig, IFormItemConfig } from './type';
+import type {
+  FormContext,
+  FormItemRules,
+  IFormConfig,
+  IFormItemConfig,
+} from './type';
 import EpComponent from './EpComponent.vue';
 import { camelCase } from '../../utils';
 
@@ -164,6 +169,15 @@ export default defineComponent({
         this.$attrs
       );
     };
+    const handleValidatorFn = (_rule: FormItemRules) => {
+      if (isFunction(_rule.validatorFn)) {
+        return {
+          ...useOmit(_rule, ['validator']),
+          validator: _rule.validatorFn(this.toRefModel),
+        };
+      }
+      return _rule;
+    };
     const handleFormItemRule = (item: IFormItemConfig) => {
       if (typeof item.rules === 'boolean') {
         return {
@@ -172,7 +186,10 @@ export default defineComponent({
           trigger: 'blur',
         };
       }
-      return item.rules;
+      if (isArray(item.rules)) {
+        return item.rules.map((_rule) => handleValidatorFn(_rule));
+      }
+      return item.rules ? handleValidatorFn(item.rules) : item.rules;
     };
     /**
      * 渲染表单组件

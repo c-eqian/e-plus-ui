@@ -50,7 +50,7 @@ module.exports = {
       'error',
       {
         singleQuote: true,
-        endOfLine: 'lf',
+        endOfLine: 'auto',
       },
     ],
     'vue/script-setup-uses-vars': 'off',
