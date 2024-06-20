@@ -55,9 +55,9 @@ export interface IFormOptions extends FormExtraPropsType {
 /**
  * 列宽配置
  */
-export type IFormItemCol = Partial<
-  Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>
->;
+export type IFormItemCol =
+  | Partial<Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>>
+  | number;
 export interface IFormConfig<T = any> {
   /**
    * 表单model
