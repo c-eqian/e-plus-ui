@@ -36,7 +36,7 @@ export interface ILineProps {
    * 边距
    * @default 8
    */
-  margin?: string; 
+  margin?: string;
   /**
    * 是否使用渐变
    * 只有在position=`center`或者没有default slot时有效
