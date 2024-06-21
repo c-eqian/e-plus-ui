@@ -1,5 +1,25 @@
 import type { FormProps } from 'element-plus';
-import type { FormItemRules, FormItemType, IFormItemCol } from '../form';
+import type { FormItemRules, IFormItemCol } from '../form';
+/**
+ * el-基础控件
+ */
+export type FormSchemaType =
+  | 'text'
+  | 'number'
+  | 'input-number'
+  | 'input'
+  | 'select'
+  | 'switch'
+  | 'textarea'
+  | 'date'
+  | 'date-time'
+  | 'date-range'
+  | 'time-picker'
+  | 'time-range'
+  | 'date-time-range'
+  | 'checkbox-group'
+  | 'radio-group'
+  | 'cascade';
 /**
  * 表单项
  */
@@ -17,6 +37,11 @@ export interface FormItemsSchema<T = any> {
    */
   labelWidth?: string;
   /**
+   * 表单默认值
+   * 如果传入model，该值无效
+   */
+  defaultValue?: any;
+  /**
    * 输入框描述
    */
   placeholder?: string;
@@ -32,7 +57,7 @@ export interface FormItemsSchema<T = any> {
    * form-item表单的类型
    * 目前暂不支持上传类型组件，如需要，则建议使用插槽
    */
-  type?: FormItemType;
+  type?: FormSchemaType;
   /**
    * 栅格的布局方式
    */

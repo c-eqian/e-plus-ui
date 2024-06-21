@@ -198,7 +198,7 @@ export default defineComponent({
       if (!this.formItems.length) return null;
       return this.formItems.map((formItem) => {
         let span = {};
-        if (!formItem.col?.span) {
+        if (typeof formItem.col !== 'number' && !formItem.col?.span) {
           span = useMerge(
             { xs: 24, sm: 12, md: 12, lg: 8, xl: 8 },
             formItem.col as any

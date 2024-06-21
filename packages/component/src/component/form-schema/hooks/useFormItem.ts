@@ -1,6 +1,5 @@
-import type { FormItemsSchema } from '../type';
-import { useOmit } from 'co-utils-vue';
-import type { FormItemType } from '../../form/type';
+import type { FormItemsSchema, FormSchemaType } from '../type';
+import { useMerge, useOmit } from 'co-utils-vue';
 
 /**
  * 参数过滤，获取组件参数
@@ -22,9 +21,9 @@ export const useFilterProps = (props: FormItemsSchema) => {
  */
 export const useFormItemProps = (props: FormItemsSchema) => {
   const { placeholder, type, label } = props;
-  const selectKeyList: FormItemType[] = [
+  const selectKeyList: FormSchemaType[] = [
     'select',
-    'daterange',
+    'date-range',
     'date-time-range',
     'date-time',
     'cascade',
@@ -36,8 +35,7 @@ export const useFormItemProps = (props: FormItemsSchema) => {
     }
     return '请输入' + label;
   };
-  return {
-    ...useFilterProps(props),
+  return useMerge(useFilterProps(props), {
     placeholder: placeholder || `${getPlaceholder()}`,
-  };
+  });
 };
