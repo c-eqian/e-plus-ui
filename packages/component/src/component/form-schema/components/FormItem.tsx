@@ -1,5 +1,5 @@
 import { computed, defineComponent, h, type PropType } from 'vue';
-import { ElFormItem, ElRow } from 'element-plus';
+import { ElCol, ElFormItem, ElRow } from 'element-plus';
 import { FormItemsSchema } from '../type';
 import { useFormItemProps } from '../hooks/useFormItem';
 
@@ -13,7 +13,9 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const computedItem = computed(() => props.item);
-    const createCol = () => {};
+    const createCol = (com: any, props?: any) => {
+      return h(ElCol, ...props, [h(com)]);
+    };
     const createRow = () => {
       return h(ElRow);
     };

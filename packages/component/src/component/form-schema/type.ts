@@ -38,6 +38,10 @@ export interface FormItemsSchema<T = any> {
    */
   col?: IFormItemCol;
   /**
+   * 是否折叠,只对isSearch搜索有效
+   */
+  collapse?: boolean;
+  /**
    * 回车
    * @param value 当前值
    */
