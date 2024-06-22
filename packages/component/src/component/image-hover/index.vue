@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
-
+defineOptions({
+  name: 'EpImageHover',
+});
 const props = defineProps({
   url: {
     type: String,

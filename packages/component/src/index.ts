@@ -18,6 +18,7 @@ import EpButton from './component/button/index';
 import EpCard from './component/card/index';
 import EpCopyText from './component/copy-text/index';
 import EpLine from './component/line/index';
+import EpImageHover from './component/image-hover/index';
 /**
  * 高级组件
  */
@@ -31,6 +32,7 @@ const components: Record<string, Plugin> = {
   EpCard,
   EpLine,
   EpCopyText,
+  EpImageHover,
 
   EpVirtualList,
   EpTable,
@@ -50,6 +52,7 @@ export {
   EpCard,
   EpCopyText,
   EpLine,
+  EpImageHover,
   EpTable,
   EpTableColumn,
   EpFormSchema,
