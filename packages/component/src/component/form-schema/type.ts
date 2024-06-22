@@ -1,25 +1,47 @@
-import type { FormProps } from 'element-plus';
-import type { FormItemRules, IFormItemCol } from '../form';
+import type { ColProps, FormItemRule, FormProps } from 'element-plus';
+import { ComponentProps } from './components/types';
+import type { Ref } from 'vue';
+/**
+ * 列宽配置
+ */
+export type IFormItemCol =
+  | Partial<Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>>
+  | number;
+/**
+ * 扩展参数
+ */
+export type FormExtraPropsType = { [k: string]: any };
+
+/**
+ * 扩展validator方法，支持自定义校验前置
+ */
+export interface FormItemRules<T = any> extends FormItemRule {
+  validatorFn?: (model: T) => FormItemRule['validator'];
+}
 /**
  * el-基础控件
  */
 export type FormSchemaType =
-  | 'text'
-  | 'number'
   | 'input-number'
   | 'input'
   | 'select'
+  | 'autocomplete'
   | 'switch'
-  | 'textarea'
-  | 'date'
-  | 'date-time'
-  | 'date-range'
+  | 'rate'
+  | 'divider'
+  | 'slider'
   | 'time-picker'
+  | 'date-picker'
+  | 'time-select'
   | 'time-range'
-  | 'date-time-range'
   | 'checkbox-group'
   | 'radio-group'
   | 'cascade';
+/**
+ * 使用映射类型创建一个新类型，该类型将每个组件类型映射到其对应的属性类型
+ */
+type ComponentPropsByType<T extends FormSchemaType> =
+  T extends keyof ComponentProps ? ComponentProps[T] : never;
 /**
  * 表单项
  */
@@ -57,7 +79,7 @@ export interface FormItemsSchema<T = any> {
    * form-item表单的类型
    * 目前暂不支持上传类型组件，如需要，则建议使用插槽
    */
-  type?: FormSchemaType;
+  type: FormSchemaType;
   /**
    * 栅格的布局方式
    */
@@ -76,12 +98,13 @@ export interface FormItemsSchema<T = any> {
    * @param value 当前值
    */
   change?: (value: any) => void;
+  componentProps?: ComponentPropsByType<FormItemsSchema['type']>;
 }
 
 /**
  * 表单
  */
-export interface FormSchema extends FormProps {
+export interface FormSchema extends Partial<FormProps> {
   /**
    * 是否使用查询表单，设置此参数，表单相关属性会失效，仅提供查询模式
    * @default false
@@ -91,4 +114,13 @@ export interface FormSchema extends FormProps {
    * 表单项配置
    */
   items: FormItemsSchema[];
+}
+/**
+ * 表达上下文
+ */
+export interface FormContext<T = any> {
+  /**
+   * form 数据对象
+   */
+  model: object;
 }

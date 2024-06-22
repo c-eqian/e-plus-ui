@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { defineFormSchema } from "e-plus-ui";
+import { defineFormItem } from "e-plus-ui";
 import {ref} from "vue";
-const formSchema = defineFormSchema([
+const formSchema = defineFormItem([
   {
     label: '名称',
     type: 'input',

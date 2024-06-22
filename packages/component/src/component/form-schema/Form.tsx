@@ -1,6 +1,14 @@
-import { computed, defineComponent, h, PropType, provide } from 'vue';
-import type { IFormConfig } from '../form';
-import { FormSchema } from './type';
+import {
+  computed,
+  defineComponent,
+  h,
+  PropType,
+  provide,
+  toRef,
+  watch,
+  watchEffect,
+} from 'vue';
+import type { FormSchema, FormContext } from './type';
 import { ElForm } from 'element-plus';
 import { isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
@@ -9,7 +17,7 @@ export default defineComponent({
   name: 'EpFormSchema',
   props: {
     model: {
-      type: Object as PropType<IFormConfig['model']>,
+      type: Object as PropType<FormContext['model']>,
       default: () => {},
     },
     config: {
@@ -36,10 +44,7 @@ export default defineComponent({
     /**
      * 是否传入model
      */
-    const formModel = computed(() => {
-      if (props.model) return props.model;
-      return createModel();
-    });
+    const formModel = toRef(props.model || createModel());
     provide('EPFormSchema', formModel);
     return {
       formModel,
@@ -48,16 +53,6 @@ export default defineComponent({
     };
   },
   render() {
-    /**
-     * 渲染表单项
-     */
-    const renderFormItem = () => {
-      return this.items.map((item) => {
-        return h(FormItem, {
-          item,
-        });
-      });
-    };
     /**
      * 渲染表单
      */
@@ -70,9 +65,16 @@ export default defineComponent({
           model: this.formModel,
           ...filterProps,
         },
-        [renderFormItem()]
+        {
+          default: () =>
+            this.items.map((item) => {
+              return h(FormItem, {
+                item,
+              });
+            }),
+        }
       );
     };
-    return h('div', null);
+    return <div>{renderForm()}</div>;
   },
 });

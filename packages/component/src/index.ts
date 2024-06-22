@@ -7,6 +7,7 @@ import './theme/index.less';
 export * from './component/table/type';
 export * from './component/form/index';
 export * from './component/virtual-list/type';
+export * from './component/form-schema/index';
 /**
  * 导出工具函数
  */
@@ -22,6 +23,7 @@ import EpLine from './component/line/index';
  */
 import { EpTable, EpTableColumn } from './component/table/index';
 import EpForm from './component/form/index';
+import EpFormSchema from './component/form-schema/index';
 import EpVirtualList from './component/virtual-list/index';
 
 const components: Record<string, Plugin> = {
@@ -33,7 +35,8 @@ const components: Record<string, Plugin> = {
   EpVirtualList,
   EpTable,
   EpTableColumn,
-  EpForm,
+  EpFormSchema,
+  // EpForm,
 };
 
 const install = (app: App, options?: any): void => {
@@ -49,6 +52,7 @@ export {
   EpLine,
   EpTable,
   EpTableColumn,
+  EpFormSchema,
   EpForm,
   EpVirtualList,
   install,
