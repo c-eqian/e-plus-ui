@@ -1,16 +1,16 @@
-import type { ColProps, FormItemRule, FormProps } from 'element-plus';
-import { ComponentProps } from './components/types';
-import type { Ref } from 'vue';
+import type {
+  ColProps,
+  FormItemRule,
+  FormProps,
+  FormValidateCallback,
+} from 'element-plus';
+import type { ComponentPropsByType } from './types';
 /**
  * 列宽配置
  */
 export type IFormItemCol =
   | Partial<Pick<ColProps, 'span' | 'sm' | 'xs' | 'md' | 'lg' | 'xl'>>
   | number;
-/**
- * 扩展参数
- */
-export type FormExtraPropsType = { [k: string]: any };
 
 /**
  * 扩展validator方法，支持自定义校验前置
@@ -37,11 +37,7 @@ export type FormSchemaType =
   | 'checkbox-group'
   | 'radio-group'
   | 'cascade';
-/**
- * 使用映射类型创建一个新类型，该类型将每个组件类型映射到其对应的属性类型
- */
-type ComponentPropsByType<T extends FormSchemaType> =
-  T extends keyof ComponentProps ? ComponentProps[T] : never;
+
 /**
  * 表单项
  */
@@ -98,7 +94,10 @@ export interface FormItemsSchema<T = any> {
    * @param value 当前值
    */
   change?: (value: any) => void;
-  componentProps?: ComponentPropsByType<FormItemsSchema['type']>;
+  componentProps?: ComponentPropsByType<
+    FormSchemaType,
+    FormItemsSchema['type']
+  >;
 }
 
 /**
@@ -123,4 +122,48 @@ export interface FormContext<T = any> {
    * form 数据对象
    */
   model: object;
+}
+
+/**
+ * 表单方法
+ */
+export interface FormSchemaReturn {
+  /**
+   * 获取表单值
+   */
+  getModelValues: () => Record<string, any>;
+  /**
+   * 设置表单值
+   * @param values
+   */
+  setModelValues: (values: Record<string, any>) => void;
+  /**
+   * 平滑滚动定位到对应的视图
+   * @param field
+   */
+  scrollIntoView: (field: FormItemsSchema['prop']) => void;
+  /**
+   * 表单校验
+   * @param isScrollToField 是否需要定位到第一个错误字段
+   * @param callback 自定义回调函数
+   */
+  validate: (
+    isScrollToField?: boolean,
+    callback?: FormValidateCallback
+  ) => Promise<any>;
+  /**
+   * 校验表单某个字段验证
+   * @param args
+   */
+  validateField: (...args) => Promise<any>;
+  /**
+   * 重置表单
+   * @param args
+   */
+  resetFields: (...args) => void;
+  /**
+   * 清空某个字段的表单有验证信息
+   * @param args
+   */
+  clearValidate: (...args) => void;
 }
