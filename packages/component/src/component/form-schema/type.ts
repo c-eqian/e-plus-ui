@@ -45,7 +45,7 @@ export interface FormItemsSchema<T = any> {
   /**
    * model 的键名。 它可以是一个属性的值(如 a.b.0)
    */
-  prop: string;
+  prop: keyof T extends infer E ? (E extends string ? E : string) : string;
   /**
    * 标签文本
    */
@@ -117,7 +117,7 @@ export interface FormSchema extends Partial<FormProps> {
 /**
  * 表达上下文
  */
-export interface FormContext<T = any> {
+export interface FormContext {
   /**
    * form 数据对象
    */
@@ -155,15 +155,15 @@ export interface FormSchemaReturn {
    * 校验表单某个字段验证
    * @param args
    */
-  validateField: (...args) => Promise<any>;
+  validateField: (...args: FormItemsSchema['prop'][]) => Promise<any>;
   /**
    * 重置表单
    * @param args
    */
-  resetFields: (...args) => void;
+  resetFields: (...args: FormItemsSchema['prop'][]) => void;
   /**
    * 清空某个字段的表单有验证信息
    * @param args
    */
-  clearValidate: (...args) => void;
+  clearValidate: (...args: FormItemsSchema['prop'][]) => void;
 }
