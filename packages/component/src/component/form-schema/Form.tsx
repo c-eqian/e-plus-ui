@@ -1,13 +1,4 @@
-import {
-  computed,
-  defineComponent,
-  h,
-  PropType,
-  provide,
-  toRef,
-  watch,
-  watchEffect,
-} from 'vue';
+import { computed, defineComponent, h, PropType, provide, toRef } from 'vue';
 import type { FormSchema, FormContext } from './type';
 import { ElForm } from 'element-plus';
 import { isString, useOmit } from 'co-utils-vue';
@@ -25,7 +16,7 @@ export default defineComponent({
       default: () => {},
     },
   },
-  setup(props, ctx) {
+  setup(props) {
     const formProps = computed(() => props.config);
     const items = computed(() => props.config.items);
     /**

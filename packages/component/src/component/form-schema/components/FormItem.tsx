@@ -8,14 +8,14 @@ import {
   Ref,
 } from 'vue';
 import { ElCol, ElFormItem, ElRow } from 'element-plus';
-import { FormItemsSchema } from '../type';
+import type { FormItemsSchema, FormSchemaType } from '../type';
 import {
   useColProps,
   useFormItemProps,
   useFormProps,
 } from '../hooks/useFormItem';
 import { componentsMap } from './index';
-import { isString } from 'co-utils-vue';
+import { isFunction, isString } from 'co-utils-vue';
 
 export default defineComponent({
   name: 'EpFormItem',
@@ -25,44 +25,61 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  setup(props, ctx) {
+  setup(props, { slots }) {
     const computedItem = computed(() => props.item);
-    const { type, ..._props } = computedItem.value;
+    const { type, render, slotKey, ..._props } = computedItem.value;
     const formModel = inject<Ref<any>>('EPFormSchema', {} as any);
-    const createCol = () => {
-      if (isString(type) && componentsMap.has(type)) {
-        const com = componentsMap.get(type) as DefineComponent;
-        return h(
-          ElCol,
-          { ...useColProps(computedItem.value) },
-          {
-            default: () =>
-              h(com, {
-                modelValue: formModel.value[_props.prop],
-                'onUpdate:modelValue': (val: any) => {
-                  formModel.value[_props.prop] = val;
-                },
-                ...useFormProps(computedItem.value),
-              }),
-          }
-        );
+    const getSlots = () => {
+      //   如果使用插槽
+      if (slotKey || slots[_props.prop!]) {
+        return slots[slotKey || _props.prop!]?.({
+          item: computedItem,
+          model: formModel,
+        });
+      }
+      if (isFunction(render)) {
+        return render({
+          item: computedItem,
+          model: formModel,
+        });
+      }
+      if (isString(type) && componentsMap.has(type as FormSchemaType)) {
+        const com = componentsMap.get(
+          type as FormSchemaType
+        ) as DefineComponent;
+        return h(com, {
+          modelValue: formModel.value[_props.prop],
+          'onUpdate:modelValue': (val: any) => {
+            formModel.value[_props.prop] = val;
+          },
+          ...useFormProps(computedItem.value),
+        });
       }
       return null;
+    };
+    const createCol = () => {
+      return h(
+        ElCol,
+        { ...useColProps(computedItem.value) },
+        {
+          default: () =>
+            h(
+              ElFormItem,
+              {
+                ...useFormItemProps(computedItem.value, formModel),
+              },
+              {
+                default: () => getSlots(),
+              }
+            ),
+        }
+      );
     };
     const createRow = () => {
       return h(ElRow, null, {
         default: () => createCol(),
       });
     };
-    return () =>
-      h(
-        ElFormItem,
-        {
-          ...useFormItemProps(computedItem.value, formModel),
-        },
-        {
-          default: () => createRow(),
-        }
-      );
+    return () => createRow();
   },
 });

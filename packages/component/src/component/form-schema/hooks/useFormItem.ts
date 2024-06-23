@@ -1,5 +1,12 @@
 import type { FormItemsSchema, FormSchemaType, FormItemRules } from '../type';
-import { isArray, isFunction, useMerge, useOmit, usePick } from 'co-utils-vue';
+import {
+  isArray,
+  isFunction,
+  isNumber,
+  useMerge,
+  useOmit,
+  usePick,
+} from 'co-utils-vue';
 
 /**
  * 参数过滤，获取组件参数
@@ -22,7 +29,14 @@ export const useFilterProps = (props: FormItemsSchema) => {
  * @param props
  */
 export const useColProps = (props: FormItemsSchema) => {
-  return usePick(props, ['col']);
+  const DEFAULT = { xs: 24, sm: 24, md: 24, lg: 24, xl: 24 };
+  const { col } = props;
+  if (isNumber(col)) {
+    return {
+      span: col,
+    };
+  }
+  return useMerge({}, usePick(props, ['col']), DEFAULT);
 };
 /**
  * 获取表单参数

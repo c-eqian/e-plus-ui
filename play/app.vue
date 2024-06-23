@@ -11,10 +11,12 @@
 </template>
 <script setup lang="ts">
 import { defineFormSchema } from '../packages/component/src';
-import { ref } from 'vue';
+import { ref, h } from 'vue';
+import { ElInput } from 'element-plus'
 const formModel = ref({
   name: '哈哈哈哈',
-  cascade:''
+  cascade:'',
+  render: ''
 })
 const handleGet = ()=>{
   console.log(formModel.value);
@@ -28,6 +30,22 @@ const formSchema = defineFormSchema({
       rules: true,
       componentProps: {
         clearable: true
+      }
+    },
+    {
+      type: '',
+      label: '自定义渲染',
+      prop: 'render',
+      render: ({model, item})=>{
+        return h(ElInput, {
+          modelValue: model.value[item.value.prop],
+          'onUpdate:modelValue':(val:any)=>{
+            console.log(val)
+            console.log(item.value.prop, model)
+            model.value[item.value.prop]=val
+            console.log(model.value[item.value.prop])
+          }
+        })
       }
     },
     {

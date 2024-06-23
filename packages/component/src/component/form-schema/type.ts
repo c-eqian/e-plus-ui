@@ -5,6 +5,7 @@ import type {
   FormValidateCallback,
 } from 'element-plus';
 import type { ComponentPropsByType } from './types';
+import { Render } from './types';
 /**
  * 列宽配置
  */
@@ -75,7 +76,11 @@ export interface FormItemsSchema<T = any> {
    * form-item表单的类型
    * 目前暂不支持上传类型组件，如需要，则建议使用插槽
    */
-  type: FormSchemaType;
+  type: FormSchemaType | '';
+  /**
+   * 自定义渲染，优先级低于插槽
+   */
+  render?: Render<T, FormItemsSchema>;
   /**
    * 栅格的布局方式
    */
@@ -96,7 +101,9 @@ export interface FormItemsSchema<T = any> {
   change?: (value: any) => void;
   componentProps?: ComponentPropsByType<
     FormSchemaType,
-    FormItemsSchema['type']
+    FormItemsSchema['type'] extends FormSchemaType
+      ? FormItemsSchema['type']
+      : any
   >;
 }
 
