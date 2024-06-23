@@ -22,6 +22,7 @@ const handleGet = ()=>{
   console.log(formModel.value);
 }
 const formSchema = defineFormSchema({
+  labelPosition: 'right',
   items: [
     {
       type: 'input',
