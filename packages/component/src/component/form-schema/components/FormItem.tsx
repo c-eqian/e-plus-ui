@@ -24,9 +24,14 @@ export default defineComponent({
       type: Object as PropType<FormItemsSchema>,
       default: () => ({}),
     },
+    isSearch: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props, { slots }) {
     const computedItem = computed(() => props.item);
+    const isSearch = computed(() => props.isSearch);
     const { type, render, slotKey, ..._props } = computedItem.value;
     const formModel = inject<Ref<any>>('EPFormSchema', {} as any);
     const getSlots = () => {
@@ -66,7 +71,11 @@ export default defineComponent({
             h(
               ElFormItem,
               {
-                ...useFormItemProps(computedItem.value, formModel),
+                ...useFormItemProps(
+                  computedItem.value,
+                  formModel,
+                  isSearch.value
+                ),
               },
               {
                 default: () => getSlots(),

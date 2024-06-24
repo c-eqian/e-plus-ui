@@ -42,12 +42,24 @@ export const useColProps = (props: FormItemsSchema) => {
  * 获取表单参数
  * @param props
  * @param model
+ * @param isSearch
  */
-export const useFormItemProps = (props: FormItemsSchema, model: any) => {
+export const useFormItemProps = (
+  props: FormItemsSchema,
+  model: any,
+  isSearch?: boolean
+) => {
   const { rules, prop, label } = props;
+  if (isSearch) {
+    return {
+      prop,
+      label,
+    };
+  }
   const handleValidatorFn = (_rule: FormItemRules) => {
     if (isFunction(_rule.validatorFn)) {
       return {
+        field: prop,
         ...useOmit(_rule, ['validator']),
         validator: _rule.validatorFn(model),
       };
