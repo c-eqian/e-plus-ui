@@ -137,13 +137,19 @@ export interface FormContext {
 export interface FormSchemaReturn {
   /**
    * 获取表单值
+   * @param serialize 是否需要序列化
+   * @default true
+   * @example
+   * ``` js
+   * // 'a.b.c'=> {a:{b: {c:xxx}}}
+   * ```
    */
-  getModelValues: () => Record<string, any>;
+  getFieldsValues: (serialize?: boolean) => Record<string, any>;
   /**
    * 设置表单值
    * @param values
    */
-  setModelValues: (values: Record<string, any>) => void;
+  setFieldsValues: (values: Record<string, any>) => void;
   /**
    * 平滑滚动定位到对应的视图
    * @param field

@@ -44,13 +44,13 @@ export const useFormSchema = () => {
       const instance = await getFormInstance();
       return instance?.scrollIntoView(...args);
     },
-    setModelValues: async (values: Record<string, any>) => {
+    setFieldsValues: async (values: Record<string, any>) => {
       const instance = await getFormInstance();
-      return instance?.setModelValues(values);
+      return instance?.setFieldsValues(values);
     },
-    getModelValues: async <T = any>(): Promise<T> => {
+    getFieldsValues: async <T = any>(serialize = true): Promise<T> => {
       const instance = await getFormInstance();
-      return instance?.getModelValues() as T;
+      return instance?.getFieldsValues(serialize) as T;
     },
   };
   return [registry, instanceMethods, getFormInstance];

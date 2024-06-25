@@ -8,6 +8,7 @@ import {
   reactive,
   ref,
   toRef,
+  unref,
 } from 'vue';
 import type { FormSchema, FormContext } from './type';
 import {
@@ -18,6 +19,7 @@ import {
 import { isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
 import type { IFormItemConfig } from '../form/type';
+import { useFormValues } from './hooks/useFormValues';
 
 export default defineComponent({
   name: 'EpFormSchema',
@@ -114,11 +116,15 @@ export default defineComponent({
     const clearValidate: FormInstance['clearValidate'] = (...arg) => {
       return epFormSchemaRef.value?.clearValidate(...arg);
     };
+    const getModelValues = () => {
+      if (!unref(epFormSchemaRef)) return {};
+    };
     /**
      * 是否传入model
      */
     const formModel = toRef(props.model || createModel());
-    provide('EPFormSchema', formModel);
+    provide('EPFormSchemaModel', formModel);
+    const { getFieldsValues } = useFormValues();
     return {
       formModel,
       formProps,
@@ -127,6 +133,7 @@ export default defineComponent({
       validate,
       resetFields,
       clearValidate,
+      getFieldsValues,
       validateField,
     };
   },
@@ -137,6 +144,7 @@ export default defineComponent({
         resetFields: this.resetFields,
         clearValidate: this.clearValidate,
         validateField: this.validateField,
+        getFieldsValues: this.getFieldsValues,
       });
     });
     /**

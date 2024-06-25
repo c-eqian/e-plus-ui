@@ -16,6 +16,7 @@ import {
 } from '../hooks/useFormItem';
 import { componentsMap } from './index';
 import { isFunction, isString } from 'co-utils-vue';
+import { FORM_SCHEMA_MODEL } from '../constants';
 
 export default defineComponent({
   name: 'EpFormItem',
@@ -33,7 +34,7 @@ export default defineComponent({
     const computedItem = computed(() => props.item);
     const isSearch = computed(() => props.isSearch);
     const { type, render, slotKey, ..._props } = computedItem.value;
-    const formModel = inject<Ref<any>>('EPFormSchema', {} as any);
+    const formModel = inject<Ref<any>>(FORM_SCHEMA_MODEL, {} as any);
     const getSlots = () => {
       //   如果使用插槽
       if (slotKey || slots[_props.prop!]) {
