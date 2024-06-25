@@ -195,7 +195,7 @@ export type FormSchemaInstance = () => Promise<FormSchemaReturn | null>;
 /**
  * 表单返回类型
  */
-export interface UseFormReturnType extends FormSchemaReturn {
+export interface UseFormSchemaReturnType extends FormSchemaReturn {
   /**
    * 表单注册函数
    */
@@ -203,5 +203,5 @@ export interface UseFormReturnType extends FormSchemaReturn {
   /**
    * 表单实例
    */
-  formInstance: FormSchemaInstance;
+  getFormInstance: FormSchemaInstance;
 }

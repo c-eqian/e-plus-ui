@@ -1,7 +1,7 @@
-import type { FormSchemaReturn, UseFormReturnType } from '../type';
+import type { FormSchemaReturn, UseFormSchemaReturnType } from '../type';
 import { nextTick, onUnmounted, ref, unref } from 'vue';
 
-export const useFormSchema = (): UseFormReturnType => {
+export const useFormSchema = (): UseFormSchemaReturnType => {
   const formInstance = ref<FormSchemaReturn | null>(null);
   const registeredRef = ref<boolean>(false);
   const getFormInstance = async () => {
@@ -56,6 +56,6 @@ export const useFormSchema = (): UseFormReturnType => {
   return {
     registry,
     ...instanceMethods,
-    formInstance: getFormInstance,
+    getFormInstance,
   };
 };
