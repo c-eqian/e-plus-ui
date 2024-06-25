@@ -127,7 +127,7 @@ export interface FormContext {
   /**
    * form 数据对象
    */
-  model: object;
+  model: Record<string, any>;
 }
 
 /**

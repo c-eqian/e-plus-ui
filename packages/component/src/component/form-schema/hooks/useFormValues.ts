@@ -1,6 +1,6 @@
 import { Ref, unref } from 'vue';
-import { isObjectLike } from 'co-utils-vue';
-
+import { isEmpty, isObjectLike } from 'co-utils-vue';
+import type { UpdateFieldValue } from '../types';
 function transformFlatObjectToNested(
   nestedObj: Record<string, any>,
   flatKey: string,
@@ -18,9 +18,10 @@ function transformFlatObjectToNested(
   currentLevel[pathArray[pathArray.length - 1]] = value;
 }
 
-export const useFormValues = (model: Ref<object>) => {
-  const formModel = model;
-
+export const useFormValues = (
+  getModel: () => Ref<object>,
+  updateFieldValue: UpdateFieldValue
+) => {
   /**
    * 获取字段值
    * @param serialize 是否需要序列化
@@ -33,7 +34,7 @@ export const useFormValues = (model: Ref<object>) => {
   const getFieldsValues = <T extends Record<string, any>>(
     serialize = true
   ): T => {
-    const model = unref(formModel);
+    const model = unref(getModel());
     if (!isObjectLike(model)) {
       return {} as T;
     }
@@ -49,7 +50,17 @@ export const useFormValues = (model: Ref<object>) => {
     }
     return values as T;
   };
+  const setFieldsValues = (values: Record<string, any>) => {
+    if (isEmpty(values)) {
+      return;
+    }
+    for (const entry of Object.entries(values)) {
+      const [prop, value] = entry;
+      updateFieldValue(prop, value);
+    }
+  };
   return {
     getFieldsValues,
+    setFieldsValues,
   };
 };

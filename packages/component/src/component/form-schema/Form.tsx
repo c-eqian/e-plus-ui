@@ -6,20 +6,17 @@ import {
   PropType,
   provide,
   reactive,
+  Ref,
   ref,
   toRef,
 } from 'vue';
 import type { FormSchema, FormContext } from './type';
-import {
-  ElForm,
-  type FormInstance,
-  type FormValidateCallback,
-} from 'element-plus';
+import { ElForm, type FormInstance } from 'element-plus';
 import { isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
-import type { IFormItemConfig } from '../form/type';
 import { useFormValues } from './hooks/useFormValues';
 import { FORM_SCHEMA_MODEL } from './constants';
+import { useFormValidate } from './hooks/useFormValidate';
 
 export default defineComponent({
   name: 'EpFormSchema',
@@ -37,49 +34,13 @@ export default defineComponent({
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
     const items = computed(() => props.config.items);
-    const epFormSchemaRef = ref<InstanceType<typeof ElForm>>();
-    /**
-     * 自定义平滑滚动定位到对应的视图
-     * @param field
-     */
-    const scrollIntoView = (field: string) => {
-      (epFormSchemaRef.value?.$el as HTMLElement)
-        ?.querySelector(`[field="${field}"]`)
-        ?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-          inline: 'center',
-        });
-    };
-    /**
-     * 对整个表单的内容进行验证
-     * @param isScrollToField 是否需要定位到第一个错误字段
-     * @param callback 自定义回调函数
-     */
-    const validate = async (
-      isScrollToField?: boolean,
-      callback?: FormValidateCallback
-    ) => {
-      if (isScrollToField) {
-        try {
-          return await epFormSchemaRef.value?.validate(callback);
-        } catch (error) {
-          const fieldModel = error as Record<string, IFormItemConfig['rules']>;
-          // 取出第一个校验失败的数据
-          const errId = Object.keys(fieldModel)[0];
-          scrollIntoView(errId);
-          return Promise.reject(error);
-        }
-      }
-      return epFormSchemaRef.value?.validate(callback);
-    };
-
+    const epFormSchemaRef = ref<FormInstance>();
     /**
      * 如果不传入model
      * 内部自动根据表单项创建，使用useFormSchema方法获取值
      */
     const createModel = () => {
-      const emptyModel = Object.create(null);
+      const emptyModel: Record<string, any> = Object.create(null);
       items.value.forEach((item) => {
         if (isString(item.prop)) {
           emptyModel[item.prop] = item.defaultValue ?? '';
@@ -88,47 +49,53 @@ export default defineComponent({
       return emptyModel;
     };
     /**
-     * 校验表单某个字段验证
-     * @param arg
-     */
-    const validateField: FormInstance['validateField'] = (...arg) => {
-      if (!epFormSchemaRef.value) {
-        console.warn('表单启用失败');
-        return Promise.resolve(true);
-      }
-      return epFormSchemaRef.value?.validateField(...arg);
-    };
-    /**
-     * 重置表单
-     * @param arg
-     */
-    const resetFields: FormInstance['resetFields'] = (...arg) => {
-      if (!epFormSchemaRef.value) {
-        console.warn('表单启用失败');
-        return Promise.resolve(true);
-      }
-      return epFormSchemaRef.value?.resetFields(...arg);
-    };
-    /**
-     * 清空某个字段的表单有验证信息
-     * @param arg
-     */
-    const clearValidate: FormInstance['clearValidate'] = (...arg) => {
-      return epFormSchemaRef.value?.clearValidate(...arg);
-    };
-    /**
      * 是否传入model
      */
     const formModel = toRef(props.model || createModel());
+    const getModel = () => {
+      return formModel;
+    };
+    /**
+     * 更新字段值
+     * 只有配置prop情况下才会更新
+     * @param prop
+     * @param value
+     */
+    const updateFieldValue = (prop: string, value: unknown) => {
+      if (prop in formModel.value) {
+        formModel.value[prop] = value;
+      } else {
+        const propValues = items.value
+          .map((item) => {
+            return item.prop;
+          })
+          .filter(Boolean);
+        if (propValues.includes(prop)) {
+          formModel.value[prop] = value;
+        }
+      }
+    };
     provide(FORM_SCHEMA_MODEL, formModel);
+    const {
+      validate,
+      resetFields,
+      clearValidate,
+      validateField,
+      scrollIntoView,
+    } = useFormValidate(epFormSchemaRef as Ref<FormInstance>);
     onMounted(() => {
-      const { getFieldsValues } = useFormValues(formModel);
+      const { getFieldsValues, setFieldsValues } = useFormValues(
+        getModel,
+        updateFieldValue
+      );
       emit('registry', {
-        validate: validate,
-        resetFields: resetFields,
-        clearValidate: clearValidate,
-        validateField: validateField,
-        getFieldsValues: getFieldsValues,
+        validate,
+        resetFields,
+        clearValidate,
+        validateField,
+        setFieldsValues,
+        scrollIntoView,
+        getFieldsValues,
       });
     });
     return {

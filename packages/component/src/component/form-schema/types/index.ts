@@ -26,3 +26,4 @@ export type Render<T = any, P = any> = (scoped: {
   | undefined;
 
 export type RegisterFn<T = any> = (formInstance: T) => void;
+export type UpdateFieldValue = (prop: string, value: unknown) => void;
