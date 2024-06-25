@@ -8,7 +8,6 @@ import {
   reactive,
   ref,
   toRef,
-  unref,
 } from 'vue';
 import type { FormSchema, FormContext } from './type';
 import {
@@ -20,6 +19,7 @@ import { isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
 import type { IFormItemConfig } from '../form/type';
 import { useFormValues } from './hooks/useFormValues';
+import { FORM_SCHEMA_MODEL } from './constants';
 
 export default defineComponent({
   name: 'EpFormSchema',
@@ -34,7 +34,7 @@ export default defineComponent({
     },
   },
   emits: ['registry'],
-  setup(props) {
+  setup(props, { emit }) {
     const formProps = computed(() => props.config);
     const items = computed(() => props.config.items);
     const epFormSchemaRef = ref<InstanceType<typeof ElForm>>();
@@ -116,15 +116,21 @@ export default defineComponent({
     const clearValidate: FormInstance['clearValidate'] = (...arg) => {
       return epFormSchemaRef.value?.clearValidate(...arg);
     };
-    const getModelValues = () => {
-      if (!unref(epFormSchemaRef)) return {};
-    };
     /**
      * 是否传入model
      */
     const formModel = toRef(props.model || createModel());
-    provide('EPFormSchemaModel', formModel);
-    const { getFieldsValues } = useFormValues();
+    provide(FORM_SCHEMA_MODEL, formModel);
+    onMounted(() => {
+      const { getFieldsValues } = useFormValues(formModel);
+      emit('registry', {
+        validate: validate,
+        resetFields: resetFields,
+        clearValidate: clearValidate,
+        validateField: validateField,
+        getFieldsValues: getFieldsValues,
+      });
+    });
     return {
       formModel,
       formProps,
@@ -133,20 +139,10 @@ export default defineComponent({
       validate,
       resetFields,
       clearValidate,
-      getFieldsValues,
       validateField,
     };
   },
   render() {
-    onMounted(() => {
-      this.$emit('registry', {
-        validate: this.validate,
-        resetFields: this.resetFields,
-        clearValidate: this.clearValidate,
-        validateField: this.validateField,
-        getFieldsValues: this.getFieldsValues,
-      });
-    });
     /**
      * 渲染表单
      */

@@ -2,7 +2,7 @@
   <div class="play">
     <ep-card>
       <el-button @click="handleGet">获取</el-button>
-      <ep-form-schema :config="formSchema" :model="formModel">
+      <ep-form-schema @registry="registry" :config="formSchema" :model="formModel">
 
       </ep-form-schema>
     </ep-card>
@@ -10,9 +10,10 @@
 
 </template>
 <script setup lang="ts">
-import { defineFormSchema } from '../packages/component/src';
+import { defineFormSchema, useFormSchema } from '../packages/component/src';
 import { ref, h } from 'vue';
 import { ElInput } from 'element-plus'
+const {registry, getFieldsValues}  = useFormSchema()
 const formModel = ref({
   name: '哈哈哈哈',
   cascade:'',
@@ -20,6 +21,7 @@ const formModel = ref({
 })
 const handleGet = ()=>{
   console.log(formModel.value);
+  console.log(333, getFieldsValues());
 }
 const formSchema = defineFormSchema({
   labelPosition: 'right',
@@ -41,10 +43,7 @@ const formSchema = defineFormSchema({
         return h(ElInput, {
           modelValue: model.value[item.value.prop],
           'onUpdate:modelValue':(val:any)=>{
-            console.log(val)
-            console.log(item.value.prop, model)
             model.value[item.value.prop]=val
-            console.log(model.value[item.value.prop])
           }
         })
       }

@@ -1,14 +1,14 @@
-import type { FormSchemaReturn } from '../type';
+import type { FormSchemaReturn, UseFormReturnType } from '../type';
 import { nextTick, onUnmounted, ref, unref } from 'vue';
 
-export const useFormSchema = () => {
+export const useFormSchema = (): UseFormReturnType => {
   const formInstance = ref<FormSchemaReturn | null>(null);
   const registeredRef = ref<boolean>(false);
   const getFormInstance = async () => {
     const instance = unref(formInstance);
     if (!instance) {
       console.warn('获取表单示例失败~~');
-      return;
+      return null;
     }
     await nextTick();
     return instance;
@@ -48,10 +48,14 @@ export const useFormSchema = () => {
       const instance = await getFormInstance();
       return instance?.setFieldsValues(values);
     },
-    getFieldsValues: async <T = any>(serialize = true): Promise<T> => {
-      const instance = await getFormInstance();
+    getFieldsValues: <T = any>(serialize = true) => {
+      const instance = unref(formInstance);
       return instance?.getFieldsValues(serialize) as T;
     },
   };
-  return [registry, instanceMethods, getFormInstance];
+  return {
+    registry,
+    ...instanceMethods,
+    formInstance: getFormInstance,
+  };
 };

@@ -1,6 +1,6 @@
-import { inject, ref, Ref, unref } from 'vue';
+import { Ref, unref } from 'vue';
 import { isObjectLike } from 'co-utils-vue';
-import { FORM_SCHEMA_MODEL } from '../constants';
+
 function transformFlatObjectToNested(
   nestedObj: Record<string, any>,
   flatKey: string,
@@ -18,8 +18,9 @@ function transformFlatObjectToNested(
   currentLevel[pathArray[pathArray.length - 1]] = value;
 }
 
-export const useFormValues = () => {
-  const formModel = inject<Ref<object>>(FORM_SCHEMA_MODEL, ref({}));
+export const useFormValues = (model: Ref<object>) => {
+  const formModel = model;
+
   /**
    * 获取字段值
    * @param serialize 是否需要序列化

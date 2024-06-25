@@ -168,15 +168,21 @@ export interface FormSchemaReturn {
    * 校验表单某个字段验证
    * @param args
    */
-  validateField: (...args: FormItemsSchema['prop'][]) => Promise<any>;
+  validateField: (...args: any[]) => Promise<any>;
   /**
    * 重置表单
    * @param args
    */
-  resetFields: (...args: FormItemsSchema['prop'][]) => void;
+  resetFields: (...args: string[]) => void;
   /**
    * 清空某个字段的表单有验证信息
    * @param args
    */
-  clearValidate: (...args: FormItemsSchema['prop'][]) => void;
+  clearValidate: (...args: string[]) => void;
+}
+export type RegisterFn = (formInstance: FormSchemaReturn) => void;
+export type FormSchemaInstance = () => Promise<FormSchemaReturn | null>;
+export interface UseFormReturnType extends FormSchemaReturn {
+  registry: RegisterFn;
+  formInstance: FormSchemaInstance;
 }
