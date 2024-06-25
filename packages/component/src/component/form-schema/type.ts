@@ -109,7 +109,7 @@ export interface FormItemsSchema<T = any> {
 /**
  * 表单
  */
-export interface FormSchema extends Partial<FormProps> {
+export interface FormSchema<T = any> extends Partial<FormProps> {
   /**
    * 是否使用查询表单，设置此参数，表单相关属性会失效，仅提供查询模式
    * @default false
@@ -118,8 +118,15 @@ export interface FormSchema extends Partial<FormProps> {
   /**
    * 表单项配置
    */
-  items: FormItemsSchema[];
+  items: FormItemsSchema<T>[];
 }
+// 定义一个工具类型，用于从FormSchema的T中提取所有可能的prop值
+type PropKeysOfFormSchema<FS extends FormSchema<any>> =
+  FS['items'][number] extends FormItemsSchema<infer T>
+    ? T extends object
+      ? keyof T
+      : never
+    : never;
 /**
  * 表达上下文
  */
@@ -148,7 +155,7 @@ export interface FormSchemaReturn {
    * 设置表单值
    * @param values
    */
-  setFieldsValues: (values: Record<string, any>) => void;
+  setFieldsValues: <T>(values: Record<keyof T, any>) => void;
   /**
    * 平滑滚动定位到对应的视图
    * @param field

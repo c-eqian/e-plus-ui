@@ -10,4 +10,3 @@ html
 *.sh
 *.md
 vite.config.mts
-play

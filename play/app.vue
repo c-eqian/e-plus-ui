@@ -2,28 +2,43 @@
   <div class="play">
     <ep-card>
       <el-button @click="handleGet">获取</el-button>
-      <ep-form-schema @registry="registry" :config="formSchema" :model="formModel">
-
+      <el-button @click="handleSet">设置值</el-button>
+      <ep-form-schema
+        @registry="registry"
+        :config="formSchema"
+        :model="formModel"
+      >
       </ep-form-schema>
     </ep-card>
   </div>
-
 </template>
 <script setup lang="ts">
 import { defineFormSchema, useFormSchema } from '../packages/component/src';
 import { ref, h } from 'vue';
-import { ElInput } from 'element-plus'
-const {registry, getFieldsValues}  = useFormSchema()
+import { ElInput } from 'element-plus';
+const { registry, getFieldsValues, validate, setFieldsValues } =
+  useFormSchema();
+interface FormModel {
+  name: string;
+  cascade: string;
+  render: string;
+}
 const formModel = ref({
   name: '哈哈哈哈',
-  cascade:'',
-  render: ''
-})
-const handleGet = ()=>{
+  cascade: '',
+  render: '',
+});
+const handleSet = () => {
+  setFieldsValues({
+    na: '新增',
+  });
+};
+const handleGet = async () => {
+  await validate();
   console.log(formModel.value);
   console.log(333, getFieldsValues());
-}
-const formSchema = defineFormSchema({
+};
+const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
   items: [
     {
@@ -32,21 +47,21 @@ const formSchema = defineFormSchema({
       prop: 'name',
       rules: true,
       componentProps: {
-        clearable: true
-      }
+        clearable: true,
+      },
     },
     {
       type: '',
       label: '自定义渲染',
       prop: 'render',
-      render: ({model, item})=>{
+      render: ({ model, item }) => {
         return h(ElInput, {
           modelValue: model.value[item.value.prop],
-          'onUpdate:modelValue':(val:any)=>{
-            model.value[item.value.prop]=val
-          }
-        })
-      }
+          'onUpdate:modelValue': (val: any) => {
+            model.value[item.value.prop] = val;
+          },
+        });
+      },
     },
     {
       type: 'cascade',
@@ -97,20 +112,23 @@ const formSchema = defineFormSchema({
                 ],
               },
             ],
-          }]
-      }
-    }
-  ]
-})
+          },
+        ],
+      },
+    },
+  ],
+});
 </script>
 <style lang="less">
-html, body, #app{
+html,
+body,
+#app {
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
 }
-.play{
+.play {
   width: 100%;
   height: 100%;
   padding-top: 100px;
