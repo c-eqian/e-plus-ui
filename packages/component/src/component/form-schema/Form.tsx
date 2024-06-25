@@ -10,13 +10,14 @@ import {
   ref,
   toRef,
 } from 'vue';
-import type { FormSchema, FormContext } from './type';
+import type { FormSchema, FormContext, FormItemsSchema } from './type';
 import { ElForm, type FormInstance } from 'element-plus';
 import { isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
 import { FORM_SCHEMA_MODEL } from './constants';
 import { useFormValidate } from './hooks/useFormValidate';
+import { useFormItem } from './hooks/useFormItem';
 
 export default defineComponent({
   name: 'EpFormSchema',
@@ -33,7 +34,7 @@ export default defineComponent({
   emits: ['registry'],
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
-    const items = computed(() => props.config.items);
+    const items = toRef(props.config.items);
     const epFormSchemaRef = ref<FormInstance>();
     /**
      * 如果不传入model
@@ -74,6 +75,13 @@ export default defineComponent({
           formModel.value[prop] = value;
         }
       }
+      console.log(formModel.value[prop]);
+    };
+    const getFormSchema = () => {
+      return items;
+    };
+    const updateFormSchema = (_items: FormItemsSchema[]) => {
+      items.value = _items;
     };
     provide(FORM_SCHEMA_MODEL, formModel);
     const {
@@ -83,11 +91,12 @@ export default defineComponent({
       validateField,
       scrollIntoView,
     } = useFormValidate(epFormSchemaRef as Ref<FormInstance>);
+    const { appendFormItem } = useFormItem(getFormSchema, updateFormSchema);
+    const { getFieldsValues, setFieldsValues } = useFormValues(
+      getModel,
+      updateFieldValue
+    );
     onMounted(() => {
-      const { getFieldsValues, setFieldsValues } = useFormValues(
-        getModel,
-        updateFieldValue
-      );
       emit('registry', {
         validate,
         resetFields,
@@ -95,6 +104,7 @@ export default defineComponent({
         validateField,
         setFieldsValues,
         scrollIntoView,
+        appendFormItem,
         getFieldsValues,
       });
     });
@@ -103,6 +113,9 @@ export default defineComponent({
       formProps,
       items,
       epFormSchemaRef,
+      appendFormItem,
+      setFieldsValues,
+      getFieldsValues,
       validate,
       resetFields,
       clearValidate,
@@ -128,6 +141,7 @@ export default defineComponent({
             this.items.map((item) => {
               return h(FormItem, {
                 item,
+                key: item.prop || item.label,
                 isSearch: isFormValid,
               });
             }),

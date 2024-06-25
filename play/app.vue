@@ -3,6 +3,7 @@
     <ep-card>
       <el-button @click="handleGet">获取</el-button>
       <el-button @click="handleSet">设置值</el-button>
+      <el-button @click="handleAdd">添加表单</el-button>
       <ep-form-schema
         @registry="registry"
         :config="formSchema"
@@ -16,21 +17,31 @@
 import { defineFormSchema, useFormSchema } from '../packages/component/src';
 import { ref, h } from 'vue';
 import { ElInput } from 'element-plus';
-const { registry, getFieldsValues, validate, setFieldsValues } =
+const { registry, getFieldsValues, validate, setFieldsValues, appendFormItem } =
   useFormSchema();
 interface FormModel {
   name: string;
   cascade: string;
   render: string;
+  test: string;
 }
 const formModel = ref({
   name: '哈哈哈哈',
   cascade: '',
   render: '',
+  test: '',
 });
 const handleSet = () => {
   setFieldsValues({
-    na: '新增',
+    test: '新增',
+  });
+};
+const handleAdd = () => {
+  appendFormItem<FormModel>({
+    prop: 'test',
+    label: '新增',
+    type: 'input',
+    rules: true,
   });
 };
 const handleGet = async () => {

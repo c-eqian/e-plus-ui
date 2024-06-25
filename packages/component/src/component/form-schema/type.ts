@@ -5,6 +5,7 @@ import type {
   FormValidateCallback,
 } from 'element-plus';
 import type { ComponentPropsByType, Render, RegisterFn } from './types';
+import { T } from 'vitest/dist/reporters-P7C2ytIv';
 /**
  * 列宽配置
  */
@@ -185,6 +186,15 @@ export interface FormSchemaReturn {
    * @param args
    */
   clearValidate: (...args: string[]) => void;
+  /**
+   * 追加组件配置
+   * @param item
+   * @param to 指定到哪个组件后面添加，默认最后一个,如果是布尔值并且为false，则添加到第一条
+   */
+  appendFormItem: <T = any>(
+    item: FormItemsSchema<T>,
+    to?: FormItemsSchema<T>['prop'] | boolean
+  ) => Promise<unknown>;
 }
 
 /**

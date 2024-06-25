@@ -3,10 +3,12 @@ import {
   isArray,
   isFunction,
   isNumber,
+  isString,
   useMerge,
   useOmit,
   usePick,
 } from 'co-utils-vue';
+import { type Ref, unref } from 'vue';
 
 /**
  * 参数过滤，获取组件参数
@@ -115,4 +117,40 @@ export const useFormProps = (props: FormItemsSchema) => {
     placeholder: placeholder || `${getPlaceholder()}`,
     ...props.componentProps,
   });
+};
+
+export const useFormItem = (
+  getFormSchema: () => Ref<FormItemsSchema[]>,
+  updateFormSchema: (_items: FormItemsSchema[]) => void
+) => {
+  const appendFormItem = (
+    items: FormItemsSchema | FormItemsSchema[],
+    to?: string | boolean
+  ) => {
+    const formSchemas = getFormSchema();
+    const add = (_index: number) => {
+      if (isArray(items)) {
+        formSchemas.value.splice(_index, 0, ...items);
+      } else {
+        formSchemas.value.splice(_index, 0, items);
+      }
+    };
+    if (isString(to)) {
+      for (const entry of Object.entries(unref(formSchemas))) {
+        const [index, value] = entry;
+        if (value.prop && value.prop == to) {
+          add(+index + 1);
+          return;
+        }
+      }
+    } else if (typeof to === 'boolean' && !to) {
+      add(0);
+    } else {
+      add(formSchemas.value.length);
+    }
+    updateFormSchema(formSchemas.value);
+  };
+  return {
+    appendFormItem,
+  };
 };

@@ -52,6 +52,10 @@ export const useFormSchema = (): UseFormSchemaReturnType => {
       const instance = unref(formInstance);
       return instance?.getFieldsValues(serialize) as T;
     },
+    appendFormItem: async (item, to) => {
+      const instance = await getFormInstance();
+      return instance?.appendFormItem(item, to);
+    },
   };
   return {
     registry,
