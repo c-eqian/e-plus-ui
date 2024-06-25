@@ -24,3 +24,5 @@ export type Render<T = any, P = any> = (scoped: {
   | string
   | number
   | undefined;
+
+export type RegisterFn<T = any> = (formInstance: T) => void;

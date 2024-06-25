@@ -4,8 +4,7 @@ import type {
   FormProps,
   FormValidateCallback,
 } from 'element-plus';
-import type { ComponentPropsByType } from './types';
-import { Render } from './types';
+import type { ComponentPropsByType, Render, RegisterFn } from './types';
 /**
  * 列宽配置
  */
@@ -180,9 +179,22 @@ export interface FormSchemaReturn {
    */
   clearValidate: (...args: string[]) => void;
 }
-export type RegisterFn = (formInstance: FormSchemaReturn) => void;
+
+/**
+ * 表单实例方法
+ */
 export type FormSchemaInstance = () => Promise<FormSchemaReturn | null>;
+
+/**
+ * 表单返回类型
+ */
 export interface UseFormReturnType extends FormSchemaReturn {
-  registry: RegisterFn;
+  /**
+   * 表单注册函数
+   */
+  registry: RegisterFn<FormSchemaReturn>;
+  /**
+   * 表单实例
+   */
   formInstance: FormSchemaInstance;
 }
