@@ -1,5 +1,5 @@
 import type { ComponentProps } from '../components/types';
-import type { ComputedRef, VNode, Ref } from 'vue';
+import type { ComputedRef, VNode, Ref, Slot } from 'vue';
 /**
  * 使用映射类型创建一个新类型，该类型将每个组件类型映射到其对应的属性类型
  */
@@ -7,6 +7,11 @@ export type ComponentPropsByType<
   T,
   P extends T
 > = P extends keyof ComponentProps ? ComponentProps[P] : never;
+export type ComponentSlots = {
+  slots: Readonly<{
+    [name: string]: Slot | undefined;
+  }>;
+};
 /**
  * 扩展参数
  */

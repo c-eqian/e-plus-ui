@@ -4,7 +4,12 @@ import type {
   FormProps,
   FormValidateCallback,
 } from 'element-plus';
-import type { ComponentPropsByType, Render, RegisterFn } from './types';
+import type {
+  ComponentPropsByType,
+  Render,
+  RegisterFn,
+  ComponentSlots,
+} from './types';
 /**
  * 列宽配置
  */
@@ -37,7 +42,6 @@ export type FormSchemaType =
   | 'checkbox-group'
   | 'radio-group'
   | 'cascade';
-
 /**
  * 表单项
  */
@@ -101,7 +105,8 @@ export interface FormItemsSchema<T = any> {
   componentProps?: ComponentPropsByType<
     FormSchemaType,
     FormItemsSchema['type']
-  >;
+  > &
+    Partial<ComponentSlots>;
 }
 
 /**
