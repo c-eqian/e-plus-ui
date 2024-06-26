@@ -8,9 +8,9 @@ export type ComponentPropsByType<
   P extends T
 > = P extends keyof ComponentProps ? ComponentProps[P] : never;
 export type ComponentSlots = {
-  slots: Readonly<{
+  slots: {
     [name: string]: Slot | undefined;
-  }>;
+  };
 };
 /**
  * 扩展参数

@@ -5,7 +5,8 @@ import {
   h,
   inject,
   type PropType,
-  Ref,
+  type Ref,
+  type Slot,
 } from 'vue';
 import { ElCol, ElFormItem, ElRow } from 'element-plus';
 import type { FormItemsSchema, FormSchemaType } from '../type';
@@ -35,7 +36,13 @@ export default defineComponent({
     const isSearch = computed(() => props.isSearch);
     const { type, render, slotKey, ..._props } = computedItem.value;
     const formModel = inject<Ref<any>>(FORM_SCHEMA_MODEL, {} as any);
-    const getSlots = () => {
+    const getComponentSlots = () => {
+      if (computedItem.value?.componentProps?.slots) {
+        return computedItem.value?.componentProps?.slots;
+      }
+      return {} as Slot;
+    };
+    const getColSlots = () => {
       //   如果使用插槽
       if (slotKey || slots[_props.prop!]) {
         return slots[slotKey || _props.prop!]?.({
@@ -53,13 +60,17 @@ export default defineComponent({
         const com = componentsMap.get(
           type as FormSchemaType
         ) as DefineComponent;
-        return h(com, {
-          modelValue: formModel.value[_props.prop],
-          'onUpdate:modelValue': (val: any) => {
-            formModel.value[_props.prop] = val;
+        return h(
+          com,
+          {
+            modelValue: formModel.value[_props.prop],
+            'onUpdate:modelValue': (val: any) => {
+              formModel.value[_props.prop] = val;
+            },
+            ...useFormProps(computedItem.value),
           },
-          ...useFormProps(computedItem.value),
-        });
+          { ...getComponentSlots() }
+        );
       }
       return null;
     };
@@ -79,7 +90,7 @@ export default defineComponent({
                 ),
               },
               {
-                default: () => getSlots(),
+                default: () => getColSlots(),
               }
             ),
         }

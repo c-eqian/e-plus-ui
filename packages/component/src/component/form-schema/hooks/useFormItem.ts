@@ -1,6 +1,7 @@
 import type { FormItemsSchema, FormSchemaType, FormItemRules } from '../type';
 import {
   isArray,
+  isEmpty,
   isFunction,
   isNumber,
   isString,
@@ -115,7 +116,9 @@ export const useFormProps = (props: FormItemsSchema) => {
   };
   return useMerge(useFilterProps(props), {
     placeholder: placeholder || `${getPlaceholder()}`,
-    ...props.componentProps,
+    ...(isEmpty(props.componentProps || {})
+      ? {}
+      : useOmit(props.componentProps || {}, ['slots'])),
   });
 };
 

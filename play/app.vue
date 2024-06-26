@@ -76,6 +76,9 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       componentProps: {
         clearable: true,
+        slots: {
+          prepend: () => [h('div', 'https://')],
+        },
       },
     },
     {
