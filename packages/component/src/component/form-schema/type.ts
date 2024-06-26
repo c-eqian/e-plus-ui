@@ -191,10 +191,15 @@ export interface FormSchemaReturn {
    * @param item
    * @param to 指定到哪个组件后面添加，默认最后一个,如果是布尔值并且为false，则添加到第一条
    */
-  appendFormItem: <T = any>(
+  appendFields: <T = any>(
     item: FormItemsSchema<T>,
     to?: FormItemsSchema<T>['prop'] | boolean
   ) => Promise<unknown>;
+  /**
+   * 删除指定表单项
+   * @param prop
+   */
+  deleteField: <T = any>(prop: FormItemsSchema<T>['prop']) => Promise<void>;
 }
 
 /**

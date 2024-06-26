@@ -123,7 +123,11 @@ export const useFormItem = (
   getFormSchema: () => Ref<FormItemsSchema[]>,
   updateFormSchema: (_items: FormItemsSchema[]) => void
 ) => {
-  const appendFormItem = (
+  const getSchemaKeys = () => {
+    const formSchemas = getFormSchema();
+    return Object.entries(unref(formSchemas));
+  };
+  const appendFields = (
     items: FormItemsSchema | FormItemsSchema[],
     to?: string | boolean
   ) => {
@@ -136,7 +140,7 @@ export const useFormItem = (
       }
     };
     if (isString(to)) {
-      for (const entry of Object.entries(unref(formSchemas))) {
+      for (const entry of getSchemaKeys()) {
         const [index, value] = entry;
         if (value.prop && value.prop == to) {
           add(+index + 1);
@@ -150,7 +154,21 @@ export const useFormItem = (
     }
     updateFormSchema(formSchemas.value);
   };
+  const deleteField = (prop: string) => {
+    if (!prop) return;
+    const formSchemas = getFormSchema();
+    for (const entry of getSchemaKeys()) {
+      const [index, value] = entry;
+      if (value.prop && value.prop == prop) {
+        console.log(index, value);
+        formSchemas.value.splice(+index, 1);
+        updateFormSchema(formSchemas.value);
+        return;
+      }
+    }
+  };
   return {
-    appendFormItem,
+    appendFields,
+    deleteField,
   };
 };
