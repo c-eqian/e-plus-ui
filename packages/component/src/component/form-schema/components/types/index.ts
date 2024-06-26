@@ -1,6 +1,5 @@
 import type { Component, VNodeProps } from 'vue';
 
-export type ComponentPropsType<T extends Component> = {};
 type ExtractPropTypes<T extends Component> = T extends new (...args: any) => any
   ? Omit<InstanceType<T>['$props'], keyof VNodeProps>
   : never;

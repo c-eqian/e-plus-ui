@@ -79,7 +79,7 @@ const formSchema = defineFormSchema<FormModel>({
       },
     },
     {
-      type: '',
+      type: 'input',
       label: '自定义渲染',
       prop: 'render',
       render: ({ model, item }) => {
