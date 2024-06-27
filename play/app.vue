@@ -81,6 +81,13 @@ const searchSchema = defineFormSchema<FormModel>({
       type: 'input',
       label: '框架名称',
       prop: 'name',
+      col: 12,
+    },
+    {
+      type: 'input',
+      label: '框架名称',
+      prop: 'name',
+      col: 12,
     },
     {
       type: 'input',
