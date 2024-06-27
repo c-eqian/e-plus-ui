@@ -12,7 +12,7 @@ import {
 } from 'vue';
 import type { FormSchema, FormContext, FormItemsSchema } from './type';
 import { ElForm, ElFormItem, type FormInstance } from 'element-plus';
-import { isString, useOmit } from 'co-utils-vue';
+import { isEmpty, isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
 import { FORM_SCHEMA_MODEL } from './constants';
@@ -25,7 +25,7 @@ export default defineComponent({
   props: {
     model: {
       type: Object as PropType<FormContext['model']>,
-      default: () => {},
+      default: () => ({}),
     },
     config: {
       type: Object as PropType<FormSchema>,
@@ -53,7 +53,7 @@ export default defineComponent({
     /**
      * 是否传入model
      */
-    const formModel = toRef(props.model || createModel());
+    const formModel = toRef(isEmpty(props.model) ? createModel() : props.model);
     const getModel = () => {
       return formModel;
     };
