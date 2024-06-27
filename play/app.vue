@@ -1,19 +1,27 @@
 <template>
   <div class="play">
-    <ep-card>
+    <ep-card title="表单">
       <div class="cz-py-4">
-        <el-button @click="handleGet">获取</el-button>
-        <el-button @click="handleSet">设置值</el-button>
-        <el-button @click="handleAdd(true)">添加表单</el-button>
-        <el-button @click="handleAdd(false)">添加表单到第一个位置</el-button>
-        <el-button @click="handleAdd('name')">添加表单到name之后位置</el-button>
-        <el-button @click="handleDeleteField">删除cascade项</el-button>
+        <div class="cz-py-4">
+          <el-button @click="handleGet">获取</el-button>
+          <el-button @click="handleSet">设置值</el-button>
+          <el-button @click="handleAdd(true)">添加表单</el-button>
+          <el-button @click="handleAdd(false)">添加表单到第一个位置</el-button>
+          <el-button @click="handleAdd('name')"
+            >添加表单到name之后位置</el-button
+          >
+          <el-button @click="handleDeleteField">删除cascade项</el-button>
+        </div>
+        <ep-form-schema
+          @registry="registry"
+          :config="formSchema"
+          :model="formModel"
+        >
+        </ep-form-schema>
       </div>
-      <ep-form-schema
-        @registry="registry"
-        :config="formSchema"
-        :model="formModel"
-      >
+    </ep-card>
+    <ep-card title="搜索">
+      <ep-form-schema @registry="registry" :config="searchSchema">
       </ep-form-schema>
     </ep-card>
   </div>
@@ -66,6 +74,21 @@ const handleGet = async () => {
   console.log('获取表单值-', formModel.value);
   console.log('获取表单值', getFieldsValues());
 };
+const searchSchema = defineFormSchema<FormModel>({
+  isSearch: true,
+  items: [
+    {
+      type: 'input',
+      label: '框架名称',
+      prop: 'name',
+    },
+    {
+      type: 'input',
+      label: '技术组',
+      prop: 'render',
+    },
+  ],
+});
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
   items: [

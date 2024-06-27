@@ -11,13 +11,14 @@ import {
   toRef,
 } from 'vue';
 import type { FormSchema, FormContext, FormItemsSchema } from './type';
-import { ElForm, type FormInstance } from 'element-plus';
+import { ElForm, ElFormItem, type FormInstance } from 'element-plus';
 import { isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
 import { FORM_SCHEMA_MODEL } from './constants';
 import { useFormValidate } from './hooks/useFormValidate';
 import { useFormItem } from './hooks/useFormItem';
+import FilterButtons from './components/FilterButtons';
 
 export default defineComponent({
   name: 'EpFormSchema',
@@ -75,7 +76,6 @@ export default defineComponent({
           formModel.value[prop] = value;
         }
       }
-      console.log(formModel.value[prop]);
     };
     const getFormSchema = () => {
       return items;
@@ -132,7 +132,6 @@ export default defineComponent({
      * 渲染表单
      */
     const renderForm = () => {
-      const isFormValid = !!this.formProps.isSearch;
       const filterProps = useOmit(this.formProps, ['items', 'isSearch']);
       return h(
         ElForm,
@@ -141,15 +140,19 @@ export default defineComponent({
           ref: (_ref: any) => (this.epFormSchemaRef = _ref),
           ...filterProps,
         }),
-        {
-          default: () =>
-            this.items.map((item) => {
-              return h(FormItem, {
-                item,
-                key: item.prop || item.label,
-                isSearch: isFormValid,
-              });
-            }),
+        () => {
+          const isFormValid = !!this.formProps.isSearch;
+          const itemNodes = this.items.map((item) => {
+            return h(FormItem, {
+              item,
+              key: item.prop || item.label,
+              isSearch: isFormValid,
+            });
+          });
+          if (isFormValid) {
+            itemNodes.push(h(ElFormItem, null, () => h(FilterButtons)));
+          }
+          return itemNodes;
         }
       );
     };
