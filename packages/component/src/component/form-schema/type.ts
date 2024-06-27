@@ -121,6 +121,11 @@ export interface FormSchema<T = any> extends Partial<FormProps> {
    */
   isSearch?: boolean;
   /**
+   * 显示列数
+   * @default 3
+   */
+  columns?: number;
+  /**
    * 表单项配置
    */
   items: FormItemsSchema<T>[];

@@ -4,12 +4,13 @@ import {
   isEmpty,
   isFunction,
   isNumber,
+  isNumeric,
   isString,
   useMerge,
   useOmit,
   usePick,
 } from 'co-utils-vue';
-import { type Ref, unref } from 'vue';
+import { ComputedRef, type Ref, unref } from 'vue';
 
 /**
  * 参数过滤，获取组件参数
@@ -30,16 +31,28 @@ export const useFilterProps = (props: FormItemsSchema) => {
 /**
  * 获取表单参数
  * @param props
+ * @param columns
  */
-export const useColProps = (props: FormItemsSchema) => {
+export const useColProps = (
+  props: FormItemsSchema,
+  columns: ComputedRef<number>
+) => {
   const DEFAULT = { xs: 24, sm: 24, md: 24, lg: 24, xl: 24 };
-  const { col } = props;
+  const { col = {} } = props;
   if (isNumber(col)) {
     return {
       span: col,
     };
+  } else if (isEmpty(col)) {
+    const _columns = unref(columns);
+    return {
+      span:
+        isNumeric(_columns) && +_columns > 0 && +_columns < 24
+          ? Math.floor(24 / +_columns)
+          : 24,
+    };
   }
-  return useMerge({}, usePick(props, ['col']), DEFAULT);
+  return useMerge({}, DEFAULT, col);
 };
 /**
  * 获取表单参数

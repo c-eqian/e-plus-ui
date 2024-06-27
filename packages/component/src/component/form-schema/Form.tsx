@@ -11,7 +11,7 @@ import {
   toRef,
 } from 'vue';
 import type { FormSchema, FormContext, FormItemsSchema } from './type';
-import { ElForm, ElFormItem, type FormInstance } from 'element-plus';
+import { ElForm, ElFormItem, ElRow, type FormInstance } from 'element-plus';
 import { isEmpty, isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
@@ -128,6 +128,22 @@ export default defineComponent({
     };
   },
   render() {
+    const createRow = () => {
+      return h(ElRow, null, () => {
+        const isFormValid = !!this.formProps.isSearch;
+        const itemNodes = this.items.map((item) => {
+          return h(FormItem, {
+            item,
+            key: item.prop || item.label,
+            isSearch: isFormValid,
+          });
+        });
+        if (isFormValid) {
+          itemNodes.push(h(ElFormItem, null, () => h(FilterButtons)));
+        }
+        return itemNodes;
+      });
+    };
     /**
      * 渲染表单
      */
@@ -140,20 +156,7 @@ export default defineComponent({
           ref: (_ref: any) => (this.epFormSchemaRef = _ref),
           ...filterProps,
         }),
-        () => {
-          const isFormValid = !!this.formProps.isSearch;
-          const itemNodes = this.items.map((item) => {
-            return h(FormItem, {
-              item,
-              key: item.prop || item.label,
-              isSearch: isFormValid,
-            });
-          });
-          if (isFormValid) {
-            itemNodes.push(h(ElFormItem, null, () => h(FilterButtons)));
-          }
-          return itemNodes;
-        }
+        () => createRow()
       );
     };
     return <div>{renderForm()}</div>;

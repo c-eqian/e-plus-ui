@@ -8,7 +8,7 @@ import {
   type Ref,
   type Slot,
 } from 'vue';
-import { ElCol, ElFormItem, ElRow } from 'element-plus';
+import { ElCol, ElFormItem } from 'element-plus';
 import type { FormItemsSchema, FormSchemaType } from '../type';
 import {
   useColProps,
@@ -26,6 +26,10 @@ export default defineComponent({
       type: Object as PropType<FormItemsSchema>,
       default: () => ({}),
     },
+    columns: {
+      type: Number,
+      default: 3,
+    },
     isSearch: {
       type: Boolean,
       default: false,
@@ -34,6 +38,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const computedItem = computed(() => props.item);
     const isSearch = computed(() => props.isSearch);
+    const columns = computed(() => props.columns);
     const { type, render, slotKey, ..._props } = computedItem.value;
     const formModel = inject<Ref<any>>(FORM_SCHEMA_MODEL, {} as any);
     const getComponentSlots = () => {
@@ -77,7 +82,7 @@ export default defineComponent({
     const createCol = () => {
       return h(
         ElCol,
-        { ...useColProps(computedItem.value) },
+        { ...useColProps(computedItem.value, columns) },
         {
           default: () =>
             h(
@@ -96,11 +101,6 @@ export default defineComponent({
         }
       );
     };
-    const createRow = () => {
-      return h(ElRow, null, {
-        default: () => createCol(),
-      });
-    };
-    return () => createRow();
+    return () => createCol();
   },
 });

@@ -20,9 +20,8 @@
         </ep-form-schema>
       </div>
     </ep-card>
-    <ep-card title="搜索">
-      <ep-form-schema @registry="registry" :config="searchSchema">
-      </ep-form-schema>
+    <ep-card title="搜索" class="cz-w-1/2">
+      <ep-form-schema :config="searchSchema"> </ep-form-schema>
     </ep-card>
   </div>
 </template>
@@ -76,6 +75,7 @@ const handleGet = async () => {
 };
 const searchSchema = defineFormSchema<FormModel>({
   isSearch: true,
+  labelWidth: '90px',
   items: [
     {
       type: 'input',
@@ -190,6 +190,8 @@ body,
   height: 100%;
   padding-top: 100px;
   display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }

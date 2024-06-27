@@ -10,6 +10,7 @@ export default defineComponent({
           ElButton,
           {
             icon: 'Search',
+            type: 'primary',
             onClick: () => {
               emit('search');
             },
