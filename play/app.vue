@@ -76,6 +76,7 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       componentProps: {
         clearable: true,
+        // 渲染插槽
         slots: {
           prepend: () => [h('div', 'https://')],
           append: () => [h('div', 'https://')],

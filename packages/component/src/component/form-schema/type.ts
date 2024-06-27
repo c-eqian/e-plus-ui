@@ -125,21 +125,14 @@ export interface FormSchema<T = any> extends Partial<FormProps> {
    */
   items: FormItemsSchema<T>[];
 }
-// 定义一个工具类型，用于从FormSchema的T中提取所有可能的prop值
-type PropKeysOfFormSchema<FS extends FormSchema<any>> =
-  FS['items'][number] extends FormItemsSchema<infer T>
-    ? T extends object
-      ? keyof T
-      : never
-    : never;
 /**
  * 表达上下文
  */
-export interface FormContext {
+export interface FormContext<T = Record<string, any>> {
   /**
    * form 数据对象
    */
-  model: Record<string, any>;
+  model: T;
 }
 
 /**
