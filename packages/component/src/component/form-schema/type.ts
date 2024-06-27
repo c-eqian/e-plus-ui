@@ -79,7 +79,7 @@ export interface FormItemsSchema<T = any> {
    * form-item表单的类型
    * 目前暂不支持上传类型组件，如需要，则建议使用插槽
    */
-  type: FormSchemaType;
+  type?: FormSchemaType;
   /**
    * 自定义渲染，优先级低于插槽
    */
@@ -104,7 +104,9 @@ export interface FormItemsSchema<T = any> {
   change?: (value: any) => void;
   componentProps?: ComponentPropsByType<
     FormSchemaType,
-    FormItemsSchema['type']
+    FormItemsSchema['type'] extends FormSchemaType
+      ? FormItemsSchema['type']
+      : any
   > &
     Partial<ComponentSlots>;
 }
