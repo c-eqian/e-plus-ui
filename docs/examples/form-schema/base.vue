@@ -1,47 +1,7 @@
-<template>
-  <div class="play">
-    <ep-card title="表单">
-      <div class="cz-py-4">
-        <div class="cz-py-4">
-          <el-button @click="handleGet">获取</el-button>
-          <el-button @click="handleSet">设置值</el-button>
-          <el-button @click="handleAdd(true)">添加表单</el-button>
-          <el-button @click="handleAdd(false)">添加表单到第一个位置</el-button>
-          <el-button @click="handleAdd('name')"
-            >添加表单到name之后位置</el-button
-          >
-          <el-button @click="handleDeleteField">删除cascade项</el-button>
-        </div>
-        <ep-form-schema
-          @registry="registry"
-          :config="formSchema"
-          :model="formModel"
-        >
-        </ep-form-schema>
-      </div>
-    </ep-card>
-    <ep-card title="搜索" class="cz-w-1/2">
-      <div class="cz-py-4">
-        <el-button @click="handleReset">重置表单</el-button>
-      </div>
-      <ep-form-schema @search="handleSearch" :config="searchSchema">
-      </ep-form-schema>
-    </ep-card>
-  </div>
-</template>
 <script setup lang="ts">
-import { defineFormSchema, useFormSchema } from '../packages/component/src';
-import { ref, h } from 'vue';
+import { defineFormSchema, useFormSchema } from 'e-plus-ui';
+import { h, ref } from 'vue';
 import { ElInput } from 'element-plus';
-const {
-  registry,
-  getFieldsValues,
-  validate,
-  setFieldsValues,
-  appendFields,
-  resetFields,
-  deleteField,
-} = useFormSchema();
 interface FormModel {
   name: string;
   cascade: string;
@@ -54,19 +14,27 @@ const formModel = ref({
   render: '',
   test: '',
 });
+const {
+  registry,
+  getFieldsValues,
+  validate,
+  setFieldsValues,
+  appendFields,
+  deleteField,
+} = useFormSchema();
+/**
+ * 设置表单值
+ */
 const handleSet = () => {
   setFieldsValues({
     test: '新增',
   });
 };
+/**
+ * 删除表单
+ */
 const handleDeleteField = () => {
   deleteField<FormModel>('cascade');
-};
-const handleReset = () => {
-  resetFields();
-};
-const handleSearch = (p: any) => {
-  console.log(p);
 };
 const handleAdd = (to: boolean | keyof FormModel) => {
   appendFields<FormModel>(
@@ -79,34 +47,14 @@ const handleAdd = (to: boolean | keyof FormModel) => {
     to
   );
 };
+/**
+ * 获取表单
+ */
 const handleGet = async () => {
+  // 校验
   await validate();
-  console.log('获取表单值-', formModel.value);
   console.log('获取表单值', getFieldsValues());
 };
-const searchSchema = defineFormSchema<FormModel>({
-  isSearch: true,
-  labelWidth: '90px',
-  items: [
-    {
-      type: 'input',
-      label: '框架名称',
-      prop: 'name',
-      col: 12,
-    },
-    {
-      type: 'input',
-      label: '框架名称',
-      prop: 'name',
-      col: 12,
-    },
-    {
-      type: 'input',
-      label: '技术组',
-      prop: 'render',
-    },
-  ],
-});
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
   columns: 1,
@@ -195,27 +143,30 @@ const formSchema = defineFormSchema<FormModel>({
   ],
 });
 </script>
-<style lang="less">
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-.play {
-  width: 100%;
-  height: 100%;
-  padding-top: 100px;
-  display: flex;
-  flex-flow: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.main-container {
-  width: 500px;
-  height: 800px;
-}
+
+<template>
+  <ep-card title="表单">
+    <div class="cz-py-4">
+      <div class="cz-py-4">
+        <el-button @click="handleGet">获取</el-button>
+        <el-button @click="handleSet">设置值</el-button>
+        <el-button @click="handleAdd(true)">添加表单</el-button>
+        <el-button @click="handleAdd(false)">添加表单到第一个位置</el-button>
+        <el-button @click="handleAdd('name')"
+        >添加表单到name之后位置</el-button
+        >
+        <el-button @click="handleDeleteField">删除cascade项</el-button>
+      </div>
+      <ep-form-schema
+        @registry="registry"
+        :config="formSchema"
+        :model="formModel"
+      >
+      </ep-form-schema>
+    </div>
+  </ep-card>
+</template>
+
+<style scoped lang="scss">
+
 </style>

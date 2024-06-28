@@ -126,13 +126,26 @@ const createHeader = () => {
 function run(isReset = false) {
   sourceFiles.forEach(async (file) => {
     const fileName = getFilePathName(file);
-    const _header = [
-      `# ${fileName.toLowerCase().replace(/\b[a-z]/g, function (match) {
-        return match.toUpperCase();
-      })} 组件定义 \n\n ${createHeader()}`,
-    ];
-    if (!isReset) {
-      if (!checkerIsHas(fileName)) {
+    if (fileName !== 'types') {
+      const _header = [
+        `# ${fileName.toLowerCase().replace(/\b[a-z]/g, function (match) {
+          return match.toUpperCase();
+        })} 组件定义 \n\n ${createHeader()}`,
+      ];
+      if (!isReset) {
+        if (!checkerIsHas(fileName)) {
+          const classList = await getClasses(file);
+          const interfaceList = await getAllInterfaces(file);
+          const typeAliasesList = await getTypeAliases(file);
+          const data = [
+            _header,
+            ...classList,
+            ...interfaceList,
+            ...typeAliasesList,
+          ].join('\n\n');
+          createTypeMdFile(fileName, data);
+        }
+      } else {
         const classList = await getClasses(file);
         const interfaceList = await getAllInterfaces(file);
         const typeAliasesList = await getTypeAliases(file);
@@ -144,19 +157,8 @@ function run(isReset = false) {
         ].join('\n\n');
         createTypeMdFile(fileName, data);
       }
-    } else {
-      const classList = await getClasses(file);
-      const interfaceList = await getAllInterfaces(file);
-      const typeAliasesList = await getTypeAliases(file);
-      const data = [
-        _header,
-        ...classList,
-        ...interfaceList,
-        ...typeAliasesList,
-      ].join('\n\n');
-      createTypeMdFile(fileName, data);
+      console.log('转换------>', fileName);
     }
-    console.log('转换------>', fileName);
   });
 }
 run(false);

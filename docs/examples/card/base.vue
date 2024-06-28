@@ -1,6 +1,6 @@
 <template>
   <div class="cz-h-full">
-    <EpCard>这是卡片</EpCard>
+    <EpCard title="标题">这是卡片</EpCard>
   </div>
 </template>
 <script setup lang="ts">
