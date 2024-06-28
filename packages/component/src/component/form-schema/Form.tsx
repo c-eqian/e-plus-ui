@@ -132,11 +132,13 @@ export default defineComponent({
     const createRow = () => {
       return h(ElRow, null, () => {
         const isFormValid = !!this.formProps.isSearch;
+        const columns = this.formProps.columns;
         const itemNodes = this.items.map((item) => {
           return h(FormItem, {
             item,
             key: item.prop || item.label,
             isSearch: isFormValid,
+            columns,
           });
         });
         if (isFormValid) {
