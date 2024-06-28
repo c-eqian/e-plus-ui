@@ -1,5 +1,5 @@
 import { Ref, unref } from 'vue';
-import { isEmpty, isObjectLike } from 'co-utils-vue';
+import { isEmpty, isObjectLike, useEmptyObject } from 'co-utils-vue';
 import type { UpdateFieldValue } from '../types';
 function transformFlatObjectToNested(
   nestedObj: Record<string, any>,
@@ -59,8 +59,13 @@ export const useFormValues = (
       updateFieldValue(prop, value);
     }
   };
+  const resetFieldsValues = () => {
+    const model = unref(getModel());
+    setFieldsValues(useEmptyObject(model));
+  };
   return {
     getFieldsValues,
     setFieldsValues,
+    resetFieldsValues,
   };
 };

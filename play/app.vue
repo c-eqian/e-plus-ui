@@ -21,7 +21,11 @@
       </div>
     </ep-card>
     <ep-card title="搜索" class="cz-w-1/2">
-      <ep-form-schema :config="searchSchema"> </ep-form-schema>
+      <div class="cz-py-4">
+        <el-button @click="handleReset">重置表单</el-button>
+      </div>
+      <ep-form-schema @search="handleSearch" :config="searchSchema">
+      </ep-form-schema>
     </ep-card>
   </div>
 </template>
@@ -35,6 +39,7 @@ const {
   validate,
   setFieldsValues,
   appendFields,
+  resetFields,
   deleteField,
 } = useFormSchema();
 interface FormModel {
@@ -56,6 +61,12 @@ const handleSet = () => {
 };
 const handleDeleteField = () => {
   deleteField<FormModel>('cascade');
+};
+const handleReset = () => {
+  resetFields();
+};
+const handleSearch = (p: any) => {
+  console.log(p);
 };
 const handleAdd = (to: boolean | keyof FormModel) => {
   appendFields<FormModel>(

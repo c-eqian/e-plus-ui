@@ -32,7 +32,7 @@ export default defineComponent({
       default: () => {},
     },
   },
-  emits: ['registry'],
+  emits: ['registry', 'search'],
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
     const items = toRef(props.config.items);
@@ -95,10 +95,8 @@ export default defineComponent({
       getFormSchema,
       updateFormSchema
     );
-    const { getFieldsValues, setFieldsValues } = useFormValues(
-      getModel,
-      updateFieldValue
-    );
+    const { getFieldsValues, setFieldsValues, resetFieldsValues } =
+      useFormValues(getModel, updateFieldValue);
     onMounted(() => {
       emit('registry', {
         validate,
@@ -106,6 +104,7 @@ export default defineComponent({
         clearValidate,
         validateField,
         setFieldsValues,
+        resetFieldsValues,
         scrollIntoView,
         deleteField,
         appendFields,
@@ -116,10 +115,12 @@ export default defineComponent({
       formModel,
       formProps,
       items,
+      emit,
       epFormSchemaRef,
       appendFields,
       setFieldsValues,
       getFieldsValues,
+      resetFieldsValues,
       validate,
       deleteField,
       resetFields,
@@ -139,7 +140,17 @@ export default defineComponent({
           });
         });
         if (isFormValid) {
-          itemNodes.push(h(ElFormItem, null, () => h(FilterButtons)));
+          itemNodes.push(
+            h(ElFormItem, null, () =>
+              h(FilterButtons, {
+                onSearch: () => this.emit('search', this.getFieldsValues()),
+                onReset: () => {
+                  this.resetFieldsValues();
+                  this.emit('search', {});
+                },
+              })
+            )
+          );
         }
         return itemNodes;
       });
