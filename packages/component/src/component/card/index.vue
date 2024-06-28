@@ -1,24 +1,40 @@
 <script setup lang="ts">
-// import type { PropType } from 'vue';
-
 import { CardProps } from './type';
-import { computed } from 'vue';
+import { computed, useSlots } from 'vue';
 
 defineOptions({
   name: 'EpCard',
 });
-const props = withDefaults(defineProps<CardProps>(), {});
+const props = withDefaults(defineProps<CardProps>(), {
+  shadow: 'hover',
+});
 const title = computed(() => props.title);
+const slots = useSlots();
+const classes = computed(() => {
+  return {
+    shadow: props.shadow === 'always',
+    'is-hover-shadow': props.shadow === 'hover',
+  };
+});
 </script>
 
 <template>
-  <div class="cz-card cz-min-h-96 cz-p-3 cz-shadow-base cz-rounded-2xl">
-    <div class="cz-border-b cz-p-4 cz-my-2">
-      <div v-if="title">{{ title }}</div>
-      <slot name="title"> </slot>
+  <div class="cz-card" :class="classes">
+    <div class="cz-card-header" v-if="slots.title || title || slots.extra">
+      <span class="cz-card-header-title">
+        <slot name="title">{{ title }}</slot>
+      </span>
+      <span class="cz-card-header-extra" v-if="slots.extra">
+        <slot name="extra"></slot>
+      </span>
     </div>
-    <slot name="header"> </slot>
-    <slot></slot>
+    <div class="cz-card-body">
+      <slot name="body" v-if="slots.body"></slot>
+      <slot v-else></slot>
+    </div>
+    <div class="cz-card-footer" v-if="slots.footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
