@@ -7,6 +7,7 @@ import {
   type PropType,
   type Ref,
   type Slot,
+  unref,
 } from 'vue';
 import { ElCol, ElFormItem } from 'element-plus';
 import type { FormItemsSchema, FormSchemaType } from '../type';
@@ -47,6 +48,9 @@ export default defineComponent({
       }
       return {} as Slot;
     };
+    const getModel = () => {
+      return formModel;
+    };
     const getColSlots = () => {
       //   如果使用插槽
       if (slotKey || slots[_props.prop!]) {
@@ -57,7 +61,7 @@ export default defineComponent({
       }
       if (isFunction(render)) {
         return render({
-          item: computedItem,
+          item: unref(computedItem),
           model: formModel,
         });
       }
@@ -72,7 +76,7 @@ export default defineComponent({
             'onUpdate:modelValue': (val: any) => {
               formModel.value[_props.prop] = val;
             },
-            ...useFormProps(computedItem.value),
+            ...useFormProps(computedItem, getModel),
           },
           { ...getComponentSlots() }
         );

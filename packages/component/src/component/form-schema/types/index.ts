@@ -1,28 +1,30 @@
 import type { ComponentProps } from '../components/types';
-import type { ComputedRef, VNode, Ref, Slot } from 'vue';
+import type { VNode, Ref, Slot } from 'vue';
 /**
  * 使用映射类型创建一个新类型，该类型将每个组件类型映射到其对应的属性类型
  */
 export type ComponentPropsByType<
   T,
-  P extends T
-> = P extends keyof ComponentProps ? ComponentProps[P] : never;
+  P extends keyof ComponentProps
+> = P extends keyof ComponentProps ? ComponentProps[P] : Record<string, any>;
 export type ComponentSlots = {
   slots: {
     [name: string]: Slot | undefined;
   };
 };
 /**
- * 扩展参数
+ * 相关回调参数
  */
-export type FormExtraPropsType = { [k: string]: any };
+export type Scoped<T = any, P = any> = {
+  item: P;
+  model: Ref<T>;
+};
 /**
  * 渲染器
  */
-export type Render<T = any, P = any> = (scoped: {
-  item: ComputedRef<P>;
-  model: Ref<T>;
-}) =>
+export type Render<T = any, P = any> = (
+  scoped: Scoped<T, P>
+) =>
   | VNode<any, any, any>
   | VNode<any, any, any>[]
   | null

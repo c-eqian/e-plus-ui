@@ -7,6 +7,7 @@ import type {
 import type {
   ComponentPropsByType,
   Render,
+  Scoped,
   RegisterFn,
   ComponentSlots,
 } from './types';
@@ -38,10 +39,25 @@ export type FormSchemaType =
   | 'time-picker'
   | 'date-picker'
   | 'time-select'
-  | 'time-range'
   | 'checkbox-group'
   | 'radio-group'
   | 'cascade';
+
+/**
+ * 扩展组件参数
+ */
+export interface ExtraProps<T = any, P = any> {
+  /**
+   * 动态是否禁用
+   * @param scoped
+   */
+  dynamicDisable?: (scoped: Scoped<T, P>) => boolean;
+  /**
+   * 动态是否显示
+   * @param scoped
+   */
+  dynamicShow?: (scoped: Scoped<T, P>) => boolean;
+}
 /**
  * 表单项
  */
@@ -79,11 +95,11 @@ export interface FormItemsSchema<T = any> {
    * form-item表单的类型
    * 目前暂不支持上传类型组件，如需要，则建议使用插槽
    */
-  type?: FormSchemaType;
+  type: FormSchemaType;
   /**
    * 自定义渲染，优先级低于插槽
    */
-  render?: Render<T, FormItemsSchema>;
+  render?: Render<T, FormItemsSchema<T>>;
   /**
    * 栅格的布局方式
    */
@@ -102,13 +118,12 @@ export interface FormItemsSchema<T = any> {
    * @param value 当前值
    */
   change?: (value: any) => void;
-  componentProps?: ComponentPropsByType<
-    FormSchemaType,
-    FormItemsSchema['type'] extends FormSchemaType
-      ? FormItemsSchema['type']
-      : any
-  > &
-    Partial<ComponentSlots>;
+  /**
+   * 组件参数
+   */
+  componentProps?: Partial<ComponentSlots> &
+    ExtraProps<T, Omit<FormItemsSchema<T>, 'componentProps'>> &
+    ComponentPropsByType<FormSchemaType, FormItemsSchema['type']>;
 }
 
 /**

@@ -8,7 +8,6 @@ import {
   isString,
   useMerge,
   useOmit,
-  usePick,
 } from 'co-utils-vue';
 import { ComputedRef, type Ref, unref } from 'vue';
 
@@ -111,9 +110,13 @@ export const useFormItemProps = (
 /**
  * 获取组件参数
  * @param props
+ * @param getModel
  */
-export const useFormProps = (props: FormItemsSchema) => {
-  const { placeholder, type, label } = props;
+export const useFormProps = (
+  props: ComputedRef<FormItemsSchema>,
+  getModel: () => Ref<any>
+) => {
+  const { placeholder, type, label, componentProps } = unref(props);
   const selectKeyList: FormSchemaType[] = [
     'select',
     'date-picker',
@@ -127,12 +130,26 @@ export const useFormProps = (props: FormItemsSchema) => {
     }
     return '请输入' + label;
   };
-  return useMerge(useFilterProps(props), {
+  const filterProps = useFilterProps(unref(props));
+  const comProps: Record<string, any> = {
     placeholder: placeholder || `${getPlaceholder()}`,
-    ...(isEmpty(props.componentProps || {})
-      ? {}
-      : useOmit(props.componentProps || {}, ['slots'])),
-  });
+    ...useOmit(componentProps ?? {}, ['slots']),
+  };
+  if (componentProps) {
+    if (!isEmpty(componentProps)) {
+      const { dynamicDisable } = componentProps;
+      if (isFunction(dynamicDisable)) {
+        return useMerge(comProps, filterProps, {
+          disable: dynamicDisable({
+            model: getModel(),
+            item: unref(props),
+          }),
+        });
+      }
+      return useMerge(comProps, filterProps);
+    }
+  }
+  return useMerge(comProps, filterProps);
 };
 
 export const useFormItem = (
@@ -176,7 +193,6 @@ export const useFormItem = (
     for (const entry of getSchemaKeys()) {
       const [index, value] = entry;
       if (value.prop && value.prop == prop) {
-        console.log(index, value);
         formSchemas.value.splice(+index, 1);
         updateFormSchema(formSchemas.value);
         return;

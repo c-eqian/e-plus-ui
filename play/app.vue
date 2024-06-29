@@ -132,9 +132,9 @@ const formSchema = defineFormSchema<FormModel>({
       prop: 'render',
       render: ({ model, item }) => {
         return h(ElInput, {
-          modelValue: model.value[item.value.prop],
+          modelValue: model.value[item.prop],
           'onUpdate:modelValue': (val: any) => {
-            model.value[item.value.prop] = val;
+            model.value[item.prop] = val;
           },
         });
       },
