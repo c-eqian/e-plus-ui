@@ -1,12 +1,12 @@
-import type { ComponentProps } from '../components/types';
+import type { ComponentTypeProps } from '../components/types';
 import type { VNode, Ref, Slot } from 'vue';
+
 /**
  * 使用映射类型创建一个新类型，该类型将每个组件类型映射到其对应的属性类型
  */
-export type ComponentPropsByType<
-  T,
-  P extends keyof ComponentProps
-> = P extends keyof ComponentProps ? ComponentProps[P] : Record<string, any>;
+export type ComponentPropsByType<T, P> = P extends keyof ComponentTypeProps
+  ? ComponentTypeProps[P]
+  : Record<string, any>;
 export type ComponentSlots = {
   slots: {
     [name: string]: Slot | undefined;

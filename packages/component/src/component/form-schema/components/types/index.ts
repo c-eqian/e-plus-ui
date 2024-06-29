@@ -4,7 +4,7 @@ type ExtractPropTypes<T extends Component> = T extends new (...args: any) => any
   ? Omit<InstanceType<T>['$props'], keyof VNodeProps>
   : never;
 
-export interface ComponentProps {
+export interface ComponentTypeProps {
   'input-number': ExtractPropTypes<
     typeof import('element-plus/es')['ElInputNumber']
   >;

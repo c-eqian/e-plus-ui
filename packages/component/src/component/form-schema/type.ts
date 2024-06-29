@@ -34,11 +34,14 @@ export type FormSchemaType =
   | 'autocomplete'
   | 'switch'
   | 'rate'
+  | 'radio'
   | 'divider'
   | 'slider'
+  | 'checkbox'
   | 'time-picker'
   | 'date-picker'
   | 'time-select'
+  | 'tree-select'
   | 'checkbox-group'
   | 'radio-group'
   | 'cascade';
@@ -95,7 +98,7 @@ export interface FormItemsSchema<T = any> {
    * form-item表单的类型
    * 目前暂不支持上传类型组件，如需要，则建议使用插槽
    */
-  type: FormSchemaType;
+  type?: FormSchemaType;
   /**
    * 自定义渲染，优先级低于插槽
    */
@@ -122,8 +125,13 @@ export interface FormItemsSchema<T = any> {
    * 组件参数
    */
   componentProps?: Partial<ComponentSlots> &
-    ExtraProps<T, Omit<FormItemsSchema<T>, 'componentProps'>> &
-    ComponentPropsByType<FormSchemaType, FormItemsSchema['type']>;
+    ExtraProps<T, FormItemsSchema<T>> &
+    ComponentPropsByType<
+      FormSchemaType,
+      FormItemsSchema['type'] extends FormSchemaType
+        ? FormItemsSchema['type']
+        : string
+    >;
 }
 
 /**

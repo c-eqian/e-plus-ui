@@ -3,14 +3,13 @@ import {
   defineComponent,
   h,
   onMounted,
-  PropType,
   provide,
   reactive,
   Ref,
   ref,
   toRef,
 } from 'vue';
-import type { FormSchema, FormContext, FormItemsSchema } from './type';
+import type { FormItemsSchema } from './type';
 import { ElForm, ElFormItem, ElRow, type FormInstance } from 'element-plus';
 import { isEmpty, isString, useOmit } from 'co-utils-vue';
 import FormItem from './components/FormItem';
@@ -19,19 +18,11 @@ import { FORM_SCHEMA_MODEL } from './constants';
 import { useFormValidate } from './hooks/useFormValidate';
 import { useFormItem } from './hooks/useFormItem';
 import FilterButtons from './components/FilterButtons';
+import { FormSchemaProps } from './types/formProps';
 
 export default defineComponent({
   name: 'EpFormSchema',
-  props: {
-    model: {
-      type: Object as PropType<FormContext['model']>,
-      default: () => ({}),
-    },
-    config: {
-      type: Object as PropType<FormSchema>,
-      default: () => {},
-    },
-  },
+  props: FormSchemaProps,
   emits: ['registry', 'search'],
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
