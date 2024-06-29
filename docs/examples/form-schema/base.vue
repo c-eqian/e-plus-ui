@@ -16,6 +16,7 @@ const formModel = ref({
 });
 const modelValues = ref<FormModel>()
 const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
+const formSchemaRef2 = ref<InstanceType<typeof EpFormSchema>>()
 /**
  * 获取表单
  */
@@ -26,9 +27,9 @@ const handleGet = async () => {
 };
 const handleGetValues = async ()=>{
   // 校验
-  await formSchemaRef.value?.validate();
+  await formSchemaRef2.value?.validate();
   // 使用getFieldsValues方法获取表单值
-  modelValues.value = formSchemaRef.value?.getFieldsValues() as FormModel;
+  modelValues.value = formSchemaRef2.value?.getFieldsValues() as FormModel;
   console.log('getFieldsValues获取表单值',modelValues.value );
 }
 const formSchema = defineFormSchema<FormModel>({
@@ -84,7 +85,7 @@ const formSchema = defineFormSchema<FormModel>({
 </script>
 
 <template>
-  <ep-card title="带有model的表单">
+  <ep-card title="带有model的表单" shadow="always">
     <div class="cz-py-4">
       <div class="cz-py-4">
         <p>{{formModel}}</p>
@@ -98,14 +99,14 @@ const formSchema = defineFormSchema<FormModel>({
       </ep-form-schema>
     </div>
   </ep-card>
-  <ep-card title="不使用model的表单">
+  <ep-card title="不使用model的表单" shadow="always">
     <div class="cz-py-4">
       <div class="cz-py-4">
         <p>{{modelValues}}</p>
         <el-button @click="handleGetValues">获取表单</el-button>
       </div>
       <ep-form-schema
-          ref="formSchemaRef"
+          ref="formSchemaRef2"
           :config="formSchema"
       >
       </ep-form-schema>
