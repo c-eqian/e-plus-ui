@@ -140,7 +140,7 @@ export const useFormProps = (
       const { dynamicDisable } = componentProps;
       if (isFunction(dynamicDisable)) {
         return useMerge(comProps, filterProps, {
-          disable: dynamicDisable({
+          disabled: dynamicDisable({
             model: getModel(),
             item: unref(props),
           }),

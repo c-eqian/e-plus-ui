@@ -118,6 +118,9 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       componentProps: {
         clearable: true,
+        dynamicDisable: ({ model, item }) => {
+          return model.value.render == '1';
+        },
         // 渲染插槽
         slots: {
           prepend: () => [h('div', 'https://')],
