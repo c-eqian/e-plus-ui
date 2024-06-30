@@ -19,6 +19,10 @@ import EpCard from './component/card/index';
 import EpCopyText from './component/copy-text/index';
 import EpLine from './component/line/index';
 import EpImageHover from './component/image-hover/index';
+
+import EpLetterLoading from './component/letter-cude/index';
+import EpDiamondLoading from './component/diamond/index';
+import EpLoading from './component/loading/index';
 /**
  * 高级组件
  */
@@ -33,12 +37,15 @@ const components: Record<string, Plugin> = {
   EpLine,
   EpCopyText,
   EpImageHover,
+  EpLetterLoading,
+  EpDiamondLoading,
+  EpLoading,
 
   EpVirtualList,
   EpTable,
   EpTableColumn,
   EpFormSchema,
-  // EpForm,
+  EpForm,
 };
 
 const install = (app: App, options?: any): void => {
@@ -53,6 +60,9 @@ export {
   EpCopyText,
   EpLine,
   EpImageHover,
+  EpLetterLoading,
+  EpDiamondLoading,
+  EpLoading,
   EpTable,
   EpTableColumn,
   EpFormSchema,

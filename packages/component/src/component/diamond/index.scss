@@ -1,0 +1,36 @@
+$accent: #41b883;
+$duration: 1500ms;
+$timing: linear;
+$count: 4;
+.cz-spinner {
+  * {
+    line-height: 0;
+    box-sizing: border-box;
+  }
+
+  .cz-diamond {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 2px;
+    background: var(--cz-diamond-bg-color);
+    transform: translateX(-50%) rotate(45deg) scale(0);
+    animation: diamonds $duration $timing infinite;
+    @for $i from 1 through $count {
+      &:nth-child(#{$i}) {
+        animation-delay: -(calc($duration / 1.5) * $i);
+      }
+    }
+  }
+}
+
+@keyframes diamonds {
+  50% {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg) scale(1);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(-50%) rotate(45deg) scale(0);
+  }
+}
