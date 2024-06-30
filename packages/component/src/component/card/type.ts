@@ -9,3 +9,14 @@ export interface CardProps {
    */
   shadow?: Shadow;
 }
+
+/**
+ * 插槽名称
+ */
+export type SlotsType = {
+  title: () => any;
+  extra: () => any;
+  body: () => any;
+  footer: () => any;
+  default: () => any;
+};

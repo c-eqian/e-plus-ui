@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CardProps } from './type';
+import { CardProps, SlotsType } from './type';
 import { computed, useSlots } from 'vue';
 
 defineOptions({
@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   shadow: 'hover',
 });
 const title = computed(() => props.title);
+defineSlots<SlotsType>();
 const slots = useSlots();
 const classes = computed(() => {
   return {
