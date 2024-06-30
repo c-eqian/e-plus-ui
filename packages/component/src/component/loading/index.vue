@@ -6,16 +6,16 @@ defineOptions({
   name: 'EpLoading',
 });
 const props = defineProps({
-  isLoading: {
+  loading: {
     type: Boolean,
     default: false,
   },
-  type: {
+  loadingType: {
     type: String as PropType<LoadingType>,
     default: 'wave',
   },
 });
-const isLoadingValue = computed(() => props.isLoading);
+const isLoadingValue = computed(() => props.loading);
 </script>
 
 <template>
@@ -24,7 +24,7 @@ const isLoadingValue = computed(() => props.isLoading);
       v-for="item in [1, 2, 3, 4]"
       :key="item"
       class="cz-loading-bar"
-      :class="`cz-loading-bar-${item} ${props.type}`"
+      :class="`cz-loading-bar-${item} ${props.loadingType}`"
     />
   </div>
 </template>
