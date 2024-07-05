@@ -11,8 +11,6 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "jsx": "preserve",
-    "paths": {
-      "e-plus-ui*": ["../packages/component/src/*"]
-    }
+    "types": ["e-plus-ui/types"]
   }
 }

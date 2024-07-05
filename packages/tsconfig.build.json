@@ -1,0 +1,14 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+      "skipLibCheck": true,
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "emitDecoratorMetadata": false,
+      "types": ["vite/client", "element-plus/global"]
+    },
+    "include": ["./src/**/*",
+      "shims-vue.d.ts"
+    ],
+    "exclude": ["node_modules", "vitest.config.ts"]
+  }

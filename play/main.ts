@@ -4,7 +4,7 @@ import 'tailwindcss/base.css';
 import 'tailwindcss/components.css';
 import 'tailwindcss/utilities.css';
 import ElementPlus from 'element-plus';
-import EPlusUI from '../packages/component/src/index';
+import EPlusUI from '../packages';
 import 'element-plus/dist/index.css';
 import * as components from '@element-plus/icons-vue';
 const app = createApp(App);

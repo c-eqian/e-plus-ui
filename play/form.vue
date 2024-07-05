@@ -30,7 +30,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineFormSchema, useFormSchema } from '../packages/component/src';
+import { defineFormSchema, useFormSchema } from '../packages';
 import { ref, h } from 'vue';
 import { ElInput } from 'element-plus';
 const {

@@ -9,10 +9,10 @@ package-lock.json
 *.ntvs*
 *.njsproj
 *.sln
-packages/e-plus-ui/lib
-packages/e-plus-ui/es
-packages/e-plus-ui/types
-packages/e-plus-ui/umd
+e-plus-ui/lib
+e-plus-ui/es
+e-plus-ui/types
+e-plus-ui/umd
 # yarn
 yarn-lock
 yarn-error.log

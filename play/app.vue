@@ -1,6 +1,9 @@
 <template>
   <div class="play">
     <loading></loading>
+    <ep-card shadow="hover">
+      <template #title></template>
+    </ep-card>
   </div>
 </template>
 <script setup lang="ts">

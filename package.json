@@ -1,21 +1,18 @@
 {
   "license": "MIT",
   "description": "a component library for Vue 3",
-  "workspaces": [
-    "packages/*",
-    "!packages/e-plus-ui",
-    "play"
-  ],
   "scripts": {
     "dev": "pnpm -C play dev",
     "dev:docs": "pnpm -C docs dev",
     "dev:layer": "pnpm -C docs/document-layer dev",
-    "test": "pnpm -C packages/component test",
-    "build": "pnpm run build:component",
-    "build:component": "pnpm -C packages/component build",
-    "publish:component": "pnpm -C packages/component publish",
-    "build:types": " pnpm -C packages/component build:types",
-    "build:table": " pnpm -C packages/component build:table",
+    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts",
+    "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
+    "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
+    "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
+    "build:dts": "tsx --tsconfig ./packages/tsconfig.build.json ./script/build.dts.ts",
+    "build:types": " node ./script/generate.docs.js",
+    "build:table": " node ./script/generate.table.js",
+    "test": "vitest run",
     "generate:icons": "pnpm -C packages/icons generate",
     "lint:eslint": "eslint \"packages/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
@@ -24,11 +21,12 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "@plus-ui/components": "workspace:*",
-    "vue": "3.3.4"
+    "co-utils-vue": "^2.5.0-rc.2",
+    "element-plus": "^2.7.6",
+    "vue": "^3.3.0"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -38,15 +36,16 @@
     "@commitlint/config-conventional": "^16.2.1",
     "@microsoft/api-extractor": "^7.34.4",
     "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/node": "^18.11.9",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^4.6.2",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
-    "@vue/compiler-sfc": "3.3.4",
-    "@vue/runtime-core": "3.3.4",
-    "@vue/server-renderer": "3.3.4",
+    "@vue/compiler-sfc": "3.4.31",
+    "@vue/runtime-core": "3.4.31",
+    "@vue/server-renderer": "3.4.31",
     "@vue/test-utils": "2.4.5",
     "autoprefixer": "^10.4.19",
     "clsx": "^2.1.1",
@@ -73,11 +72,11 @@
     "tailwindcss": "^3.4.4",
     "ts-morph": "22.0.0",
     "tsx": "^4.10.5",
-    "typescript": "^4.9.5",
+    "typescript": "^5.4.5",
     "vite": "5.2.11",
     "vitest": "1.4.0",
     "vue-component-meta": "^1.0.8",
-    "vue-tsc": "1.5.3"
+    "vue-tsc": "2.0.6"
   },
   "config": {
     "commitizen": {

@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "module": "esnext",
+      "target": "es2015",
+      "moduleResolution": "Node",
+      "strict": true,
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "esModuleInterop": true,
+      "declarationDir": "./e-plus-ui/types",
+      "jsx": "preserve",
+      "jsxFactory": "h",
+      "paths": {
+        "element-plus": ["node_modules/element-plus"],
+        "e-plus-ui": ["./packages"]
+      },
+      "types": ["vite/client", "element-plus/global"],
+      "skipLibCheck": true,
+      "lib": ["ESNext","DOM"]
+    },
+  "include": ["packages/**/*.ts", "packages/**/*.js", "packages/**/*.d.ts",
+    "packages/**/*.tsx", "packages/**/*.vue",
+    "vite.config.mts",
+    "./types/auto-imports.d.ts" // 和 AutoImport dts保持一致 引入即可
+  ],
+    "exclude": ["node_modules", "**/__tests__/**"]
+}

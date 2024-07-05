@@ -1,5 +1,0 @@
-packages:
-  - packages/*
-  - play
-ignore:
-  - 'packages/e-plus-ui/*'
