@@ -1,20 +1,21 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
+      "baseUrl": "./packages",
       "module": "esnext",
       "target": "es2015",
       "moduleResolution": "Node",
       "strict": true,
       "allowJs": true,
       "resolveJsonModule": true,
+      "declaration": true,
       "noImplicitAny": false,
       "emitDeclarationOnly": true,
       "esModuleInterop": true,
+      "declarationDir": "e-plus-ui/types",
       "jsx": "preserve",
       "jsxFactory": "h",
       "paths": {
-        "element-plus": ["node_modules/element-plus"],
-        "e-plus-ui": ["./packages"]
+        "element-plus": ["node_modules/element-plus"]
       },
       "types": ["vite/client", "element-plus/global"],
       "skipLibCheck": true,
@@ -24,9 +25,12 @@
     "lib": "@vue/runtime-core",
   },
   "include": ["packages/**/*.ts", "packages/**/*.js", "packages/**/*.d.ts",
-    "packages/**/*.tsx", "packages/**/*.vue", "play/**/*",
-    "vite.config.mts",
-    "./types/auto-imports.d.ts" // 和 AutoImport dts保持一致 引入即可
+    "packages/**/*.tsx", "packages/**/*.vue"
   ],
-    "exclude": ["node_modules", "**/__tests__/**"]
+    "exclude": [
+      "node_modules",
+      "**/__tests__/**",
+      "packages/vitest.config.ts",
+      "packages/shims-vue.d.ts"
+    ]
 }

@@ -1,5 +1,5 @@
 // @ts-nocheck
-
+type A = import('@vue/runtime-core').GlobalComponents;
 import EpButton from './button/index';
 import EpCard from './card/index';
 import EpLine from './line/index';
@@ -14,7 +14,7 @@ import EpDiamondLoading from './diamond/index';
 import EpLoading from './loading/index';
 declare module '@vue/runtime-core' {
   // GlobalComponents for Volar
-  export interface GlobalComponents {
+  export interface GlobalComponents extends A {
     EpButton: typeof EpButton;
     EpCard: typeof EpCard;
     EpLine: typeof EpLine;

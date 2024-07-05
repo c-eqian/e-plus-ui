@@ -11,6 +11,6 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "jsx": "preserve",
-    "types": ["e-plus-ui/types"]
+    "types": ["../e-plus-ui/types/*"]
   }
 }
