@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
+      "baseUrl": "./packages",
       "module": "esnext",
       "target": "es2015",
       "moduleResolution": "Node",
@@ -11,6 +11,6 @@
       "emitDeclarationOnly": true,
       "esModuleInterop": true
     },
-    "include": ["./**/*/type.ts"],
+    "include": ["packages/**/*/type.ts"],
     "exclude": ["node_modules", "**/__tests__/**", "**/types/**"]
 }

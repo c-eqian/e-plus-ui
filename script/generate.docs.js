@@ -6,7 +6,6 @@ const path = require('path');
 const tsconfigMarkdown = path.resolve(
   __dirname,
   '..',
-  'packages',
   'tsconfig.markdown.json'
 );
 const project = new Project({
