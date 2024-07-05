@@ -10,6 +10,8 @@
       "noImplicitAny": false,
       "emitDeclarationOnly": true,
       "esModuleInterop": true,
+      "declarationDir": "e-plus-ui/types",
+      "declaration": true,
       "jsx": "preserve",
       "jsxFactory": "h",
       "paths": {
@@ -24,7 +26,7 @@
     "lib": "@vue/runtime-core",
   },
   "include": ["packages/**/*.ts", "packages/**/*.js", "packages/**/*.d.ts",
-    "packages/**/*.tsx", "packages/**/*.vue", "play/**/*",
+    "packages/**/*.tsx", "packages/**/*.vue",
     "vite.config.mts",
     "./types/auto-imports.d.ts" // 和 AutoImport dts保持一致 引入即可
   ],

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "baseUrl": "./packages",
+      "baseUrl": ".",
       "module": "esnext",
       "target": "es2015",
       "moduleResolution": "Node",

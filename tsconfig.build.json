@@ -1,5 +1,9 @@
 {
-    "extends": "./tsconfig.dts.json",
+    "references": [
+      {
+        "path": "./tsconfig.dts.json"
+      }
+    ],
     "compilerOptions": {
       "skipLibCheck": true,
       "declaration": true,
