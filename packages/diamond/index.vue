@@ -29,10 +29,10 @@ const styles = computed(() => {
 </script>
 
 <template>
-  <div :style="styles" class="cz-spinner cz-relative spinner--rotate-diamond">
-    <div :style="diamondStyle" class="cz-diamond" />
-    <div :style="diamondStyle" class="cz-diamond" />
-    <div :style="diamondStyle" class="cz-diamond" />
+  <div :style="styles" class="cz-spinner-loading spinner--rotate-diamond">
+    <div :style="diamondStyle" class="cz-diamond-loading" />
+    <div :style="diamondStyle" class="cz-diamond-loading" />
+    <div :style="diamondStyle" class="cz-diamond-loading" />
   </div>
 </template>
 

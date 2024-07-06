@@ -53,8 +53,8 @@ export default defineComponent({
     };
     const getColSlots = () => {
       //   如果使用插槽
-      if (slotKey || slots[_props.prop!]) {
-        return slots[slotKey || _props.prop!]?.({
+      if (slotKey || slots[_props?.prop!]) {
+        return slots[slotKey || _props?.prop!]?.({
           item: computedItem,
           model: formModel,
         });

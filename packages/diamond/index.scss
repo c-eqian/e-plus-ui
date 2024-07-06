@@ -2,13 +2,14 @@ $accent: #41b883;
 $duration: 1500ms;
 $timing: linear;
 $count: 4;
-.cz-spinner {
+.cz-spinner-loading {
+  position: relative;
   * {
     line-height: 0;
     box-sizing: border-box;
   }
 
-  .cz-diamond {
+  .cz-diamond-loading {
     position: absolute;
     left: 0;
     top: 0;

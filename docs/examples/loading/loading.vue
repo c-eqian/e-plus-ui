@@ -8,13 +8,15 @@ const handleSwitch = ()=>{
 </script>
 
 <template>
-<div>
+<div class="cz-space-y-3">
   <ep-card title="loading">
     <ep-button @click="handleSwitch">切换</ep-button>
     <ep-loading :loading></ep-loading>
   </ep-card>
   <ep-card title="diamond-loading">
-    <ep-diamond-loading :size="40"></ep-diamond-loading>
+    <template #body>
+      <ep-diamond-loading :size="40"></ep-diamond-loading>
+    </template>
   </ep-card>
   <ep-card title="letter-loading">
     <ep-letter-loading></ep-letter-loading>
