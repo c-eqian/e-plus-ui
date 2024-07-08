@@ -124,7 +124,7 @@ function run(isReset = false) {
       const _header = [
         `# ${fileName.toLowerCase().replace(/\b[a-z]/g, function (match) {
           return match.toUpperCase();
-        })} 组件定义 \n\n ${createHeader()}`,
+        })} API \n\n ${createHeader()}`,
       ];
       if (!isReset) {
         if (!checkerIsHas(fileName)) {

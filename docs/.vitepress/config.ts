@@ -53,7 +53,7 @@ export default defineConfig({
                     items: generateSidebar('senior')
                 },
               {
-                text: 'Type 字段类型',
+                text: 'API',
                 link: '',
                 items: generateSidebar('type')
               }
