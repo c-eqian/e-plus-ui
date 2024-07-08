@@ -11,11 +11,7 @@ const tsconfigMarkdown = path.resolve(
 const project = new Project({
   tsConfigFilePath: tsconfigMarkdown,
 });
-const docsRoot = path.resolve(
-  __dirname,
-  '..',
-  'docs/components/type'
-);
+const docsRoot = path.resolve(__dirname, '..', 'docs/components/type');
 // 从文件系统加载tsconfig.json文件，并将其中的所有源文件添加到项目中
 // project.addSourceFilesAtPaths('example.ts');
 

@@ -15,8 +15,7 @@
       "jsx": "preserve",
       "jsxFactory": "h",
       "paths": {
-        "element-plus": ["node_modules/element-plus"],
-        "e-plus-ui": ["./packages"]
+        "element-plus": ["node_modules/element-plus"]
       },
       "types": ["vite/client", "element-plus/global"],
       "skipLibCheck": true,
@@ -30,5 +29,5 @@
     "vite.config.mts",
     "./types/auto-imports.d.ts" // 和 AutoImport dts保持一致 引入即可
   ],
-    "exclude": ["node_modules", "**/__tests__/**"]
+    "exclude": ["node_modules", "**/__tests__/**", "packages/vitest.config.ts"]
 }

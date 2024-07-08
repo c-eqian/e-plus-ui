@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Eqian",
   "license": "MIT",
-  "description": "a component library for Vue 3",
+  "description": "一个基于element-plus的封装组件库，高效、简单",
   "type": "module",
   "main": "es/index.js",
   "unpkg": "umd/index.js",
@@ -48,15 +48,11 @@
     "build:dts": "tsx --tsconfig ./tsconfig.build.json ./script/build.dts.ts",
     "test": "vitest run"
   },
-  "devDependencies": {
-    "@rollup/plugin-terser": "0.4.4"
+  "peerDependencies": {
+    "vue": "^3.3.0"
   },
   "dependencies": {
-    "@types/qrcode": "1.5.0",
-    "@vueuse/core": "8.7.3",
-    "cropperjs": "^1.5.12",
-    "jsbarcode": "3.11.5",
-    "qrcode": "1.5.0"
+    "co-utils-vue": "^2.5.0-rc.2"
   },
   "files": [
     "lib",
