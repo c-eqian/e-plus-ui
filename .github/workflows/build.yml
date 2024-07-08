@@ -35,7 +35,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: 构建文档
         #        run: yarn && yarn run docs:build
-        run: npm install && npm install -g pnpm && npm run build:docs
+        run: npm install && npm install -g pnpm && cd ./docs && npm install && cd .. && npm run build:docs
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
