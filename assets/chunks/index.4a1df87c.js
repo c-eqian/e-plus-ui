@@ -1,0 +1,1 @@
+import{_ as o,C as c,o as n,c as t,H as r}from"./framework.9743316f.js";const s={};function a(_,p){const e=c("ep-image-hover");return n(),t("div",null,[r(e,{url:"https://s3.bmp.ovh/imgs/2022/11/23/84077c18f8e3acfa.jpg"})])}const f=o(s,[["render",a]]);export{f as default};
