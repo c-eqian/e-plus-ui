@@ -33,6 +33,8 @@ jobs:
         with:
           # node版本
           node-version: ${{ matrix.node-version }}
+      - run: git config --global user.email "2429120006@qq.com"
+      - run:  git config --global user.name "eqian"
       - name: 构建文档
         #        run: yarn && yarn run docs:build
         run: npm install && npm install -g pnpm && cd ./docs && npm install && cd .. && npm run build:docs
