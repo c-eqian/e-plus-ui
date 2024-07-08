@@ -32,7 +32,7 @@ defineOptions({
 const props = withDefaults(defineProps<ButtonProps>(), {
   borderStyle: 'soild',
   radius: false,
-  loadingIcon: 'ep-icon-loading-one',
+  loadingIcon: 'cz-icon-loading-one',
   nativeType: 'button',
   fluid: false,
   loading: false,
@@ -57,34 +57,34 @@ const styles = computed(() => {
 const classes = computed(() => {
   return [
     {
-      'ep-btn-fluid': props.fluid,
-      'ep-btn-radius': props.radius,
-      'ep-btn-disabled': props.disabled,
+      'cz-btn-fluid': props.fluid,
+      'cz-btn-radius': props.radius,
+      'cz-btn-disabled': props.disabled,
     },
-    props.type ? `ep-btn-${props.type}` : '',
-    size.value ? `ep-btn-${size.value}` : '',
-    props.border ? `ep-border-${props.border}` : '',
+    props.type ? `cz-btn-${props.type}` : '',
+    size.value ? `cz-btn-${size.value}` : '',
+    props.border ? `cz-border-${props.border}` : '',
   ];
 });
 </script>
 
 <template>
   <button
-    class="ep-btn"
+    class="cz-btn"
     :class="classes"
     :style="styles"
     :type="nativeType"
     @click="onClick"
   >
-    <i v-if="prefixIcon" :class="`ep-icon ${prefixIcon}`"></i>
+    <i v-if="prefixIcon" :class="`cz-icon ${prefixIcon}`"></i>
     <i
       v-if="loading"
       :class="loadingIcon"
-      class="ep-icon ep-anim ep-anim-rotate ep-anim-loop"
+      class="cz-icon cz-anim cz-anim-rotate cz-anim-loop"
     ></i>
     <span>
       <slot></slot>
     </span>
-    <i v-if="suffixIcon" :class="`ep-icon ${suffixIcon}`"></i>
+    <i v-if="suffixIcon" :class="`cz-icon ${suffixIcon}`"></i>
   </button>
 </template>
