@@ -1,10 +1,17 @@
+# 版本
+![NPM dev or peer Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/peer/vue)
+![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/co-utils-vue)
+![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/element-plus)
+
 
 # 介绍
+![NPM Version](https://img.shields.io/npm/v/e-plus-ui)![NPM Downloads](https://img.shields.io/npm/dm/e-plus-ui)
+
+
 `EPlus-UI`，一个精心打造的基于`element-plus`的组件库，`EPlus-UI`旨在消除冗余代码，让开发过程变得更为高效、流畅，强调灵活性和可配置性。
 它允许开发者通过简单的配置操作，轻松调整组件的行为和交互逻辑。在开发过程中，EPlus-UI提供了丰富的文档和示例代码，帮助开发者快速上手并理解组件的使用方法和最佳实践
 
 # 安装使用
-
 本节将介绍如何在项目中使用 EPlus-UI
 
 ## 安装
