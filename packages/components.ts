@@ -15,6 +15,7 @@ import EpLoading from './loading/index';
 import EpCommentItem from './comment-item/index';
 import EpCommentLayout from './comment-layout';
 import EpComment from './comment';
+import EpEditor from './editor';
 declare module '@vue/runtime-core' {
   // GlobalComponents for Volar
   export interface GlobalComponents extends A {
@@ -34,6 +35,7 @@ declare module '@vue/runtime-core' {
     EpCommentItem: typeof EpCommentItem;
     EpCommentLayout: typeof EpCommentLayout;
     EpComment: typeof EpComment;
+    EpEditor: typeof EpEditor;
   }
 }
 

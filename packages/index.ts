@@ -20,7 +20,7 @@ import EpCard from './card/index';
 import EpCopyText from './copy-text/index';
 import EpLine from './line/index';
 import EpImage from './image/index';
-
+import EpEditor from './editor';
 import EpLetterLoading from './letter-cude/index';
 import EpDiamondLoading from './diamond/index';
 import EpLoading from './loading/index';
@@ -43,6 +43,7 @@ const components: Record<string, Plugin> = {
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,
+  EpEditor,
 
   EpVirtualList,
   EpTable,
@@ -69,6 +70,7 @@ export {
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,
+  EpEditor,
   EpTable,
   EpTableColumn,
   EpFormSchema,
