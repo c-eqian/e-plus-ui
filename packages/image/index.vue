@@ -8,6 +8,7 @@ defineOptions({
 const props = withDefaults(defineProps<IImage>(), {
   width: '100%',
   height: '100%',
+  url: '',
   borderRadius: 0,
 });
 const imageUrl = computed(() => props.url);

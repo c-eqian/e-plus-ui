@@ -30,7 +30,9 @@ import { EpTable, EpTableColumn } from './table';
 import EpForm from './form';
 import EpFormSchema from './form-schema';
 import EpVirtualList from './virtual-list/index';
-
+import EpCommentItem from './comment-item/index';
+import EpCommentLayout from './comment-layout';
+import EpComment from './comment';
 const components: Record<string, Plugin> = {
   EpButton,
   EpCard,
@@ -46,6 +48,9 @@ const components: Record<string, Plugin> = {
   EpTableColumn,
   EpFormSchema,
   EpForm,
+  EpCommentItem,
+  EpCommentLayout,
+  EpComment,
 };
 
 const install = (app: App, options?: any): void => {
@@ -68,6 +73,9 @@ export {
   EpFormSchema,
   EpForm,
   EpVirtualList,
+  EpCommentItem,
+  EpCommentLayout,
+  EpComment,
   install,
 };
 

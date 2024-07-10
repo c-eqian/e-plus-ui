@@ -1,19 +1,9 @@
-<script setup lang="ts">
-import Image from '../../image/index.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="cz-flex cz-h-full cz-w-full">
     <div v-if="$slots.avatar">
       <slot name="avatar"></slot>
-    </div>
-    <div v-else>
-      <Image
-        url="https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg"
-        width="36"
-        round
-        height="36"
-      />
     </div>
     <div class="cz-flex-1 cz-text-sm">
       <div class="cz-flex cz-text-[#945c5f] cz-text-sm">
@@ -28,8 +18,14 @@ import Image from '../../image/index.vue';
         <div class="cz-w-full" v-if="$slots.content">
           <slot name="content"></slot>
         </div>
-        <div class="cz-pt-2 cz-w-full" v-if="$slots.action">
-          <slot name="action"></slot>
+        <div class="cz-pt-2 cz-w-full">
+          <div v-if="$slots.action">
+            <slot name="action"></slot>
+          </div>
+
+          <div v-if="$slots.reply">
+            <slot name="reply" />
+          </div>
         </div>
       </div>
       <!--          二级评论-->
