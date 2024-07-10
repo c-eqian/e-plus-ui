@@ -1,5 +1,5 @@
 <template>
-  <div class="demo-mr cz-bg-sky-400">
+  <div class="demo-mr">
     <EpButton type="primary">哈哈哈</EpButton>
     <EpButton type="normal">normal</EpButton>
     <EpButton type="danger">danger</EpButton>

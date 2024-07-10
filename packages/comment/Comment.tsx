@@ -31,10 +31,10 @@ export default defineComponent({
           {
             data: item,
           },
-          {
-            'sub-comment': () =>
-              hasSub(item)
-                ? item.subComment?.list.map((sub) => {
+          hasSub(item)
+            ? {
+                'sub-comment': () =>
+                  item.subComment?.list.map((sub) => {
                     return (
                       <CommentItem
                         key={sub.commentId}
@@ -42,9 +42,9 @@ export default defineComponent({
                         isSubReply={true}
                       />
                     );
-                  })
-                : undefined,
-          }
+                  }),
+              }
+            : undefined
         );
       });
     };

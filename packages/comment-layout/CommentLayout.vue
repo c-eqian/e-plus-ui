@@ -5,7 +5,7 @@ defineOptions({
 </script>
 
 <template>
-  <div class="cz-flex cz-h-full cz-w-full">
+  <div class="cz-flex cz-h-full cz-w-full cz-comment-box">
     <div v-if="$slots.avatar">
       <slot name="avatar"></slot>
     </div>
@@ -18,7 +18,7 @@ defineOptions({
           <slot name="right"></slot>
         </div>
       </div>
-      <div class="cz-px-2 cz-py-4">
+      <div class="cz-px-2 cz-py-2">
         <div class="cz-w-full" v-if="$slots.content">
           <slot name="content"></slot>
         </div>
@@ -33,11 +33,18 @@ defineOptions({
         </div>
       </div>
       <!--          二级评论-->
-      <div v-if="$slots.sub" class="cz-bg-[#f8f9fa] cz-p-4 cz-rounded">
+      <div
+        v-if="$slots.sub"
+        class="cz-bg-[#f8f9fa] dark:cz-bg-[#181818] cz-mb-2 cz-p-2 cz-px-4 cz-rounded"
+      >
         <slot name="sub"></slot>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="less">
+.cz-comment-box:last-child {
+  margin-top: 12px;
+}
+</style>

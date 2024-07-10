@@ -14,19 +14,34 @@ const commentData: ICommentData = {
         list: [
           {
             userInfo: {
+              username: '张无忌',
+              avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+              userId: 63
+            },
+            replyId: 1,
+            // 如果 replyInfo为空，则是二级评论中回复的二级评论
+            replyInfo: {
+              userInfo: {
+                username: '小龙女',
+                avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                userId: 1
+              },
+              content: '如果 replyInfo为空，则是二级评论'
+            },
+            createDate: '2023-05-02',
+            content: '如果 replyInfo不为空，则是二级评论中回复的二级评论'
+          },
+          {
+            userInfo: {
               username: '小龙女',
               avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
               userId: 63
             },
             replyId: 1,
-            replyInfo: {
-              userInfo: {
-                username: '张无忌',
-                avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
-                userId: 1
-              }
-            },
-            content: '太帅啦啊啊啊啊啊'
+            // 如果 replyInfo为空，则是二级评论
+            replyInfo: {},
+            createDate: '2023-05-02',
+            content: '如果 replyInfo为空，则是二级评论'
           }
         ]
       },

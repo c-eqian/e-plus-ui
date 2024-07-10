@@ -1,4 +1,4 @@
-# 平平常
+# Comment 评论
 ## 基础用法
 :::demo
 comment/index

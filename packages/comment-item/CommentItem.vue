@@ -39,9 +39,9 @@ defineOptions({
         <span class="cz-pr-1">{{ data.userInfo.username }}</span>
       </div>
       <div v-else class="cz-flex">
-        <div class="cz-flex cz-space-x-5">
+        <div class="cz-flex">
           <div class="cz-relative cz-w-fit">
-            <span class="cz-pr-1">{{ data.userInfo?.username }}</span>
+            <span>{{ data.userInfo?.username }}</span>
           </div>
           <span v-if="data.replyId && !isEmpty(data.replyInfo)" class="cz-px-1">
             <strong>回复</strong>
@@ -54,7 +54,7 @@ defineOptions({
       <div v-text="data.content" />
       <div
         v-if="isSubReply && data.replyId && !isEmpty(data.replyInfo)"
-        class="cz-border-[1px] cz-text-sm cz-text-gray-600"
+        class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600"
       >
         <div class="cz-p-2">“{{ data.replyInfo?.content }}”</div>
       </div>
