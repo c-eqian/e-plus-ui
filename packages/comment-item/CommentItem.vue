@@ -20,7 +20,9 @@ const data = computed(() => props.data);
 const state = reactive({
   isReply: false,
 });
-console.log(props.isSubReply);
+const handleReply = () => {
+  state.isReply = !state.isReply;
+};
 defineOptions({
   name: 'EpCommentItem',
 });
@@ -67,14 +69,17 @@ defineOptions({
           <el-icon><Star /></el-icon>
           <span>点赞</span>
         </div>
-        <div class="cz-flex cz-cursor-pointer cz-items-center cz-space-x-1">
+        <div
+          class="cz-flex cz-cursor-pointer cz-items-center cz-space-x-1"
+          @click="handleReply"
+        >
           <el-icon><ChatDotSquare /></el-icon>
           <span>{{ state.isReply ? '取消回复' : '回复' }}</span>
         </div>
       </div>
     </template>
     <template v-if="state.isReply" #reply>
-      <input placeholder="暂时使用" />
+      <EpEditor></EpEditor>
     </template>
     <template v-if="$slots['sub-comment']" #sub>
       <slot name="sub-comment"></slot>
