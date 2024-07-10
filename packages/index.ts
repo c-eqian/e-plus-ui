@@ -18,7 +18,7 @@ import EpButton from './button/index';
 import EpCard from './card/index';
 import EpCopyText from './copy-text/index';
 import EpLine from './line/index';
-import EpImageHover from './image-hover/index';
+import EpImage from './image/index';
 
 import EpLetterLoading from './letter-cude/index';
 import EpDiamondLoading from './diamond/index';
@@ -36,7 +36,7 @@ const components: Record<string, Plugin> = {
   EpCard,
   EpLine,
   EpCopyText,
-  EpImageHover,
+  EpImage,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,
@@ -59,7 +59,7 @@ export {
   EpCard,
   EpCopyText,
   EpLine,
-  EpImageHover,
+  EpImage,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,

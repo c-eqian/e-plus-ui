@@ -7,7 +7,7 @@ import { EpTable, EpTableColumn } from './table';
 import EpVirtualList from './virtual-list/index';
 import EpCopyText from './copy-text/index';
 import EpForm from './form';
-import EpImageHover from './image-hover/index';
+import EpImage from './image/index';
 import EpFormSchema from './form-schema';
 import EpLetterLoading from './letter-cude/index';
 import EpDiamondLoading from './diamond/index';
@@ -23,7 +23,7 @@ declare module '@vue/runtime-core' {
     EpLoading: typeof EpLoading;
     EpCopyText: typeof EpCopyText;
     EpTable: typeof EpTable;
-    EpImageHover: typeof EpImageHover;
+    EpImage: typeof EpImage;
     EpTableColumn: typeof EpTableColumn;
     EpForm: typeof EpForm;
     EpFormSchema: typeof EpFormSchema;
