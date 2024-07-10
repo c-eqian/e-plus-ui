@@ -7,17 +7,20 @@ const valueComputed = defineModel('value', {
   type: String,
   default: '',
 });
-const placeholder = defineModel('placeholder', {
-  type: String,
-  default: '留下点什么吧...',
-});
-const isLogin = defineModel('isLogin', {
-  type: Boolean,
-  default: false,
+const props = defineProps({
+  placeholder: {
+    type: String,
+    default: '留下点什么吧...',
+  },
+  autoFocus: {
+    type: Boolean,
+    default: false,
+  },
 });
 const emojiRef = ref<HTMLDivElement | null>(null);
 const isShowEmojiSelect = ref(false);
 const isTextareaFocus = ref(false);
+const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const input = ref('');
 const isShowAction = ref(false);
 const handleFocus = () => {
@@ -34,11 +37,17 @@ onMounted(() => {
     isShowEmojiSelect.value = false;
   });
 });
+const focus = () => {
+  textareaRef.value?.focus();
+};
 onBeforeUnmount(() => {
   valueComputed.value = '';
 });
 defineOptions({
   name: 'EpEditor',
+});
+defineExpose({
+  focus,
 });
 </script>
 
@@ -64,7 +73,8 @@ defineOptions({
           <div class="comment-input">
             <textarea
               v-model.trim="input"
-              :placeholder="placeholder"
+              ref="textareaRef"
+              :placeholder="props.placeholder"
               class="comment-textarea"
               @blur="handleBlur"
               @focus="handleFocus"

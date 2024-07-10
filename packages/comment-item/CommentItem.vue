@@ -3,9 +3,10 @@ import CommentLayout from '../comment-layout/CommentLayout.vue';
 import { ElIcon } from 'element-plus';
 import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
-import { computed, PropType, reactive } from 'vue';
+import { computed, nextTick, type PropType, reactive, ref } from 'vue';
 import type { CommentDataRow } from '../comment';
 import { isEmpty, useBeforeDate } from 'co-utils-vue';
+import { onClickOutside } from '@vueuse/core';
 const props = defineProps({
   isSubReply: {
     type: Boolean,
@@ -17,11 +18,21 @@ const props = defineProps({
   },
 });
 const data = computed(() => props.data);
+const editorRef = ref();
+const commentRef = ref();
+onClickOutside(commentRef, () => {
+  state.isReply = false;
+});
 const state = reactive({
   isReply: false,
 });
 const handleReply = () => {
   state.isReply = !state.isReply;
+  if (state.isReply) {
+    nextTick(() => {
+      editorRef.value?.focus();
+    });
+  }
 };
 defineOptions({
   name: 'EpCommentItem',
@@ -29,7 +40,7 @@ defineOptions({
 </script>
 
 <template>
-  <comment-layout>
+  <comment-layout ref="commentRef">
     <template #avatar>
       <Image :url="data.userInfo.avatar" width="36" round height="36" />
     </template>
@@ -70,7 +81,7 @@ defineOptions({
           <span>点赞</span>
         </div>
         <div
-          class="cz-flex cz-cursor-pointer cz-items-center cz-space-x-1"
+          class="cz-flex cz-select-none cz-cursor-pointer cz-items-center cz-space-x-1"
           @click="handleReply"
         >
           <el-icon><ChatDotSquare /></el-icon>
@@ -79,7 +90,7 @@ defineOptions({
       </div>
     </template>
     <template v-if="state.isReply" #reply>
-      <EpEditor></EpEditor>
+      <EpEditor ref="editorRef"></EpEditor>
     </template>
     <template v-if="$slots['sub-comment']" #sub>
       <slot name="sub-comment"></slot>
