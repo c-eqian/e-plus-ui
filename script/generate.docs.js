@@ -124,7 +124,7 @@ function run(isReset = false) {
       const _header = [
         `# ${fileName.toLowerCase().replace(/\b[a-z]/g, function (match) {
           return match.toUpperCase();
-        })} API \n\n ${createHeader()}`,
+        })}  \n\n ${createHeader()}`,
       ];
       if (!isReset) {
         if (!checkerIsHas(fileName)) {
