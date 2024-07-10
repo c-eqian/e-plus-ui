@@ -10,6 +10,9 @@
     "strict": true,
     "noImplicitAny": false,
     "skipLibCheck": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "e-plus-ui*": ["../packages/*"]
+    }
   }
 }

@@ -4,7 +4,7 @@ import plugin from 'tailwindcss/plugin';
 export default {
   prefix: 'cz-',
   content: [
-    '../packages/component/src/**/*.{js,ts,jsx,tsx,vue}',
+    '../packages/**/*.{js,ts,jsx,tsx,vue}',
     './examples/**/*.{js,ts,jsx,tsx,vue}',
     './components/**/*.{js,ts,jsx,tsx,vue html}',
     './.vitepress/**/*.{js,ts,jsx,tsx,vue html}',

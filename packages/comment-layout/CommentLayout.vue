@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineOptions({
+  name: 'EpCommentLayout',
+});
+</script>
 
 <template>
   <div class="cz-flex cz-h-full cz-w-full">

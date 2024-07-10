@@ -8,6 +8,7 @@ export * from './table/type';
 export * from './form';
 export * from './virtual-list/type';
 export * from './form-schema';
+export * from './comment';
 /**
  * 导出工具函数
  */

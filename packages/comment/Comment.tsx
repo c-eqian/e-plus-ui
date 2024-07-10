@@ -17,26 +17,34 @@ export default defineComponent({
     };
   },
   render() {
-    const renderSubComment = (item: CommentDataRow) => {
-      return {
-        'sub-comment':
-          !isEmpty(item.subComment) && !isEmpty(item.subComment.list)
-            ? () =>
-                h(CommentItem, {
-                  data: item,
-                  isSubReply: true,
-                })
-            : null,
-      };
+    const hasSub = (item: CommentDataRow) => {
+      return (
+        item.subComment &&
+        !isEmpty(item.subComment) &&
+        !isEmpty(item.subComment.list)
+      );
     };
     const renderComment = () => {
-      this.computedData.list.map((item) => {
+      return this.computedData.list.map((item) => {
         return h(
           CommentItem,
           {
             data: item,
           },
-          renderSubComment(item)
+          {
+            'sub-comment': () =>
+              hasSub(item)
+                ? item.subComment?.list.map((sub) => {
+                    return (
+                      <CommentItem
+                        key={sub.commentId}
+                        data={sub}
+                        isSubReply={true}
+                      />
+                    );
+                  })
+                : undefined,
+          }
         );
       });
     };

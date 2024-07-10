@@ -20,6 +20,10 @@ const data = computed(() => props.data);
 const state = reactive({
   isReply: false,
 });
+console.log(props.isSubReply);
+defineOptions({
+  name: 'EpCommentItem',
+});
 </script>
 
 <template>
@@ -72,7 +76,7 @@ const state = reactive({
     <template v-if="state.isReply" #reply>
       <input placeholder="暂时使用" />
     </template>
-    <template #sub>
+    <template v-if="$slots['sub-comment']" #sub>
       <slot name="sub-comment"></slot>
     </template>
   </comment-layout>

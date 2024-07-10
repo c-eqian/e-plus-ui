@@ -16,7 +16,7 @@ const computedImageStyle = computed(() => {
   return {
     width: pixelUnits(props.width),
     height: pixelUnits(props.height),
-    borderRadius: pixelUnits(props.borderRadius),
+    borderRadius: !props.round ? pixelUnits(props.borderRadius) : false,
   };
 });
 const computedImageCls = computed(() => {
@@ -25,6 +25,7 @@ const computedImageCls = computed(() => {
     'cz-rounded-full': !props.scale && props.round,
   };
 });
+console.log(computedImageCls.value);
 </script>
 
 <template>
