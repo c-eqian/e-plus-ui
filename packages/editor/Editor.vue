@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { inject, onBeforeUnmount, onMounted, PropType, ref } from 'vue';
 import Image from '../image/index.vue';
+import type { EmojiData } from './type';
 const emits = defineEmits<{ (event: 'onSubMit', v: string): void }>();
 const valueComputed = defineModel('value', {
   type: String,
@@ -11,6 +12,14 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: '留下点什么吧...',
+  },
+  emoji: {
+    type: Boolean,
+    default: false,
+  },
+  emojiList: {
+    type: Array as PropType<EmojiData[]>,
+    default: () => [],
   },
   autoFocus: {
     type: Boolean,
@@ -23,6 +32,9 @@ const isTextareaFocus = ref(false);
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const input = ref('');
 const isShowAction = ref(false);
+const emojiList = props.emoji
+  ? props.emojiList
+  : inject<EmojiData[]>('EMOJI-LIST');
 const handleFocus = () => {
   isShowAction.value = true;
   isTextareaFocus.value = true;
@@ -39,6 +51,10 @@ onMounted(() => {
 });
 const focus = () => {
   textareaRef.value?.focus();
+};
+const handleClickEmoji = (item: EmojiData) => {
+  valueComputed.value += item.name;
+  input.value += item.name;
 };
 onBeforeUnmount(() => {
   valueComputed.value = '';
@@ -94,7 +110,21 @@ defineExpose({
             v-show="isShowEmojiSelect"
             ref="emojiRef"
             class="emoji-wrapper cz-max-h-40 cz-overflow-y-auto animate__fadeInDown"
-          ></div>
+          >
+            <span
+              v-for="item in emojiList"
+              :key="item.name"
+              class="emoji-item cz-p-[5px]"
+              @click="handleClickEmoji(item)"
+            >
+              <img
+                :src="item.url"
+                :title="item.name"
+                :alt="item.name"
+                class="cz-w-6 cz-h-6 emoji"
+              />
+            </span>
+          </div>
         </div>
       </div>
     </div>

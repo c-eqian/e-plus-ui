@@ -17,6 +17,17 @@
     width: 100%;
     border-radius: 4px;
   }
+  .emoji-item {
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+  }
+  .emoji {
+    user-select: none;
+    margin: 0.25rem;
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 .is-focus {
   transition: 0.5s all;
