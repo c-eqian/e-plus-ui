@@ -74,10 +74,10 @@ defineExpose({
       :class="[isTextareaFocus ? 'is-focus' : '']"
     >
       <div class="cz-flex">
-        <div class="avatar">
+        <div class="avatar cz-pt-1.5">
           <Image
-            width="36"
-            height="36"
+            width="24"
+            height="24"
             round
             url="https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg"
           />
@@ -97,7 +97,8 @@ defineExpose({
             class="emoji-container cz-my-1.5 cz-items-center cz-flex cz-justify-between"
           >
             <div
-              class="cursor-pointer"
+              class="cz-cursor-pointer"
+              title="表情包"
               @click="isShowEmojiSelect = !isShowEmojiSelect"
             >
               <img alt="" class="cz-w-6 cz-h-6" src="./emoji.svg" />

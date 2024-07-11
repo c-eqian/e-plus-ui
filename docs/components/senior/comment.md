@@ -7,3 +7,7 @@ comment/index
 :::demo
 comment/Reply
 :::
+## 集成表情包
+:::demo
+comment/emoji
+:::
