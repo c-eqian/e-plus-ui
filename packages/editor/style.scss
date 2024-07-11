@@ -1,0 +1,24 @@
+.cz-editor{
+  .editor-input-wrapper {
+    border: 1px solid rgba(144, 147, 153, 0.31);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0 0 10px;
+  }
+  .editor-textarea {
+    font-size: 0.875rem;
+    color: var(--cz-secondary-color, #4c4948);
+    outline: none;
+    padding: 10px 5px;
+    min-height: 80px;
+    max-height: 360px;
+    background:transparent;  //  背景透明
+    resize: none;
+    width: 100%;
+    border-radius: 4px;
+  }
+}
+.is-focus {
+  transition: 0.5s all;
+  box-shadow: 0 0 0 1px #409eff inset;
+}

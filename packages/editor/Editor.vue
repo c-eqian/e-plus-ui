@@ -52,12 +52,9 @@ defineExpose({
 </script>
 
 <template>
-  <div class="cz-w-full">
-    <div class="comment-title">
-      <slot />
-    </div>
+  <div class="cz-w-full cz-editor">
     <div
-      class="comment-input-wrapper"
+      class="editor-input-wrapper"
       :class="[isTextareaFocus ? 'is-focus' : '']"
     >
       <div class="cz-flex">
@@ -70,17 +67,19 @@ defineExpose({
           />
         </div>
         <div class="cz-ml-3 cz-w-full">
-          <div class="comment-input">
+          <div class="editor-input cz-relative">
             <textarea
               v-model.trim="input"
               ref="textareaRef"
               :placeholder="props.placeholder"
-              class="comment-textarea"
+              class="editor-textarea"
               @blur="handleBlur"
               @focus="handleFocus"
             />
           </div>
-          <div class="emoji-container cz-flex cz-justify-between">
+          <div
+            class="emoji-container cz-my-1.5 cz-items-center cz-flex cz-justify-between"
+          >
             <div
               class="cursor-pointer"
               @click="isShowEmojiSelect = !isShowEmojiSelect"
@@ -94,7 +93,7 @@ defineExpose({
           <div
             v-show="isShowEmojiSelect"
             ref="emojiRef"
-            class="emoji-wrapper animate__fadeInDown"
+            class="emoji-wrapper cz-max-h-40 cz-overflow-y-auto animate__fadeInDown"
           ></div>
         </div>
       </div>
@@ -103,75 +102,11 @@ defineExpose({
 </template>
 
 <style lang="scss" scoped>
-.comment-title {
-  display: flex;
-  align-items: center;
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 40px;
-  margin-bottom: 10px;
-}
+@import 'style.scss';
 
-.comment-input-wrapper {
-  border: 1px solid rgba(144, 147, 153, 0.31);
-  border-radius: 4px;
-  padding: 10px;
-  margin: 0 0 10px;
-}
-
-img {
-  border-style: none;
-}
-
-.comment-input {
-  position: relative;
-}
-.is-focus {
-  transition: 0.5s all;
-  box-shadow: 0 0 0 1px #409eff inset;
-}
-.comment-textarea {
-  font-size: 0.875rem;
-  color: var(--cz-secondary-color, #4c4948);
-  outline: none;
-  padding: 10px 5px;
-  min-height: 80px;
-  max-height: 360px;
-  resize: none;
-  width: 100%;
-  border-radius: 4px;
-}
 //@media (min-width: 960px) {
 //  .comment-textarea {
 //    background: url(@/assets/commentBack.webp) 100% 100% no-repeat;
 //  }
 //}
-
-.emoji-container,
-.send-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.emoji-container {
-  margin: 5px 0;
-}
-
-.emoji-item {
-  cursor: pointer;
-  display: block;
-  float: left;
-}
-
-.emoji-wrapper {
-  max-height: 150px;
-  overflow-y: auto;
-}
-
-.emoji {
-  user-select: none;
-  margin: 0.25rem;
-  display: inline-block;
-  vertical-align: middle;
-}
 </style>
