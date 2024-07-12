@@ -33,6 +33,7 @@ const commentData: ICommentData = {
                 // 回复ID就是二级评论的ID
                 replyId: '1-1',
                 content: '如果 replyInfo为空，则是二级评论',
+                commentId: 6,
                 createDate: '2024-05-02',
               }
             ],
@@ -40,10 +41,32 @@ const commentData: ICommentData = {
             content: '如果 replyInfo不为空，则是二级评论中回复的二级评论'
           },
           {
+            content: '如果 replyInfo为空，则是二级评论',
+            createDate: '2024-05-02',
             userInfo: {
               username: '小龙女',
               avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
-              userId: 63
+              userId: 1
+            },
+            children: [
+              {
+                userInfo: {
+                  username: '李慕婉',
+                  avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                  userId: 3
+                },
+                // 回复ID就是二级评论的ID
+                replyId: 6,
+                content: '是的哇',
+                createDate: '2024-07-02',
+              }
+            ]
+          },
+          {
+            userInfo: {
+              username: '李慕婉',
+              avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+              userId: 3
             },
             // 每个回复都有个公共的父级ID，就是一级评论的ID
             parentId: 1,
