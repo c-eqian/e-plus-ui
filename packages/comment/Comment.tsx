@@ -37,7 +37,7 @@ export default defineComponent({
             </span>
           </div>
         ),
-        'sub-content': () => (
+        'reply-content': () => (
           <div class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600">
             <div class="cz-p-2">“{item?.content}”</div>
           </div>

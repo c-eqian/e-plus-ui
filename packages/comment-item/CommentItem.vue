@@ -51,8 +51,7 @@ defineOptions({
       <div v-if="!$slots.reply" class="cz-relative cz-w-fit">
         <span class="cz-pr-1">{{ data.userInfo.username }}</span>
       </div>
-
-      <div v-else class="cz-flex">
+      <div class="cz-flex">
         <slot name="reply"></slot>
       </div>
     </template>
