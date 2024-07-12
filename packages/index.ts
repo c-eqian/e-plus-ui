@@ -9,6 +9,7 @@ export * from './form';
 export * from './virtual-list/type';
 export * from './form-schema';
 export * from './comment';
+export * from './pagination';
 /**
  * 导出工具函数
  */
@@ -24,6 +25,7 @@ import EpEditor from './editor';
 import EpLetterLoading from './letter-cude/index';
 import EpDiamondLoading from './diamond/index';
 import EpLoading from './loading/index';
+import EpPagination from './pagination';
 /**
  * 高级组件
  */
@@ -44,6 +46,7 @@ const components: Record<string, Plugin> = {
   EpDiamondLoading,
   EpLoading,
   EpEditor,
+  EpPagination,
 
   EpVirtualList,
   EpTable,
@@ -71,6 +74,7 @@ export {
   EpDiamondLoading,
   EpLoading,
   EpEditor,
+  EpPagination,
   EpTable,
   EpTableColumn,
   EpFormSchema,
