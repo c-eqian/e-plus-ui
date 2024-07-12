@@ -45,7 +45,8 @@ export interface CommentDataRow {
   /**
    * 二级评
    */
-  subComment: ICommentData;
+  children?: CommentDataRow[];
+  subComment?: ICommentData;
   /**
    * 二级评：父级ID 也就是第一级的评论ID
    */
@@ -54,14 +55,14 @@ export interface CommentDataRow {
    * 二级评：当前被回复的ID
    */
   replyId: number | null;
-  /**
-   * 二级评：二级评论下的评论信息
-   */
-  replyInfo: CommentDataRow;
-  /**
-   * 二级评：二级评论ID
-   */
-  subCommentId: number;
+  // /**
+  //  * 二级评：二级评论下的评论信息
+  //  */
+  // replyInfo: CommentDataRow;
+  // /**
+  //  * 二级评：二级评论ID
+  //  */
+  // ommentId: number;
 }
 
 /**

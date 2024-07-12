@@ -5,7 +5,7 @@ import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
 import { computed, nextTick, type PropType, reactive, ref } from 'vue';
 import type { CommentDataRow } from '../comment';
-import { isEmpty, useBeforeDate } from 'co-utils-vue';
+import { useBeforeDate } from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
 const props = defineProps({
   isSubReply: {
@@ -48,29 +48,17 @@ defineOptions({
       <time>{{ useBeforeDate(data.createDate) }}</time>
     </template>
     <template #left>
-      <div v-if="!props.isSubReply" class="cz-relative cz-w-fit">
+      <div v-if="!$slots.reply" class="cz-relative cz-w-fit">
         <span class="cz-pr-1">{{ data.userInfo.username }}</span>
       </div>
+
       <div v-else class="cz-flex">
-        <div class="cz-flex">
-          <div class="cz-relative cz-w-fit">
-            <span>{{ data.userInfo?.username }}</span>
-          </div>
-          <span v-if="data.replyId && !isEmpty(data.replyInfo)" class="cz-px-1">
-            <strong>回复</strong>
-            {{ data.replyInfo?.userInfo?.username }}
-          </span>
-        </div>
+        <slot name="reply"></slot>
       </div>
     </template>
     <template #content>
       <div v-text="data.content" />
-      <div
-        v-if="isSubReply && data.replyId && !isEmpty(data.replyInfo)"
-        class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600"
-      >
-        <div class="cz-p-2">“{{ data.replyInfo?.content }}”</div>
-      </div>
+      <slot name="reply-content"> </slot>
     </template>
     <template #action>
       <div
@@ -89,7 +77,7 @@ defineOptions({
         </div>
       </div>
     </template>
-    <template v-if="state.isReply" #reply>
+    <template v-if="state.isReply" #editor-reply>
       <EpEditor ref="editorRef"></EpEditor>
     </template>
     <template v-if="$slots['sub-comment']" #sub>

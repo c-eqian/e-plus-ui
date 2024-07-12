@@ -27,8 +27,8 @@ defineOptions({
             <slot name="action"></slot>
           </div>
 
-          <div v-if="$slots.reply">
-            <slot name="reply" />
+          <div v-if="$slots['editor-reply']">
+            <slot name="editor-reply" />
           </div>
         </div>
       </div>

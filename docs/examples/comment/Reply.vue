@@ -18,16 +18,24 @@ const commentData: ICommentData = {
               avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
               userId: 63
             },
-            replyId: 1,
-            // 如果 replyInfo为空，则是二级评论中回复的二级评论
-            replyInfo: {
-              userInfo: {
-                username: '小龙女',
-                avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
-                userId: 1
-              },
-              content: '如果 replyInfo为空，则是二级评论'
-            },
+            // 每个回复都有个公共的父级ID，就是一级评论的ID
+            parentId: 1,
+            // 二级评论的ID
+            commentId: '1-1',
+            // 如果 children 不为空，则是二级评论中回复的二级评论
+            children: [
+              {
+                userInfo: {
+                  username: '小龙女',
+                  avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                  userId: 1
+                },
+                // 回复ID就是二级评论的ID
+                replyId: '1-1',
+                content: '如果 replyInfo为空，则是二级评论',
+                createDate: '2024-05-02',
+              }
+            ],
             createDate: '2023-05-02',
             content: '如果 replyInfo不为空，则是二级评论中回复的二级评论'
           },
@@ -37,9 +45,10 @@ const commentData: ICommentData = {
               avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
               userId: 63
             },
-            replyId: 1,
+            // 每个回复都有个公共的父级ID，就是一级评论的ID
+            parentId: 1,
             // 如果 replyInfo为空，则是二级评论
-            replyInfo: {},
+            children: [],
             createDate: '2023-05-02',
             content: '如果 replyInfo为空，则是二级评论'
           }
