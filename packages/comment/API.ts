@@ -84,6 +84,10 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
    * 二级评：当前被回复的ID
    */
   replyId?: number | null;
+  /**
+   * 被回复的二级评论的数据结构
+   */
+  reply?: CommentDataRow<T>;
 };
 
 /**
@@ -164,6 +168,10 @@ export interface ICommentFields<T = any> {
    * @default replyId
    */
   replyId?: GetTypeFrom<T>;
+  /**
+   * 回复的二级评论，只有dataLevel=2时才会生效
+   */
+  reply?: GetTypeFrom<T>;
   [k: string]: any;
 }
 
@@ -176,6 +184,12 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    * @default false
    */
   showLevel?: boolean;
+  /**
+   * 数据的层级结构
+   * 如果是二级的数据结构，需包含reply字段，此字段也可以通过`ICommentFields`配置
+   * @default 2
+   */
+  dataLevel?: number;
   /**
    * 显示地址
    * @default false

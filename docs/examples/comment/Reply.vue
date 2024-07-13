@@ -1,47 +1,5 @@
 <script setup lang="ts">
 import { EpComment, ICommentConfig, ICommentData } from 'e-plus-ui';
-import { initEmoji } from '../../utils/emoji';
-type Item = {
-  commentName: string;
-  avatar: string;
-  userId: number;
-  commentId: number;
-  createDate: string;
-  text: string;
-  children: {
-    commentName: string;
-    avatar: string;
-    userId: number;
-    commentId: number;
-    createDate: string;
-    text: string;
-    parentId: number;
-    children: {
-      replyId: number;
-      commentName: string;
-      avatar: string;
-      userId: number;
-      parentId: number;
-      commentId: number;
-      createDate: string;
-      text: string;
-      children: {
-        replyId: number;
-        commentName: string;
-        avatar: string;
-        userId: number;
-        parentId: number;
-        commentId: number;
-        createDate: string;
-        text: string;
-      }[];
-    }[];
-  }[];
-};
-type DataType = {
-  total: number;
-  list: Item[];
-};
 const commentData: ICommentData = {
   total: '99',
   list: [
@@ -98,48 +56,78 @@ const commentData: ICommentData = {
             commentId: 667,
             createDate: '2024-07-06',
             text: '去哪？',
-            children: [
-              {
-                commentName: '王林',
-                avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
-                userId: 6,
-                parentId: 666,
-                commentId: 669,
-                createDate: '2024-07-07',
-                text: '我带你去SHA人。',
-              },
-              {
-                commentName: '许立国',
-                avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
-                userId: 8,
-                parentId: 666,
-                commentId: 670,
-                createDate: '2024-07-07',
-                children: [
-                  {
-                    commentName: '王林',
-                    avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
-                    userId: 6,
-                    parentId: 666,
-                    commentId: 671,
-                    createDate: '2024-07-07',
-                    text: '这杀千刀的许立国',
-                    children: [
-                      {
-                        commentName: '许立国',
-                        avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
-                        userId: 8,
-                        parentId: 666,
-                        commentId: 672,
-                        createDate: '2024-06-05',
-                        text: '主子，主子，我错了，真错了',
-                      },
-                    ]
-                  }
-                ],
-                text: '极品!极品啊!',
-              },
-            ]
+          },
+          {
+            commentName: '王林',
+            avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+            userId: 6,
+            parentId: 666,
+            commentId: 669,
+            createDate: '2024-07-07',
+            text: '我带你去SHA人。',
+            reply: {
+              commentName: '李慕婉',
+              avatarUrl: 'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
+              userId: 7,
+              parentId: 666,
+              commentId: 667,
+              createDate: '2024-07-06',
+              text: '去哪？',
+            }
+          },
+          {
+            commentName: '许立国',
+            avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
+            userId: 8,
+            parentId: 666,
+            commentId: 670,
+            createDate: '2024-07-07',
+            text: '极品!极品啊!',
+            reply: {
+              commentName: '李慕婉',
+              avatarUrl: 'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
+              userId: 7,
+              parentId: 666,
+              commentId: 667,
+              createDate: '2024-07-06',
+              text: '去哪？',
+            }
+          },
+          {
+            commentName: '王林',
+            avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+            userId: 6,
+            parentId: 666,
+            commentId: 671,
+            createDate: '2024-07-07',
+            text: '这杀千刀的许立国',
+            reply: {
+              commentName: '许立国',
+              avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
+              userId: 8,
+              parentId: 666,
+              commentId: 670,
+              createDate: '2024-07-07',
+              text: '极品!极品啊!',
+            },
+          },
+          {
+            commentName: '许立国',
+            avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
+            userId: 8,
+            parentId: 666,
+            commentId: 672,
+            createDate: '2024-06-05',
+            text: '主子，主子，我错了，真错了',
+            reply: {
+              commentName: '王林',
+              avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+              userId: 6,
+              parentId: 666,
+              commentId: 671,
+              createDate: '2024-07-07',
+              text: '这杀千刀的许立国',
+            }
           },
           {
             commentName: '许立国',
@@ -163,8 +151,7 @@ const fieldsConfig: ICommentConfig = {
   content: 'text',
   username: 'commentName',
   avatar: 'avatarUrl',
-  userId: 'userId',
-  emojis: initEmoji(),
+  userId: 'userId'
 };
 </script>
 

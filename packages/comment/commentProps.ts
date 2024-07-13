@@ -14,8 +14,10 @@ export const defaultFields: Record<keyof ICommentConfig, any> = {
   subComment: 'subComment',
   parentId: 'parentId',
   replyId: 'replyId',
+  reply: 'reply',
   formatTime: true,
   replyRender: true,
   likeRender: true,
+  dataLevel: 2,
   replyReference: true,
 };

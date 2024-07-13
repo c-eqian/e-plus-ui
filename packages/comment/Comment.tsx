@@ -33,8 +33,15 @@ export default defineComponent({
     };
   },
   render() {
-    const { subComment, commentId, username, content, children } =
-      this.computedConfig;
+    const {
+      subComment,
+      commentId,
+      dataLevel = 2,
+      username,
+      content,
+      children,
+      reply,
+    } = this.computedConfig;
     const hasSub = (item: CommentDataRow) => {
       const _subComment = deepObjectValue(item, subComment ?? '');
       return _subComment && !isEmpty(_subComment) && !isEmpty(_subComment.list);
@@ -129,12 +136,25 @@ export default defineComponent({
      * @param level1
      */
     const renderSubComment = (item: CommentDataRow, level1: CommentDataRow) => {
-      const _children = deepObjectValue(item, children ?? '');
-      if (!_children || isEmpty(_children)) {
-        return renderCommentItem(item, true, level1);
-      }
       const nodes: any[] = [];
-      deepMoreLevel2(item, _children, level1, nodes);
+      if (dataLevel === 2) {
+        const _reply = item[reply!] ?? {};
+        if (isEmpty(_reply)) {
+          nodes.push(renderCommentItem(item, true, level1));
+        } else {
+          nodes.push(
+            renderCommentItem(item, true, level1, () =>
+              renderReplySlot(_reply, item)
+            )
+          );
+        }
+      } else if (dataLevel > 2) {
+        const _children = deepObjectValue(item, children ?? '');
+        if (!_children || isEmpty(_children)) {
+          return renderCommentItem(item, true, level1);
+        }
+        deepMoreLevel2(item, _children, level1, nodes);
+      }
       return nodes;
     };
     /**

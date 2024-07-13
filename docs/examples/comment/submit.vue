@@ -187,6 +187,7 @@ const fieldsConfig: ICommentConfig = {
   username: 'commentName',
   avatar: 'avatarUrl',
   userId: 'userId',
+  dataLevel: 3,
   emojis: initEmoji(),
 };
 </script>
