@@ -1,8 +1,9 @@
-import { computed, defineComponent, h, type PropType } from 'vue';
+import { computed, defineComponent, h, type PropType, provide } from 'vue';
 import CommentItem from '../comment-item/CommentItem.vue';
-import type { CommentDataRow, ICommentData, ICommentFields } from './API';
+import type { CommentDataRow, ICommentData, ICommentConfig } from './API';
 import { isEmpty, deepObjectValue } from 'co-utils-vue';
 import { defaultFields } from './commentProps';
+import { COMMENT_FIELD_CONFIG } from './constants';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -11,19 +12,22 @@ export default defineComponent({
       default: () => ({} as ICommentData),
     },
     fields: {
-      type: Object as PropType<ICommentFields>,
-      default: () => defaultFields as ICommentFields,
+      type: Object as PropType<ICommentConfig>,
+      default: () => defaultFields as ICommentConfig,
     },
   },
   setup: (props) => {
     const computedData = computed(() => props.data);
+    const computedFields = computed(() => props.fields);
+    provide(COMMENT_FIELD_CONFIG, computedFields);
     return {
       computedData,
+      computedFields,
     };
   },
   render() {
     const { subComment, commentId, username, content, children } =
-      this.$props.fields;
+      this.computedFields;
     const hasSub = (item: CommentDataRow) => {
       return (
         item[subComment!] &&

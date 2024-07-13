@@ -3,11 +3,20 @@ import CommentLayout from '../comment-layout/CommentLayout.vue';
 import { ElIcon } from 'element-plus';
 import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
-import { computed, nextTick, type PropType, reactive, ref } from 'vue';
-import type { CommentDataRow, ICommentFields } from '../comment';
+import {
+  computed,
+  ComputedRef,
+  inject,
+  nextTick,
+  type PropType,
+  reactive,
+  ref,
+} from 'vue';
+import type { CommentDataRow, ICommentConfig } from '../comment';
 import { useBeforeDate, deepObjectValue } from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
 import { defaultFields } from '../comment/commentProps';
+import { COMMENT_FIELD_CONFIG } from '../comment/constants';
 const props = defineProps({
   isSubReply: {
     type: Boolean,
@@ -17,13 +26,12 @@ const props = defineProps({
     type: Object as PropType<CommentDataRow>,
     default: () => ({}),
   },
-  fields: {
-    type: Object as PropType<ICommentFields>,
-    default: () => defaultFields as ICommentFields,
-  },
 });
 const data = computed(() => props.data);
-const fields = computed(() => props.fields as ICommentFields);
+const fields = inject(
+  COMMENT_FIELD_CONFIG,
+  defaultFields
+) as ComputedRef<ICommentConfig>;
 const editorRef = ref();
 const commentRef = ref();
 const { username, content, avatar, createDate } = fields.value;

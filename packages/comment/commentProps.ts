@@ -1,6 +1,6 @@
-import type { ICommentFields } from './API';
+import type { ICommentConfig } from './API';
 
-export const defaultFields: Record<keyof ICommentFields, any> = {
+export const defaultFields: Record<keyof ICommentConfig, any> = {
   commentId: 'commentId',
   content: 'content',
   createDate: 'createDate',
@@ -14,4 +14,8 @@ export const defaultFields: Record<keyof ICommentFields, any> = {
   subComment: 'subComment',
   parentId: 'parentId',
   replyId: 'replyId',
+  formatTime: true,
+  replyRender: true,
+  likeRender: true,
+  replyReference: true,
 };

@@ -1,3 +1,25 @@
+import { VNode } from 'vue';
+
+/**
+ * 根据配置类型提取字段类型
+ */
+export type GetTypeFrom<T = any> = keyof T extends infer E
+  ? E extends string
+    ? E
+    : string
+  : string;
+/**
+ * 渲染器
+ */
+export type CommentItemRender<T = any> = (scoped: {
+  item: T;
+}) =>
+  | VNode<any, any, any>
+  | VNode<any, any, any>[]
+  | null
+  | string
+  | number
+  | undefined;
 /**
  * 评论人信息
  */
@@ -55,14 +77,6 @@ export interface CommentDataRow {
    * 二级评：当前被回复的ID
    */
   replyId?: number | null;
-  // /**
-  //  * 二级评：二级评论下的评论信息
-  //  */
-  // replyInfo: CommentDataRow;
-  // /**
-  //  * 二级评：二级评论ID
-  //  */
-  // ommentId: number;
 }
 
 /**
@@ -76,72 +90,117 @@ export interface ICommentData {
 /**
  * 字段配置
  */
-export interface ICommentFields {
+export interface ICommentFields<T = any> {
   /**
    * 评论内容
    * @default content
    */
-  content?: string;
+  content?: GetTypeFrom<T>;
   /**
    * 创建时间
    * @default createDate
    */
-  createDate?: string;
+  createDate?: GetTypeFrom<T>;
   /**
    * 评论ID
    * @default commentId
    */
-  commentId?: string;
+  commentId?: GetTypeFrom<T>;
   /**
    * 是否为当前账号的评论
    * @default publisher
    */
-  publisher?: string;
+  publisher?: GetTypeFrom<T>;
   /**
    * 当前评论点赞数
    * @default likeCount
    */
-  likeCount?: string;
+  likeCount?: GetTypeFrom<T>;
   /**
    * 更新时间
    * @default updateDate
    */
-  updateDate?: string;
+  updateDate?: GetTypeFrom<T>;
   /**
    * 当前评论的用户名，支持链式，如{a:{b:1}} a.b => 1
    * @default userInfo.username
    */
-  username: string;
+  username: GetTypeFrom<T>;
   /**
    * 用户头像地址
    * @default userInfo.avatar
    */
-  avatar?: string;
+  avatar?: GetTypeFrom<T>;
   /** 用户id
    * @default userInfo.userId
    */
-  userId?: string;
+  userId?: GetTypeFrom<T>;
   /**
    * 二级评字段
    * 与 subComment的区别是，subComment的数据结构中的二级评论会有children
    * @default children
    */
-  children?: string;
+  children?: GetTypeFrom<T>;
   /**
    * 二级评论数据字段
    * 与一级的一致
    * @default subComment
    */
-  subComment?: string;
+  subComment?: GetTypeFrom<T>;
   /**
    * 二级评：父级ID 也就是第一级的评论ID
    * @default parentId
    */
-  parentId?: string;
+  parentId?: GetTypeFrom<T>;
   /**
    * 二级评：当前被回复的评论ID
    * @default replyId
    */
-  replyId?: string;
+  replyId?: GetTypeFrom<T>;
   [k: string]: any;
+}
+
+/**
+ * 评论配置
+ */
+export interface ICommentConfig<T = any> extends ICommentFields<T> {
+  /**
+   * 是否显示等级
+   * @default false
+   */
+  showLevel?: boolean;
+  /**
+   * 显示地址
+   * @default false
+   */
+  showIpAddress?: boolean;
+  /**
+   * 格式化时间
+   * 默认：xxx 前
+   * @default true
+   */
+  formatTime?: boolean | CommentItemRender<T>;
+  /**
+   * 更多操作
+   * @default false
+   */
+  moreOperations?: boolean | CommentItemRender<T>;
+  /**
+   * 渲染点赞
+   * 支持自定义渲染
+   * @default true
+   */
+  likeRender?: boolean | CommentItemRender<T>;
+  /**
+   * 渲染回复
+   * 支持自定义渲染
+   * @default true
+   */
+  replyRender?: boolean | CommentItemRender<T>;
+  /**
+   * 引用被回复的评论内容
+   * 支持自定义渲染
+   * @default true
+   */
+  replyReference?: boolean | CommentItemRender<T>;
 }
