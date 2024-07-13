@@ -1,4 +1,5 @@
 import { VNode } from 'vue';
+import { EmojiData } from '../editor/type';
 
 /**
  * 根据配置类型提取字段类型
@@ -203,4 +204,9 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    * @default true
    */
   replyReference?: boolean | CommentItemRender<T>;
+  /**
+   * 表情包
+   * @default false
+   */
+  emojis: boolean | EmojiData[] | (() => EmojiData[]);
 }

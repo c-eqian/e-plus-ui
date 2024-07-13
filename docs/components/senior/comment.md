@@ -9,5 +9,10 @@ comment/Reply
 :::
 ## 集成表情包
 :::demo
-comment/emoji
+comment/customEmoji
+:::
+## 自定义字段
+如果返回的格式字段非上面那样，那么可以通过配置`fields`
+:::demo
+comment/field
 :::

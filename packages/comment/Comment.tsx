@@ -1,9 +1,8 @@
-import { computed, defineComponent, h, type PropType, provide } from 'vue';
+import { computed, defineComponent, h, type PropType } from 'vue';
 import CommentItem from '../comment-item/CommentItem.vue';
 import type { CommentDataRow, ICommentData, ICommentConfig } from './API';
-import { isEmpty, deepObjectValue } from 'co-utils-vue';
+import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from './commentProps';
-import { __COMMENT_FIELD_CONFIG_KEY__ } from './constants';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -11,23 +10,24 @@ export default defineComponent({
       type: Object as PropType<ICommentData>,
       default: () => ({} as ICommentData),
     },
-    fields: {
+    config: {
       type: Object as PropType<ICommentConfig>,
-      default: () => defaultFields as ICommentConfig,
+      default: () => ({}),
     },
   },
   setup: (props) => {
     const computedData = computed(() => props.data);
-    const computedFields = computed(() => props.fields);
-    provide(__COMMENT_FIELD_CONFIG_KEY__, computedFields);
+    const computedConfig = computed(() => {
+      return useMerge({}, defaultFields, props.config) as ICommentConfig;
+    });
     return {
       computedData,
-      computedFields,
+      computedConfig,
     };
   },
   render() {
     const { subComment, commentId, username, content, children } =
-      this.computedFields;
+      this.computedConfig;
     const hasSub = (item: CommentDataRow) => {
       return (
         item[subComment!] &&
@@ -35,6 +35,33 @@ export default defineComponent({
         !isEmpty(item[subComment!].list)
       );
     };
+    /**
+     * 评论组件渲染
+     * @param item
+     * @param isSubReply
+     * @param slot
+     */
+    const renderCommentItem = (
+      item: CommentDataRow,
+      isSubReply = false,
+      slot?: () => any
+    ) => {
+      return (
+        <CommentItem
+          data={item}
+          config={this.computedConfig}
+          isSubReply={isSubReply}
+          key={item[commentId!]}
+          name={this.name}
+          v-slots={isFunction(slot) ? slot() : null}
+        ></CommentItem>
+      );
+    };
+    /**
+     * 回复渲染
+     * @param item
+     * @param sub
+     */
     const renderReplySlot = (item: CommentDataRow, sub: CommentDataRow) => {
       return {
         reply: () => (
@@ -55,38 +82,36 @@ export default defineComponent({
         ),
       };
     };
+    /**
+     * 二级回复评论渲染
+     * @param item
+     */
     const renderSubComment = (item: CommentDataRow) => {
       if (!item[children!] || isEmpty(item[children!])) {
-        return <CommentItem data={item} isSubReply={true}></CommentItem>;
+        return renderCommentItem(item, true);
       }
       return item?.[children!]?.map((sub: CommentDataRow) => {
-        return (
-          <CommentItem
-            data={sub}
-            isSubReply={true}
-            key={sub[commentId!]}
-            v-slots={renderReplySlot(item, sub)}
-          ></CommentItem>
-        );
+        return renderCommentItem(sub, true, () => renderReplySlot(item, sub));
       });
     };
+    /**
+     * 二级评论渲染
+     * @param item
+     */
+    const renderSlot = (item: CommentDataRow) => {
+      return hasSub(item)
+        ? {
+            'sub-comment': () =>
+              item?.[subComment!]?.list.map((sub: CommentDataRow) => {
+                return renderSubComment(sub);
+              }),
+          }
+        : undefined;
+    };
+    // 评论渲染
     const renderComment = () => {
       return this.computedData.list.map((item) => {
-        return h(
-          CommentItem,
-          {
-            data: item,
-            key: item[commentId!],
-          },
-          hasSub(item)
-            ? {
-                'sub-comment': () =>
-                  item?.[subComment!]?.list.map((sub: CommentDataRow) => {
-                    return renderSubComment(sub);
-                  }),
-              }
-            : undefined
-        );
+        return renderCommentItem(item, true, () => renderSlot(item));
       });
     };
     return renderComment();

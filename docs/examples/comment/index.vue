@@ -9,7 +9,7 @@ const commentData: ICommentData = {
         avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
         userId: 1
       },
-      commentId: 1,
+      commentId: 36,
       createDate: '2016-05-02',
       content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。'
     },
@@ -20,7 +20,7 @@ const commentData: ICommentData = {
         userId: 2
       },
       content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
-      commentId: 2,
+      commentId: 66,
       createDate: '2018-05-02',
     }
   ]

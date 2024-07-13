@@ -60,6 +60,7 @@ const components: Record<string, Plugin> = {
 
 const install = (app: App, options?: any): void => {
   for (const key of Object.keys(components)) {
+    if (!key) continue;
     app.use(components[key], options);
   }
 };

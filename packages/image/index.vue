@@ -25,7 +25,6 @@ const computedImageCls = computed(() => {
     'cz-rounded-full': !props.scale && props.round,
   };
 });
-console.log(computedImageCls.value);
 </script>
 
 <template>

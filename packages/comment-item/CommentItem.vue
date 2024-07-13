@@ -3,20 +3,15 @@ import CommentLayout from '../comment-layout/CommentLayout.vue';
 import { ElIcon } from 'element-plus';
 import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
-import {
-  computed,
-  ComputedRef,
-  inject,
-  nextTick,
-  type PropType,
-  reactive,
-  ref,
-} from 'vue';
+import { computed, nextTick, type PropType, reactive, ref } from 'vue';
 import type { CommentDataRow, ICommentConfig } from '../comment';
-import { useBeforeDate, deepObjectValue } from 'co-utils-vue';
+import {
+  useBeforeDate,
+  deepObjectValue,
+  isArray,
+  isFunction,
+} from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
-import { defaultFields } from '../comment/commentProps';
-import { __COMMENT_FIELD_CONFIG_KEY__ } from '../comment/constants';
 const props = defineProps({
   isSubReply: {
     type: Boolean,
@@ -26,15 +21,16 @@ const props = defineProps({
     type: Object as PropType<CommentDataRow>,
     default: () => ({}),
   },
+  config: {
+    type: Object as PropType<ICommentConfig>,
+    default: () => ({}),
+  },
 });
 const data = computed(() => props.data);
-const fields = inject(
-  __COMMENT_FIELD_CONFIG_KEY__,
-  defaultFields
-) as ComputedRef<ICommentConfig>;
+const config = computed(() => props.config);
 const editorRef = ref();
 const commentRef = ref();
-const { username, content, avatar, createDate } = fields.value;
+const { username, content, avatar, createDate, emojis } = config.value;
 onClickOutside(commentRef, () => {
   state.isReply = false;
 });
@@ -48,6 +44,11 @@ const handleReply = () => {
       editorRef.value?.focus();
     });
   }
+};
+const handleEmoji = () => {
+  if (isArray(emojis)) return emojis;
+  if (isFunction(emojis)) return emojis();
+  return [];
 };
 defineOptions({
   name: 'EpCommentItem',
@@ -97,7 +98,7 @@ defineOptions({
       </div>
     </template>
     <template v-if="state.isReply" #editor-reply>
-      <EpEditor ref="editorRef"></EpEditor>
+      <EpEditor :emojis="handleEmoji()" ref="editorRef"></EpEditor>
     </template>
     <template v-if="$slots['sub-comment']" #sub>
       <slot name="sub-comment"></slot>

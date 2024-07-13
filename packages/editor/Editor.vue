@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core';
-import { inject, onBeforeUnmount, onMounted, PropType, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, type PropType, ref } from 'vue';
 import Image from '../image/index.vue';
 import type { EmojiData } from './type';
 const emits = defineEmits<{ (event: 'onSubMit', v: string): void }>();
@@ -13,11 +13,7 @@ const props = defineProps({
     type: String,
     default: '留下点什么吧...',
   },
-  emoji: {
-    type: Boolean,
-    default: false,
-  },
-  emojiList: {
+  emojis: {
     type: Array as PropType<EmojiData[]>,
     default: () => [],
   },
@@ -32,9 +28,8 @@ const isTextareaFocus = ref(false);
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const input = ref('');
 const isShowAction = ref(false);
-const emojiList = props.emoji
-  ? props.emojiList
-  : inject<EmojiData[]>('EMOJI-LIST');
+const emojiList = computed(() => props.emojis);
+console.log(666, emojiList.value)
 const handleFocus = () => {
   isShowAction.value = true;
   isTextareaFocus.value = true;
@@ -108,7 +103,7 @@ defineExpose({
             </div>
           </div>
           <div
-            v-show="isShowEmojiSelect"
+            v-show="isShowEmojiSelect && emojiList.length > 0"
             ref="emojiRef"
             class="emoji-wrapper cz-max-h-40 cz-overflow-y-auto animate__fadeInDown"
           >
