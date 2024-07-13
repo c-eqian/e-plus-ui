@@ -10,6 +10,7 @@ import {
   deepObjectValue,
   isArray,
   isFunction,
+  isBoolean,
 } from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
 import { __COMMENT_CLICK_KEY__ } from '../comment/constants';
@@ -39,7 +40,15 @@ const editorRef = ref();
 const commentRef = ref();
 const inputValue = ref('');
 const clickReplyMapFn = inject(__COMMENT_CLICK_KEY__, {});
-const { username, content, avatar, createDate, emojis } = config.value;
+const {
+  username,
+  content,
+  avatar,
+  createDate,
+  emojis,
+  showIpAddress,
+  ipAddress,
+} = config.value;
 onClickOutside(commentRef, () => {
   state.isReply = false;
 });
@@ -65,6 +74,15 @@ const handleClearValue = (close = false) => {
   if (close) {
     state.isReply = false;
   }
+};
+const isShowIpAddress = () => {
+  if (isBoolean(showIpAddress)) {
+    const address = deepObjectValue(data, ipAddress ?? '');
+    return address ? `来自 · ${address}` : false;
+  } else if (isFunction(showIpAddress)) {
+    return showIpAddress({ item: data.value });
+  }
+  return false;
 };
 const handleClickSubmit = (value: string) => {
   if (isFunction(clickReplyMapFn['reply'])) {
@@ -96,11 +114,16 @@ defineOptions({
       <time>{{ useBeforeDate(deepObjectValue(data, createDate ?? '')) }}</time>
     </template>
     <template #left>
-      <div v-if="!$slots.reply" class="cz-relative cz-w-fit">
-        <span class="cz-pr-1">{{ deepObjectValue(data, username) }}</span>
-      </div>
-      <div class="cz-flex">
+      <div class="cz-flex cz-items-center">
+        <div v-if="!$slots.reply" class="cz-relative cz-w-fit">
+          <span class="cz-pr-1">{{ deepObjectValue(data, username) }}</span>
+        </div>
         <slot name="reply"></slot>
+        <span
+          v-if="isShowIpAddress()"
+          v-html="isShowIpAddress()"
+          class="cz-inline-block cz-px-2 cz-text-xs"
+        ></span>
       </div>
     </template>
     <template #content>

@@ -164,12 +164,17 @@ export interface ICommentFields<T = any> {
    */
   parentId?: GetTypeFrom<T>;
   /**
+   * ip地址
+   */
+  ipAddress?: GetTypeFrom<T>;
+  /**
    * 二级评：当前被回复的评论ID
    * @default replyId
    */
   replyId?: GetTypeFrom<T>;
   /**
    * 回复的二级评论，只有dataLevel=2时才会生效
+   * @default reply
    */
   reply?: GetTypeFrom<T>;
   [k: string]: any;
@@ -192,9 +197,10 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
   dataLevel?: number;
   /**
    * 显示地址
+   * 支持自定义返回
    * @default false
    */
-  showIpAddress?: boolean;
+  showIpAddress?: boolean | CommentItemRender<T>;
   /**
    * 格式化时间
    * 默认：xxx 前
