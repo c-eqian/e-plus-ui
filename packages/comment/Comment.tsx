@@ -1,8 +1,9 @@
-import { computed, defineComponent, h, type PropType } from 'vue';
+import { computed, defineComponent, h, type PropType, provide } from 'vue';
 import CommentItem from '../comment-item/CommentItem.vue';
 import type { CommentDataRow, ICommentData, ICommentConfig } from './API';
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from './commentProps';
+import { __COMMENT_CLICK_KEY__ } from './constants';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -15,10 +16,16 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  setup: (props) => {
+  emits: ['reply'],
+  setup: (props, { emit }) => {
     const computedData = computed(() => props.data);
     const computedConfig = computed(() => {
       return useMerge({}, defaultFields, props.config) as ICommentConfig;
+    });
+    provide(__COMMENT_CLICK_KEY__, {
+      reply: (...args: any[]) => {
+        emit('reply', ...args);
+      },
     });
     return {
       computedData,
@@ -36,16 +43,19 @@ export default defineComponent({
      * 评论组件渲染
      * @param item
      * @param isSubReply
+     * @param level1 // 一级评论的数据，如果item已经是一级，则为{}
      * @param slot
      */
     const renderCommentItem = (
       item: CommentDataRow,
       isSubReply = false,
+      level1 = {},
       slot?: () => any
     ) => {
       return (
         <CommentItem
           data={item}
+          level1={level1}
           config={this.computedConfig}
           isSubReply={isSubReply}
           key={deepObjectValue(item, commentId ?? '')}
@@ -65,10 +75,8 @@ export default defineComponent({
             <div class="cz-relative cz-w-fit">
               <span>{deepObjectValue(sub, username)}</span>
             </div>
-            <span class="cz-px-1">
-              <strong>回复</strong>
-              {deepObjectValue(item, username)}
-            </span>
+            <strong class="cz-px-1">回复</strong>
+            {deepObjectValue(item, username)}
           </div>
         ),
         'reply-content': () => (
@@ -81,15 +89,21 @@ export default defineComponent({
     /**
      * 二级回复评论渲染
      * @param item
+     * @param level1
      */
-    const renderSubComment = (item: CommentDataRow) => {
+    const renderSubComment = (item: CommentDataRow, level1: CommentDataRow) => {
       const _children = deepObjectValue(item, children ?? '');
       if (!_children || isEmpty(_children)) {
-        return renderCommentItem(item, true);
+        return renderCommentItem(item, false, level1);
       }
-      return _children?.map((sub: CommentDataRow) => {
-        return renderCommentItem(sub, true, () => renderReplySlot(item, sub));
-      });
+      return [
+        renderCommentItem(item, true, level1),
+        ..._children?.map((sub: CommentDataRow) => {
+          return renderCommentItem(sub, true, level1, () =>
+            renderReplySlot(item, sub)
+          );
+        }),
+      ];
     };
     /**
      * 二级评论渲染
@@ -101,7 +115,7 @@ export default defineComponent({
         ? {
             'sub-comment': () =>
               _subComment?.list.map((sub: CommentDataRow) => {
-                return renderSubComment(sub);
+                return renderSubComment(sub, item);
               }),
           }
         : undefined;
@@ -109,7 +123,7 @@ export default defineComponent({
     // 评论渲染
     const renderComment = () => {
       return this.computedData.list.map((item) => {
-        return renderCommentItem(item, true, () => renderSlot(item));
+        return renderCommentItem(item, true, {}, () => renderSlot(item));
       });
     };
     return renderComment();

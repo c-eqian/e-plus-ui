@@ -2,9 +2,11 @@
 import { onClickOutside } from '@vueuse/core';
 import { computed, onBeforeUnmount, onMounted, type PropType, ref } from 'vue';
 import Image from '../image/index.vue';
+import { ElButton } from 'element-plus';
 import type { EmojiData } from './type';
-const emits = defineEmits<{ (event: 'onSubMit', v: string): void }>();
-const valueComputed = defineModel('value', {
+import { Position } from '@element-plus/icons-vue';
+const emits = defineEmits<{ (event: 'click-submit', v: string): void }>();
+const valueComputed = defineModel({
   type: String,
   default: '',
 });
@@ -26,16 +28,14 @@ const emojiRef = ref<HTMLDivElement | null>(null);
 const isShowEmojiSelect = ref(false);
 const isTextareaFocus = ref(false);
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
-const input = ref('');
 const isShowAction = ref(false);
 const emojiList = computed(() => props.emojis);
-console.log(666, emojiList.value);
 const handleFocus = () => {
   isShowAction.value = true;
   isTextareaFocus.value = true;
 };
 const handleBlur = () => {
-  isShowAction.value = !!input.value.trim();
+  isShowAction.value = !!valueComputed.value.trim();
   isTextareaFocus.value = false;
 };
 onMounted(() => {
@@ -49,7 +49,9 @@ const focus = () => {
 };
 const handleClickEmoji = (item: EmojiData) => {
   valueComputed.value += item.name;
-  input.value += item.name;
+};
+const handleSubmit = () => {
+  emits('click-submit', valueComputed.value);
 };
 onBeforeUnmount(() => {
   valueComputed.value = '';
@@ -80,7 +82,7 @@ defineExpose({
         <div class="cz-ml-3 cz-w-full">
           <div class="editor-input cz-relative">
             <textarea
-              v-model.trim="input"
+              v-model.trim="valueComputed"
               ref="textareaRef"
               :placeholder="props.placeholder"
               class="editor-textarea"
@@ -99,7 +101,14 @@ defineExpose({
               <img alt="" class="cz-w-6 cz-h-6" src="./emoji.svg" />
             </div>
             <div v-show="isShowAction">
-              <el-button>提交</el-button>
+              <ElButton
+                :disabled="valueComputed.length === 0"
+                size="small"
+                :icon="Position"
+                type="primary"
+                @click="handleSubmit"
+                >提交</ElButton
+              >
             </div>
           </div>
           <div

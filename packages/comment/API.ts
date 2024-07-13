@@ -29,10 +29,13 @@ export interface ICommentUserInfo {
   userId?: number;
   username?: string;
 }
+export type CommentDataRowExTra<T = any> = {
+  [P in keyof T]: T[P] extends infer T ? T : any;
+};
 /**
  * 一级评论明细
  */
-export interface CommentDataRow {
+export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
   /**
    * 评论内容
    */
@@ -66,9 +69,12 @@ export interface CommentDataRow {
    */
   userInfo?: ICommentUserInfo;
   /**
-   * 二级评
+   * 二级评下的评论
    */
-  children?: CommentDataRow[];
+  children?: CommentDataRow<T>[];
+  /**
+   * 二级评论
+   */
   subComment?: ICommentData;
   /**
    * 二级评：父级ID 也就是第一级的评论ID
@@ -78,14 +84,14 @@ export interface CommentDataRow {
    * 二级评：当前被回复的ID
    */
   replyId?: number | null;
-}
+};
 
 /**
  * 评论基础
  */
-export interface ICommentData {
+export interface ICommentData<T = any> {
   total: number;
-  list: CommentDataRow[];
+  list: CommentDataRow<T>[];
 }
 
 /**

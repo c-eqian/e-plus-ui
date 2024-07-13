@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig} from 'e-plus-ui'
+import { EpComment, ICommentConfig, ICommentData } from 'e-plus-ui';
+
 const commentData = {
-  title: '99',
+  total: '99',
   list: [
     {
       // 非username字段
@@ -10,21 +11,21 @@ const commentData = {
       avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
       userId: 1,
       commentId: 99,
-      createDate: '2016-05-02',
+      createDate: '2023-10-02',
       // 非content字段
-      text: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。'
+      text: '你周末一般都喜欢干什么呀？',
     },
     {
       commentName: '王林',
       avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
       userId: 2,
       // 非content字段
-      text: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
+      text: '如果有一天自己变成了超人你最想干什么呢？',
       commentId: 666,
       createDate: '2018-05-02',
-    }
-  ]
-}
+    },
+  ],
+};
 
 /**
  * 通过配置修改字段值
@@ -33,8 +34,8 @@ const fieldsConfig: ICommentConfig = {
   content: 'text',
   username: 'commentName',
   avatar: 'avatar',
-  userId: 'userId'
-}
+  userId: 'userId',
+};
 </script>
 
 <template>
@@ -43,6 +44,4 @@ const fieldsConfig: ICommentConfig = {
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

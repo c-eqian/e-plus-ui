@@ -3,7 +3,7 @@ import CommentLayout from '../comment-layout/CommentLayout.vue';
 import { ElIcon } from 'element-plus';
 import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
-import { computed, nextTick, type PropType, reactive, ref } from 'vue';
+import { computed, inject, nextTick, type PropType, reactive, ref } from 'vue';
 import type { CommentDataRow, ICommentConfig } from '../comment';
 import {
   useBeforeDate,
@@ -12,6 +12,7 @@ import {
   isFunction,
 } from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
+import { __COMMENT_CLICK_KEY__ } from '../comment/constants';
 const props = defineProps({
   isSubReply: {
     type: Boolean,
@@ -21,16 +22,23 @@ const props = defineProps({
     type: Object as PropType<CommentDataRow>,
     default: () => ({}),
   },
+  level1: {
+    type: Object as PropType<CommentDataRow>,
+    default: () => ({}),
+  },
   config: {
     type: Object as PropType<ICommentConfig>,
     default: () => ({}),
   },
 });
 const data = computed(() => props.data);
+const level1 = computed(() => props.level1);
 const config = computed(() => props.config);
 const placeholder = ref('留下点什么吧...');
 const editorRef = ref();
 const commentRef = ref();
+const inputValue = ref('');
+const clickReplyMapFn = inject(__COMMENT_CLICK_KEY__, {});
 const { username, content, avatar, createDate, emojis } = config.value;
 onClickOutside(commentRef, () => {
   state.isReply = false;
@@ -40,7 +48,6 @@ const state = reactive({
 });
 const handleReply = () => {
   state.isReply = !state.isReply;
-  console.log(99, data.value);
   if (state.isReply) {
     nextTick(() => {
       editorRef.value?.focus();
@@ -52,6 +59,17 @@ const handleEmoji = () => {
   if (isArray(emojis)) return emojis;
   if (isFunction(emojis)) return emojis();
   return [];
+};
+const handleClearValue = (close = false) => {
+  inputValue.value = '';
+  if (close) {
+    state.isReply = false;
+  }
+};
+const handleClickSubmit = (value: string) => {
+  if (isFunction(clickReplyMapFn['reply'])) {
+    clickReplyMapFn['reply'](value, data.value, level1.value, handleClearValue);
+  }
 };
 defineOptions({
   name: 'EpCommentItem',
@@ -105,6 +123,8 @@ defineOptions({
         :placeholder="placeholder"
         :emojis="handleEmoji()"
         ref="editorRef"
+        v-model="inputValue"
+        @click-submit="handleClickSubmit"
       ></EpEditor>
     </template>
     <template v-if="$slots['sub-comment']" #sub>

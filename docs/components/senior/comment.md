@@ -16,3 +16,8 @@ comment/customEmoji
 :::demo
 comment/field
 :::
+## 提交回复内容
+如果返回的格式字段非上面那样，那么可以通过配置`fields`
+:::demo
+comment/submit
+:::
