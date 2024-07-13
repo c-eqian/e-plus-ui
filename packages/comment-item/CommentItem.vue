@@ -4,9 +4,10 @@ import { ElIcon } from 'element-plus';
 import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
 import { computed, nextTick, type PropType, reactive, ref } from 'vue';
-import type { CommentDataRow } from '../comment';
-import { useBeforeDate } from 'co-utils-vue';
+import type { CommentDataRow, ICommentFields } from '../comment';
+import { useBeforeDate, deepObjectValue } from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
+import { defaultFields } from '../comment/commentProps';
 const props = defineProps({
   isSubReply: {
     type: Boolean,
@@ -16,10 +17,16 @@ const props = defineProps({
     type: Object as PropType<CommentDataRow>,
     default: () => ({}),
   },
+  fields: {
+    type: Object as PropType<ICommentFields>,
+    default: () => defaultFields as ICommentFields,
+  },
 });
 const data = computed(() => props.data);
+const fields = computed(() => props.fields as ICommentFields);
 const editorRef = ref();
 const commentRef = ref();
+const { username, content, avatar, createDate } = fields.value;
 onClickOutside(commentRef, () => {
   state.isReply = false;
 });
@@ -42,21 +49,26 @@ defineOptions({
 <template>
   <comment-layout ref="commentRef">
     <template #avatar>
-      <Image :url="data.userInfo.avatar" width="36" round height="36" />
+      <Image
+        :url="deepObjectValue(data, avatar!)"
+        width="36"
+        round
+        height="36"
+      />
     </template>
     <template #right>
-      <time>{{ useBeforeDate(data.createDate) }}</time>
+      <time>{{ useBeforeDate(data[createDate!]) }}</time>
     </template>
     <template #left>
       <div v-if="!$slots.reply" class="cz-relative cz-w-fit">
-        <span class="cz-pr-1">{{ data.userInfo.username }}</span>
+        <span class="cz-pr-1">{{ deepObjectValue(data, username) }}</span>
       </div>
       <div class="cz-flex">
         <slot name="reply"></slot>
       </div>
     </template>
     <template #content>
-      <div v-text="data.content" />
+      <div v-text="data[content!]" />
       <slot name="reply-content"> </slot>
     </template>
     <template #action>

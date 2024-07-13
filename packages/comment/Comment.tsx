@@ -1,13 +1,18 @@
 import { computed, defineComponent, h, type PropType } from 'vue';
 import CommentItem from '../comment-item/CommentItem.vue';
-import type { CommentDataRow, ICommentData } from './API';
-import { isEmpty } from 'co-utils-vue';
+import type { CommentDataRow, ICommentData, ICommentFields } from './API';
+import { isEmpty, deepObjectValue } from 'co-utils-vue';
+import { defaultFields } from './commentProps';
 export default defineComponent({
   name: 'EpComment',
   props: {
     data: {
       type: Object as PropType<ICommentData>,
       default: () => ({} as ICommentData),
+    },
+    fields: {
+      type: Object as PropType<ICommentFields>,
+      default: () => defaultFields as ICommentFields,
     },
   },
   setup: (props) => {
@@ -17,11 +22,13 @@ export default defineComponent({
     };
   },
   render() {
+    const { subComment, commentId, username, content, children } =
+      this.$props.fields;
     const hasSub = (item: CommentDataRow) => {
       return (
-        item.subComment &&
-        !isEmpty(item.subComment) &&
-        !isEmpty(item.subComment.list)
+        item[subComment!] &&
+        !isEmpty(item[subComment!]) &&
+        !isEmpty(item[subComment!].list)
       );
     };
     const renderReplySlot = (item: CommentDataRow, sub: CommentDataRow) => {
@@ -29,31 +36,31 @@ export default defineComponent({
         reply: () => (
           <div class="cz-flex">
             <div class="cz-relative cz-w-fit">
-              <span>{sub.userInfo?.username}</span>
+              <span>{deepObjectValue(sub, username)}</span>
             </div>
             <span class="cz-px-1">
               <strong>回复</strong>
-              {item.userInfo?.username}
+              {deepObjectValue(item, username)}
             </span>
           </div>
         ),
         'reply-content': () => (
           <div class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600">
-            <div class="cz-p-2">“{item?.content}”</div>
+            <div class="cz-p-2">“{item[content!]}”</div>
           </div>
         ),
       };
     };
     const renderSubComment = (item: CommentDataRow) => {
-      if (!item.children || isEmpty(item.children)) {
+      if (!item[children!] || isEmpty(item[children!])) {
         return <CommentItem data={item} isSubReply={true}></CommentItem>;
       }
-      return item.children?.map((sub) => {
+      return item?.[children!]?.map((sub: CommentDataRow) => {
         return (
           <CommentItem
             data={sub}
             isSubReply={true}
-            key={sub.commentId}
+            key={sub[commentId!]}
             v-slots={renderReplySlot(item, sub)}
           ></CommentItem>
         );
@@ -65,12 +72,12 @@ export default defineComponent({
           CommentItem,
           {
             data: item,
-            key: item.commentId,
+            key: item[commentId!],
           },
           hasSub(item)
             ? {
                 'sub-comment': () =>
-                  item.subComment?.list.map((sub) => {
+                  item?.[subComment!]?.list.map((sub: CommentDataRow) => {
                     return renderSubComment(sub);
                   }),
               }
