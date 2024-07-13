@@ -82,7 +82,7 @@ const commentData: ICommentData = {
     },
     {
       commentName: '王林',
-      avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+      avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
       userId: 6,
       // 非content字段
       text: '婉儿，来~',
@@ -93,7 +93,7 @@ const commentData: ICommentData = {
         list: [
           {
             commentName: '李慕婉',
-            avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+            avatarUrl: 'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
             userId: 7,
             parentId: 666,
             commentId: 667,
@@ -102,7 +102,7 @@ const commentData: ICommentData = {
             children: [
               {
                 commentName: '王林',
-                avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
                 userId: 6,
                 parentId: 666,
                 commentId: 669,
@@ -111,7 +111,7 @@ const commentData: ICommentData = {
               },
               {
                 commentName: '许立国',
-                avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
                 userId: 8,
                 parentId: 666,
                 commentId: 670,
@@ -119,7 +119,7 @@ const commentData: ICommentData = {
                 children: [
                   {
                     commentName: '王林',
-                    avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                    avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
                     userId: 6,
                     parentId: 666,
                     commentId: 671,
@@ -128,7 +128,7 @@ const commentData: ICommentData = {
                     children: [
                       {
                         commentName: '许立国',
-                        avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                        avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
                         userId: 8,
                         parentId: 666,
                         commentId: 672,
@@ -144,7 +144,7 @@ const commentData: ICommentData = {
           },
           {
             commentName: '许立国',
-            avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+            avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
             userId: 8,
             parentId: 666,
             commentId: 668,

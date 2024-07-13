@@ -33,7 +33,7 @@ const computedImageCls = computed(() => {
       :src="imageUrl"
       alt="图片"
       :class="computedImageCls"
-      class="cz-cursor-pointer cz-bg-cover cz-bg-center cz-bg-no-repeat"
+      class="cz-cursor-pointer cz-bg-cover cz-object-cover cz-bg-center cz-bg-no-repeat"
       style="transition: all 0.5s ease 0.1s"
       :style="computedImageStyle"
       v-bind="$attrs"
