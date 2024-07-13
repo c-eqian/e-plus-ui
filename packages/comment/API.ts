@@ -85,6 +85,10 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
    */
   replyId?: number | null;
   /**
+   * IP属地
+   */
+  ipAddress?: string;
+  /**
    * 被回复的二级评论的数据结构
    */
   reply?: CommentDataRow<T>;

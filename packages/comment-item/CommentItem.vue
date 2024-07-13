@@ -77,7 +77,7 @@ const handleClearValue = (close = false) => {
 };
 const isShowIpAddress = () => {
   if (isBoolean(showIpAddress)) {
-    const address = deepObjectValue(data, ipAddress ?? '');
+    const address = deepObjectValue(data.value, ipAddress ?? '');
     return address ? `来自 · ${address}` : false;
   } else if (isFunction(showIpAddress)) {
     return showIpAddress({ item: data.value });
@@ -135,14 +135,14 @@ defineOptions({
         class="cz-flex cz-space-x-10 cz-py-2 dark:cz-text-gray-400 cz-text-gray-600 cz-text-xs"
       >
         <div class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1">
-          <el-icon><Star /></el-icon>
+          <ElIcon><Star /></ElIcon>
           <span>点赞</span>
         </div>
         <div
           class="cz-flex cz-select-none cz-cursor-pointer cz-items-center cz-space-x-1"
           @click="handleReply"
         >
-          <el-icon><ChatDotSquare /></el-icon>
+          <ElIcon><ChatDotSquare /></ElIcon>
           <span>{{ state.isReply ? '取消回复' : '回复' }}</span>
         </div>
       </div>

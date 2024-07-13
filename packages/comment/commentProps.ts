@@ -18,6 +18,7 @@ export const defaultFields: Record<keyof ICommentConfig, any> = {
   formatTime: true,
   replyRender: true,
   likeRender: true,
+  ipAddress: 'ipAddress',
   dataLevel: 2,
   replyReference: true,
 };
