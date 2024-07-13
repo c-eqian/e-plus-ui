@@ -87,6 +87,43 @@ export default defineComponent({
       };
     };
     /**
+     * 递归处理二级评论及之后的评论
+     * @param item
+     * @param _children
+     * @param level1
+     * @param nodes
+     * @param parentItem
+     */
+    const deepMoreLevel2 = (
+      item: CommentDataRow,
+      _children: CommentDataRow[],
+      level1: CommentDataRow,
+      nodes: any[] = [],
+      parentItem?: CommentDataRow
+    ) => {
+      if (parentItem !== undefined) {
+        nodes.push(
+          renderCommentItem(item, true, level1, () =>
+            renderReplySlot(parentItem, item)
+          )
+        );
+      } else {
+        nodes.push(renderCommentItem(item, true, level1));
+      }
+      _children?.forEach((sub: CommentDataRow) => {
+        const __children = deepObjectValue(sub, children ?? '');
+        if (__children && !isEmpty(__children)) {
+          deepMoreLevel2(sub, __children, level1, nodes, item);
+        } else {
+          nodes.push(
+            renderCommentItem(sub, true, level1, () =>
+              renderReplySlot(item, sub)
+            )
+          );
+        }
+      });
+    };
+    /**
      * 二级回复评论渲染
      * @param item
      * @param level1
@@ -96,14 +133,9 @@ export default defineComponent({
       if (!_children || isEmpty(_children)) {
         return renderCommentItem(item, false, level1);
       }
-      return [
-        renderCommentItem(item, true, level1),
-        ..._children?.map((sub: CommentDataRow) => {
-          return renderCommentItem(sub, true, level1, () =>
-            renderReplySlot(item, sub)
-          );
-        }),
-      ];
+      const nodes: any[] = [];
+      deepMoreLevel2(item, _children, level1, nodes);
+      return nodes;
     };
     /**
      * 二级评论渲染

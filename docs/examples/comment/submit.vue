@@ -26,6 +26,16 @@ type Item = {
       commentId: number;
       createDate: string;
       text: string;
+      children: {
+        replyId: number;
+        commentName: string;
+        avatar: string;
+        userId: number;
+        parentId: number;
+        commentId: number;
+        createDate: string;
+        text: string;
+      }[];
     }[];
   }[];
 };
@@ -75,7 +85,7 @@ const commentData: ICommentData = {
       avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
       userId: 6,
       // 非content字段
-      text: '来~',
+      text: '婉儿，来~',
       commentId: 666,
       createDate: '2024-05-02',
       subComment: {
@@ -106,6 +116,28 @@ const commentData: ICommentData = {
                 parentId: 666,
                 commentId: 670,
                 createDate: '2024-07-07',
+                children: [
+                  {
+                    commentName: '王林',
+                    avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                    userId: 6,
+                    parentId: 666,
+                    commentId: 671,
+                    createDate: '2024-07-07',
+                    text: '这杀千刀的许立国',
+                    children: [
+                      {
+                        commentName: '许立国',
+                        avatarUrl: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
+                        userId: 8,
+                        parentId: 666,
+                        commentId: 672,
+                        createDate: '2024-06-05',
+                        text: '主子，主子，我错了，真错了',
+                      },
+                    ]
+                  }
+                ],
                 text: '极品!极品啊!',
               },
             ]
@@ -117,7 +149,7 @@ const commentData: ICommentData = {
             parentId: 666,
             commentId: 668,
             createDate: '2024-06-05',
-            text: '主子，主子，我错了，真错了',
+            text: '等日后老子有一天修为高了，一定要让这煞星好看，大不了老子拼了……拼……',
           },
         ]
       },
