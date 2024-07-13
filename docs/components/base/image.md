@@ -1,11 +1,4 @@
-<!--
- * @Descripttion:
- * @version:
- * @Author: 十三
- * @Date: 2022-10-19 00:30:34
- * @LastEditors: 十三
- * @LastEditTime: 2022-10-19 00:59:20
--->
+
 
 # image 图片
 
@@ -22,4 +15,21 @@ image/base
 
 :::demo
 image/size
+:::
+
+## 设置头像
+
+通过设置`round`属性
+
+**`scale`属性和`round`属性一起使用时，`scale`不会生效**
+:::demo
+image/avatar
+:::
+## 缩放
+
+鼠标移入缩放效果，通过设置`scale`属性
+
+**`scale`属性和`round`属性一起使用时，`scale`不会生效**
+:::demo
+image/scale
 :::
