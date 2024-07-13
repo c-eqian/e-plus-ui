@@ -29,11 +29,8 @@ export default defineComponent({
     const { subComment, commentId, username, content, children } =
       this.computedConfig;
     const hasSub = (item: CommentDataRow) => {
-      return (
-        item[subComment!] &&
-        !isEmpty(item[subComment!]) &&
-        !isEmpty(item[subComment!].list)
-      );
+      const _subComment = deepObjectValue(item, subComment ?? '');
+      return _subComment && !isEmpty(_subComment) && !isEmpty(_subComment.list);
     };
     /**
      * 评论组件渲染
@@ -51,8 +48,7 @@ export default defineComponent({
           data={item}
           config={this.computedConfig}
           isSubReply={isSubReply}
-          key={item[commentId!]}
-          name={this.name}
+          key={deepObjectValue(item, commentId ?? '')}
           v-slots={isFunction(slot) ? slot() : null}
         ></CommentItem>
       );
@@ -77,7 +73,7 @@ export default defineComponent({
         ),
         'reply-content': () => (
           <div class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600">
-            <div class="cz-p-2">“{item[content!]}”</div>
+            <div class="cz-p-2">“{deepObjectValue(item, content ?? '')}”</div>
           </div>
         ),
       };
@@ -87,10 +83,11 @@ export default defineComponent({
      * @param item
      */
     const renderSubComment = (item: CommentDataRow) => {
-      if (!item[children!] || isEmpty(item[children!])) {
+      const _children = deepObjectValue(item, children ?? '');
+      if (!_children || isEmpty(_children)) {
         return renderCommentItem(item, true);
       }
-      return item?.[children!]?.map((sub: CommentDataRow) => {
+      return _children?.map((sub: CommentDataRow) => {
         return renderCommentItem(sub, true, () => renderReplySlot(item, sub));
       });
     };
@@ -99,10 +96,11 @@ export default defineComponent({
      * @param item
      */
     const renderSlot = (item: CommentDataRow) => {
+      const _subComment = deepObjectValue(item, subComment ?? '');
       return hasSub(item)
         ? {
             'sub-comment': () =>
-              item?.[subComment!]?.list.map((sub: CommentDataRow) => {
+              _subComment?.list.map((sub: CommentDataRow) => {
                 return renderSubComment(sub);
               }),
           }

@@ -29,7 +29,7 @@ const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const input = ref('');
 const isShowAction = ref(false);
 const emojiList = computed(() => props.emojis);
-console.log(666, emojiList.value)
+console.log(666, emojiList.value);
 const handleFocus = () => {
   isShowAction.value = true;
   isTextareaFocus.value = true;

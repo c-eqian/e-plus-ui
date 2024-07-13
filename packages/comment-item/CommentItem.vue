@@ -28,6 +28,7 @@ const props = defineProps({
 });
 const data = computed(() => props.data);
 const config = computed(() => props.config);
+const placeholder = ref('留下点什么吧...');
 const editorRef = ref();
 const commentRef = ref();
 const { username, content, avatar, createDate, emojis } = config.value;
@@ -39,9 +40,11 @@ const state = reactive({
 });
 const handleReply = () => {
   state.isReply = !state.isReply;
+  console.log(99, data.value);
   if (state.isReply) {
     nextTick(() => {
       editorRef.value?.focus();
+      placeholder.value = `回复 @${deepObjectValue(data.value, username)}`;
     });
   }
 };
@@ -66,7 +69,7 @@ defineOptions({
       />
     </template>
     <template #right>
-      <time>{{ useBeforeDate(data[createDate!]) }}</time>
+      <time>{{ useBeforeDate(deepObjectValue(data, createDate ?? '')) }}</time>
     </template>
     <template #left>
       <div v-if="!$slots.reply" class="cz-relative cz-w-fit">
@@ -77,7 +80,7 @@ defineOptions({
       </div>
     </template>
     <template #content>
-      <div v-text="data[content!]" />
+      <div v-text="deepObjectValue(data, content ?? '')" />
       <slot name="reply-content"> </slot>
     </template>
     <template #action>
@@ -98,7 +101,11 @@ defineOptions({
       </div>
     </template>
     <template v-if="state.isReply" #editor-reply>
-      <EpEditor :emojis="handleEmoji()" ref="editorRef"></EpEditor>
+      <EpEditor
+        :placeholder="placeholder"
+        :emojis="handleEmoji()"
+        ref="editorRef"
+      ></EpEditor>
     </template>
     <template v-if="$slots['sub-comment']" #sub>
       <slot name="sub-comment"></slot>
