@@ -11,6 +11,21 @@
   <div class="demo-mr">
     <EpImage round :url="image2" width="24" height="24" />
   </div>
+  <div class="demo-mr">
+    <EpImage round  width="24" height="24" >
+      用
+    </EpImage>
+  </div>
+  <div class="demo-mr">
+    <EpImage round  width="36" height="36" >
+      用户
+    </EpImage>
+  </div>
+  <div class="demo-mr">
+    <EpImage round  width="56" height="56" style="font-size: 16px" >
+      用户
+    </EpImage>
+  </div>
 </template>
 <script lang="ts" setup>
 import { EpImage } from 'e-plus-ui'

@@ -19,7 +19,8 @@ image/size
 
 ## 设置头像
 
-通过设置`round`属性
+ - 通过设置`round`属性
+ - 通过默认插槽可以显示文本头像
 :::demo
 image/avatar
 :::
