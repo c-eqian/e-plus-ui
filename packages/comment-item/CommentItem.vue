@@ -16,7 +16,7 @@ import type { CommentDataRow, ICommentConfig } from '../comment';
 import { useBeforeDate, deepObjectValue } from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
 import { defaultFields } from '../comment/commentProps';
-import { COMMENT_FIELD_CONFIG } from '../comment/constants';
+import { __COMMENT_FIELD_CONFIG_KEY__ } from '../comment/constants';
 const props = defineProps({
   isSubReply: {
     type: Boolean,
@@ -29,7 +29,7 @@ const props = defineProps({
 });
 const data = computed(() => props.data);
 const fields = inject(
-  COMMENT_FIELD_CONFIG,
+  __COMMENT_FIELD_CONFIG_KEY__,
   defaultFields
 ) as ComputedRef<ICommentConfig>;
 const editorRef = ref();

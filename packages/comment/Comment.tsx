@@ -3,7 +3,7 @@ import CommentItem from '../comment-item/CommentItem.vue';
 import type { CommentDataRow, ICommentData, ICommentConfig } from './API';
 import { isEmpty, deepObjectValue } from 'co-utils-vue';
 import { defaultFields } from './commentProps';
-import { COMMENT_FIELD_CONFIG } from './constants';
+import { __COMMENT_FIELD_CONFIG_KEY__ } from './constants';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -19,7 +19,7 @@ export default defineComponent({
   setup: (props) => {
     const computedData = computed(() => props.data);
     const computedFields = computed(() => props.fields);
-    provide(COMMENT_FIELD_CONFIG, computedFields);
+    provide(__COMMENT_FIELD_CONFIG_KEY__, computedFields);
     return {
       computedData,
       computedFields,

@@ -1,5 +1,5 @@
 import type { InjectionKey } from 'vue';
 
-export const COMMENT_FIELD_CONFIG = Symbol(
+export const __COMMENT_FIELD_CONFIG_KEY__ = Symbol(
   'COMMENT-FIELD-CONFIG'
 ) as InjectionKey<any>;
