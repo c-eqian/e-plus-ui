@@ -131,7 +131,7 @@ export default defineComponent({
     const renderSubComment = (item: CommentDataRow, level1: CommentDataRow) => {
       const _children = deepObjectValue(item, children ?? '');
       if (!_children || isEmpty(_children)) {
-        return renderCommentItem(item, false, level1);
+        return renderCommentItem(item, true, level1);
       }
       const nodes: any[] = [];
       deepMoreLevel2(item, _children, level1, nodes);
@@ -155,7 +155,7 @@ export default defineComponent({
     // 评论渲染
     const renderComment = () => {
       return this.computedData.list.map((item) => {
-        return renderCommentItem(item, true, {}, () => renderSlot(item));
+        return renderCommentItem(item, false, {}, () => renderSlot(item));
       });
     };
     return renderComment();

@@ -71,6 +71,12 @@ const handleClickSubmit = (value: string) => {
     clickReplyMapFn['reply'](value, data.value, level1.value, handleClearValue);
   }
 };
+const getImageSize = computed(() => {
+  return {
+    width: props.isSubReply ? 24 : 36,
+    height: props.isSubReply ? 24 : 36,
+  };
+});
 defineOptions({
   name: 'EpCommentItem',
 });
@@ -81,9 +87,9 @@ defineOptions({
     <template #avatar>
       <Image
         :url="deepObjectValue(data, avatar!)"
-        width="36"
+        :width="getImageSize.width"
         round
-        height="36"
+        :height="getImageSize.height"
       />
     </template>
     <template #right>
