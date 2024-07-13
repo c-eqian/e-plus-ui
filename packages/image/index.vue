@@ -21,8 +21,7 @@ const computedImageStyle = computed<any>(() => {
 });
 const computedImageCls = computed(() => {
   return {
-    'hover:cz-scale-150': !props.round && props.scale,
-    'cz-rounded-full': props.round,
+    'hover:cz-scale-150': props.scale,
   };
 });
 </script>
@@ -31,6 +30,9 @@ const computedImageCls = computed(() => {
   <span
     class="cz-inline-flex cz-items-center cz-text-center cz-cursor-pointer cz-w-full cz-box-border cz-overflow-hidden cz-h-full"
     :style="computedImageStyle"
+    :class="{
+      'cz-rounded-full': props.round,
+    }"
   >
     <img
       :src="imageUrl"
