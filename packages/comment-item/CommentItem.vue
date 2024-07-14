@@ -3,6 +3,7 @@ import CommentLayout from '../comment-layout/CommentLayout.vue';
 import { ElIcon } from 'element-plus';
 import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
+import Lv1 from './lv1.svg';
 import { computed, inject, nextTick, type PropType, reactive, ref } from 'vue';
 import type { CommentDataRow, ICommentConfig } from '../comment';
 import {
@@ -89,6 +90,11 @@ const handleClickSubmit = (value: string) => {
     clickReplyMapFn['reply'](value, data.value, level1.value, handleClearValue);
   }
 };
+const handleLike = () => {
+  if (isFunction(clickReplyMapFn['like'])) {
+    clickReplyMapFn['like'](data.value, level1.value);
+  }
+};
 const getImageSize = computed(() => {
   return {
     width: props.isSubReply ? 24 : 36,
@@ -119,6 +125,29 @@ defineOptions({
           <span class="cz-pr-1">{{ deepObjectValue(data, username) }}</span>
         </div>
         <slot name="reply"></slot>
+        <i v-if="!$slots.reply" class="cz-w-4 cz-h-4 cz-text-green-500">
+          <svg
+            viewBox="0 0 1682 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="831"
+          >
+            <path
+              d="M219.428571 73.142857h1243.428572a146.285714 146.285714 0 0 1 146.285714 146.285714v585.142858a146.285714 146.285714 0 0 1-146.285714 146.285714H219.428571a146.285714 146.285714 0 0 1-146.285714-146.285714V219.428571a146.285714 146.285714 0 0 1 146.285714-146.285714z"
+              fill="#8CDBF4"
+              p-id="832"
+            ></path>
+            <path
+              d="M219.428571 292.571429h146.285715v512H219.428571z m365.714286 146.285714h146.285714l146.285715 365.714286h-146.285715z"
+              fill="#FFFFFF"
+              p-id="833"
+            ></path>
+            <path
+              d="M1024 438.857143h-146.285714l-146.285715 365.714286h146.285715zM219.428571 658.285714h365.714286v146.285715H219.428571z m950.857143-365.714285l73.142857-73.142858v146.285715h-73.142857z m73.142857-73.142858h146.285715v146.285715h-146.285715z m0 146.285715h146.285715v438.857143h-146.285715z"
+              fill="#FFFFFF"
+            ></path>
+          </svg>
+        </i>
         <span
           v-if="isShowIpAddress()"
           v-html="isShowIpAddress()"
@@ -134,7 +163,10 @@ defineOptions({
       <div
         class="cz-flex cz-space-x-10 cz-py-2 dark:cz-text-gray-400 cz-text-gray-600 cz-text-xs"
       >
-        <div class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1">
+        <div
+          class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1"
+          @click="handleLike"
+        >
           <ElIcon><Star /></ElIcon>
           <span>点赞</span>
         </div>

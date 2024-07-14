@@ -16,7 +16,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  emits: ['reply'],
+  emits: ['reply', 'like'],
   setup: (props, { emit }) => {
     const computedData = computed(() => props.data);
     const computedConfig = computed(() => {
@@ -26,6 +26,7 @@ export default defineComponent({
       reply: (...args: any[]) => {
         emit('reply', ...args);
       },
+      like: (...args: any[]) => emit('like', ...args),
     });
     return {
       computedData,

@@ -180,6 +180,13 @@ const handleReply = (
   clear(true);
 };
 /**
+ * @param item 当前被回复的评论
+ * @param level1 当前评论的父级评论，即一级评论，如果item是一级， level1为{}，
+ */
+const handleLike = (item, level1)=> {
+  ElMessage.success(`点赞-${item.commentName}`)
+}
+/**
  * 通过配置修改字段值
  */
 const fieldsConfig: ICommentConfig = {
@@ -196,6 +203,7 @@ const fieldsConfig: ICommentConfig = {
   <div>
     <ep-comment
       @reply="handleReply"
+      @like="handleLike"
       :data="commentData"
       :config="fieldsConfig"
     ></ep-comment>

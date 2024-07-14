@@ -28,10 +28,12 @@ const computedImageCls = computed(() => {
 
 <template>
   <span
-    class="cz-inline-flex cz-justify-center cz-text-gray-50 cz-items-center cz-bg-[#c0c4cc] cz-text-center cz-text-sm cz-cursor-pointer cz-w-full cz-box-border cz-overflow-hidden cz-h-full"
+    class="cz-inline-flex cz-justify-center cz-items-center cz-text-center cz-text-sm cz-cursor-pointer cz-w-full cz-box-border cz-overflow-hidden cz-h-full"
     :style="computedImageStyle"
     :class="{
       'cz-rounded-full': props.round,
+      'cz-bg-[#c0c4cc]': !!$slots.default,
+      'cz-text-gray-50': !!$slots.default,
     }"
   >
     <img
