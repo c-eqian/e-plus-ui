@@ -24,16 +24,12 @@ export default defineConfig({
                 link: '/components/base/button'
             },
             {
-                text: '主题',
-                link: '/foo/'
-            },
-            {
-                text: 'Gitee',
-                link: 'https://gitee.com/cyq13/cz-coco'
+                text: '更新日志',
+                link: '/guide/CHANGELOG'
             },
             {
                 text: 'Github',
-                link: 'https://github.com/C1320/cz-coco'
+                link: 'https://github.com/c-eqian/e-plus-ui'
             },
         ],
         sidebar: {
