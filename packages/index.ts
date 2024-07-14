@@ -27,6 +27,7 @@ import EpDiamondLoading from './diamond/index';
 import EpLoading from './loading/index';
 import EpPagination from './pagination';
 import EpTextFold from './text-fold';
+import EpNoticeBar from './notice-bar';
 /**
  * 高级组件
  */
@@ -48,6 +49,7 @@ const components: Record<string, Plugin> = {
   EpLoading,
   EpEditor,
   EpPagination,
+  EpNoticeBar,
   EpTextFold,
   EpVirtualList,
   EpTable,
@@ -77,6 +79,7 @@ export {
   EpLoading,
   EpEditor,
   EpPagination,
+  EpNoticeBar,
   EpTextFold,
   EpTable,
   EpTableColumn,
