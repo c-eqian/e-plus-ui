@@ -26,6 +26,7 @@ import EpLetterLoading from './letter-cude/index';
 import EpDiamondLoading from './diamond/index';
 import EpLoading from './loading/index';
 import EpPagination from './pagination';
+import EpTextFold from './text-fold';
 /**
  * 高级组件
  */
@@ -47,7 +48,7 @@ const components: Record<string, Plugin> = {
   EpLoading,
   EpEditor,
   EpPagination,
-
+  EpTextFold,
   EpVirtualList,
   EpTable,
   EpTableColumn,
@@ -76,6 +77,7 @@ export {
   EpLoading,
   EpEditor,
   EpPagination,
+  EpTextFold,
   EpTable,
   EpTableColumn,
   EpFormSchema,

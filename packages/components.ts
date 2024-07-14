@@ -17,6 +17,7 @@ import EpCommentLayout from './comment-layout';
 import EpComment from './comment';
 import EpEditor from './editor';
 import EpPagination from './pagination';
+import EpTextFold from './text-fold';
 declare module '@vue/runtime-core' {
   // GlobalComponents for Volar
   export interface GlobalComponents extends A {
@@ -38,6 +39,7 @@ declare module '@vue/runtime-core' {
     EpComment: typeof EpComment;
     EpEditor: typeof EpEditor;
     EpPagination: typeof EpPagination;
+    EpTextFold: typeof EpTextFold;
   }
 }
 

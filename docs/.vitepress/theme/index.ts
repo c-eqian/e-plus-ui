@@ -3,7 +3,7 @@ import './style.css'
 import DefaultTheme from "vitepress/theme";
 // import "element-plus/dist/index.css";
 import { AntDesignContainer } from '@vitepress-demo-preview/component'
-// import '@vitepress-demo-preview/component/dist/style.css'
+// import '@vitepress-demo-preview/component/dist/style.scss'
 import { globals } from '../vitepress';
 import cz from 'e-plus-ui';
 // import 'e-plus-ui'

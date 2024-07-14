@@ -5,7 +5,7 @@
 <template>
 <div>
   <ep-card title="自定义插槽">
-    <template   ></template>
+    <template #body>自定义插槽自定义插槽自定义插槽自定义插槽</template>
   </ep-card>
 </div>
 </template>
