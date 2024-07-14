@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<IPaginationProps>(), {
   limit: 20,
   size: 'small',
   pageSizes: () => [10, 20, 30, 50],
-  pagerCount: document.body.clientWidth < 992 ? 5 : 7,
+  pagerCount: 5,
   layout: 'total, sizes, prev, pager, next, jumper',
   background: true,
   hidden: false,
