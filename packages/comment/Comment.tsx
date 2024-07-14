@@ -3,7 +3,10 @@ import CommentItem from '../comment-item/CommentItem.vue';
 import type { CommentDataRow, ICommentData, ICommentConfig } from './API';
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from './commentProps';
-import { __COMMENT_CLICK_KEY__ } from './constants';
+import {
+  __COMMENT_CLICK_KEY__,
+  __COMMENT_FIELD_CONFIG_KEY__,
+} from './constants';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -22,6 +25,7 @@ export default defineComponent({
     const computedConfig = computed(() => {
       return useMerge({}, defaultFields, props.config) as ICommentConfig;
     });
+    provide(__COMMENT_FIELD_CONFIG_KEY__, computedConfig);
     provide(__COMMENT_CLICK_KEY__, {
       reply: (...args: any[]) => {
         emit('reply', ...args);
@@ -64,7 +68,6 @@ export default defineComponent({
         <CommentItem
           data={item}
           level1={level1}
-          config={this.computedConfig}
           isSubReply={isSubReply}
           key={deepObjectValue(item, commentId ?? '')}
           v-slots={isFunction(slot) ? slot() : null}

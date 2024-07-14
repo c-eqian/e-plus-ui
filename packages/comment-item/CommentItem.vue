@@ -3,8 +3,15 @@ import CommentLayout from '../comment-layout/CommentLayout.vue';
 import { ElIcon } from 'element-plus';
 import { ChatDotSquare, Star } from '@element-plus/icons-vue';
 import Image from '../image/index.vue';
-import Lv1 from './lv1.svg';
-import { computed, inject, nextTick, type PropType, reactive, ref } from 'vue';
+import {
+  computed,
+  ComputedRef,
+  inject,
+  nextTick,
+  type PropType,
+  reactive,
+  ref,
+} from 'vue';
 import type { CommentDataRow, ICommentConfig } from '../comment';
 import {
   useBeforeDate,
@@ -14,7 +21,11 @@ import {
   isBoolean,
 } from 'co-utils-vue';
 import { onClickOutside } from '@vueuse/core';
-import { __COMMENT_CLICK_KEY__ } from '../comment/constants';
+import {
+  __COMMENT_CLICK_KEY__,
+  __COMMENT_FIELD_CONFIG_KEY__,
+} from '../comment/constants';
+import { defaultFields } from '../comment/commentProps';
 const props = defineProps({
   isSubReply: {
     type: Boolean,
@@ -28,19 +39,18 @@ const props = defineProps({
     type: Object as PropType<CommentDataRow>,
     default: () => ({}),
   },
-  config: {
-    type: Object as PropType<ICommentConfig>,
-    default: () => ({}),
-  },
 });
 const data = computed(() => props.data);
 const level1 = computed(() => props.level1);
-const config = computed(() => props.config);
 const placeholder = ref('留下点什么吧...');
 const editorRef = ref();
 const commentRef = ref();
 const inputValue = ref('');
 const clickReplyMapFn = inject(__COMMENT_CLICK_KEY__, {});
+const config = inject(
+  __COMMENT_FIELD_CONFIG_KEY__,
+  defaultFields
+) as ComputedRef<ICommentConfig>;
 const {
   username,
   content,
