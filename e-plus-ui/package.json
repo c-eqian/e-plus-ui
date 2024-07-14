@@ -1,6 +1,6 @@
 {
   "name": "e-plus-ui",
-  "version": "1.1.0",
+  "version": "1.0.1-rc.0",
   "author": "Eqian",
   "license": "MIT",
   "description": "一个基于element-plus的封装组件库，高效、简单",

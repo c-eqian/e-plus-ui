@@ -6,7 +6,9 @@ import fs from 'fs-extra';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 export const DIR_ROOT = resolve(__dirname, '..');
 async function build(v: 'rc' | 'alpha' | '' = '') {
-  consola.info('构建中 ...');
+  consola.info('组件代码构建中 ...');
+  execSync('npm run build', { stdio: 'inherit' });
+  consola.info('组件代码构建完成！');
   if (v === 'rc') {
     execSync('npm run release:rc', { stdio: 'inherit' });
   } else if (v === 'alpha') {
@@ -53,14 +55,15 @@ async function gitPush() {
     }
     execSync(`git push origin master v${version}`, { stdio: 'inherit' });
     const command = 'npm publish --access public';
-    execSync(command, { stdio: 'inherit', cwd: join(DIR_ROOT, 'dist') });
-    consola.success('Published');
+    execSync(command, { stdio: 'inherit', cwd: join(DIR_ROOT, 'e-plus-ui') });
+    consola.success(`已发布---版本号：V${version}`);
   });
 }
 async function run() {
-  await build();
+  await build('rc');
   await updatePackage();
   await updateDocs();
+  await gitPush();
 }
 
 run();
