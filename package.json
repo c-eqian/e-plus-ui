@@ -1,6 +1,6 @@
 {
   "name": "e-plus-ui",
-  "version": "1.1.0",
+  "version": "1.1.1-rc.0",
   "license": "MIT",
   "description": "a component library for Vue 3",
   "scripts": {
@@ -22,7 +22,7 @@
     "lint:eslint": "eslint \"packages/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
     "prepare": "husky install",
-    "release": "npm run buildstandard-version",
+    "release": "npm run build && standard-version",
     "release:alpha": "npm run build&&standard-version --prerelease alpha",
     "release:rc": "standard-version --prerelease rc",
     "release:major": "npm run release -- --release-as major",
