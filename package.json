@@ -22,7 +22,7 @@
     "lint:eslint": "eslint \"packages/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
     "prepare": "husky install",
-    "release": "standard-version",
+    "release": "npm run buildstandard-version",
     "release:alpha": "npm run build&&standard-version --prerelease alpha",
     "release:rc": "standard-version --prerelease rc",
     "release:major": "npm run release -- --release-as major",
