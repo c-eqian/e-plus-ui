@@ -9,7 +9,10 @@ export * from './form';
 export * from './virtual-list/type';
 export * from './form-schema';
 export * from './comment';
+export * from './comment-item';
+export * from './comment-layout';
 export * from './pagination';
+export * from './icon';
 /**
  * 导出工具函数
  */
@@ -28,6 +31,7 @@ import EpLoading from './loading/index';
 import EpPagination from './pagination';
 import EpTextFold from './text-fold';
 import EpNoticeBar from './notice-bar';
+import EpIcon from './icon';
 /**
  * 高级组件
  */
@@ -50,6 +54,7 @@ const components: Record<string, Plugin> = {
   EpEditor,
   EpPagination,
   EpNoticeBar,
+  EpIcon,
   EpTextFold,
   EpVirtualList,
   EpTable,
@@ -80,6 +85,7 @@ export {
   EpEditor,
   EpPagination,
   EpNoticeBar,
+  EpIcon,
   EpTextFold,
   EpTable,
   EpTableColumn,

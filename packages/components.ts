@@ -19,6 +19,7 @@ import EpEditor from './editor';
 import EpPagination from './pagination';
 import EpTextFold from './text-fold';
 import EpNoticeBar from './notice-bar';
+import EpIcon from './icon';
 declare module '@vue/runtime-core' {
   // GlobalComponents for Volar
   export interface GlobalComponents extends A {
@@ -42,6 +43,7 @@ declare module '@vue/runtime-core' {
     EpPagination: typeof EpPagination;
     EpTextFold: typeof EpTextFold;
     EpNoticeBar: typeof EpNoticeBar;
+    EpIcon: typeof EpIcon;
   }
 }
 
