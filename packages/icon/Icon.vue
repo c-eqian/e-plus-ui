@@ -13,6 +13,8 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 const computedStyle = computed(() => {
   return {
     color: props.color,
+    width: pixelUnits(props.width),
+    height: pixelUnits(props.height),
   };
 });
 defineOptions({
@@ -22,7 +24,7 @@ defineOptions({
 </script>
 
 <template>
-  <i class="cz-icon" :style="computedStyle">
+  <i class="cz-icon cz-inline-flex" :style="computedStyle">
     <slot v-if="$slots.default" />
     <svg
       v-else

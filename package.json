@@ -33,6 +33,7 @@
     "commit": "git add . && git-cz && git push"
   },
   "dependencies": {
+    "@e-plus-ui/icons": "^1.1.0",
     "@element-plus/icons-vue": "^2.3.1",
     "co-utils-vue": "^2.5.0-rc.2",
     "element-plus": "^2.7.6",
