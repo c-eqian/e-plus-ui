@@ -7,7 +7,7 @@ export interface IconProps {
   /**
    * 名称
    */
-  name: string;
+  name?: string;
   /**
    * 颜色
    * @default currentColor

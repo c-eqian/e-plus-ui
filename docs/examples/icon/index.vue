@@ -8,7 +8,7 @@ import { EpIcon, EpCard } from 'e-plus-ui'
   <Level0 class="cz-w-6 cz-h-6"></Level0>
 </EpCard>
   <EpCard title="混合使用">
-    <ep-icon color="red" width="30" height="30">
+    <ep-icon color="green" width="24" height="24">
       <Level0></Level0>
     </ep-icon>
   </EpCard>
