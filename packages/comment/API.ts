@@ -190,9 +190,10 @@ export interface ICommentFields<T = any> {
 export interface ICommentConfig<T = any> extends ICommentFields<T> {
   /**
    * 是否显示等级
+   * 支持自定义返回
    * @default false
    */
-  showLevel?: boolean;
+  showLevel?: boolean | CommentItemRender<T>;
   /**
    * 数据的层级结构
    * 如果是二级的数据结构，需包含reply字段，此字段也可以通过`ICommentFields`配置

@@ -1,5 +1,5 @@
 import { computed, defineComponent, h, type PropType, provide } from 'vue';
-import CommentItem from '../comment-item/CommentItem.vue';
+import CommentItem from './Item.vue';
 import type { CommentDataRow, ICommentData, ICommentConfig } from './API';
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from './commentProps';
