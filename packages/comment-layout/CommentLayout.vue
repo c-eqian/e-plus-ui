@@ -34,10 +34,10 @@ defineOptions({
       </div>
       <!--          二级评论-->
       <div
-        v-if="$slots.sub"
+        v-if="$slots.default && $slots.default()"
         class="cz-bg-[#f8f9fa] dark:cz-bg-[#181818] cz-mb-2 cz-p-2 cz-px-4 cz-rounded"
       >
-        <slot name="sub"></slot>
+        <slot></slot>
       </div>
     </div>
   </div>

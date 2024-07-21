@@ -12,7 +12,6 @@ import EpFormSchema from './form-schema';
 import EpLetterLoading from './letter-cude/index';
 import EpDiamondLoading from './diamond/index';
 import EpLoading from './loading/index';
-import EpCommentItem from './comment-item/index';
 import EpCommentLayout from './comment-layout';
 import EpComment from './comment';
 import EpEditor from './editor';

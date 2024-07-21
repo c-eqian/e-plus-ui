@@ -9,7 +9,6 @@ export * from './form';
 export * from './virtual-list/type';
 export * from './form-schema';
 export * from './comment';
-export * from './comment-item';
 export * from './comment-layout';
 export * from './pagination';
 export * from './icon';
@@ -39,7 +38,6 @@ import { EpTable, EpTableColumn } from './table';
 import EpForm from './form';
 import EpFormSchema from './form-schema';
 import EpVirtualList from './virtual-list/index';
-import EpCommentItem from './comment-item/index';
 import EpCommentLayout from './comment-layout';
 import EpComment from './comment';
 const components: Record<string, Plugin> = {
@@ -61,7 +59,6 @@ const components: Record<string, Plugin> = {
   EpTableColumn,
   EpFormSchema,
   EpForm,
-  EpCommentItem,
   EpCommentLayout,
   EpComment,
 };
@@ -92,7 +89,6 @@ export {
   EpFormSchema,
   EpForm,
   EpVirtualList,
-  EpCommentItem,
   EpCommentLayout,
   EpComment,
   install,
