@@ -13,7 +13,22 @@ export type GetTypeFrom<T = any> = keyof T extends infer E
  * 渲染器
  */
 export type CommentItemRender<T = any> = (scoped: {
+  /**
+   * 当前评论
+   */
   item: T;
+  /**
+   * 是否为回复的评论
+   */
+  isSubReply?: boolean;
+  /**
+   * 一级评论
+   */
+  level1?: T;
+  /**
+   * 回复引用
+   */
+  reply?: T;
 }) =>
   | VNode<any, any, any>
   | VNode<any, any, any>[]

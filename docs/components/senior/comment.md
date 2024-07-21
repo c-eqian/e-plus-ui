@@ -49,13 +49,33 @@ comment/customEmoji
 :::demo
 comment/submit
 :::
-## 自定义显示等级
+## 自定义等级
 通过配置`showLevel`属性，自定义等级图标。
 :::demo
 comment/custom-level
 :::
-## 自定义显示等级-插槽
+## 自定义等级-插槽
 支持使用模板语法插槽`(level)`自定义等级图标
 :::demo
 comment/level-slots
+:::
+## 自定义头像-插槽
+支持使用模板语法插槽`(avatar)`自定义头像内容
+:::demo
+comment/avatar-slots
+:::
+## 自定义右侧-插槽
+支持使用模板语法插槽`(right)`自定义右侧内容
+:::demo
+comment/right-slots
+:::
+## 自定义左侧-插槽
+支持使用模板语法插槽`(left)`自定义左侧内容
+:::demo
+comment/left-slots
+:::
+## 自定义内容-插槽
+支持使用模板语法插槽`(content)`自定义回复内容
+:::demo
+comment/content-slots
 :::

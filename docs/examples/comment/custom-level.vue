@@ -17,7 +17,7 @@ const commentData: ICommentData = {
       ipAddress: '深圳',
       level: 1,
       createDate: '2016-05-02',
-      content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。'
+      content: '所有随风而逝的都属于昨天的，所有历经风雨留下来的才是面向未来的。'
     },
     {
       userInfo: {
@@ -27,7 +27,7 @@ const commentData: ICommentData = {
       },
       ipAddress: '广州',
       level: 5,
-      content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
+      content: '生活没有义务满足我们的期望，我们应该接受现实并因情况不是更糟而感恩。',
       commentId: 66,
       createDate: '2018-05-02',
     }

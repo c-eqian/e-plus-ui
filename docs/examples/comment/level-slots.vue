@@ -17,7 +17,8 @@ const commentData: ICommentData = {
       ipAddress: '深圳',
       level: 1,
       createDate: '2016-05-02',
-      content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。'
+      content: '我从来不是那样的人，不能耐心地拾起一地碎片，把它们凑合在一起，然后对自己说，这个修补好了的东西，' +
+          '跟新的完全一样。一样东西破碎了就是破碎了，我宁愿记住它最好时的模样，而不想把它修补好，然后终生看着那些碎了的地方'
     },
     {
       userInfo: {
@@ -27,7 +28,7 @@ const commentData: ICommentData = {
       },
       ipAddress: '广州',
       level: 5,
-      content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
+      content: '勇敢并不是一个人手中拿着枪，而是在你动手之前你已经知道自己会输，但依然会动手，而且无论如何会坚持到底。',
       commentId: 66,
       createDate: '2018-05-02',
     }

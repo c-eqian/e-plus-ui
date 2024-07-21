@@ -62,22 +62,32 @@ export default defineComponent({
       const _subComment = deepObjectValue(item, subComment ?? '');
       return _subComment && !isEmpty(_subComment) && !isEmpty(_subComment.list);
     };
-    const getItemSlots = (item: CommentDataRow) => {
+    const getItemSlots = (
+      item: CommentDataRow,
+      isSubReply = false,
+      level1 = {},
+      reply: CommentDataRow = {}
+    ) => {
       const _slots: Record<string, any> = {};
       if (this.$slots.avatar) {
-        _slots.avatar = this.$slots.avatar({ item });
+        _slots.avatar = () =>
+          this.$slots.avatar({ item, isSubReply, level1, reply });
       }
       if (this.$slots.level) {
-        _slots.level = this.$slots.level({ item });
+        _slots.level = () =>
+          this.$slots.level({ item, isSubReply, level1, reply });
       }
       if (this.$slots.content) {
-        _slots.content = this.$slots.content({ item });
+        _slots.content = () =>
+          this.$slots.content({ item, isSubReply, level1, reply });
       }
-      if (this.$slots.content) {
-        _slots.left = this.$slots.left({ item });
+      if (this.$slots.left) {
+        _slots.left = () =>
+          this.$slots.left({ item, isSubReply, level1, reply });
       }
       if (this.$slots.right) {
-        _slots.right = this.$slots.right({ item });
+        _slots.right = () =>
+          this.$slots.right({ item, isSubReply, level1, reply });
       }
       return _slots;
     };
@@ -97,7 +107,7 @@ export default defineComponent({
       slots?: any
     ) => {
       const getSlots = () => {
-        const _slots = getItemSlots(item);
+        const _slots = getItemSlots(item, isSubReply, level1, reply);
         return {
           ..._slots,
           ...(isFunction(slots) ? slots() : null),
