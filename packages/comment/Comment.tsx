@@ -1,6 +1,18 @@
-import { computed, defineComponent, h, type PropType, provide } from 'vue';
+import {
+  computed,
+  defineComponent,
+  h,
+  type PropType,
+  provide,
+  SlotsType,
+} from 'vue';
 import CommentItem from './Item';
-import type { CommentDataRow, ICommentData, ICommentConfig } from './API';
+import type {
+  CommentDataRow,
+  ICommentData,
+  ICommentConfig,
+  ItemSlots,
+} from './API';
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from './commentProps';
 import {
@@ -20,6 +32,7 @@ export default defineComponent({
     },
   },
   emits: ['reply', 'like'],
+  slots: Object as SlotsType<ItemSlots>,
   setup: (props, { emit }) => {
     const computedData = computed(() => props.data);
     const computedConfig = computed(() => {
@@ -42,14 +55,31 @@ export default defineComponent({
       subComment,
       commentId,
       dataLevel = 2,
-      username,
-      content,
       children,
       reply,
     } = this.computedConfig;
     const hasSub = (item: CommentDataRow) => {
       const _subComment = deepObjectValue(item, subComment ?? '');
       return _subComment && !isEmpty(_subComment) && !isEmpty(_subComment.list);
+    };
+    const getItemSlots = (item: CommentDataRow) => {
+      const _slots: Record<string, any> = {};
+      if (this.$slots.avatar) {
+        _slots.avatar = this.$slots.avatar({ item });
+      }
+      if (this.$slots.level) {
+        _slots.level = this.$slots.level({ item });
+      }
+      if (this.$slots.content) {
+        _slots.content = this.$slots.content({ item });
+      }
+      if (this.$slots.content) {
+        _slots.left = this.$slots.left({ item });
+      }
+      if (this.$slots.right) {
+        _slots.right = this.$slots.right({ item });
+      }
+      return _slots;
     };
     /**
      * 评论组件渲染
@@ -66,6 +96,13 @@ export default defineComponent({
       reply: CommentDataRow = {},
       slots?: any
     ) => {
+      const getSlots = () => {
+        const _slots = getItemSlots(item);
+        return {
+          ..._slots,
+          ...(isFunction(slots) ? slots() : null),
+        };
+      };
       return (
         <CommentItem
           data={item}
@@ -73,7 +110,7 @@ export default defineComponent({
           isSubReply={isSubReply}
           reply={reply}
           key={deepObjectValue(item, commentId ?? '')}
-          v-slots={isFunction(slots) ? slots() : null}
+          v-slots={getSlots()}
         ></CommentItem>
       );
     };

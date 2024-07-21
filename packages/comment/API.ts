@@ -249,3 +249,15 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    */
   emojis: boolean | EmojiData[] | (() => EmojiData[]);
 }
+
+/**
+ * 插槽
+ */
+export type ItemSlots = {
+  avatar: CommentItemRender;
+  right: CommentItemRender;
+  left: CommentItemRender;
+  level: CommentItemRender;
+  content: any;
+  default: any;
+};

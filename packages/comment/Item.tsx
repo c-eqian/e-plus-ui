@@ -9,7 +9,7 @@ import {
 } from 'vue';
 import CommentLayout from '../comment-layout';
 import Image from '../image/index';
-import type { CommentDataRow, ICommentConfig } from './API';
+import type { CommentDataRow, ICommentConfig, ItemSlots } from './API';
 import CustomComponent from './Component.vue';
 import {
   deepObjectValue,
@@ -20,14 +20,6 @@ import {
 } from 'co-utils-vue';
 import { __COMMENT_FIELD_CONFIG_KEY__, LEVEL_MAP } from './constants';
 import { defaultFields } from './commentProps';
-export type ItemSlots = {
-  avatar: any;
-  right: any;
-  left: any;
-  level: any;
-  content: any;
-  default: any;
-};
 
 export default defineComponent({
   name: 'Item',
@@ -46,7 +38,7 @@ export default defineComponent({
     },
   },
   slots: Object as SlotsType<ItemSlots>,
-  setup(props, { slots }) {
+  setup(props) {
     const computedData = computed(() => props.data);
     const computedReply = computed(() => props.reply);
     const config = inject(
@@ -155,7 +147,7 @@ export default defineComponent({
     };
     // 回复
     const renderReply = () => {
-      const { computedReply, computedData } = this;
+      const { computedReply } = this;
       if (computedReply && !isEmpty(computedReply)) {
         return (
           <>

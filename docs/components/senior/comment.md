@@ -55,7 +55,7 @@ comment/submit
 comment/custom-level
 :::
 ## 自定义显示等级-插槽
-通过配置`showLevel`属性，自定义等级图标。
+支持使用模板语法插槽`(level)`自定义等级图标
 :::demo
-comment/custom-level
+comment/level-slots
 :::
