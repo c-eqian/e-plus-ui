@@ -19,6 +19,12 @@ comment/index
 :::demo
 comment/field
 :::
+## 显示等级
+默认支持最高等级为6级。
+ - 支持自定义等级图标
+:::demo
+comment/level
+:::
 ## 带有二级评论
  - 回复评论是将所有的二级之后的评论都看作是二级评论
  - 如果二级评论里面回复某个评论， 那么该评论也是一个二级评论，只不过在数据结构上面，是三级的数据结构
@@ -42,4 +48,14 @@ comment/customEmoji
   - `level1` 当前被回复的评论的父级评论，即一级评论，如果`item`是一级， `level1`为`{}`，
 :::demo
 comment/submit
+:::
+## 自定义显示等级
+通过配置`showLevel`属性，自定义等级图标。
+:::demo
+comment/custom-level
+:::
+## 自定义显示等级-插槽
+通过配置`showLevel`属性，自定义等级图标。
+:::demo
+comment/custom-level
 :::

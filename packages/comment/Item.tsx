@@ -137,7 +137,10 @@ export default defineComponent({
         return slotsVNode;
       }
       const _VNode = getValueByKey('showLevel', true);
-      if (isFunction(_VNode)) return _VNode();
+      if (isFunction(_VNode))
+        return _VNode({
+          item: this.computedData,
+        });
       if (_VNode) {
         const _level = getValueByKey('level', level);
         const levelData = LEVEL_MAP[_level] ?? LEVEL_MAP['6'];

@@ -95,7 +95,7 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
   /**
    * 等级，默认最高级 6
    */
-  level?: CommentDataRow<T>;
+  level?: number;
 };
 
 /**
