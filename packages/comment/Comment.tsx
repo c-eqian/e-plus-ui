@@ -93,10 +93,6 @@ export default defineComponent({
       parentItem?: CommentDataRow
     ) => {
       if (parentItem !== undefined) {
-        console.log({
-          item,
-          parentItem,
-        });
         nodes.push(renderCommentItem(item, true, level1, parentItem));
       } else {
         nodes.push(renderCommentItem(item, true, level1));

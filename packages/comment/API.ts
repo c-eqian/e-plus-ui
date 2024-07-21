@@ -92,6 +92,10 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
    * 被回复的二级评论的数据结构
    */
   reply?: CommentDataRow<T>;
+  /**
+   * 等级，默认最高级 6
+   */
+  level?: CommentDataRow<T>;
 };
 
 /**
@@ -181,6 +185,10 @@ export interface ICommentFields<T = any> {
    * @default reply
    */
   reply?: GetTypeFrom<T>;
+  /**
+   * 等级
+   */
+  level?: GetTypeFrom<T>;
   [k: string]: any;
 }
 

@@ -13,6 +13,7 @@ import 'tailwindcss/components.css';
 import 'tailwindcss/utilities.css';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import * as icons from '@e-plus-ui/icons'
 // 图标并进行全局注册
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'prism-themes/themes/prism-one-dark.css'
@@ -39,5 +40,9 @@ export default {
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
       app.component(key, component)
     }
+      // 注册所有图标
+      for (const [key, component] of Object.entries(icons)) {
+          app.component(key, component)
+      }
   }
 };

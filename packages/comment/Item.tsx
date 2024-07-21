@@ -10,6 +10,7 @@ import {
 import CommentLayout from '../comment-layout';
 import Image from '../image/index';
 import type { CommentDataRow, ICommentConfig } from './API';
+import CustomComponent from './Component.vue';
 import {
   deepObjectValue,
   isBoolean,
@@ -17,9 +18,8 @@ import {
   isFunction,
   useBeforeDate,
 } from 'co-utils-vue';
-import { __COMMENT_FIELD_CONFIG_KEY__ } from './constants';
+import { __COMMENT_FIELD_CONFIG_KEY__, LEVEL_MAP } from './constants';
 import { defaultFields } from './commentProps';
-import { Level6 } from '@e-plus-ui/icons';
 export type ItemSlots = {
   avatar: any;
   right: any;
@@ -115,9 +115,7 @@ export default defineComponent({
         const address = getValueByKey('ipAddress', _level as any);
 
         return address ? (
-          <span class="cz-inline-block cz-px-2 cz-text-xs">
-            {`来自 · ${address}`}
-          </span>
+          <span class="cz-inline-block cz-px-2 cz-text-[10px]">{`${address}`}</span>
         ) : undefined;
       }
       return isFunction(isShow) ? isShow() : undefined;
@@ -133,18 +131,24 @@ export default defineComponent({
       const _VNode = getValueByKey('createDate');
       return _VNode ? <time>{useBeforeDate(_VNode)}</time> : undefined;
     };
-    const renderLevel = (data?: CommentDataRow) => {
+    const renderLevel = (level?: any) => {
       const slotsVNode = getSlotsByName('level');
       if (slotsVNode) {
         return slotsVNode;
       }
       const _VNode = getValueByKey('showLevel', true);
       if (isFunction(_VNode)) return _VNode();
-      return _VNode ? (
-        <ep-icon width="20" height="20" color="#67C23A">
-          <component is={Level6} />
-        </ep-icon>
-      ) : undefined;
+      if (_VNode) {
+        const _level = getValueByKey('level', level);
+        const levelData = LEVEL_MAP[_level] ?? LEVEL_MAP['6'];
+        console.log(levelData);
+        return (
+          <ep-icon width="20" height="20" color={levelData.color}>
+            <CustomComponent is={levelData.type}></CustomComponent>
+          </ep-icon>
+        );
+      }
+      return undefined;
     };
     // 回复
     const renderReply = () => {
@@ -154,7 +158,7 @@ export default defineComponent({
           <>
             <strong class="cz-px-1">回复</strong>
             {getValueByKey('username', 2)}
-            {renderLevel(computedReply)}
+            {renderLevel(2)}
             {renderAddress(2)}
           </>
         );
@@ -174,7 +178,7 @@ export default defineComponent({
           <div class="cz-relative cz-w-fit">
             <span class="cz-pr-1">{getValueByKey('username')}</span>
           </div>
-          {renderLevel()}
+          {renderLevel(1)}
           {renderAddress()}
           {renderReply()}
         </div>
