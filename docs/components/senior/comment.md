@@ -32,6 +32,10 @@ comment/level
 :::demo
 comment/Reply
 :::
+## 不显示操作按钮
+:::demo
+comment/action
+:::
 ## 集成表情包
 :::demo
 comment/customEmoji
