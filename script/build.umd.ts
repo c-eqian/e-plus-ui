@@ -25,7 +25,7 @@ export default ({ mode }): UserConfigExport => {
       outDir: resolve(process.cwd(), 'e-plus-ui', 'umd'),
       emptyOutDir: true,
       lib: {
-        entry: resolve(process.cwd(), 'packages/index.ts'),
+        entry: resolve(process.cwd(), 'src/index.ts'),
         name: 'ePlusUi',
         formats: ['umd'],
         fileName: (name) => `index.js`,

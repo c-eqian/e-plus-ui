@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<IconProps>(), {
 const symbolId = computed(() => `#${props.prefix}-${props.name}`);
 const computedStyle = computed(() => {
   return {
-    color: props.color,
+    color: props.color?.startsWith('--') ? `var(${props.color})` : props.color,
     width: pixelUnits(props.width),
     height: pixelUnits(props.height),
   };

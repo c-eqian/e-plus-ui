@@ -230,39 +230,21 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    */
   showIpAddress?: boolean | CommentItemRender<T>;
   /**
-   * 格式化时间
-   * 默认：xxx 前
-   * @default true
-   */
-  formatTime?: boolean | CommentItemRender<T>;
-  /**
    * 更多操作
    * @default false
    */
   moreOperations?: boolean | CommentItemRender<T>;
   /**
-   * 渲染点赞
-   * 支持自定义渲染
-   * @default true
-   */
-  likeRender?: boolean | CommentItemRender<T>;
-  /**
-   * 渲染回复
-   * 支持自定义渲染
-   * @default true
-   */
-  replyRender?: boolean | CommentItemRender<T>;
-  /**
-   * 引用被回复的评论内容
-   * 支持自定义渲染
-   * @default true
-   */
-  replyReference?: boolean | CommentItemRender<T>;
-  /**
    * 表情包
    * @default false
    */
-  emojis: boolean | EmojiData[] | (() => EmojiData[]);
+  emojis?: boolean | EmojiData[] | (() => EmojiData[]);
+  /**
+   * 渲染操作
+   * 支持自定义
+   * @default true
+   */
+  actions?: boolean | CommentItemRender<T>;
 }
 
 /**
@@ -273,6 +255,8 @@ export type ItemSlots = {
   right: CommentItemRender;
   left: CommentItemRender;
   level: CommentItemRender;
-  content: any;
+  actions: CommentItemRender;
+  editor: CommentItemRender;
+  content: CommentItemRender;
   default: any;
 };

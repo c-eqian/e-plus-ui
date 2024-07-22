@@ -35,7 +35,7 @@
   "dependencies": {
     "@e-plus-ui/icons": "^1.2.0",
     "@element-plus/icons-vue": "^2.3.1",
-    "co-utils-vue": "^2.5.0-rc.2",
+    "co-utils-vue": "^2.5.1",
     "element-plus": "^2.7.6",
     "vue": "^3.4.31"
   },

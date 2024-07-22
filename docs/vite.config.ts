@@ -16,7 +16,7 @@ export default defineConfig({
   resolve: {
     // 配置路径别名
     alias: {
-      'e-plus-ui': path.resolve(__dirname, '../packages')
+      'e-plus-ui': path.resolve(__dirname, '../src')
     },
   },
     server: {

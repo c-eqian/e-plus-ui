@@ -21,5 +21,6 @@ export const defaultFields: Record<keyof ICommentConfig, any> = {
   ipAddress: 'ipAddress',
   dataLevel: 2,
   level: 'level',
+  actions: true,
   replyReference: true,
 };

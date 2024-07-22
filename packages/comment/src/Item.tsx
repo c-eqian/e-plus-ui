@@ -4,12 +4,14 @@ import {
   defineComponent,
   h,
   inject,
+  nextTick,
   type PropType,
+  ref,
   type SlotsType,
 } from 'vue';
-import CommentLayout from '../comment-layout';
-import Image from '../image/index';
-import type { CommentDataRow, ICommentConfig, ItemSlots } from './API';
+import CommentLayout from '../../comment-layout';
+import Image from '../../image/index';
+import type { CommentDataRow, ICommentConfig, ItemSlots } from '../API';
 import CustomComponent from './Component.vue';
 import {
   deepObjectValue,
@@ -18,8 +20,14 @@ import {
   isFunction,
   useBeforeDate,
 } from 'co-utils-vue';
-import { __COMMENT_FIELD_CONFIG_KEY__, LEVEL_MAP } from './constants';
-import { defaultFields } from './commentProps';
+import {
+  __COMMENT_CLICK_KEY__,
+  __COMMENT_FIELD_CONFIG_KEY__,
+  LEVEL_MAP,
+} from '../constants';
+import { defaultFields } from '../commentProps';
+import Action from './Action.vue';
+import Editor from '../../editor';
 
 export default defineComponent({
   name: 'Item',
@@ -36,15 +44,51 @@ export default defineComponent({
       type: Object as PropType<CommentDataRow>,
       default: () => ({}),
     },
+    level1: {
+      type: Object as PropType<CommentDataRow>,
+      default: () => ({}),
+    },
   },
   slots: Object as SlotsType<ItemSlots>,
   setup(props) {
     const computedData = computed(() => props.data);
     const computedReply = computed(() => props.reply);
+    const computedIsSubReply = computed(() => props.isSubReply);
+    const computedLevel1 = computed(() => props.level1);
+    const editorInputRef = ref<InstanceType<typeof Editor> | null>(null);
+    const replyState = ref({
+      isCustomEditor: false,
+      value: '',
+      placeholder: '输入点什么',
+      isEditable: false,
+    });
     const config = inject(
       __COMMENT_FIELD_CONFIG_KEY__,
       defaultFields
     ) as ComputedRef<ICommentConfig>;
+    const clickReplyMapFn = inject(__COMMENT_CLICK_KEY__, {});
+    const executeCallback = (
+      key: 'reply' | 'like',
+      value = '',
+      ...args: any[]
+    ) => {
+      if (key === 'reply' && isFunction(clickReplyMapFn[key])) {
+        clickReplyMapFn[key]({
+          value,
+          item: computedData.value,
+          level1: computedLevel1.value,
+          ...args,
+        });
+        return;
+      }
+      if (key === 'like' && isFunction(clickReplyMapFn[key])) {
+        clickReplyMapFn[key]({
+          item: computedData.value,
+          level1: computedLevel1.value,
+          ...args,
+        });
+      }
+    };
     /**
      * 获取值
      * @param key
@@ -65,10 +109,24 @@ export default defineComponent({
         config.value?.[key as unknown as any]
       );
     };
+    const getSlotsParameter = () => {
+      return {
+        item: computedData.value,
+        isSubReply: computedIsSubReply.value,
+        level1: computedLevel1.value,
+        reply: computedLevel1.value,
+      };
+    };
     return {
       computedData,
       computedReply,
       getValueByKey,
+      replyState,
+      computedIsSubReply,
+      computedLevel1,
+      editorInputRef,
+      executeCallback,
+      getSlotsParameter,
     };
   },
   render() {
@@ -110,7 +168,7 @@ export default defineComponent({
           <span class="cz-inline-block cz-px-2 cz-text-[10px]">{`${address}`}</span>
         ) : undefined;
       }
-      return isFunction(isShow) ? isShow() : undefined;
+      return isFunction(isShow) ? isShow(this.getSlotsParameter()) : undefined;
     };
     /**
      * 渲染右边
@@ -129,14 +187,10 @@ export default defineComponent({
         return slotsVNode;
       }
       const _VNode = getValueByKey('showLevel', true);
-      if (isFunction(_VNode))
-        return _VNode({
-          item: this.computedData,
-        });
+      if (isFunction(_VNode)) return _VNode(this.getSlotsParameter());
       if (_VNode) {
         const _level = getValueByKey('level', level);
         const levelData = LEVEL_MAP[_level] ?? LEVEL_MAP['6'];
-        console.log(levelData);
         return (
           <ep-icon width="20" height="20" color={levelData.color}>
             <CustomComponent is={levelData.type}></CustomComponent>
@@ -209,14 +263,86 @@ export default defineComponent({
         </div>
       ) : null;
     };
+    const handleClickReply = ({ reply }) => {
+      this.replyState.isEditable = reply;
+      if (this.replyState.isEditable) {
+        nextTick(() => {
+          this.editorInputRef?.focus();
+          this.replyState.placeholder = `回复 @${getValueByKey('username')}`;
+        });
+      }
+    };
+    const handleClearValue = (close = false) => {
+      this.replyState.value = '';
+      if (close) {
+        this.replyState.isEditable = false;
+      }
+    };
+    const handleClickSubmit = (value: string) => {
+      this.executeCallback('reply', value, handleClearValue);
+    };
+    /**
+     * 操作
+     */
+    const renderActions = () => {
+      const slotsVNode = getSlotsByName('actions');
+      if (slotsVNode) {
+        this.replyState.isEditable = false;
+        this.replyState.isCustomEditor = true;
+        return slotsVNode;
+      }
+      const isActions = getValueByKey('actions', true);
+      if (isBoolean(isActions)) {
+        return isActions ? (
+          <Action
+            onClickLike={(...args: any[]) =>
+              this.executeCallback('like', '', ...args)
+            }
+            onClickReply={handleClickReply}
+          ></Action>
+        ) : undefined;
+      }
+      if (isFunction(isActions)) {
+        this.replyState.isEditable = false;
+        this.replyState.isCustomEditor = true;
+        return isActions(this.getSlotsParameter());
+      }
+      return undefined;
+    };
+    const renderEditor = () => {
+      const slotsVNode = getSlotsByName('editor');
+      if (slotsVNode) {
+        return slotsVNode;
+      }
+      if (this.replyState.isEditable) {
+        return (
+          <Editor
+            placeholder={this.replyState.placeholder}
+            ref={this.editorInputRef}
+            modelValue={this.replyState.value}
+            onModelValue={(val: string) => (this.replyState.value = val)}
+            onClickSubmit={handleClickSubmit}
+          ></Editor>
+        );
+      }
+      return undefined;
+    };
     const getSlots = () => {
-      const _slots = {
+      const _slots: Record<string, any> = {
         avatar: () => renderAvatar(),
         right: () => renderRight(),
         left: () => renderLeft(),
         content: () => renderContent(),
       };
       const VNode = getSlotsByName('default');
+      const _actions = renderActions();
+      if (_actions) {
+        _slots.actions = () => _actions;
+        const _editor = renderEditor();
+        if (_editor) {
+          _slots.action = () => _editor;
+        }
+      }
       if (VNode) {
         return {
           ..._slots,

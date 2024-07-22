@@ -4,7 +4,7 @@ import plugin from 'tailwindcss/plugin';
 export default {
   prefix: 'cz-',
   content: [
-    './packages/**/*.{js,ts,jsx,tsx,vue}',
+    './src/**/*.{js,ts,jsx,tsx,vue}',
     './play/*.{js,ts,jsx,tsx,vue}',
     './play/index.html',
     './docs/examples/**/*.{js,ts,jsx,tsx,vue}',

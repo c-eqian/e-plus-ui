@@ -12,13 +12,13 @@ import type {
   ICommentData,
   ICommentConfig,
   ItemSlots,
-} from './API';
+} from '../API';
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
-import { defaultFields } from './commentProps';
+import { defaultFields } from '../commentProps';
 import {
   __COMMENT_CLICK_KEY__,
   __COMMENT_FIELD_CONFIG_KEY__,
-} from './constants';
+} from '../constants';
 export default defineComponent({
   name: 'EpComment',
   props: {
