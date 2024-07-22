@@ -23,8 +23,8 @@ defineOptions({
           <slot name="content"></slot>
         </div>
         <div class="cz-pt-2 cz-w-full">
-          <div v-if="$slots.action">
-            <slot name="action"></slot>
+          <div v-if="$slots.actions">
+            <slot name="actions"></slot>
           </div>
 
           <div v-if="$slots['editor-reply']">

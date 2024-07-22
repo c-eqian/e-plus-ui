@@ -340,7 +340,7 @@ export default defineComponent({
         _slots.actions = () => _actions;
         const _editor = renderEditor();
         if (_editor) {
-          _slots.action = () => _editor;
+          _slots['editor-reply'] = () => _editor;
         }
       }
       if (VNode) {

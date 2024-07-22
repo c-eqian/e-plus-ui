@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { icons } from '@e-plus-ui/icons/global'
+import * as icons  from '@e-plus-ui/icons'
 import { EpIcon } from 'e-plus-ui'
 </script>
 
