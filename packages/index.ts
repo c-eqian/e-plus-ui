@@ -40,6 +40,7 @@ import EpFormSchema from './form-schema';
 import EpVirtualList from './virtual-list/index';
 import EpCommentLayout from './comment-layout';
 import EpComment from './comment';
+import { INSTALLED_KEY } from './utils/constant';
 const components: Record<string, Plugin> = {
   EpButton,
   EpCard,
@@ -64,6 +65,8 @@ const components: Record<string, Plugin> = {
 };
 
 const install = (app: App, options?: any): void => {
+  if (app[INSTALLED_KEY]) return;
+  app[INSTALLED_KEY] = true;
   for (const key of Object.keys(components)) {
     if (!key) continue;
     app.use(components[key], options);
