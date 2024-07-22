@@ -1,1 +1,1 @@
-export const INSTALLED_KEY = Symbol('__EP_INSTALLED_KEY__')
+export const INSTALLED_KEY = Symbol('__EP_INSTALLED_KEY__');
