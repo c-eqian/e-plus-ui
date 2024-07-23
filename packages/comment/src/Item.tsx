@@ -60,6 +60,7 @@ export default defineComponent({
     const computedLevel1 = computed(() => props.level1);
     const editorInputRef = ref<InstanceType<typeof Editor> | null>(null);
     const commentRef = ref();
+    const actionRef = ref();
     const replyState = ref({
       isCustomEditor: false,
       value: '',
@@ -130,12 +131,14 @@ export default defineComponent({
     };
     onClickOutside(commentRef, (event) => {
       replyState.value.isEditable = false;
+      actionRef.value?.replyDone(false);
     });
     return {
       computedData,
       computedReply,
       getValueByKey,
       commentRef,
+      actionRef,
       replyState,
       computedIsSubReply,
       computedLevel1,
@@ -311,6 +314,7 @@ export default defineComponent({
       if (isBoolean(isActions)) {
         return isActions ? (
           <Action
+            ref="actionRef"
             onClickLike={(...args: any[]) =>
               this.executeCallback('like', '', ...args)
             }

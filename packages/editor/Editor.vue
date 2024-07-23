@@ -98,7 +98,7 @@ defineExpose({
             />
           </div>
           <div
-            class="emoji-container cz-my-1.5 cz-items-center cz-flex"
+            class="emoji-container cz-py-1.5 cz-items-center cz-flex"
             :class="[props.useEmojis ? 'cz-justify-between' : 'cz-justify-end']"
           >
             <el-popover trigger="click" width="260px">
@@ -130,7 +130,7 @@ defineExpose({
                 </span>
               </div>
             </el-popover>
-            <div v-show="isShowAction">
+            <div>
               <ElButton
                 :disabled="valueComputed.length === 0"
                 size="small"

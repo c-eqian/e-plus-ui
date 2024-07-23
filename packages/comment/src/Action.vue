@@ -29,6 +29,7 @@ const handleLike = () => {
   });
 };
 const handleReply = () => {
+  console.log(1111);
   state.value.reply = !state.value.reply;
   emits('click-reply', {
     reply: state.value.reply,
@@ -37,6 +38,10 @@ const handleReply = () => {
 };
 const state = ref({
   reply: false,
+});
+defineExpose({
+  likeDone,
+  replyDone,
 });
 const _iconColor = computed(() => {
   if (isLike.value) {
