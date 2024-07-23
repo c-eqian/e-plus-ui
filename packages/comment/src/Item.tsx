@@ -31,6 +31,7 @@ import { defaultFields } from '../commentProps';
 import Action from './Action.vue';
 import Editor from '../../editor';
 import { onClickOutside } from '@vueuse/core';
+import TextFold from '../../text-fold';
 
 export default defineComponent({
   name: 'Item',
@@ -276,7 +277,13 @@ export default defineComponent({
       const _VNode = getValueByKey('content');
       return _VNode ? (
         <div>
-          {_VNode}
+          <TextFold
+            line={getValueByKey('lines', true)}
+            is-fold={true}
+            position={getValueByKey('foldBtnPosition', true)}
+          >
+            {_VNode}
+          </TextFold>
           {renderContentReply()}
         </div>
       ) : null;

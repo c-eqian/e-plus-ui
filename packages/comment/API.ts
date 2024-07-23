@@ -249,6 +249,16 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    * @default true
    */
   actions?: boolean | CommentItemRender<T>;
+  /**
+   * 文本显示几行，超出显示...
+   * @default 3
+   */
+  lines?: number;
+  /**
+   * 折叠按钮位置
+   * @default left
+   */
+  foldBtnPosition: 'left' | 'right';
 }
 
 /**

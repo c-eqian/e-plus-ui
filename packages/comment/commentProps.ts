@@ -25,4 +25,6 @@ export const defaultFields: Record<keyof ICommentConfig, any> = {
   useEmojis: false,
   emojis: [],
   replyReference: true,
+  foldBtnPosition: 'left',
+  lines: 3,
 };
