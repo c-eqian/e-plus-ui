@@ -95,6 +95,12 @@ export default defineComponent({
       return _slots;
     };
     /**
+     * 渲染加载更多
+     */
+    const renderLoadingMore = () => {
+      return <div class="cz-text-xs">加载更多</div>;
+    };
+    /**
      * 评论组件渲染
      * @param item
      * @param isSubReply
@@ -196,9 +202,11 @@ export default defineComponent({
     };
     // 评论渲染
     const renderComment = () => {
-      return this.computedData.list.map((item) => {
+      const vNodes = this.computedData.list.map((item) => {
         return renderCommentItem(item, false, {}, {}, () => renderSlot(item));
       });
+      vNodes.push(renderLoadingMore());
+      return vNodes;
     };
     return renderComment();
   },
