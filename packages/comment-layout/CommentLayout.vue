@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 defineOptions({
   name: 'EpCommentLayout',
+});
+const replyRef = ref<HTMLDivElement>();
+defineExpose({
+  replyRef,
 });
 </script>
 
@@ -22,11 +28,10 @@ defineOptions({
         <div class="cz-w-full" v-if="$slots.content">
           <slot name="content"></slot>
         </div>
-        <div class="cz-pt-2 cz-w-full">
+        <div class="cz-pt-2 cz-w-full" ref="replyRef">
           <div v-if="$slots.actions">
             <slot name="actions"></slot>
           </div>
-
           <div v-if="$slots['editor-reply']">
             <slot name="editor-reply" />
           </div>

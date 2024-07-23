@@ -31,7 +31,8 @@ const commentData = {
  * 通过配置修改字段值
  */
 const fieldsConfig: ICommentConfig = {
-  emojis: initEmoji()
+  emojis: initEmoji(),
+  useEmojis: true
 }
 </script>
 

@@ -98,9 +98,10 @@ defineExpose({
             />
           </div>
           <div
-            class="emoji-container cz-my-1.5 cz-items-center cz-flex cz-justify-between"
+            class="emoji-container cz-my-1.5 cz-items-center cz-flex"
+            :class="[props.useEmojis ? 'cz-justify-between' : 'cz-justify-end']"
           >
-            <el-popover>
+            <el-popover trigger="click" width="260px">
               <template #reference>
                 <div
                   v-if="props.useEmojis"

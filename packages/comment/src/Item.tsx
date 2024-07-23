@@ -2,9 +2,11 @@ import {
   computed,
   ComputedRef,
   defineComponent,
+  getCurrentInstance,
   h,
   inject,
   nextTick,
+  onMounted,
   type PropType,
   ref,
   type SlotsType,
@@ -28,6 +30,7 @@ import {
 import { defaultFields } from '../commentProps';
 import Action from './Action.vue';
 import Editor from '../../editor';
+import { onClickOutside } from '@vueuse/core';
 
 export default defineComponent({
   name: 'Item',
@@ -56,6 +59,7 @@ export default defineComponent({
     const computedIsSubReply = computed(() => props.isSubReply);
     const computedLevel1 = computed(() => props.level1);
     const editorInputRef = ref<InstanceType<typeof Editor> | null>(null);
+    const commentRef = ref();
     const replyState = ref({
       isCustomEditor: false,
       value: '',
@@ -124,10 +128,14 @@ export default defineComponent({
         reply: computedLevel1.value,
       };
     };
+    onClickOutside(commentRef, (event) => {
+      replyState.value.isEditable = false;
+    });
     return {
       computedData,
       computedReply,
       getValueByKey,
+      commentRef,
       replyState,
       computedIsSubReply,
       computedLevel1,
@@ -326,7 +334,7 @@ export default defineComponent({
         return (
           <Editor
             placeholder={this.replyState.placeholder}
-            ref={this.editorInputRef}
+            ref="editorInputRef"
             modelValue={this.replyState.value}
             useEmojis={getValueByKey('useEmojis', true)}
             emojis={getValueByKey('emojis', true)}
@@ -362,7 +370,9 @@ export default defineComponent({
       return _slots;
     };
     const renderItem = () => {
-      return <CommentLayout v-slots={getSlots()}></CommentLayout>;
+      return (
+        <CommentLayout ref="commentRef" v-slots={getSlots()}></CommentLayout>
+      );
     };
     return renderItem();
   },
