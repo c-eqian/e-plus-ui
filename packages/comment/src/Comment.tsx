@@ -31,7 +31,7 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  emits: ['reply', 'like'],
+  emits: ['reply', 'like', 'submit-reply'],
   slots: Object as SlotsType<ItemSlots>,
   setup: (props, { emit }) => {
     const computedData = computed(() => props.data);
@@ -42,6 +42,9 @@ export default defineComponent({
     provide(__COMMENT_CLICK_KEY__, {
       reply: (...args: any[]) => {
         emit('reply', ...args);
+      },
+      'submit-reply': (...args: any[]) => {
+        emit('submit-reply', ...args);
       },
       like: (...args: any[]) => emit('like', ...args),
     });

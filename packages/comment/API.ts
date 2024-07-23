@@ -240,6 +240,10 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    */
   emojis?: boolean | EmojiData[] | (() => EmojiData[]);
   /**
+   * 使用表情
+   */
+  useEmojis?: boolean;
+  /**
    * 渲染操作
    * 支持自定义
    * @default true

@@ -68,7 +68,7 @@ export default defineComponent({
     ) as ComputedRef<ICommentConfig>;
     const clickReplyMapFn = inject(__COMMENT_CLICK_KEY__, {});
     const executeCallback = (
-      key: 'reply' | 'like',
+      key: 'reply' | 'like' | 'submit-reply',
       value = '',
       ...args: any[]
     ) => {
@@ -82,6 +82,13 @@ export default defineComponent({
         return;
       }
       if (key === 'like' && isFunction(clickReplyMapFn[key])) {
+        clickReplyMapFn[key]({
+          item: computedData.value,
+          level1: computedLevel1.value,
+          ...args,
+        });
+      }
+      if (key === 'submit-reply' && isFunction(clickReplyMapFn[key])) {
         clickReplyMapFn[key]({
           item: computedData.value,
           level1: computedLevel1.value,
@@ -265,6 +272,7 @@ export default defineComponent({
     };
     const handleClickReply = ({ reply }) => {
       this.replyState.isEditable = reply;
+      this.executeCallback('submit-reply', '', this.replyState);
       if (this.replyState.isEditable) {
         nextTick(() => {
           this.editorInputRef?.focus();
@@ -320,6 +328,8 @@ export default defineComponent({
             placeholder={this.replyState.placeholder}
             ref={this.editorInputRef}
             modelValue={this.replyState.value}
+            useEmojis={getValueByKey('useEmojis', true)}
+            emojis={getValueByKey('emojis', true)}
             onModelValue={(val: string) => (this.replyState.value = val)}
             onClickSubmit={handleClickSubmit}
           ></Editor>

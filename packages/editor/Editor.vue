@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { onClickOutside } from '@vueuse/core';
-import { computed, onBeforeUnmount, onMounted, type PropType, ref } from 'vue';
+import { onBeforeUnmount, type PropType, ref, watchEffect } from 'vue';
 import Image from '../image/index.vue';
-import { ElButton } from 'element-plus';
+import { ElButton, ElPopover } from 'element-plus';
 import type { EmojiData } from './type';
 import { Position } from '@element-plus/icons-vue';
 const emits = defineEmits<{ (event: 'click-submit', v: string): void }>();
@@ -19,17 +18,25 @@ const props = defineProps({
     type: Array as PropType<EmojiData[]>,
     default: () => [],
   },
+  useEmojis: {
+    type: Boolean,
+    default: false,
+  },
   autoFocus: {
     type: Boolean,
     default: false,
   },
 });
 const emojiRef = ref<HTMLDivElement | null>(null);
-const isShowEmojiSelect = ref(false);
 const isTextareaFocus = ref(false);
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const isShowAction = ref(false);
-const emojiList = computed(() => props.emojis);
+const emojiList = ref<EmojiData[]>([]);
+watchEffect(() => {
+  if (props.useEmojis) {
+    emojiList.value = props.emojis;
+  }
+});
 const handleFocus = () => {
   isShowAction.value = true;
   isTextareaFocus.value = true;
@@ -38,12 +45,6 @@ const handleBlur = () => {
   isShowAction.value = !!valueComputed.value.trim();
   isTextareaFocus.value = false;
 };
-onMounted(() => {
-  // 点击表情容器外，隐藏
-  onClickOutside(emojiRef, () => {
-    isShowEmojiSelect.value = false;
-  });
-});
 const focus = () => {
   textareaRef.value?.focus();
 };
@@ -53,6 +54,11 @@ const handleClickEmoji = (item: EmojiData) => {
 const handleSubmit = () => {
   emits('click-submit', valueComputed.value);
 };
+const setEmojis = (list: EmojiData[]) => {
+  if (props.useEmojis) {
+    emojiList.value = list;
+  }
+};
 onBeforeUnmount(() => {
   valueComputed.value = '';
 });
@@ -61,6 +67,7 @@ defineOptions({
 });
 defineExpose({
   focus,
+  setEmojis,
 });
 </script>
 
@@ -93,13 +100,35 @@ defineExpose({
           <div
             class="emoji-container cz-my-1.5 cz-items-center cz-flex cz-justify-between"
           >
-            <div
-              class="cz-cursor-pointer"
-              title="表情包"
-              @click="isShowEmojiSelect = !isShowEmojiSelect"
-            >
-              <img alt="" class="cz-w-6 cz-h-6" src="./emoji.svg" />
-            </div>
+            <el-popover>
+              <template #reference>
+                <div
+                  v-if="props.useEmojis"
+                  class="cz-cursor-pointer"
+                  title="表情包"
+                >
+                  <img alt="" class="cz-w-6 cz-h-6" src="./emoji.svg" />
+                </div>
+              </template>
+              <div
+                ref="emojiRef"
+                class="emoji-wrapper cz-max-h-40 cz-overflow-y-auto animate__fadeInDown"
+              >
+                <span
+                  v-for="item in emojiList"
+                  :key="item.name"
+                  class="emoji-item cz-p-[5px]"
+                  @click="handleClickEmoji(item)"
+                >
+                  <img
+                    :src="item.url"
+                    :title="item.name"
+                    :alt="item.name"
+                    class="cz-w-6 cz-h-6 emoji"
+                  />
+                </span>
+              </div>
+            </el-popover>
             <div v-show="isShowAction">
               <ElButton
                 :disabled="valueComputed.length === 0"
@@ -110,25 +139,6 @@ defineExpose({
                 >提交</ElButton
               >
             </div>
-          </div>
-          <div
-            v-show="isShowEmojiSelect && emojiList.length > 0"
-            ref="emojiRef"
-            class="emoji-wrapper cz-max-h-40 cz-overflow-y-auto animate__fadeInDown"
-          >
-            <span
-              v-for="item in emojiList"
-              :key="item.name"
-              class="emoji-item cz-p-[5px]"
-              @click="handleClickEmoji(item)"
-            >
-              <img
-                :src="item.url"
-                :title="item.name"
-                :alt="item.name"
-                class="cz-w-6 cz-h-6 emoji"
-              />
-            </span>
           </div>
         </div>
       </div>

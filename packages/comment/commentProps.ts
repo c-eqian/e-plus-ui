@@ -22,5 +22,7 @@ export const defaultFields: Record<keyof ICommentConfig, any> = {
   dataLevel: 2,
   level: 'level',
   actions: true,
+  useEmojis: true,
+  emojis: [],
   replyReference: true,
 };
