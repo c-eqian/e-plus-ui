@@ -57,11 +57,18 @@ export default defineComponent({
     const editorInputRef = ref<InstanceType<typeof Editor> | null>(null);
     const commentRef = ref();
     const actionRef = ref();
-    const replyState = ref({
+    const replyState = ref<{
+      isCustomEditor: boolean;
+      value: string;
+      placeholder: string;
+      isEditable: boolean;
+      replyDone: any;
+    }>({
       isCustomEditor: false,
       value: '',
       placeholder: '输入点什么',
       isEditable: false,
+      replyDone: undefined,
     });
     const config = inject(
       __COMMENT_FIELD_CONFIG_KEY__,
@@ -255,9 +262,11 @@ export default defineComponent({
     /**
      * 点击回复
      * @param reply
+     * @param replyDone
      */
-    const handleClickReply = ({ reply }) => {
+    const handleClickReply = ({ reply, replyDone }) => {
       this.replyState.isEditable = reply;
+      this.replyState.replyDone = replyDone;
       if (this.replyState.isEditable) {
         nextTick(() => {
           this.editorInputRef?.focus();
@@ -269,7 +278,11 @@ export default defineComponent({
     const handleClearValue = (close = false) => {
       this.replyState.value = '';
       if (close) {
+        const { replyDone } = this.replyState;
         this.replyState.isEditable = false;
+        if (isFunction(replyDone)) {
+          replyDone(!close);
+        }
       }
     };
     /**

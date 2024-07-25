@@ -29,7 +29,6 @@ const handleLike = () => {
   });
 };
 const handleReply = () => {
-  console.log(1111);
   state.value.reply = !state.value.reply;
   emits('click-reply', {
     reply: state.value.reply,
