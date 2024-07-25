@@ -2,11 +2,9 @@ import {
   computed,
   ComputedRef,
   defineComponent,
-  getCurrentInstance,
   h,
   inject,
   nextTick,
-  onMounted,
   type PropType,
   ref,
   type SlotsType,
@@ -22,11 +20,7 @@ import {
   isFunction,
   useBeforeDate,
 } from 'co-utils-vue';
-import {
-  __COMMENT_CLICK_KEY__,
-  __COMMENT_FIELD_CONFIG_KEY__,
-  LEVEL_MAP,
-} from '../constants';
+import { __COMMENT_FIELD_CONFIG_KEY__, LEVEL_MAP } from '../constants';
 import { defaultFields } from '../commentProps';
 import Action from './Action.vue';
 import Editor from '../../editor';
@@ -54,6 +48,7 @@ export default defineComponent({
     },
   },
   slots: Object as SlotsType<ItemSlots>,
+  emits: ['click-reply', 'click-like', 'confirm-reply'],
   setup(props) {
     const computedData = computed(() => props.data);
     const computedReply = computed(() => props.reply);
@@ -72,36 +67,6 @@ export default defineComponent({
       __COMMENT_FIELD_CONFIG_KEY__,
       defaultFields
     ) as ComputedRef<ICommentConfig>;
-    const clickReplyMapFn = inject(__COMMENT_CLICK_KEY__, {});
-    const executeCallback = (
-      key: 'reply' | 'like' | 'submit-reply',
-      value = '',
-      ...args: any[]
-    ) => {
-      if (key === 'reply' && isFunction(clickReplyMapFn[key])) {
-        clickReplyMapFn[key]({
-          value,
-          item: computedData.value,
-          level1: computedLevel1.value,
-          ...args,
-        });
-        return;
-      }
-      if (key === 'like' && isFunction(clickReplyMapFn[key])) {
-        clickReplyMapFn[key]({
-          item: computedData.value,
-          level1: computedLevel1.value,
-          ...args,
-        });
-      }
-      if (key === 'submit-reply' && isFunction(clickReplyMapFn[key])) {
-        clickReplyMapFn[key]({
-          item: computedData.value,
-          level1: computedLevel1.value,
-          ...args,
-        });
-      }
-    };
     /**
      * 获取值
      * @param key
@@ -130,7 +95,7 @@ export default defineComponent({
         reply: computedLevel1.value,
       };
     };
-    onClickOutside(commentRef, (event) => {
+    onClickOutside(commentRef, () => {
       replyState.value.isEditable = false;
       actionRef.value?.replyDone(false);
     });
@@ -144,7 +109,6 @@ export default defineComponent({
       computedIsSubReply,
       computedLevel1,
       editorInputRef,
-      executeCallback,
       getSlotsParameter,
     };
   },
@@ -288,13 +252,17 @@ export default defineComponent({
         </div>
       ) : null;
     };
+    /**
+     * 点击回复
+     * @param reply
+     */
     const handleClickReply = ({ reply }) => {
       this.replyState.isEditable = reply;
-      this.executeCallback('submit-reply', '', this.replyState);
       if (this.replyState.isEditable) {
         nextTick(() => {
           this.editorInputRef?.focus();
           this.replyState.placeholder = `回复 @${getValueByKey('username')}`;
+          this.$emit('click-reply');
         });
       }
     };
@@ -304,8 +272,15 @@ export default defineComponent({
         this.replyState.isEditable = false;
       }
     };
+    /**
+     * 提交回复
+     * @param value
+     */
     const handleClickSubmit = (value: string) => {
-      this.executeCallback('reply', value, handleClearValue);
+      this.$emit('confirm-reply', {
+        value,
+        clear: handleClearValue,
+      });
     };
     /**
      * 操作
@@ -322,9 +297,7 @@ export default defineComponent({
         return isActions ? (
           <Action
             ref="actionRef"
-            onClickLike={(...args: any[]) =>
-              this.executeCallback('like', '', ...args)
-            }
+            onClickLike={(args: any) => this.$emit('click-like', '', args)}
             onClickReply={handleClickReply}
           ></Action>
         ) : undefined;

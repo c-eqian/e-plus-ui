@@ -274,3 +274,12 @@ export type ItemSlots = {
   content: CommentItemRender;
   default: any;
 };
+
+export interface IResolveParams {
+  item: CommentDataRow;
+  isSubReply: boolean;
+  level1: CommentDataRow;
+  reply: CommentDataRow;
+  index: number;
+  $index: number;
+}
