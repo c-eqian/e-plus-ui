@@ -47,7 +47,6 @@ const props = withDefaults(defineProps<TextFoldProps>(), {
   line: 3,
   position: 'right',
 });
-console.log(props.position);
 const computedLine = computed(() => {
   const _line = Math.trunc(Number(props.line));
   return _line > 0 ? _line : 1;

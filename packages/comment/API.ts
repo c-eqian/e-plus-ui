@@ -159,7 +159,7 @@ export interface ICommentFields<T = any> {
    * 当前评论的用户名，支持链式，如{a:{b:1}} a.b => 1
    * @default userInfo.username
    */
-  username: GetTypeFrom<T>;
+  username?: GetTypeFrom<T>;
   /**
    * 用户头像地址
    * @default userInfo.avatar
@@ -258,7 +258,7 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    * 折叠按钮位置
    * @default left
    */
-  foldBtnPosition: 'left' | 'right';
+  foldBtnPosition?: 'left' | 'right';
 }
 
 /**

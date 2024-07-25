@@ -1,13 +1,12 @@
 <template>
   <div class="play">
-    <loading></loading>
     <ep-card shadow="hover">
-      <template #title></template>
+      <Index></Index>
     </ep-card>
   </div>
 </template>
 <script setup lang="ts">
-import Loading from './loading.vue';
+import Index from './index.vue';
 </script>
 <style lang="less">
 html,

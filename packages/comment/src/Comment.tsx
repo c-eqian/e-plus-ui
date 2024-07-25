@@ -83,10 +83,16 @@ export default defineComponent({
         const { $index, index } = _recordItem;
         // dataLevel只有两级的情况下，回复一级,形成二级
         if (($index === -1 && index > -1) || $index > -1) {
+          const newIndex = $index > -1 ? $index : index;
           const subCommentKey = getValueByKey('subComment');
-          const _subList =
-            list[$index ? $index : index][subCommentKey].list ?? [];
-          commentData.value.list[$index ? $index : index][subCommentKey].list =
+          if (!list[newIndex][subCommentKey]) {
+            list[newIndex][subCommentKey] = {
+              total: 1,
+              list: [],
+            };
+          }
+          const _subList = list[newIndex][subCommentKey].list ?? [];
+          commentData.value.list[newIndex][subCommentKey].list =
             _subList.concat(items);
           return;
         }
@@ -356,6 +362,12 @@ export default defineComponent({
             }),
         };
       }
+      addMapValues(item, {
+        parent: undefined,
+        children: [],
+        $index: -1,
+        index: $index,
+      });
       return null;
     };
     // 评论渲染

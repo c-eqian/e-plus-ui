@@ -1,6 +1,6 @@
 import type { CommentDataRow } from '../API';
 import { isArray } from 'co-utils-vue';
-import { getCurrentInstance } from 'vue';
+import { getCurrentInstance, ref } from 'vue';
 export type CommentRecordMap = {
   /**
    * 子节点
@@ -21,8 +21,8 @@ export type CommentRecordMap = {
 };
 export const useComment = () => {
   // 一个父节点与子节点的映射
-  const recordsDataMap = new Map<string, CommentRecordMap>();
-  const instance = getCurrentInstance() as any;
+  const recordsDataMap = ref(new Map<string, CommentRecordMap>());
+  const instance = getCurrentInstance()?.proxy as any;
   const resolve = (list: CommentDataRow[]) => {
     if (!isArray(list)) {
       throw new TypeError('[resolve] list must be an array');
@@ -30,14 +30,16 @@ export const useComment = () => {
   };
   const getMapValues = (item: CommentDataRow) => {
     const key = instance.getValueByKey('commentId');
-    return recordsDataMap.get(item[key]);
+    console.log(recordsDataMap.value);
+    return recordsDataMap.value.get(item[key]);
   };
   const addMapValues = (item: CommentDataRow, values: CommentRecordMap) => {
     const key = instance.getValueByKey('commentId');
-    recordsDataMap.set(item[key], values);
+    recordsDataMap.value.set(item[key], values);
+    console.log(recordsDataMap.value);
   };
   const clearMapValues = () => {
-    recordsDataMap.clear();
+    recordsDataMap.value.clear();
   };
   // 获取包含父子节点的comment
   const getRecordComment = (recordItem: CommentDataRow) => {
@@ -79,6 +81,7 @@ export const useComment = () => {
     resolve,
     getMapValues,
     addMapValues,
+    recordsDataMap,
     clearMapValues,
     getRecordComment,
     getChildrenComments,
