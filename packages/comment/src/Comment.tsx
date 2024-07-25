@@ -2,8 +2,10 @@ import {
   computed,
   defineComponent,
   h,
+  onUnmounted,
   type PropType,
   provide,
+  ref,
   SlotsType,
 } from 'vue';
 import CommentItem from './Item';
@@ -17,6 +19,8 @@ import {
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from '../commentProps';
 import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
+import { useComment } from '../hooks/useComment';
+import item from './Item';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -32,13 +36,77 @@ export default defineComponent({
   emits: ['click-reply', 'click-like', 'confirm-reply'],
   slots: Object as SlotsType<ItemSlots>,
   setup: (props) => {
-    const computedData = computed(() => props.data);
+    const commentData = ref<ICommentData>(props.data as ICommentData);
+    const computedData = computed(() => commentData.value);
     const computedConfig = computed(() => {
       return useMerge({}, defaultFields, props.config) as ICommentConfig;
     });
     provide(__COMMENT_FIELD_CONFIG_KEY__, computedConfig);
+    /**
+     * 获取值
+     * @param key
+     */
+    const getValueByKey = (key: keyof ICommentConfig) => {
+      if (!key && !computedConfig.value?.[key as unknown as any]) return '';
+      return computedConfig.value[key];
+    };
+    const {
+      getMapValues,
+      addMapValues,
+      clearMapValues,
+      getRecordComment,
+      getChildrenComments,
+      getParentComment,
+      getParentNodes,
+    } = useComment();
+    onUnmounted(() => {
+      clearMapValues();
+    });
+    /**
+     *
+     * @param recordItem 如果为空，默认一级
+     * @param items
+     */
+    const appendComments = (
+      items: CommentDataRow[] | CommentDataRow,
+      recordItem?: CommentDataRow
+    ) => {
+      const { list = [] } = commentData.value;
+      //   首次回复
+      if (!recordItem || isEmpty(recordItem)) {
+        commentData.value.list = list?.concat(items);
+        return;
+      }
+      if (getValueByKey('dataLevel') < 3) {
+        const _recordItem = getMapValues(recordItem);
+        if (!_recordItem) return;
+        const { $index, index } = _recordItem;
+        // dataLevel只有两级的情况下，回复一级,形成二级
+        if (($index === -1 && index > -1) || $index > -1) {
+          const subCommentKey = getValueByKey('subComment');
+          const _subList =
+            list[$index ? $index : index][subCommentKey].list ?? [];
+          commentData.value.list[$index ? $index : index][subCommentKey].list =
+            _subList.concat(items);
+          return;
+        }
+      } else {
+        const parentNodes = getParentNodes(recordItem);
+        if (parentNodes && parentNodes?.length > 0) {
+        }
+      }
+    };
     return {
       computedData,
+      appendComments,
+      getValueByKey,
+      getParentComment,
+      getRecordComment,
+      getChildrenComments,
+      getMapValues,
+      addMapValues,
+      getParentNodes,
+      clearMapValues,
       computedConfig,
     };
   },
@@ -50,6 +118,7 @@ export default defineComponent({
       children,
       reply,
     } = this.computedConfig;
+    const { addMapValues } = this;
     const hasSub = (item: CommentDataRow) => {
       const _subComment = deepObjectValue(item, subComment ?? '');
       return _subComment && !isEmpty(_subComment) && !isEmpty(_subComment.list);
@@ -149,6 +218,9 @@ export default defineComponent({
               reply,
               $index,
               index,
+              resolve: (list: CommentDataRow | CommentDataRow[]) => {
+                this.appendComments(list, item);
+              },
             });
           }}
           key={deepObjectValue(item, commentId ?? '')}
@@ -175,6 +247,12 @@ export default defineComponent({
       $index = -1,
       index = -1
     ) => {
+      addMapValues(item, {
+        parent: parentItem,
+        children: _children ?? [],
+        $index,
+        index,
+      });
       if (parentItem !== undefined) {
         nodes.push(
           renderCommentItem({
@@ -225,6 +303,12 @@ export default defineComponent({
       const nodes: any[] = [];
       if (dataLevel === 2) {
         const _reply = item[reply!] ?? {};
+        addMapValues(item, {
+          parent: level1,
+          children: [],
+          $index,
+          index,
+        });
         if (isEmpty(_reply)) {
           nodes.push(
             renderCommentItem({ item, isSubReply: true, level1, $index, index })
@@ -257,14 +341,22 @@ export default defineComponent({
      */
     const renderSlot = (item: CommentDataRow, $index: number) => {
       const _subComment = deepObjectValue(item, subComment ?? '');
-      return hasSub(item)
-        ? {
-            default: () =>
-              _subComment?.list.map((sub: CommentDataRow, index: number) => {
-                return renderSubComment(sub, item, $index, index);
-              }),
-          }
-        : undefined;
+      if (hasSub(item)) {
+        const { list = [] } = _subComment;
+        addMapValues(item, {
+          parent: undefined,
+          children: list,
+          $index: -1,
+          index: $index,
+        });
+        return {
+          default: () =>
+            list.map((sub: CommentDataRow, index: number) => {
+              return renderSubComment(sub, item, $index, index);
+            }),
+        };
+      }
+      return null;
     };
     // 评论渲染
     const renderComment = () => {
