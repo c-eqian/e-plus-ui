@@ -1,5 +1,5 @@
-import { VNode } from 'vue';
-import { EmojiData } from '../editor/type';
+import type { VNode } from 'vue';
+import type { EmojiData } from '../editor/type';
 
 /**
  * 根据配置类型提取字段类型
@@ -210,7 +210,7 @@ export interface ICommentFields<T = any> {
 /**
  * 评论配置
  */
-export interface ICommentConfig<T = any> extends ICommentFields<T> {
+export type ICommentConfig<T = any> = {
   /**
    * 是否显示等级
    * 支持自定义返回
@@ -259,7 +259,7 @@ export interface ICommentConfig<T = any> extends ICommentFields<T> {
    * @default left
    */
   foldBtnPosition?: 'left' | 'right';
-}
+} & ICommentFields<T>;
 
 /**
  * 插槽
