@@ -101,7 +101,7 @@
     "vite": "5.2.11",
     "vitest": "1.4.0",
     "vue-component-meta": "^1.0.8",
-    "vue-tsc": "^2.0.26"
+    "vue-tsc": "^2.0.29"
   },
   "config": {
     "commitizen": {

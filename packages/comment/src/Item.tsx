@@ -28,7 +28,7 @@ import { onClickOutside } from '@vueuse/core';
 import TextFold from '../../text-fold';
 
 export default defineComponent({
-  name: 'Item',
+  name: 'CommentItem',
   props: {
     data: {
       type: Object as PropType<CommentDataRow>,

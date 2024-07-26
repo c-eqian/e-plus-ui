@@ -3,7 +3,7 @@
       "baseUrl": ".",
       "module": "esnext",
       "target": "es2015",
-      "moduleResolution": "Node",
+      "moduleResolution": "NodeNext",
       "strict": true,
       "allowJs": true,
       "resolveJsonModule": true,

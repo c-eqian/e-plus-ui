@@ -79,7 +79,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     return diff(recordItem);
   };
   /**
-   *
+   * 追加记录
    * @param recordItem 如果为空，默认一级
    * @param items
    */
@@ -115,11 +115,64 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       }
     }
   };
+  /**
+   * 更新
+   * @param recordItem 原始记录项
+   * @param item 新值
+   */
+  const updateComment = (recordItem: CommentDataRow, item: CommentDataRow) => {
+    if (!recordItem || !isEmpty(recordItem)) return;
+    const { getValueByKey } = instance;
+    if (getValueByKey('dataLevel') < 3) {
+      const _recordItem = getMapValues(recordItem);
+      if (!_recordItem) return;
+      const { $index, index } = _recordItem;
+      if (index < 0) return;
+      const { list = [] } = watcherPropsData.data.value;
+      if (isEmpty(list)) return;
+      // 父节点索引-1，一级
+      if ($index < 0) {
+        watcherPropsData.data.value.list[index] = item;
+        return;
+      }
+      const subCommentKey = getValueByKey('subComment');
+      watcherPropsData.data.value.list[$index][subCommentKey].list[index] =
+        item;
+    }
+  };
+  /**
+   * 删除
+   * @param recordItem
+   */
+  const deleteComment = (recordItem: CommentDataRow) => {
+    if (!recordItem || !isEmpty(recordItem)) return;
+    const { getValueByKey } = instance;
+    if (getValueByKey('dataLevel') < 3) {
+      const _recordItem = getMapValues(recordItem);
+      if (!_recordItem) return;
+      const { $index, index } = _recordItem;
+      if (index < 0) return;
+      const { list = [] } = watcherPropsData.data.value;
+      if (isEmpty(list)) return;
+      // 父节点索引-1，一级
+      if ($index < 0) {
+        watcherPropsData.data.value.list.splice(index, 1);
+        return;
+      }
+      const subCommentKey = getValueByKey('subComment');
+      watcherPropsData.data.value.list[$index][subCommentKey].list.splice(
+        index,
+        1
+      );
+    }
+  };
   return {
     resolve,
     getMapValues,
     addMapValues,
     recordsDataMap,
+    updateComment,
+    deleteComment,
     clearMapValues,
     getRecordComment,
     getChildrenComments,

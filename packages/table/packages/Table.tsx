@@ -87,7 +87,7 @@ export default defineComponent({
   ],
   setup(props, { emit }) {
     const czFormRef = ref<FormInstance>();
-    const zkTable = ref<InstanceType<typeof ElTable>>();
+    const epTable = ref<InstanceType<typeof ElTable>>();
     const dataComputed = computed(() => props.data);
     const columnsComputed = computed(() => {
       return props.column.filter((columnsItem) => {
@@ -235,7 +235,7 @@ export default defineComponent({
     };
     return {
       czFormRef,
-      zkTable,
+      epTable,
       dataComputed,
       columnsComputed,
       // dictValue,
@@ -250,13 +250,13 @@ export default defineComponent({
       handleRowDbClick,
       handleCurrentChange,
       setCurrentRow(row: any) {
-        zkTable.value?.setCurrentRow(row);
+        epTable.value?.setCurrentRow(row);
       },
       toggleRowSelection(row: any, selected: boolean) {
-        zkTable.value?.toggleRowSelection(row, selected);
+        epTable.value?.toggleRowSelection(row, selected);
       },
       clearSelection() {
-        zkTable.value?.clearSelection();
+        epTable.value?.clearSelection();
       },
     };
   },
@@ -298,7 +298,7 @@ export default defineComponent({
     const tableRender = () => {
       return (
         <ElTable
-          ref="zkTable"
+          ref="epTable"
           {...setTableProps()}
           onRow-dblclick={this.handleRowDbClick}
           onSelection-change={this.handleSelectionChange}
