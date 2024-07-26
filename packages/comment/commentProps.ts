@@ -6,6 +6,7 @@ export const defaultFields: Record<keyof ICommentConfig, any> = {
   createDate: 'createDate',
   publisher: 'publisher',
   likeCount: 'likeCount',
+  like: 'like',
   updateDate: 'updateDate',
   username: 'userInfo.username',
   avatar: 'userInfo.avatar',
