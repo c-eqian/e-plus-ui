@@ -307,13 +307,16 @@ export default defineComponent({
       }
       const isActions = getValueByKey('actions', true);
       if (isBoolean(isActions)) {
-        return isActions ? (
-          <Action
-            ref="actionRef"
-            onClickLike={(args: any) => this.$emit('click-like', '', args)}
-            onClickReply={handleClickReply}
-          ></Action>
-        ) : undefined;
+        return isActions
+          ? h(Action, {
+              ref: ($el) => (this.actionRef = $el),
+              modelValue: this.computedData[getValueByKey('like', true)],
+              'onUpdate:modelValue': (value: any) =>
+                (this.computedData[getValueByKey('like', true)] = value),
+              onClickLike: (args: any) => this.$emit('click-like', args),
+              onClickReply: handleClickReply,
+            })
+          : undefined;
       }
       if (isFunction(isActions)) {
         this.replyState.isEditable = false;

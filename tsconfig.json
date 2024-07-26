@@ -16,6 +16,7 @@
       "declaration": true,
       "jsx": "preserve",
       "jsxFactory": "h",
+      "jsxImportSource": "vue",
       "paths": {
         "element-plus": ["node_modules/element-plus"]
       },

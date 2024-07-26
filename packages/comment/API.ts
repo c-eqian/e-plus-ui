@@ -72,10 +72,6 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
    */
   likeCount?: number;
   /**
-   * 自定义键，判断是否回复
-   */
-  isReply?: boolean;
-  /**
    * 更新时间
    */
   updateDate?: string;
@@ -107,6 +103,10 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
    * 被回复的二级评论的数据结构
    */
   reply?: CommentDataRow<T>;
+  /**
+   * 是否点赞
+   */
+  like?: number | boolean;
   /**
    * 等级，默认最高级 6
    */
@@ -150,6 +150,11 @@ export interface ICommentFields<T = any> {
    * @default likeCount
    */
   likeCount?: GetTypeFrom<T>;
+  /**
+   * 是否点赞
+   * @default like
+   */
+  like?: GetTypeFrom<T>;
   /**
    * 更新时间
    * @default updateDate
