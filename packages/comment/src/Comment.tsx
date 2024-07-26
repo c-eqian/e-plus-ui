@@ -57,46 +57,13 @@ export default defineComponent({
       getChildrenComments,
       getParentComment,
       getParentNodes,
-    } = useComment();
+      appendComments,
+    } = useComment({
+      data: commentData,
+    });
     onUnmounted(() => {
       clearMapValues();
     });
-    /**
-     *
-     * @param recordItem 如果为空，默认一级
-     * @param items
-     */
-    const appendComments = (
-      items: CommentDataRow[] | CommentDataRow,
-      recordItem?: CommentDataRow
-    ) => {
-      const { list = [] } = commentData.value;
-      //   首次回复
-      if (!recordItem || isEmpty(recordItem)) {
-        commentData.value.list = list?.concat(items);
-        return;
-      }
-      if (getValueByKey('dataLevel') < 3) {
-        const _recordItem = getMapValues(recordItem);
-        if (!_recordItem) return;
-        const { $index, index } = _recordItem;
-        // dataLevel只有两级的情况下，回复一级,形成二级
-        if (($index === -1 && index > -1) || $index > -1) {
-          const newIndex = $index > -1 ? $index : index;
-          const subCommentKey = getValueByKey('subComment');
-          if (!list[newIndex][subCommentKey]) {
-            list[newIndex][subCommentKey] = {
-              total: 1,
-              list: [],
-            };
-          }
-          const _subList = list[newIndex][subCommentKey].list ?? [];
-          commentData.value.list[newIndex][subCommentKey].list =
-            _subList.concat(items);
-          return;
-        }
-      }
-    };
     return {
       computedData,
       appendComments,

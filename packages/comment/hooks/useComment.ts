@@ -1,6 +1,6 @@
-import type { CommentDataRow } from '../API';
-import { isArray } from 'co-utils-vue';
-import { getCurrentInstance, ref } from 'vue';
+import type { CommentDataRow, ICommentData } from '../API';
+import { isArray, isEmpty } from 'co-utils-vue';
+import { getCurrentInstance, type Ref, ref } from 'vue';
 export type CommentRecordMap = {
   /**
    * 子节点
@@ -19,7 +19,10 @@ export type CommentRecordMap = {
    */
   $index: number;
 };
-export const useComment = () => {
+interface WatcherPropsData {
+  data: Ref<ICommentData>;
+}
+export const useComment = (watcherPropsData: WatcherPropsData) => {
   // 一个父节点与子节点的映射
   const recordsDataMap = ref(new Map<string, CommentRecordMap>());
   const instance = getCurrentInstance()?.proxy as any;
@@ -30,13 +33,11 @@ export const useComment = () => {
   };
   const getMapValues = (item: CommentDataRow) => {
     const key = instance.getValueByKey('commentId');
-    console.log(recordsDataMap.value);
     return recordsDataMap.value.get(item[key]);
   };
   const addMapValues = (item: CommentDataRow, values: CommentRecordMap) => {
     const key = instance.getValueByKey('commentId');
     recordsDataMap.value.set(item[key], values);
-    console.log(recordsDataMap.value);
   };
   const clearMapValues = () => {
     recordsDataMap.value.clear();
@@ -77,6 +78,43 @@ export const useComment = () => {
     };
     return diff(recordItem);
   };
+  /**
+   *
+   * @param recordItem 如果为空，默认一级
+   * @param items
+   */
+  const appendComments = (
+    items: CommentDataRow[] | CommentDataRow,
+    recordItem?: CommentDataRow
+  ) => {
+    const { list = [] } = watcherPropsData.data.value;
+    const { getValueByKey } = instance;
+    //   首次回复
+    if (!recordItem || isEmpty(recordItem)) {
+      watcherPropsData.data.value.list = list?.concat(items);
+      return;
+    }
+    if (getValueByKey('dataLevel') < 3) {
+      const _recordItem = getMapValues(recordItem);
+      if (!_recordItem) return;
+      const { $index, index } = _recordItem;
+      // dataLevel只有两级的情况下，回复一级,形成二级
+      if (($index === -1 && index > -1) || $index > -1) {
+        const newIndex = $index > -1 ? $index : index;
+        const subCommentKey = getValueByKey('subComment');
+        if (!list[newIndex][subCommentKey]) {
+          list[newIndex][subCommentKey] = {
+            total: 1,
+            list: [],
+          };
+        }
+        const _subList = list[newIndex][subCommentKey].list ?? [];
+        watcherPropsData.data.value.list[newIndex][subCommentKey].list =
+          _subList.concat(items);
+        return;
+      }
+    }
+  };
   return {
     resolve,
     getMapValues,
@@ -87,5 +125,6 @@ export const useComment = () => {
     getChildrenComments,
     getParentComment,
     getParentNodes,
+    appendComments,
   };
 };
