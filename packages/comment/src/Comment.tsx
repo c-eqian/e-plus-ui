@@ -144,6 +144,12 @@ export default defineComponent({
       if (this.$slots.right) {
         _slots.right = () => this.$slots.right(args as IResolveParams);
       }
+      if (this.$slots.actions) {
+        _slots.actions = () => this.$slots.actions(args as IResolveParams);
+      }
+      if (this.$slots.editor) {
+        _slots.editor = () => this.$slots.editor(args as IResolveParams);
+      }
       return _slots;
     };
     /**
