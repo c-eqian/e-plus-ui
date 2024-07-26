@@ -20,7 +20,6 @@ import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from '../commentProps';
 import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
 import { useComment } from '../hooks/useComment';
-import item from './Item';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -95,10 +94,6 @@ export default defineComponent({
           commentData.value.list[newIndex][subCommentKey].list =
             _subList.concat(items);
           return;
-        }
-      } else {
-        const parentNodes = getParentNodes(recordItem);
-        if (parentNodes && parentNodes?.length > 0) {
         }
       }
     };
