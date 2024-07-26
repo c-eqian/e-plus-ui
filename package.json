@@ -3,6 +3,10 @@
   "version": "1.0.1-rc.0",
   "license": "MIT",
   "description": "a component library for Vue 3",
+  "workspaces": [
+    "docs",
+    "play"
+  ],
   "scripts": {
     "dev": "pnpm -C play dev",
     "build:release": "esno script/release.ts",
