@@ -161,7 +161,7 @@ export default defineComponent({
           level1={level1}
           isSubReply={isSubReply}
           reply={reply}
-          onClickLike={(args: any) => {
+          onClick-like={(args: any) => {
             this.$emit('click-like', {
               ...args,
               item,

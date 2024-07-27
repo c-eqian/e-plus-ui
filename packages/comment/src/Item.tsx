@@ -336,6 +336,7 @@ export default defineComponent({
           ref: ($ref: any) => (this.editorInputRef = $ref),
           modelValue: this.replyState.value,
           useEmojis: getValueByKey('useEmojis', true),
+          emojis: getValueByKey('emojis', true),
           'onUpdate:modelValue': (val: string) => (this.replyState.value = val),
           'onClick-submit': handleClickSubmit,
         });

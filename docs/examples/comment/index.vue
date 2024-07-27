@@ -45,32 +45,12 @@ const fieldsConfig: ICommentConfig = {
   // 如果字段也为ipAddress，可不填
   // ipAddress: 'ipAddress'
 };
-const handleConfirm = (data:any)=>{
-  console.log(data)
-  const { resolve, value, clear } = data
-  setTimeout(()=>{
-    resolve([
-      {
-        userInfo: {
-          username: '王林',
-          avatar: 'https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg',
-          userId: 2
-        },
-        ipAddress: '广州',
-        level: 5,
-        content: value,
-        commentId: 69,
-        createDate: '2018-05-02',
-      }
-    ])
-    clear(true)
-  }, 500)
-}
+
 </script>
 
 <template>
   <div>
-    <ep-comment @confirm-reply="handleConfirm" :data="commentData" :config="fieldsConfig"></ep-comment>
+    <ep-comment :data="commentData" :config="fieldsConfig"></ep-comment>
   </div>
 </template>
 

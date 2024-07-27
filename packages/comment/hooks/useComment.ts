@@ -89,19 +89,22 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   ) => {
     const { list = [] } = watcherPropsData.data.value;
     const { getValueByKey } = instance;
+    console.log(recordItem);
     //   首次回复
     if (!recordItem || isEmpty(recordItem)) {
       watcherPropsData.data.value.list = list?.concat(items);
       return;
     }
-    if (getValueByKey('dataLevel') < 3) {
+      console.log(getValueByKey('dataLevel', true))
+    if (getValueByKey('dataLevel', true) < 3) {
       const _recordItem = getMapValues(recordItem);
+      console.log(_recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;
       // dataLevel只有两级的情况下，回复一级,形成二级
       if (($index === -1 && index > -1) || $index > -1) {
         const newIndex = $index > -1 ? $index : index;
-        const subCommentKey = getValueByKey('subComment');
+        const subCommentKey = getValueByKey('subComment', true);
         if (!list[newIndex][subCommentKey]) {
           list[newIndex][subCommentKey] = {
             total: 1,
@@ -123,7 +126,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   const updateComment = (recordItem: CommentDataRow, item: CommentDataRow) => {
     if (!recordItem || !isEmpty(recordItem)) return;
     const { getValueByKey } = instance;
-    if (getValueByKey('dataLevel') < 3) {
+    if (getValueByKey('dataLevel', true) < 3) {
       const _recordItem = getMapValues(recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;
@@ -135,7 +138,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
         watcherPropsData.data.value.list[index] = item;
         return;
       }
-      const subCommentKey = getValueByKey('subComment');
+      const subCommentKey = getValueByKey('subComment', true);
       watcherPropsData.data.value.list[$index][subCommentKey].list[index] =
         item;
     }
@@ -147,7 +150,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   const deleteComment = (recordItem: CommentDataRow) => {
     if (!recordItem || !isEmpty(recordItem)) return;
     const { getValueByKey } = instance;
-    if (getValueByKey('dataLevel') < 3) {
+    if (getValueByKey('dataLevel', true) < 3) {
       const _recordItem = getMapValues(recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;
@@ -159,7 +162,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
         watcherPropsData.data.value.list.splice(index, 1);
         return;
       }
-      const subCommentKey = getValueByKey('subComment');
+      const subCommentKey = getValueByKey('subComment', true);
       watcherPropsData.data.value.list[$index][subCommentKey].list.splice(
         index,
         1

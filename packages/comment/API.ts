@@ -287,4 +287,18 @@ export interface IResolveParams {
   reply: CommentDataRow;
   index: number;
   $index: number;
+  /**
+   * 提交回复，执行回调是否清空及关闭输入框
+   * @param val
+   */
+  clear?: (val: boolean) => void;
+  /**
+   * 回复事件内容
+   */
+  value?: string;
+  /**
+   * 回复新增
+   * @param items
+   */
+  resolve?: (items: CommentDataRow | CommentDataRow[]) => void;
 }

@@ -1,48 +1,7 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig, ICommentData } from 'e-plus-ui';
+import { EpComment, ICommentConfig, ICommentData, IResolveParams } from 'e-plus-ui';
 import { initEmoji } from '../../utils/emoji';
 import { ElMessage } from 'element-plus';
-type Item = {
-  commentName: string;
-  avatar: string;
-  userId: number;
-  commentId: number;
-  createDate: string;
-  text: string;
-  children: {
-    commentName: string;
-    avatar: string;
-    userId: number;
-    commentId: number;
-    createDate: string;
-    text: string;
-    parentId: number;
-    children: {
-      replyId: number;
-      commentName: string;
-      avatar: string;
-      userId: number;
-      parentId: number;
-      commentId: number;
-      createDate: string;
-      text: string;
-      children: {
-        replyId: number;
-        commentName: string;
-        avatar: string;
-        userId: number;
-        parentId: number;
-        commentId: number;
-        createDate: string;
-        text: string;
-      }[];
-    }[];
-  }[];
-};
-type DataType = {
-  total: number;
-  list: Item[];
-};
 const commentData: ICommentData = {
   total: '99',
   list: [
@@ -99,48 +58,6 @@ const commentData: ICommentData = {
             commentId: 667,
             createDate: '2024-07-06',
             text: '去哪？',
-            children: [
-              {
-                commentName: '王林',
-                avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
-                userId: 6,
-                parentId: 666,
-                commentId: 669,
-                createDate: '2024-07-07',
-                text: '我带你去SHA人。',
-              },
-              {
-                commentName: '许立国',
-                avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
-                userId: 8,
-                parentId: 666,
-                commentId: 670,
-                createDate: '2024-07-07',
-                children: [
-                  {
-                    commentName: '王林',
-                    avatarUrl: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
-                    userId: 6,
-                    parentId: 666,
-                    commentId: 671,
-                    createDate: '2024-07-07',
-                    text: '这杀千刀的许立国',
-                    children: [
-                      {
-                        commentName: '许立国',
-                        avatarUrl: 'https://puui.qpic.cn/vpic_cover/w3533s42ici/w3533s42ici_1702637681_hz.jpg/496',
-                        userId: 8,
-                        parentId: 666,
-                        commentId: 672,
-                        createDate: '2024-06-05',
-                        text: '主子，主子，我错了，真错了',
-                      },
-                    ]
-                  }
-                ],
-                text: '极品!极品啊!',
-              },
-            ]
           },
           {
             commentName: '许立国',
@@ -158,26 +75,23 @@ const commentData: ICommentData = {
 };
 /**
  *
- * @param value 评论的文本内容
- * @param item 当前被回复的评论
- * @param level1 当前评论的父级评论，即一级评论，如果item是一级， level1为{}，
- * @param clear 是否调用清空输入框,接受一个Boolean参数，如果为true,将会关闭输入框
+ * @param data
  */
-const handleReply = (
-  value: string,
-  item: DataType,
-  level1: DataType,
-  clear: (val: boolean) => void
-) => {
-  ElMessage.success(value);
-  console.log({
-    value,
-    clear,
-    item,
-    level1,
-  });
-  // 清空文本，同时关闭输入框
-  clear(true);
+const handleReply = (data: IResolveParams) => {
+  const { resolve, clear, value, item } = data
+  setTimeout(()=>{
+    resolve({
+      commentName: '李慕婉',
+      avatarUrl: 'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
+      userId: 7,
+      parentId: 666,
+      commentId: 666,
+      createDate: '2024-07-06',
+      text: value,
+      reply: item
+    })
+    clear(true)
+  }, 500)
 };
 /**
  * @param item 当前被回复的评论
@@ -194,7 +108,6 @@ const fieldsConfig: ICommentConfig = {
   username: 'commentName',
   avatar: 'avatarUrl',
   userId: 'userId',
-  dataLevel: 3,
   emojis: initEmoji(),
 };
 </script>
@@ -202,8 +115,8 @@ const fieldsConfig: ICommentConfig = {
 <template>
   <div>
     <ep-comment
-      @reply="handleReply"
-      @like="handleLike"
+      @confirm-reply="handleReply"
+      @click-like="handleLike"
       :data="commentData"
       :config="fieldsConfig"
     ></ep-comment>
