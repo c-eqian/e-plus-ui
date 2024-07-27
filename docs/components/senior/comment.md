@@ -40,7 +40,7 @@ comment/action
 :::demo
 comment/customEmoji
 :::
-## 提交回复内容
+## 操作
 1. 组件提供一个`reply`回复提交的事件回调，回调返回参数包含如下:
   - `value` 评论的文本内容 
   - `item` 当前被回复的评论 

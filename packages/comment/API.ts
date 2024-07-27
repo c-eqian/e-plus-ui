@@ -288,6 +288,15 @@ export interface IResolveParams {
   index: number;
   $index: number;
   /**
+   * 是否点赞，点赞事件具备
+   */
+  isLike?: boolean | number;
+  /**
+   * 执行修改点赞状态
+   * @param val
+   */
+  likeDone?: (val: boolean | number) => void;
+  /**
    * 提交回复，执行回调是否清空及关闭输入框
    * @param val
    */

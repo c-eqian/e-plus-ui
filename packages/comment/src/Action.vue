@@ -4,10 +4,7 @@ import EpIcon from '../../icon';
 import { computed, ref } from 'vue';
 import { isBoolean } from 'co-utils-vue';
 const emits = defineEmits(['click-like', 'click-reply']);
-const isLike = defineModel('value', {
-  type: Boolean,
-  default: false,
-});
+const isLike = defineModel();
 const likeDone = (val: boolean) => {
   if (isBoolean(val)) {
     isLike.value = val;
@@ -57,12 +54,15 @@ const _iconColor = computed(() => {
     <div
       class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1"
       @click="handleLike"
+      :class="{
+        'cz-text-[--global-checked-color]': isLike,
+      }"
     >
       <EpIcon :color="_iconColor">
         <CollectionFill v-if="isLike" />
         <Collection v-else />
       </EpIcon>
-      <span>点赞</span>
+      <span>{{ isLike ? '已赞' : '点赞' }}</span>
     </div>
     <div
       class="cz-flex cz-select-none cz-cursor-pointer cz-items-center cz-space-x-1"

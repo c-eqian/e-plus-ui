@@ -13,6 +13,7 @@ const commentData: ICommentData = {
       userId: 1,
       commentId: 99,
       createDate: '2023-10-02',
+      like: true,
       // 非content字段
       text: '你玩过最好玩的游戏是什么呢？',
       subComment: {
@@ -93,12 +94,15 @@ const handleReply = (data: IResolveParams) => {
     clear(true)
   }, 500)
 };
-/**
- * @param item 当前被回复的评论
- * @param level1 当前评论的父级评论，即一级评论，如果item是一级， level1为{}，
+/** 点赞
+ * @param data
  */
-const handleLike = (item, level1)=> {
-  ElMessage.success(`点赞-${item.commentName}`)
+const handleLike = (data: IResolveParams)=> {
+  const { likeDone, isLike } = data
+  setTimeout(()=>{
+    likeDone(!isLike)
+    ElMessage.success(!isLike? `点赞` : '取消点赞')
+  }, 500)
 }
 /**
  * 通过配置修改字段值

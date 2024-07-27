@@ -95,7 +95,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       watcherPropsData.data.value.list = list?.concat(items);
       return;
     }
-      console.log(getValueByKey('dataLevel', true))
+    console.log(getValueByKey('dataLevel', true));
     if (getValueByKey('dataLevel', true) < 3) {
       const _recordItem = getMapValues(recordItem);
       console.log(_recordItem);
