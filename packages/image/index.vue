@@ -36,7 +36,7 @@ const computedImageCls = computed(() => {
       'cz-rounded-full': props.round,
       'cz-bg-[#c0c4cc]': !!$slots.default,
       'cz-text-gray-50': !!$slots.default,
-      'is-skeleton': props.loading,
+      'is-skeleton': props.loading && !$slots.default,
     }"
   >
     <img
