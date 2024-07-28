@@ -1,5 +1,5 @@
-import type { CommentDataRow, ICommentData } from '../API';
-import { isArray, isEmpty } from 'co-utils-vue';
+import { CommentDataRow, CommentLoad, ICommentData } from '../API';
+import { isArray, isEmpty, isFunction } from 'co-utils-vue';
 import { getCurrentInstance, type Ref, ref } from 'vue';
 export type CommentRecordMap = {
   /**
@@ -26,10 +26,21 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   // 一个父节点与子节点的映射
   const recordsDataMap = ref(new Map<string, CommentRecordMap>());
   const instance = getCurrentInstance()?.proxy as any;
-  const resolve = (list: CommentDataRow[]) => {
+  const resolve = (
+    list: CommentDataRow[],
+    data: CommentLoad & { loadDone: any },
+    hasMore?: boolean
+  ) => {
     if (!isArray(list)) {
       throw new TypeError('[resolve] list must be an array');
     }
+    const { isSubReply, loadDone, item } = data;
+    if (isSubReply) {
+      appendComments(list, item, hasMore);
+    } else {
+      appendComments(list, {}, hasMore);
+    }
+    loadDone();
   };
   const getMapValues = (item: CommentDataRow) => {
     const key = instance.getValueByKey('commentId');
@@ -82,23 +93,23 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
    * 追加记录
    * @param recordItem 如果为空，默认一级
    * @param items
+   * @param hasMore
    */
   const appendComments = (
     items: CommentDataRow[] | CommentDataRow,
-    recordItem?: CommentDataRow
+    recordItem?: CommentDataRow,
+    hasMore?: boolean
   ) => {
     const { list = [] } = watcherPropsData.data.value;
     const { getValueByKey } = instance;
-    console.log(recordItem);
     //   首次回复
     if (!recordItem || isEmpty(recordItem)) {
       watcherPropsData.data.value.list = list?.concat(items);
+      watcherPropsData.data.value.hasMore = !!hasMore;
       return;
     }
-    console.log(getValueByKey('dataLevel', true));
     if (getValueByKey('dataLevel', true) < 3) {
       const _recordItem = getMapValues(recordItem);
-      console.log(_recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;
       // dataLevel只有两级的情况下，回复一级,形成二级
@@ -114,6 +125,8 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
         const _subList = list[newIndex][subCommentKey].list ?? [];
         watcherPropsData.data.value.list[newIndex][subCommentKey].list =
           _subList.concat(items);
+        watcherPropsData.data.value.list[newIndex][subCommentKey].hasMore =
+          !!hasMore;
         return;
       }
     }
@@ -169,6 +182,17 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       );
     }
   };
+  const loadData = (data: CommentLoad & { loadDone: any }) => {
+    const { item, isSubReply } = data;
+    const { load } = instance;
+    if (!isFunction(load)) return;
+    load.call(null, {
+      isSubReply,
+      item,
+      resolve: (items: CommentDataRow[], hasMore?: boolean) =>
+        resolve(items, data, hasMore),
+    });
+  };
   return {
     resolve,
     getMapValues,
@@ -182,5 +206,6 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     getParentComment,
     getParentNodes,
     appendComments,
+    loadData,
   };
 };

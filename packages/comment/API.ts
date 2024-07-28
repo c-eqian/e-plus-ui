@@ -58,7 +58,7 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
   /**
    * 创建时间
    */
-  createDate?: string;
+  createDate?: string | Date;
   /**
    * 评论ID
    */
@@ -117,7 +117,17 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
  * 评论基础
  */
 export interface ICommentData<T = any> {
-  total: number;
+  /**
+   * 数据总数
+   */
+  total?: number;
+  /**
+   * 是否还有更多
+   */
+  hasMore?: boolean;
+  /**
+   * 数据列表
+   */
   list: CommentDataRow<T>[];
 }
 
@@ -311,3 +321,15 @@ export interface IResolveParams {
    */
   resolve?: (items: CommentDataRow | CommentDataRow[]) => void;
 }
+
+/**
+ * 加载数据
+ */
+export type CommentLoad = Pick<
+  IResolveParams,
+  'resolve' | 'isSubReply' | 'item'
+>;
+/**
+ * 加载数据
+ */
+export type CommentLoadFn = (load: CommentLoad) => void;

@@ -53,6 +53,10 @@ comment/customEmoji
 :::demo
 comment/submit
 :::
+## 加载数据
+:::demo
+comment/load
+:::
 ## 自定义等级
 通过配置`showLevel`属性，自定义等级图标。
 :::demo

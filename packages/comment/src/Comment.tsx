@@ -7,19 +7,22 @@ import {
   provide,
   ref,
   SlotsType,
+  watch,
 } from 'vue';
 import CommentItem from './Item';
-import {
+import type {
   CommentDataRow,
   ICommentData,
   ICommentConfig,
   ItemSlots,
   IResolveParams,
+  CommentLoadFn,
 } from '../API';
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from '../commentProps';
 import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
 import { useComment } from '../hooks/useComment';
+import LoadMore from './LoadMore.vue';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -31,8 +34,11 @@ export default defineComponent({
       type: Object as PropType<ICommentConfig>,
       default: () => ({}),
     },
+    load: {
+      type: Function as PropType<CommentLoadFn>,
+    },
   },
-  emits: ['click-reply', 'click-like', 'confirm-reply'],
+  emits: ['click-reply', 'click-like', 'confirm-reply', 'load'],
   slots: Object as SlotsType<ItemSlots>,
   setup: (props) => {
     const commentData = ref<ICommentData>(props.data as ICommentData);
@@ -40,6 +46,20 @@ export default defineComponent({
     const computedConfig = computed(() => {
       return useMerge({}, defaultFields, props.config) as ICommentConfig;
     });
+    const loadingMap = ref({
+      level1: false,
+      level2: false,
+    });
+    const loadingStatus = () => {
+      const isLoading = ref(false);
+      const setStatus = (val: boolean) => {
+        isLoading.value = val;
+      };
+      return {
+        isLoading,
+        setStatus,
+      };
+    };
     provide(__COMMENT_FIELD_CONFIG_KEY__, computedConfig);
     /**
      * 获取值
@@ -58,6 +78,7 @@ export default defineComponent({
       getParentComment,
       getParentNodes,
       appendComments,
+      loadData,
     } = useComment({
       data: commentData,
     });
@@ -76,6 +97,9 @@ export default defineComponent({
       getParentNodes,
       clearMapValues,
       computedConfig,
+      loadingMap,
+      loadingStatus,
+      loadData,
     };
   },
   render() {
@@ -122,8 +146,19 @@ export default defineComponent({
     /**
      * 渲染加载更多
      */
-    const renderLoadingMore = () => {
-      return <div class="cz-text-xs">加载更多</div>;
+    const renderLoadingMore = (isSubReply = false, args?: any) => {
+      return (
+        <LoadMore
+          isReply={isSubReply}
+          onLoad={(loadDone: any) =>
+            this.loadData({
+              loadDone,
+              isSubReply,
+              ...args,
+            })
+          }
+        ></LoadMore>
+      );
     };
     /**
      * 评论组件渲染
@@ -172,7 +207,7 @@ export default defineComponent({
               index,
             });
           }}
-          onClickReply={(args: any) => {
+          onClick-reply={(args: any) => {
             this.$emit('click-reply', {
               ...args,
               item,
@@ -183,7 +218,7 @@ export default defineComponent({
               index,
             });
           }}
-          onConfirmReply={(args: any) => {
+          onConfirm-reply={(args: any) => {
             this.$emit('confirm-reply', {
               ...args,
               item,
@@ -316,7 +351,7 @@ export default defineComponent({
     const renderSlot = (item: CommentDataRow, $index: number) => {
       const _subComment = deepObjectValue(item, subComment ?? '');
       if (hasSub(item)) {
-        const { list = [] } = _subComment;
+        const { list = [], hasMore } = _subComment;
         addMapValues(item, {
           parent: undefined,
           children: list,
@@ -324,10 +359,15 @@ export default defineComponent({
           index: $index,
         });
         return {
-          default: () =>
-            list.map((sub: CommentDataRow, index: number) => {
+          default: () => {
+            const vNodes = list.map((sub: CommentDataRow, index: number) => {
               return renderSubComment(sub, item, $index, index);
-            }),
+            });
+            if (hasMore) {
+              vNodes.push(renderLoadingMore(true, { item }));
+            }
+            return vNodes;
+          },
         };
       }
       addMapValues(item, {
@@ -350,7 +390,9 @@ export default defineComponent({
           slots: () => renderSlot(item, index),
         });
       });
-      vNodes.push(renderLoadingMore());
+      if (this.computedData.hasMore) {
+        vNodes.push(renderLoadingMore(false));
+      }
       return vNodes;
     };
     return renderComment();
