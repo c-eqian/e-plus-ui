@@ -5,6 +5,13 @@ import { computed, ref } from 'vue';
 import { isBoolean } from 'co-utils-vue';
 const emits = defineEmits(['click-like', 'click-reply']);
 const isLike = defineModel();
+const props = defineProps({
+  likeCount: {
+    type: Number,
+    default: 0,
+  },
+});
+const likeCount = computed(() => props.likeCount);
 const likeDone = (val: boolean) => {
   if (isBoolean(val)) {
     isLike.value = val;
@@ -62,7 +69,10 @@ const _iconColor = computed(() => {
         <CollectionFill v-if="isLike" />
         <Collection v-else />
       </EpIcon>
-      <span>{{ isLike ? '已赞' : '点赞' }}</span>
+      <span
+        >{{ isLike ? '已赞' : '点赞' }}
+        {{ likeCount > 0 ? `${likeCount}` : '' }}</span
+      >
     </div>
     <div
       class="cz-flex cz-select-none cz-cursor-pointer cz-items-center cz-space-x-1"

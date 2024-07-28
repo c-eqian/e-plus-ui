@@ -310,6 +310,7 @@ export default defineComponent({
         return isActions
           ? h(Action, {
               ref: ($el) => (this.actionRef = $el),
+              likeCount: this.computedData[getValueByKey('likeCount', true)],
               modelValue: this.computedData[getValueByKey('like', true)],
               'onUpdate:modelValue': (value: any) =>
                 (this.computedData[getValueByKey('like', true)] = value),

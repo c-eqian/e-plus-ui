@@ -78,6 +78,8 @@ export default defineComponent({
       getParentComment,
       getParentNodes,
       appendComments,
+      updateComment,
+      updateLikeCount,
       loadData,
     } = useComment({
       data: commentData,
@@ -96,10 +98,12 @@ export default defineComponent({
       addMapValues,
       getParentNodes,
       clearMapValues,
+      updateComment,
       computedConfig,
       loadingMap,
       loadingStatus,
       loadData,
+      updateLikeCount,
     };
   },
   render() {

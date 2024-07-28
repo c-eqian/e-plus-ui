@@ -137,7 +137,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
    * @param item 新值
    */
   const updateComment = (recordItem: CommentDataRow, item: CommentDataRow) => {
-    if (!recordItem || !isEmpty(recordItem)) return;
+    if (!recordItem || isEmpty(recordItem)) return;
     const { getValueByKey } = instance;
     if (getValueByKey('dataLevel', true) < 3) {
       const _recordItem = getMapValues(recordItem);
@@ -154,6 +154,33 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       const subCommentKey = getValueByKey('subComment', true);
       watcherPropsData.data.value.list[$index][subCommentKey].list[index] =
         item;
+    }
+  };
+  /**
+   * 更新评论数量
+   * @param recordItem
+   * @param likeCount
+   */
+  const updateLikeCount = (recordItem: CommentDataRow, likeCount: number) => {
+    if (!recordItem || isEmpty(recordItem)) return;
+    const { getValueByKey } = instance;
+    if (getValueByKey('dataLevel', true) < 3) {
+      const _recordItem = getMapValues(recordItem);
+      if (!_recordItem) return;
+      const { $index, index } = _recordItem;
+      if (index < 0) return;
+      const { list = [] } = watcherPropsData.data.value;
+      if (isEmpty(list)) return;
+      // 父节点索引-1，一级
+      if ($index < 0) {
+        watcherPropsData.data.value.list[index][getValueByKey('likeCount')] =
+          likeCount;
+        return;
+      }
+      const subCommentKey = getValueByKey('subComment', true);
+      watcherPropsData.data.value.list[$index][subCommentKey].list[index][
+        getValueByKey('likeCount')
+      ] = likeCount;
     }
   };
   /**
@@ -206,6 +233,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     getParentComment,
     getParentNodes,
     appendComments,
+    updateLikeCount,
     loadData,
   };
 };
