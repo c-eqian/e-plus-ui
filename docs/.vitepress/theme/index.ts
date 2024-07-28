@@ -14,6 +14,7 @@ import 'tailwindcss/utilities.css';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import { icons } from '@e-plus-ui/icons/global'
+import locale from 'element-plus/dist/locale/zh-cn'
 // 图标并进行全局注册
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'prism-themes/themes/prism-one-dark.css'
@@ -31,7 +32,9 @@ export default {
     // app.component('demo-preview', AntDesignContainer)
     app.use(cz)
     // 注册element-plus
-    app.use(ElementPlus);
+    app.use(ElementPlus, {
+        locale
+    });
     // 全局引入vp-demo组件
     globals.forEach(([name, Comp]) => {
       app.component(name, Comp);
