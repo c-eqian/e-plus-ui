@@ -291,11 +291,29 @@ export type ItemSlots = {
 };
 
 export interface IResolveParams {
+  /**
+   * 当前评论项
+   */
   item: CommentDataRow;
+  /**
+   * 是否是二级回复
+   */
   isSubReply: boolean;
+  /**
+   * 所属一级评论
+   */
   level1: CommentDataRow;
+  /**
+   * 回复
+   */
   reply: CommentDataRow;
+  /**
+   * 当前项索引
+   */
   index: number;
+  /**
+   * 父节点索引
+   */
   $index: number;
   /**
    * 是否点赞，点赞事件具备

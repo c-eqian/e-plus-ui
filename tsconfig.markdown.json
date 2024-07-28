@@ -11,6 +11,6 @@
       "emitDeclarationOnly": true,
       "esModuleInterop": true
     },
-    "include": ["packages/**/*/type.ts"],
+    "include": ["packages/**/*/type.ts", "packages/**/*/API.ts"],
     "exclude": ["node_modules", "**/__tests__/**", "**/types/**"]
 }
