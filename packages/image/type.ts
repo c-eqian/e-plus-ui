@@ -28,4 +28,9 @@ export interface IImage {
    * @default -
    */
   borderRadius?: number | string;
+  /**
+   * 是否显示加载骨架
+   * @default true
+   */
+  loading?: boolean;
 }
