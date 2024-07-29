@@ -1,1 +1,0 @@
-import{_,C as c,o as s,c as a,H as o,w as e,a as d}from"./framework.790dffa7.js";const n={},r={class:"cz-h-full"};function l(p,i){const t=c("ep-card");return s(),a("div",r,[o(t,{title:"标题"},{title:e(()=>[]),default:e(()=>[d("这是卡片 ")]),_:1})])}const u=_(n,[["render",l],["__scopeId","data-v-db3d02d4"]]);export{u as default};
