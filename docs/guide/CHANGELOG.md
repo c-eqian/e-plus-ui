@@ -1,4 +1,61 @@
-# 更新日志
+# 更新日志 
+
+
+## [1.1.0](https://github.com/c-eqian/e-plus-ui/compare/v1.0.1-rc.0...v1.1.0) (2024-07-29)
+
+
+###   Chores | 其他更新
+
+* **pnpm:** 添加pnpm ([5c56b9f](https://github.com/c-eqian/e-plus-ui/commit/5c56b9ff280e8b9d6c684cabcab33da30e9093a8))
+* release v1.0.1-rc.0 ([c2d01f4](https://github.com/c-eqian/e-plus-ui/commit/c2d01f40476623ba61011649a0869ea824b8384d))
+
+
+###   Bug Fixes | Bug 修复
+
+* **all:** 路径修复 ([cb7227f](https://github.com/c-eqian/e-plus-ui/commit/cb7227f032f6376d529bba1aea571972efd5ae10))
+* **comment:** 取消三级以上数据结构 ([520ca9a](https://github.com/c-eqian/e-plus-ui/commit/520ca9a7228d0eed6593e1e4c1aabc7592ba4a3f))
+* **comment:** 优化回复 ([f03e07f](https://github.com/c-eqian/e-plus-ui/commit/f03e07f671be96a0613f327724063d752d430e4c))
+* **comment:** 优化回复 ([732bd51](https://github.com/c-eqian/e-plus-ui/commit/732bd517d1bf97bb0988a9560fc0b5d24d212843))
+* **comment:** 优化回复 ([ef6372a](https://github.com/c-eqian/e-plus-ui/commit/ef6372a464ebcdc5e12a8ebd1d217209b9cd9404))
+* **comment:** 优化action ([d3be3eb](https://github.com/c-eqian/e-plus-ui/commit/d3be3ebc78c20951be75eda220f2966fb44cfcb9))
+* **comment:** 优化action ([e04a688](https://github.com/c-eqian/e-plus-ui/commit/e04a688168b8c7f2e4766127f65fe0d02d96900a))
+* **comment:** 优化editor ([953ddd6](https://github.com/c-eqian/e-plus-ui/commit/953ddd6a15f0035a202f7b7b2049ebe859e8cbef))
+* **image:** 优化自定义插槽状态下骨架动画 ([1e23e0b](https://github.com/c-eqian/e-plus-ui/commit/1e23e0ba03c560013ffb5e06c93ef7a3ca75cf62))
+* **pagination:** 修复分页document在ssr中报错 ([3e680b3](https://github.com/c-eqian/e-plus-ui/commit/3e680b3d5d52e2ebb1ca1d95976f0677ab890490))
+
+
+### ✨ Features | 新功能
+
+* **comment:** 点赞 ([7eab821](https://github.com/c-eqian/e-plus-ui/commit/7eab821fde36193680cefefb430fc0d0978f6cbe))
+* **comment:** 点赞数据绑定 ([2ce00e8](https://github.com/c-eqian/e-plus-ui/commit/2ce00e806fc252c225a7a05bea0f14a5b52534e7))
+* **comment:** 点赞数据绑定 ([796a7e5](https://github.com/c-eqian/e-plus-ui/commit/796a7e54d36b5d9b91db06ee003f274bd2cc6567))
+* **comment:** 集成TextFold组件 ([4832f83](https://github.com/c-eqian/e-plus-ui/commit/4832f8312c06f427b7db25ecf570fd652c473251))
+* **comment:** 添加加载 ([33bd5c1](https://github.com/c-eqian/e-plus-ui/commit/33bd5c10c39a4c0eee6a69acd1de333a4c810388))
+* **comment:** 添加自定义action ([cd118ec](https://github.com/c-eqian/e-plus-ui/commit/cd118ec1301be5fcb20db9995e41b4ea7690a7ac))
+* **comment:** 新增方法 ([954bfd2](https://github.com/c-eqian/e-plus-ui/commit/954bfd2bde2120209080f15539e393c078008f12))
+* **comment:** 新增方法 ([72f2ef7](https://github.com/c-eqian/e-plus-ui/commit/72f2ef790765a7af863d9aeee92db2e69cb179ce))
+* **comment:** 优化 ([3c6dc6f](https://github.com/c-eqian/e-plus-ui/commit/3c6dc6fd4e3004802c0617bfa15d2e460c78bc27))
+* **comment:** 优化等级 ([ac2b1f3](https://github.com/c-eqian/e-plus-ui/commit/ac2b1f37ff03741067302a33804367e3b5dda23a))
+* **comment:** 优化逻辑 ([13f0d37](https://github.com/c-eqian/e-plus-ui/commit/13f0d37586036fb71f6ad84da24eb983a739af9a))
+* **comment:** 优化模板插槽 ([fdad99e](https://github.com/c-eqian/e-plus-ui/commit/fdad99ee1826fda84e26f40ed68da69939558a67))
+* **comment:** 优化action ([bea1295](https://github.com/c-eqian/e-plus-ui/commit/bea1295dad77e6005e08aa1834328665ee00a98f))
+* **comment:** 支持分页加载数据 ([206042a](https://github.com/c-eqian/e-plus-ui/commit/206042a875d1bedf54b42a457e500a6991308eab))
+* **comment:** 支持模板插槽 ([b664dcc](https://github.com/c-eqian/e-plus-ui/commit/b664dccd69561c93a08f1d653317d2a03c2a1e62))
+* **comment:** 支持添加数据 ([97ee53e](https://github.com/c-eqian/e-plus-ui/commit/97ee53eb31b6ceac331c1372dfb1a355bba8669d))
+* **comment:** 支持自定义插槽 ([8b68afc](https://github.com/c-eqian/e-plus-ui/commit/8b68afc6fcd660e410b36327f8048ab553355dc9))
+* **constant:** 添加全局 ([d273279](https://github.com/c-eqian/e-plus-ui/commit/d27327959e9f731c97aec137baf3a10d43a34690))
+* **constant:** 添加全局 ([6f9cd68](https://github.com/c-eqian/e-plus-ui/commit/6f9cd687bac1fc042906502799d675640fccac95))
+* **icon:** 添加icon图标 ([1cee31d](https://github.com/c-eqian/e-plus-ui/commit/1cee31d2a6bdc2314201282f6a648d222c8c873c))
+* **image:** 支持加载过程骨架动画 ([e181ec6](https://github.com/c-eqian/e-plus-ui/commit/e181ec63b981e0689d89d9196bede7d1001399e6))
+* **notice:** 新增通知组件 ([0c3d2b0](https://github.com/c-eqian/e-plus-ui/commit/0c3d2b02068ee4d9e3cdf57c399a10fcea179a45))
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* **ALL:** 优化 ([5ac7114](https://github.com/c-eqian/e-plus-ui/commit/5ac7114471b4124ae0abaa2c8d20daf57dceb0c3))
+* **comment:** 优化 ([51b74bd](https://github.com/c-eqian/e-plus-ui/commit/51b74bd09185ee023108ecaee10d95298b7f1860))
+
+# 更新日志 
 
 ###   Bug Fixes | Bug 修复
 
