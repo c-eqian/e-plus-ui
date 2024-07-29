@@ -1,6 +1,14 @@
 # 更新日志 
 
 
+### [1.1.2](https://github.com/c-eqian/e-plus-ui/compare/v1.1.1...v1.1.2) (2024-07-29)
+
+
+###   Chores | 其他更新
+
+* release v1.1.1 ([fa0b80a](https://github.com/c-eqian/e-plus-ui/commit/fa0b80ac9d2bcbd7a918be4b22f5120ba67df3b3))
+* **types:** 类型修饰 ([0b2bdff](https://github.com/c-eqian/e-plus-ui/commit/0b2bdffef23dbbf60376af2efd487b8b624953bd))
+
 ### [1.1.1](https://github.com/c-eqian/e-plus-ui/compare/v1.1.0...v1.1.1) (2024-07-29)
 
 
