@@ -1,29 +1,27 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "module": "ESNext",
-      "target": "ESNext",
-      "moduleResolution": "Node",
-      "useDefineForClassFields": true,
-      "strict": true,
-      "allowJs": true,
-      "resolveJsonModule": true,
-      "noImplicitAny": false,
-      "emitDeclarationOnly": true,
-      "composite": true,
-      "esModuleInterop": true,
-      "declarationDir": "e-plus-ui/types",
-      "declaration": true,
-      "jsx": "preserve",
-      "jsxFactory": "h",
-      "jsxImportSource": "vue",
-      "paths": {
-        "element-plus": ["node_modules/element-plus"]
-      },
-      "types": ["vite/client", "element-plus/global"],
-      "skipLibCheck": true,
-      "lib": ["ESNext","DOM"]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "esnext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": false,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true,
+    "declarationDir": "e-plus-ui/types",
+    "declaration": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxImportSource": "vue",
+    "paths": {
+      "element-plus": ["node_modules/element-plus"]
     },
+    "types": ["vite/client", "element-plus/global"],
+    "skipLibCheck": true,
+    "lib": ["ESNext","DOM"]
+  },
   "vueCompilerOptions": {
     "lib": "@vue/runtime-core",
   },
@@ -32,5 +30,5 @@
     "vite.config.mts",
     "./types/auto-imports.d.ts" // 和 AutoImport dts保持一致 引入即可
   ],
-    "exclude": ["node_modules", "**/__tests__/**", "packages/vitest.config.ts"]
+  "exclude": ["node_modules", "**/__tests__/**", "packages/vitest.config.ts"]
 }
