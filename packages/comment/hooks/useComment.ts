@@ -1,4 +1,4 @@
-import { CommentDataRow, CommentLoad, ICommentData } from '../API';
+import { CommentDataRow, CommentLoad, ICommentData } from '../type';
 import { isArray, isEmpty, isFunction } from 'co-utils-vue';
 import { getCurrentInstance, type Ref, ref } from 'vue';
 export type CommentRecordMap = {

@@ -1,4 +1,4 @@
-import type { ICommentConfig } from './API';
+import type { ICommentConfig } from './type';
 
 export const defaultFields: Record<keyof ICommentConfig, any> = {
   commentId: 'commentId',

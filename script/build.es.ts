@@ -6,20 +6,20 @@ import * as fs from 'fs';
 import terser from '@rollup/plugin-terser';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
+import { outDir, packagesPath, projectRoot } from './paths';
 
-const inputDir = resolve(process.cwd(), 'packages');
-const inputsArray = fs.readdirSync(inputDir).filter((name) => {
-  const componentDir = resolve(inputDir, name);
+const inputsArray = fs.readdirSync(packagesPath).filter((name) => {
+  const componentDir = resolve(packagesPath, name);
   const isDir = fs.lstatSync(componentDir).isDirectory();
   return isDir && fs.readdirSync(componentDir).includes('index.ts');
 });
 
 const inputs = inputsArray.reduce((backObj, pkgName) => {
-  backObj[pkgName] = resolve(process.cwd(), inputDir, `${pkgName}/index.ts`);
+  backObj[pkgName] = resolve(packagesPath, `${pkgName}/index.ts`);
   return backObj;
 }, {});
 
-inputs['index'] = resolve(process.cwd(), inputDir, 'index.ts');
+inputs['index'] = resolve(packagesPath, 'index.ts');
 
 const matchModule: string[] = [
   'input',
@@ -58,7 +58,7 @@ export default (): UserConfigExport => {
       alias: [
         {
           find: '@',
-          replacement: resolve(process.cwd(), '..'),
+          replacement: projectRoot,
         },
       ],
     },
@@ -77,9 +77,9 @@ export default (): UserConfigExport => {
     build: {
       cssCodeSplit: true,
       emptyOutDir: true,
-      outDir: resolve(process.cwd(), 'e-plus-ui', 'es'),
+      outDir: resolve(outDir, 'es'),
       lib: {
-        entry: resolve(process.cwd(), inputDir, 'index.ts'),
+        entry: resolve(packagesPath, 'index.ts'),
         formats: ['es'],
       },
       rollupOptions: {

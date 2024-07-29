@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { resolve } from 'path';
 import terser from '@rollup/plugin-terser';
+import { outDir, packagesPath, projectRoot } from './paths';
 
 export default (): UserConfigExport => {
   return {
@@ -11,17 +12,17 @@ export default (): UserConfigExport => {
       alias: [
         {
           find: '@',
-          replacement: resolve(process.cwd(), '..'),
+          replacement: projectRoot,
         },
       ],
     },
     plugins: [vue(), vueJsx()],
     build: {
       cssCodeSplit: false,
-      outDir: resolve(process.cwd(), 'e-plus-ui', 'lib'),
+      outDir: resolve(outDir, 'lib'),
       emptyOutDir: true,
       lib: {
-        entry: resolve(process.cwd(), 'src/index.ts'),
+        entry: resolve(packagesPath, 'index.ts'),
         name: 'e-plus-ui',
         formats: ['es'],
         fileName: (name) => `index.js`,

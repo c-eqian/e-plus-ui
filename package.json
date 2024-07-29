@@ -22,6 +22,7 @@
     "build:types": " node ./script/generate.docs.js",
     "build:table": " node ./script/generate.table.js",
     "test": "vitest run",
+    "remove": "rimraf docs/node_modules/ play/node_modules/ ./node_modules/",
     "generate:icons": "pnpm -C packages/icons generate",
     "lint:eslint": "eslint \"packages/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",

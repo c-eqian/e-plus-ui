@@ -5,6 +5,7 @@ import {
   ElRadio,
   ElTable,
   ElTableColumn,
+  type FormInstance,
   type FormValidateCallback,
 } from 'element-plus';
 import {
@@ -18,9 +19,8 @@ import {
   watchEffect,
 } from 'vue';
 
-import { ITableColumnConfig, OperationType } from '../type';
+import type { ITableColumnConfig, OperationType } from '../type';
 import EpTableColumn from './TableColumn';
-type FormInstance = InstanceType<typeof ElForm>;
 export default defineComponent({
   name: 'EpTable',
   props: {

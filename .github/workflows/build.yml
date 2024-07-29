@@ -37,8 +37,8 @@ jobs:
       - run:  git config --global user.name "eqian"
       - name: 构建文档
         #        run: yarn && yarn run docs:build
-#        run: npm install && npm install -g pnpm && cd ./docs && npm install && cd .. && npm run build:docs
-        run: npm install -g pnpm && pnpm install cd && npm run build:docs
+        run: npm install && npm install -g pnpm && cd ./docs && npm install && cd .. && npm run build:docs
+#        run: npm install -g pnpm && pnpm install cd && npm run build:docs
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

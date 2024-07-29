@@ -11,7 +11,7 @@ import {
 } from 'vue';
 import CommentLayout from '../../comment-layout';
 import Image from '../../image/index';
-import type { CommentDataRow, ICommentConfig, ItemSlots } from '../API';
+import type { CommentDataRow, ICommentConfig, ItemSlots } from '../type';
 import CustomComponent from './Component.vue';
 import {
   deepObjectValue,

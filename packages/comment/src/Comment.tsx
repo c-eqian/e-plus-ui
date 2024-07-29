@@ -6,8 +6,7 @@ import {
   type PropType,
   provide,
   ref,
-  SlotsType,
-  watch,
+  type SlotsType,
 } from 'vue';
 import CommentItem from './Item';
 import type {
@@ -17,7 +16,7 @@ import type {
   ItemSlots,
   IResolveParams,
   CommentLoadFn,
-} from '../API';
+} from '../type';
 import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
 import { defaultFields } from '../commentProps';
 import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
