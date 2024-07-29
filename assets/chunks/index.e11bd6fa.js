@@ -1,0 +1,1 @@
+import{f as l}from"../app.390b7fa1.js";import{d as r,h as t,o as n,b as s,l as u}from"./framework.330b59dd.js";import"./theme.18bfc3c8.js";const _=r({__name:"index",setup(m){const e=t("");return(p,o)=>(n(),s(u(l),{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=a=>e.value=a)},null,8,["modelValue"]))}});export{_ as default};
