@@ -18,7 +18,7 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div class="cz-card" :class="classes">
+  <div class="cz-card cz-bg-white dark:cz-bg-dark-2" :class="classes">
     <div class="cz-card-header" v-if="$slots.title || title || $slots.extra">
       <span class="cz-card-header-title">
         <slot name="title">{{ title }}</slot>

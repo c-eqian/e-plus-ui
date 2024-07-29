@@ -18,6 +18,11 @@ export default {
       boxShadow: {
         base: '2px 2px 5px 1px rgba(229,231,235,1)',
       },
+      colors: {
+        dark: '#0a0a0a',
+        'dark-1': '#141414',
+        'dark-2': '#1d1e1f',
+      },
       textColor: {
         sub: '#a0a0a0',
       },
