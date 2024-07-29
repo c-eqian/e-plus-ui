@@ -1,0 +1,1 @@
+import{_ as t,C as o,o as c,c as a,H as s,w as n,a as r}from"./framework.330b59dd.js";const _={};function d(l,p){const e=o("ep-card");return c(),a("div",null,[s(e,{title:"自定义插槽"},{body:n(()=>[r("自定义插槽自定义插槽自定义插槽自定义插槽")]),_:1})])}const i=t(_,[["render",d]]);export{i as default};
