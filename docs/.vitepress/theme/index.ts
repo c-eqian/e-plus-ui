@@ -14,7 +14,7 @@ import 'tailwindcss/utilities.css';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import { icons } from '@e-plus-ui/icons/global'
-import locale from 'element-plus/dist/locale/zh-cn'
+import locale from 'element-plus/dist/locale/zh-cn.mjs'
 // 图标并进行全局注册
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'prism-themes/themes/prism-one-dark.css'
