@@ -276,20 +276,6 @@ export type ICommentConfig<T = any> = {
   foldBtnPosition?: 'left' | 'right';
 } & ICommentFields<T>;
 
-/**
- * 插槽
- */
-export type ItemSlots = {
-  avatar: CommentItemRender;
-  right: CommentItemRender;
-  left: CommentItemRender;
-  level: CommentItemRender;
-  actions: CommentItemRender;
-  editor: CommentItemRender;
-  content: CommentItemRender;
-  default: any;
-};
-
 export interface IResolveParams {
   /**
    * 当前评论项
@@ -339,15 +325,53 @@ export interface IResolveParams {
    */
   resolve?: (items: CommentDataRow | CommentDataRow[]) => void;
 }
-
 /**
  * 加载数据
  */
-export type CommentLoad = Pick<
-  IResolveParams,
-  'resolve' | 'isSubReply' | 'item'
->;
+export type LoadData = {
+  isSubReply: boolean;
+  item: CommentDataRow;
+  resolve: (items: CommentDataRow[], hasMore?: boolean) => void;
+};
 /**
  * 加载数据
  */
-export type CommentLoadFn = (load: CommentLoad) => void;
+export type CommentLoadFn = (load: LoadData) => void;
+/**
+ * 插槽
+ */
+export type ItemSlots = {
+  avatar: CommentItemRender;
+  right: CommentItemRender;
+  left: CommentItemRender;
+  level: CommentItemRender;
+  actions: CommentItemRender;
+  editor: CommentItemRender;
+  content: CommentItemRender;
+  default: any;
+};
+/**
+ * 事件
+ */
+export type CommentEmits = {
+  /**
+   * 点击回复时间
+   * @param data
+   */
+  'click-reply': (data: IResolveParams) => void;
+  /**
+   * 点赞事件
+   * @param data
+   */
+  'click-like': (data: IResolveParams) => void;
+  /**
+   * 提交回复
+   * @param data
+   */
+  'confirm-reply': (data: IResolveParams) => void;
+  /**
+   * 加载数据
+   * @param data
+   */
+  load: (data: LoadData) => void;
+};

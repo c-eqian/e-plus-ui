@@ -1,4 +1,4 @@
-import { CommentDataRow, CommentLoad, ICommentData } from '../type';
+import { CommentDataRow, LoadData, ICommentData } from '../type';
 import { isArray, isEmpty, isFunction } from 'co-utils-vue';
 import { getCurrentInstance, type Ref, ref } from 'vue';
 export type CommentRecordMap = {
@@ -28,7 +28,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   const instance = getCurrentInstance()?.proxy as any;
   const resolve = (
     list: CommentDataRow[],
-    data: CommentLoad & { loadDone: any },
+    data: LoadData & { loadDone: any },
     hasMore?: boolean
   ) => {
     if (!isArray(list)) {
@@ -209,7 +209,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       );
     }
   };
-  const loadData = (data: CommentLoad & { loadDone: any }) => {
+  const loadData = (data: LoadData & { loadDone: any }) => {
     const { item, isSubReply } = data;
     const { load } = instance;
     if (!isFunction(load)) return;
