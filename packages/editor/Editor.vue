@@ -38,6 +38,7 @@ const emojiRef = ref<HTMLDivElement | null>(null);
 const isTextareaFocus = ref(false);
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const isShowAction = ref(false);
+const isShow = ref(false);
 const emojiList = ref<EmojiData[]>([]);
 watchEffect(() => {
   if (props.useEmojis) {
@@ -86,6 +87,7 @@ defineOptions({
 });
 defineExpose({
   focus,
+  isShow,
   setEmojis,
 });
 </script>
@@ -120,7 +122,12 @@ defineExpose({
             class="emoji-container cz-py-1.5 cz-items-center cz-flex"
             :class="[props.useEmojis ? 'cz-justify-between' : 'cz-justify-end']"
           >
-            <el-popover trigger="click" width="260px">
+            <el-popover
+              trigger="click"
+              width="260px"
+              @show="isShow = true"
+              @hide="isShow = false"
+            >
               <template #reference>
                 <div
                   v-if="props.useEmojis"

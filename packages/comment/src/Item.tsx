@@ -105,6 +105,7 @@ export default defineComponent({
       };
     };
     onClickOutside(commentRef, () => {
+      if (editorInputRef.value?.isShow) return;
       replyState.value.isEditable = false;
       actionRef.value?.replyDone(false);
     });
@@ -182,7 +183,6 @@ export default defineComponent({
       if (isFunction(_VNode)) return _VNode(this.getSlotsParameter());
       if (_VNode) {
         const _level = getValueByKey('level', level, false, true);
-        console.log(_level);
         const levelData = LEVEL_MAP[_level] ?? LEVEL_MAP['6'];
         return (
           <ep-icon width="20" height="20" color={levelData.color}>
