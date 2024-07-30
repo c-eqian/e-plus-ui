@@ -88,7 +88,7 @@ export default defineComponent({
       isField = false
     ) => {
       const _key = isField ? `commentFields.${key}` : key;
-      if (isBoolean(level) || isBoolean(configValue)) {
+      if (isBoolean(level) || configValue) {
         return deepObjectValue(config.value, _key);
       }
       return deepObjectValue(
@@ -145,7 +145,7 @@ export default defineComponent({
       if (slotsVNode) {
         return slotsVNode;
       }
-      const _VNode = getValueByKey('avatar');
+      const _VNode = getValueByKey('avatar', 1, false, true);
       return _VNode ? <Image url={_VNode} {...getImageStyle()} /> : undefined;
     };
     /**
@@ -154,7 +154,7 @@ export default defineComponent({
     const renderAddress = (_level = 1) => {
       const isShow = getValueByKey('showIpAddress', true);
       if (isBoolean(isShow)) {
-        const address = getValueByKey('ipAddress', _level as any);
+        const address = getValueByKey('ipAddress', _level as any, false, true);
 
         return address ? (
           <span class="cz-inline-block cz-px-2 cz-text-[10px]">{`${address}`}</span>
@@ -170,7 +170,7 @@ export default defineComponent({
       if (slotsVNode) {
         return slotsVNode;
       }
-      const _VNode = getValueByKey('createDate');
+      const _VNode = getValueByKey('createDate', false, false, true);
       return _VNode ? <time>{useBeforeDate(_VNode)}</time> : undefined;
     };
     const renderLevel = (level?: any) => {
@@ -181,7 +181,8 @@ export default defineComponent({
       const _VNode = getValueByKey('showLevel', true);
       if (isFunction(_VNode)) return _VNode(this.getSlotsParameter());
       if (_VNode) {
-        const _level = getValueByKey('level', level);
+        const _level = getValueByKey('level', level, false, true);
+        console.log(_level);
         const levelData = LEVEL_MAP[_level] ?? LEVEL_MAP['6'];
         return (
           <ep-icon width="20" height="20" color={levelData.color}>
@@ -198,7 +199,7 @@ export default defineComponent({
         return (
           <>
             <strong class="cz-px-1">回复</strong>
-            {getValueByKey('username', 2)}
+            {getValueByKey('username', 2, false, true)}
             {renderLevel(2)}
             {renderAddress(2)}
           </>
@@ -217,7 +218,9 @@ export default defineComponent({
       return (
         <div class="cz-flex cz-items-center">
           <div class="cz-relative cz-w-fit">
-            <span class="cz-pr-1">{getValueByKey('username')}</span>
+            <span class="cz-pr-1">
+              {getValueByKey('username', 1, false, true)}
+            </span>
           </div>
           {renderLevel(1)}
           {renderAddress()}
@@ -233,7 +236,9 @@ export default defineComponent({
       if (computedReply && !isEmpty(computedReply)) {
         return (
           <div class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600">
-            <div class="cz-p-2">“{getValueByKey('content', 2)}”</div>
+            <div class="cz-p-2">
+              “{getValueByKey('content', 2, false, true)}”
+            </div>
           </div>
         );
       }
@@ -247,7 +252,7 @@ export default defineComponent({
       if (slotsVNode) {
         return slotsVNode;
       }
-      const _VNode = getValueByKey('content');
+      const _VNode = getValueByKey('content', 1, false, true);
       return _VNode ? (
         <div>
           <TextFold
@@ -272,7 +277,12 @@ export default defineComponent({
       if (this.replyState.isEditable) {
         nextTick(() => {
           this.editorInputRef?.focus();
-          this.replyState.placeholder = `回复 @${getValueByKey('username')}`;
+          this.replyState.placeholder = `回复 @${getValueByKey(
+            'username',
+            false,
+            false,
+            true
+          )}`;
           this.$emit('click-reply');
         });
       }
@@ -312,10 +322,13 @@ export default defineComponent({
         return isActions
           ? h(Action, {
               ref: ($el) => (this.actionRef = $el),
-              likeCount: this.computedData[getValueByKey('likeCount', true)],
-              modelValue: this.computedData[getValueByKey('like', true)],
+              likeCount:
+                this.computedData[getValueByKey('likeCount', true, true, true)],
+              modelValue:
+                this.computedData[getValueByKey('like', true, true, true)],
               'onUpdate:modelValue': (value: any) =>
-                (this.computedData[getValueByKey('like', true)] = value),
+                (this.computedData[getValueByKey('like', true, true, true)] =
+                  value),
               onClickLike: (args: any) => this.$emit('click-like', args),
               onClickReply: handleClickReply,
             })
