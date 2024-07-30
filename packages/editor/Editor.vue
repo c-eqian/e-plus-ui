@@ -1,9 +1,16 @@
 <script lang="ts" setup>
-import { onBeforeUnmount, type PropType, ref, watchEffect } from 'vue';
+import {
+  nextTick,
+  onBeforeUnmount,
+  type PropType,
+  ref,
+  watchEffect,
+} from 'vue';
 import Image from '../image/index.vue';
 import { ElButton, ElPopover } from 'element-plus';
 import type { EmojiData } from './type';
 import { Position } from '@element-plus/icons-vue';
+
 const emits = defineEmits<{ (event: 'click-submit', v: string): void }>();
 const valueComputed = defineModel({
   type: String,
@@ -49,7 +56,19 @@ const focus = () => {
   textareaRef.value?.focus();
 };
 const handleClickEmoji = (item: EmojiData) => {
-  valueComputed.value += item.name;
+  const selectStart = textareaRef.value?.selectionStart ?? 0;
+  const selectEnd = textareaRef.value?.selectionEnd ?? 0;
+  valueComputed.value =
+    valueComputed.value.substring(0, selectStart) +
+    item.name +
+    valueComputed.value.substring(selectEnd);
+  nextTick(() => {
+    textareaRef.value?.focus(); // 聚焦，否则连续点击追加回无效
+    textareaRef.value?.setSelectionRange(
+      selectStart + item.name.length,
+      selectStart + item.name.length
+    );
+  });
 };
 const handleSubmit = () => {
   emits('click-submit', valueComputed.value);
