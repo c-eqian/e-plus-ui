@@ -63,10 +63,11 @@ export default defineComponent({
     /**
      * 获取值
      * @param key
+     * @param isField
      */
-    const getValueByKey = (key: keyof ICommentConfig) => {
-      if (!key && !computedConfig.value?.[key as unknown as any]) return '';
-      return computedConfig.value[key];
+    const getValueByKey = (key: string, isField = false) => {
+      const _key = isField ? `commentFields.${key}` : key;
+      return deepObjectValue(computedConfig.value, _key) ?? _key;
     };
     const {
       getMapValues,
@@ -106,16 +107,12 @@ export default defineComponent({
     };
   },
   render() {
-    const {
-      subComment,
-      commentId,
-      dataLevel = 2,
-      children,
-      reply,
-    } = this.computedConfig;
-    const { addMapValues } = this;
+    const { addMapValues, getValueByKey } = this;
     const hasSub = (item: CommentDataRow) => {
-      const _subComment = deepObjectValue(item, subComment ?? '');
+      const _subComment = deepObjectValue(
+        item,
+        getValueByKey('subComment', true)
+      );
       return _subComment && !isEmpty(_subComment) && !isEmpty(_subComment.list);
     };
     const getItemSlots = (
@@ -235,7 +232,7 @@ export default defineComponent({
               },
             });
           }}
-          key={deepObjectValue(item, commentId ?? '')}
+          key={deepObjectValue(item, getValueByKey('commentId', true))}
           v-slots={getSlots()}
         ></CommentItem>
       );
@@ -282,7 +279,10 @@ export default defineComponent({
         );
       }
       _children?.forEach((sub: CommentDataRow, _index) => {
-        const __children = deepObjectValue(sub, children ?? '');
+        const __children = deepObjectValue(
+          sub,
+          getValueByKey('children', true)
+        );
         if (__children && !isEmpty(__children)) {
           deepMoreLevel2(sub, __children, level1, nodes, item, $index, _index);
         } else {
@@ -313,8 +313,9 @@ export default defineComponent({
       index: number
     ) => {
       const nodes: any[] = [];
+      const dataLevel = getValueByKey('dataLevel');
       if (dataLevel === 2) {
-        const _reply = item[reply!] ?? {};
+        const _reply = item[getValueByKey('reply', true)!] ?? {};
         addMapValues(item, {
           parent: level1,
           children: [],
@@ -338,7 +339,10 @@ export default defineComponent({
           );
         }
       } else if (dataLevel > 2) {
-        const _children = deepObjectValue(item, children ?? '');
+        const _children = deepObjectValue(
+          item,
+          getValueByKey('children', true)
+        );
         if (!_children || isEmpty(_children)) {
           return renderCommentItem({ item, isSubReply: true, level1, $index });
         }
@@ -352,7 +356,10 @@ export default defineComponent({
      * @param $index
      */
     const renderSlot = (item: CommentDataRow, $index: number) => {
-      const _subComment = deepObjectValue(item, subComment ?? '');
+      const _subComment = deepObjectValue(
+        item,
+        getValueByKey('subComment', true)
+      );
       if (hasSub(item)) {
         const { list = [], hasMore } = _subComment;
         addMapValues(item, {

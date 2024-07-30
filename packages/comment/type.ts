@@ -62,7 +62,7 @@ export type CommentDataRow<T = any> = CommentDataRowExTra<T> & {
   /**
    * 评论ID
    */
-  commentId?: number;
+  commentId?: number | string;
   /**
    * 是否为当前账号的评论
    */
@@ -134,7 +134,7 @@ export interface ICommentData<T = any> {
 /**
  * 字段配置
  */
-export interface ICommentFields<T = any> {
+export type ICommentFields<T = any> = {
   /**
    * 评论内容
    * @default content
@@ -220,7 +220,7 @@ export interface ICommentFields<T = any> {
    */
   level?: GetTypeFrom<T>;
   [k: string]: any;
-}
+};
 
 /**
  * 评论配置
@@ -274,7 +274,21 @@ export type ICommentConfig<T = any> = {
    * @default left
    */
   foldBtnPosition?: 'left' | 'right';
-} & ICommentFields<T>;
+  /**
+   * 数据属性
+   * @default list
+   */
+  list?: string;
+  /**
+   * 是否还有更多
+   * @default false
+   */
+  hasMore?: boolean;
+  /**
+   * 字段配置
+   */
+  commentFields?: ICommentFields<T>;
+};
 
 export interface IResolveParams {
   /**

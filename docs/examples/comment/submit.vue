@@ -116,10 +116,12 @@ const handleLike = (data: IResolveParams)=> {
  * 通过配置修改字段值
  */
 const fieldsConfig: ICommentConfig = {
-  content: 'text',
-  username: 'commentName',
-  avatar: 'avatarUrl',
-  userId: 'userId',
+  commentFields: {
+    content: 'text',
+    username: 'commentName',
+    avatar: 'avatarUrl',
+    userId: 'userId',
+  },
   emojis: initEmoji(),
 };
 </script>

@@ -79,19 +79,21 @@ export default defineComponent({
      * @param key
      * @param level
      * @param configValue
+     * @param isField
      */
     const getValueByKey = (
-      key: keyof ICommentConfig,
+      key: string,
       level: 1 | 2 | boolean = 1,
-      configValue?: boolean
+      configValue?: boolean,
+      isField = false
     ) => {
-      if (!key && !config.value?.[key as unknown as any]) return '';
+      const _key = isField ? `commentFields.${key}` : key;
       if (isBoolean(level) || isBoolean(configValue)) {
-        return config.value[key];
+        return deepObjectValue(config.value, _key);
       }
       return deepObjectValue(
         level == 1 ? computedData.value : computedReply.value,
-        config.value?.[key as unknown as any]
+        deepObjectValue(config.value, _key) ?? _key
       );
     };
     const getSlotsParameter = () => {

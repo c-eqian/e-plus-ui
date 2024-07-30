@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig, ICommentData } from 'e-plus-ui';
+import { EpComment, ICommentConfig } from 'e-plus-ui';
 
 const commentData = {
   total: '99',
@@ -31,10 +31,12 @@ const commentData = {
  * 通过配置修改字段值
  */
 const fieldsConfig: ICommentConfig = {
-  content: 'text',
-  username: 'commentName',
-  avatar: 'avatar',
-  userId: 'userId',
+  commentFields: {
+    content: 'text',
+    username: 'commentName',
+    avatar: 'avatar',
+    userId: 'userId',
+  }
 };
 </script>
 

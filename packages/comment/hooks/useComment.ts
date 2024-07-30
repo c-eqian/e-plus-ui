@@ -43,11 +43,11 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     loadDone();
   };
   const getMapValues = (item: CommentDataRow) => {
-    const key = instance.getValueByKey('commentId');
+    const key = instance.getValueByKey('commentId', true);
     return recordsDataMap.value.get(item[key]);
   };
   const addMapValues = (item: CommentDataRow, values: CommentRecordMap) => {
-    const key = instance.getValueByKey('commentId');
+    const key = instance.getValueByKey('commentId', true);
     recordsDataMap.value.set(item[key], values);
   };
   const clearMapValues = () => {
@@ -173,13 +173,14 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       if (isEmpty(list)) return;
       // 父节点索引-1，一级
       if ($index < 0) {
-        watcherPropsData.data.value.list[index][getValueByKey('likeCount')] =
-          likeCount;
+        watcherPropsData.data.value.list[index][
+          getValueByKey('likeCount', true)
+        ] = likeCount;
         return;
       }
       const subCommentKey = getValueByKey('subComment', true);
       watcherPropsData.data.value.list[$index][subCommentKey].list[index][
-        getValueByKey('likeCount')
+        getValueByKey('likeCount', true)
       ] = likeCount;
     }
   };
