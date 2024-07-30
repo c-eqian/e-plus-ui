@@ -108,7 +108,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       watcherPropsData.data.value.hasMore = !!hasMore;
       return;
     }
-    if (getValueByKey('dataLevel', true) < 3) {
+    if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;
@@ -139,7 +139,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   const updateComment = (recordItem: CommentDataRow, item: CommentDataRow) => {
     if (!recordItem || isEmpty(recordItem)) return;
     const { getValueByKey } = instance;
-    if (getValueByKey('dataLevel', true) < 3) {
+    if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;
@@ -164,7 +164,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   const updateLikeCount = (recordItem: CommentDataRow, likeCount: number) => {
     if (!recordItem || isEmpty(recordItem)) return;
     const { getValueByKey } = instance;
-    if (getValueByKey('dataLevel', true) < 3) {
+    if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;
@@ -191,7 +191,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   const deleteComment = (recordItem: CommentDataRow) => {
     if (!recordItem || !isEmpty(recordItem)) return;
     const { getValueByKey } = instance;
-    if (getValueByKey('dataLevel', true) < 3) {
+    if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
       if (!_recordItem) return;
       const { $index, index } = _recordItem;

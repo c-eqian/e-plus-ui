@@ -170,7 +170,7 @@ export default defineComponent({
       if (slotsVNode) {
         return slotsVNode;
       }
-      const _VNode = getValueByKey('createDate', false, false, true);
+      const _VNode = getValueByKey('createDate', 1, false, true);
       return _VNode ? <time>{useBeforeDate(_VNode)}</time> : undefined;
     };
     const renderLevel = (level?: any) => {
@@ -279,7 +279,7 @@ export default defineComponent({
           this.editorInputRef?.focus();
           this.replyState.placeholder = `回复 @${getValueByKey(
             'username',
-            false,
+            1,
             false,
             true
           )}`;
