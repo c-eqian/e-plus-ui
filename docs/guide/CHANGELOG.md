@@ -1,6 +1,34 @@
 # 更新日志 
 
 
+## [1.2.0](https://github.com/c-eqian/e-plus-ui/compare/v1.1.2...v1.2.0) (2024-08-02)
+
+
+###   Bug Fixes | Bug 修复
+
+* **comment:** 配置字段优化 ([69adf36](https://github.com/c-eqian/e-plus-ui/commit/69adf361cc4f0e31b1a41ee9bfeee2c524e627a9))
+* **comment:** 配置字段优化 ([c210d52](https://github.com/c-eqian/e-plus-ui/commit/c210d524faa9236f777c07a5c64a1f0589f3e758))
+* **comment:** 字段优化 ([f8eb939](https://github.com/c-eqian/e-plus-ui/commit/f8eb93952b77b5194f0a5849acaf08e9f7e013de))
+* **comment:** 字段优化 ([c43bcb3](https://github.com/c-eqian/e-plus-ui/commit/c43bcb3031211ccccf6b38c0142a9c38d9807856))
+* **editor:** 优化光标处添加内容 ([6b3ab71](https://github.com/c-eqian/e-plus-ui/commit/6b3ab71108d812347db03108eb4a7c0cf69c8d0a))
+* **type:** 类型优化 ([bb9059d](https://github.com/c-eqian/e-plus-ui/commit/bb9059da930a28af783ca1e3c98782492965a6d7))
+
+
+### ✨ Features | 新功能
+
+* **all:** 新增menu组件；修改co-utils-vue为@eqian/utils-vue ([e673830](https://github.com/c-eqian/e-plus-ui/commit/e673830449160e0287791c8cf122286caf4cc6b3))
+* **comment:** 修复数据请求不更新 ([4f57a49](https://github.com/c-eqian/e-plus-ui/commit/4f57a4941e00b06fd594d93b4f509fe7050f44b1))
+* **comment:** 修复数据为空报错 ([f0ce64f](https://github.com/c-eqian/e-plus-ui/commit/f0ce64fdff4dbfed9855edce06b5d0c70708e952))
+* **comment:** 优化回复 ([3da29a5](https://github.com/c-eqian/e-plus-ui/commit/3da29a5f20e2ce015322c699e17722a51d917dfd))
+* **comment:** 优化回复 ([6cbcfc9](https://github.com/c-eqian/e-plus-ui/commit/6cbcfc93e6d0e6467e5238d0af50cf7176c81fef))
+* **comment:** 优化回复 ([3994116](https://github.com/c-eqian/e-plus-ui/commit/3994116783c70336efa9e220c96a417be8a7179c))
+
+
+###   Chores | 其他更新
+
+* release v1.1.2 ([01b52fe](https://github.com/c-eqian/e-plus-ui/commit/01b52fe72176a958f3bf7f75607e5e8b387e29f5))
+* **utils:** 更新依赖 ([8373989](https://github.com/c-eqian/e-plus-ui/commit/8373989923e42e2659344b5a9d345be43b754106))
+
 ### [1.1.2](https://github.com/c-eqian/e-plus-ui/compare/v1.1.1...v1.1.2) (2024-07-29)
 
 
