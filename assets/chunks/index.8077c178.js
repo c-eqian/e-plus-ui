@@ -1,0 +1,1 @@
+import{t as e}from"../app.307b32e6.js";import{d as o,o as t,b as r,l as a}from"./framework.330b59dd.js";import"./theme.18bfc3c8.js";const _=o({__name:"index",setup(n){return(s,p)=>(t(),r(a(e),{list:"不要等待，时机永远不会恰到好处"}))}});export{_ as default};
