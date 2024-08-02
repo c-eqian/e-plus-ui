@@ -9,7 +9,7 @@ import {
 import Image from '../image/index.vue';
 import { ElButton, ElPopover } from 'element-plus';
 import type { EmojiData } from './type';
-import { Position } from '@element-plus/icons-vue';
+import { Position } from '@e-plus-ui/icons';
 
 const emits = defineEmits<{ (event: 'click-submit', v: string): void }>();
 const valueComputed = defineModel({

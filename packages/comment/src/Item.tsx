@@ -38,6 +38,12 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    /**
+     * 点击回复之前，如果返回false,则不会进行回复
+     */
+    beforeReply: {
+      type: Function,
+    },
     reply: {
       type: Object as PropType<CommentDataRow>,
       default: () => ({}),
@@ -146,7 +152,9 @@ export default defineComponent({
       if (slotsVNode) {
         return slotsVNode;
       }
-      const _VNode = getValueByKey('avatar', 1, false, true);
+      const _VNode =
+        getValueByKey('avatar', 1, false, true) ||
+        getValueByKey('defaultAvatar', true);
       return _VNode ? <Image url={_VNode} {...getImageStyle()} /> : undefined;
     };
     /**
@@ -272,6 +280,11 @@ export default defineComponent({
      * @param replyDone
      */
     const handleClickReply = ({ reply, replyDone }) => {
+      const { beforeReply } = this.$props;
+      if (isFunction(beforeReply)) {
+        const flag = beforeReply(reply);
+        if (isBoolean(flag) && !flag) return;
+      }
       this.replyState.isEditable = reply;
       this.replyState.replyDone = replyDone;
       if (this.replyState.isEditable) {
@@ -283,7 +296,6 @@ export default defineComponent({
             false,
             true
           )}`;
-          this.$emit('click-reply');
         });
       }
     };

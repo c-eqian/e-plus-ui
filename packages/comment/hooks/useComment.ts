@@ -105,7 +105,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     //   首次回复
     if (!recordItem || isEmpty(recordItem)) {
       watcherPropsData.data.value.list = list?.concat(items);
-      watcherPropsData.data.value.hasMore = !!hasMore;
+      watcherPropsData.data.value[getValueByKey('hasMore')] = !!hasMore;
       return;
     }
     if (getValueByKey('dataLevel') < 3) {
@@ -125,8 +125,9 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
         const _subList = list[newIndex][subCommentKey].list ?? [];
         watcherPropsData.data.value.list[newIndex][subCommentKey].list =
           _subList.concat(items);
-        watcherPropsData.data.value.list[newIndex][subCommentKey].hasMore =
-          !!hasMore;
+        watcherPropsData.data.value.list[newIndex][subCommentKey][
+          getValueByKey('hasMore')
+        ] = !!hasMore;
         return;
       }
     }

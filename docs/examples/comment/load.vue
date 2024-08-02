@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig, ICommentData, IResolveParams, CommentLoad } from 'e-plus-ui';
+import { EpComment, ICommentConfig, ICommentData, IResolveParams, LoadData } from 'e-plus-ui';
 import { initEmoji } from '../../utils/emoji';
 import { ElMessage } from 'element-plus';
 const commentData: ICommentData = {
@@ -124,7 +124,7 @@ const fieldsConfig: ICommentConfig = {
  * @param item isSubReply 为false时不存在
  * @param resolve 加载数据
  */
-const handleLoad = ({isSubReply, item, resolve}:CommentLoad)=> {
+const handleLoad = ({isSubReply, item, resolve}:LoadData)=> {
   console.log(isSubReply)
   setTimeout(()=> {
     resolve([

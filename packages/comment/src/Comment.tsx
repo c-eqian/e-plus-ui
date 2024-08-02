@@ -18,7 +18,12 @@ import type {
   IResolveParams,
   CommentLoadFn,
 } from '../type';
-import { isEmpty, deepObjectValue, useMerge, isFunction } from '@eqian/utils-vue';
+import {
+  isEmpty,
+  deepObjectValue,
+  useMerge,
+  isFunction,
+} from '@eqian/utils-vue';
 import { defaultFields } from '../commentProps';
 import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
 import { useComment } from '../hooks/useComment';
@@ -33,6 +38,12 @@ export default defineComponent({
     config: {
       type: Object as PropType<ICommentConfig>,
       default: () => ({}),
+    },
+    /**
+     * 点击回复之前，如果返回false,则不会进行回复
+     */
+    beforeReply: {
+      type: Function,
     },
     load: {
       type: Function as PropType<CommentLoadFn>,
@@ -214,17 +225,7 @@ export default defineComponent({
               index,
             });
           }}
-          onClick-reply={(args: any) => {
-            this.$emit('click-reply', {
-              ...args,
-              item,
-              isSubReply,
-              level1,
-              reply,
-              $index,
-              index,
-            });
-          }}
+          beforeReply={this.$props.beforeReply}
           onConfirm-reply={(args: any) => {
             this.$emit('confirm-reply', {
               ...args,
@@ -368,7 +369,7 @@ export default defineComponent({
         getValueByKey('subComment', true)
       );
       if (hasSub(item)) {
-        const { hasMore } = _subComment;
+        const hasMore = _subComment[getValueByKey('hasMore')];
         const list = _subComment[getValueByKey('list')];
         addMapValues(item, {
           parent: undefined,
@@ -410,7 +411,7 @@ export default defineComponent({
           });
         }
       );
-      if (this.computedData.hasMore) {
+      if (this.computedData[getValueByKey('hasMore')]) {
         vNodes.push(renderLoadingMore(false));
       }
       return vNodes;

@@ -281,9 +281,13 @@ export type ICommentConfig<T = any> = {
   list?: string;
   /**
    * 是否还有更多
-   * @default false
+   * @default 'hasMore'
    */
-  hasMore?: boolean;
+  hasMore?: string;
+  /**
+   * 默认头像
+   */
+  defaultAvatar?: string;
   /**
    * 字段配置
    */
@@ -369,10 +373,10 @@ export type ItemSlots = {
  */
 export type CommentEmits = {
   /**
-   * 点击回复时间
+   * 点击回复之前处理
    * @param data
    */
-  'click-reply': (data: IResolveParams) => void;
+  'before-reply': (val: boolean) => boolean | void;
   /**
    * 点赞事件
    * @param data

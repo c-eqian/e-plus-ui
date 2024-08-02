@@ -26,7 +26,7 @@ export const defaultFields = {
   useEmojis: false,
   emojis: [],
   list: 'list',
-  hasMore: false,
+  hasMore: 'hasMore',
   foldBtnPosition: 'left',
   lines: 3,
 };
