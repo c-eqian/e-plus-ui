@@ -106,6 +106,7 @@ const handleReply = (data: IResolveParams) => {
  * @param data
  */
 const handleLike = (data: IResolveParams)=> {
+  if (!handleBefore()) return;
   const { likeDone, isLike, item } = data
   setTimeout(()=>{
     likeDone(!isLike)

@@ -279,14 +279,14 @@ export default defineComponent({
      * @param reply
      * @param replyDone
      */
-    const handleClickReply = ({ reply, replyDone }) => {
+    const handleClickReply = ({ reply }) => {
       const { beforeReply } = this.$props;
       if (isFunction(beforeReply)) {
         const flag = beforeReply(reply);
         if (isBoolean(flag) && !flag) return;
       }
-      this.replyState.isEditable = reply;
-      this.replyState.replyDone = replyDone;
+      this.actionRef?.updateReplyState(!reply);
+      this.replyState.isEditable = !reply;
       if (this.replyState.isEditable) {
         nextTick(() => {
           this.editorInputRef?.focus();
@@ -302,11 +302,8 @@ export default defineComponent({
     const handleClearValue = (close = false) => {
       this.replyState.value = '';
       if (close) {
-        const { replyDone } = this.replyState;
         this.replyState.isEditable = false;
-        if (isFunction(replyDone)) {
-          replyDone(!close);
-        }
+        this.actionRef?.updateReplyState(close);
       }
     };
     /**
