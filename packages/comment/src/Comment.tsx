@@ -7,6 +7,7 @@ import {
   provide,
   ref,
   type SlotsType,
+  watchEffect,
 } from 'vue';
 import CommentItem from './Item';
 import type {
@@ -40,8 +41,7 @@ export default defineComponent({
   emits: ['click-reply', 'click-like', 'confirm-reply', 'load'],
   slots: Object as SlotsType<ItemSlots>,
   setup: (props) => {
-    const commentData = ref<ICommentData>(props.data as ICommentData);
-    const computedData = computed(() => commentData.value);
+    const computedData = ref<ICommentData>(props.data as ICommentData);
     const computedConfig = computed(() => {
       return useMerge({}, defaultFields, props.config) as ICommentConfig;
     });
@@ -59,6 +59,9 @@ export default defineComponent({
         setStatus,
       };
     };
+    watchEffect(() => {
+      computedData.value = props.data;
+    });
     provide(__COMMENT_FIELD_CONFIG_KEY__, computedConfig);
     /**
      * 获取值
@@ -82,7 +85,7 @@ export default defineComponent({
       updateLikeCount,
       loadData,
     } = useComment({
-      data: commentData,
+      data: computedData,
     });
     onUnmounted(() => {
       clearMapValues();
@@ -116,7 +119,7 @@ export default defineComponent({
       return (
         _subComment &&
         !isEmpty(_subComment) &&
-        !isEmpty(_subComment[getValueByKey('list', true)])
+        !isEmpty(_subComment[getValueByKey('list')])
       );
     };
     const getItemSlots = (
@@ -366,10 +369,10 @@ export default defineComponent({
       );
       if (hasSub(item)) {
         const { hasMore } = _subComment;
-        const list = _subComment[getValueByKey('list', true)];
+        const list = _subComment[getValueByKey('list')];
         addMapValues(item, {
           parent: undefined,
-          children: _subComment[getValueByKey('list', true)],
+          children: list,
           $index: -1,
           index: $index,
         });
@@ -395,7 +398,7 @@ export default defineComponent({
     };
     // 评论渲染
     const renderComment = () => {
-      const vNodes = this.computedData[getValueByKey('list', true)]?.map(
+      const vNodes = this.computedData[getValueByKey('list')]?.map(
         (item, index) => {
           return renderCommentItem({
             item,

@@ -14,6 +14,10 @@
 :::demo
 comment/index
 :::
+## 加载
+:::demo
+comment/dynamic
+:::
 ## 自定义字段
 如果返回的格式字段非上面那样，那么可以通过配置`config`，字段详情请看评论组件的API
 :::demo
