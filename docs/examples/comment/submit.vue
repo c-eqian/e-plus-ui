@@ -4,6 +4,7 @@ import { initEmoji } from '../../utils/emoji';
 import { ElMessage } from 'element-plus';
 import {ref} from "vue";
 const commentRef = ref<InstanceType<typeof EpComment>>()
+const isLogin = ref<boolean>(false);
 const commentData: ICommentData = {
   total: '99',
   list: [
@@ -124,13 +125,23 @@ const fieldsConfig: ICommentConfig = {
   },
   emojis: initEmoji(),
 };
+const handleBefore = () => {
+  if (!isLogin.value){
+    ElMessage.error('请登录')
+    // 返回false不会执行文本输入
+    return false
+  }
+  return true
+}
 </script>
 
 <template>
   <div>
+    <ep-button @click="isLogin=!isLogin">{{isLogin ? '注销': '登录'}}</ep-button>
     <ep-comment
         ref="commentRef"
       @confirm-reply="handleReply"
+        :before-reply="handleBefore"
       @click-like="handleLike"
       :data="commentData"
       :config="fieldsConfig"

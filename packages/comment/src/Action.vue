@@ -33,11 +33,17 @@ const handleLike = () => {
   });
 };
 const handleReply = () => {
-  state.value.reply = !state.value.reply;
   emits('click-reply', {
     reply: state.value.reply,
-    replyDone,
   });
+};
+const updateReplyState = (val?: boolean) => {
+  if (isBoolean(val)) {
+    state.value.reply = !!val;
+    replyDone(!!val);
+    return;
+  }
+  replyDone(!state.value.reply);
 };
 const state = ref({
   reply: false,
@@ -45,6 +51,7 @@ const state = ref({
 defineExpose({
   likeDone,
   replyDone,
+  updateReplyState,
 });
 const _iconColor = computed(() => {
   if (isLike.value) {
