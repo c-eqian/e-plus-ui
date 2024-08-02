@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isFunction } from 'co-utils-vue';
+import { isFunction } from '@eqian/utils-vue';
 
 import type { IFormItemConfig } from '../type';
 import { useContextProps, useProps } from './index.hooks';

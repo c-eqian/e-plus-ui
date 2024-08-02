@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {EpComment, EpImage, type ICommentData, EpIcon} from 'e-plus-ui'
 import { Level6 } from '@e-plus-ui/icons'
-import {isEmpty} from "co-utils-vue";
+import {isEmpty} from "@eqian/utils-vue";
 const commentData: ICommentData = {
   title: '99',
   list: [

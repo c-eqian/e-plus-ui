@@ -2,7 +2,7 @@
 import { ElButton } from 'element-plus';
 import { ArrowDown } from '@e-plus-ui/icons';
 import { computed, ref } from 'vue';
-import { isBoolean } from 'co-utils-vue';
+import { isBoolean } from '@eqian/utils-vue';
 const props = defineProps({
   isReply: {
     type: Boolean,

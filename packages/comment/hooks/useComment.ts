@@ -1,5 +1,5 @@
 import { CommentDataRow, LoadData, ICommentData } from '../type';
-import { isArray, isEmpty, isFunction } from 'co-utils-vue';
+import { isArray, isEmpty, isFunction } from '@eqian/utils-vue';
 import { getCurrentInstance, type Ref, ref } from 'vue';
 export type CommentRecordMap = {
   /**

@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isNumber } from 'co-utils-vue';
+import { isNumber } from '@eqian/utils-vue';
 import { computed, onUpdated, reactive, ref, unref, watchEffect } from 'vue';
 import { IVirtualList } from './type';
 

@@ -8,7 +8,7 @@ import {
   isString,
   useMerge,
   useOmit,
-} from 'co-utils-vue';
+} from '@eqian/utils-vue';
 import { ComputedRef, type Ref, unref } from 'vue';
 
 /**

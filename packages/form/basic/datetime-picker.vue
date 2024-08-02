@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMerge } from 'co-utils-vue';
+import { useMerge } from '@eqian/utils-vue';
 
 import type { IFormItemConfig } from '../type';
 import { useContextProps, useProps } from './index.hooks';

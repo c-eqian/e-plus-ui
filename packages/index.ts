@@ -12,6 +12,7 @@ export * from './comment';
 export * from './comment-layout';
 export * from './pagination';
 export * from './icon';
+export * from './menu';
 /**
  * 导出工具函数
  */
@@ -31,6 +32,7 @@ import EpPagination from './pagination';
 import EpTextFold from './text-fold';
 import EpNoticeBar from './notice-bar';
 import EpIcon from './icon';
+import EpMenu from './menu';
 /**
  * 高级组件
  */
@@ -47,6 +49,7 @@ const components: Record<string, Plugin> = {
   EpLine,
   EpCopyText,
   EpImage,
+  EpMenu,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,
@@ -79,6 +82,7 @@ export {
   EpCopyText,
   EpLine,
   EpImage,
+  EpMenu,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,

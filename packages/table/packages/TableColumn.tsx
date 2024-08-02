@@ -4,7 +4,7 @@ import {
   useOmit,
   usePick,
   isFunction,
-} from 'co-utils-vue';
+} from '@eqian/utils-vue';
 import { ElButton, ElFormItem, ElTableColumn, ElTag } from 'element-plus';
 import { defineComponent, h, inject, type PropType, unref } from 'vue';
 

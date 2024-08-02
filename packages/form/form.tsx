@@ -1,4 +1,4 @@
-import { useMerge, useOmit, isArray, isFunction } from 'co-utils-vue';
+import { useMerge, useOmit, isArray, isFunction } from '@eqian/utils-vue';
 import {
   ElCol,
   ElForm,

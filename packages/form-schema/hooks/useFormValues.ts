@@ -1,5 +1,5 @@
 import { Ref, unref } from 'vue';
-import { isEmpty, isObjectLike, useEmptyObject } from 'co-utils-vue';
+import { isEmpty, isObjectLike, useEmptyObject } from '@eqian/utils-vue';
 import type { UpdateFieldValue } from '../types';
 function transformFlatObjectToNested(
   nestedObj: Record<string, any>,

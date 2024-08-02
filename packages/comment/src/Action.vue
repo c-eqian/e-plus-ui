@@ -2,7 +2,7 @@
 import { Collection, CollectionFill, ChatDotSquare } from '@e-plus-ui/icons';
 import EpIcon from '../../icon';
 import { computed, ref } from 'vue';
-import { isBoolean } from 'co-utils-vue';
+import { isBoolean } from '@eqian/utils-vue';
 const emits = defineEmits(['click-like', 'click-reply']);
 const isLike = defineModel();
 const props = defineProps({

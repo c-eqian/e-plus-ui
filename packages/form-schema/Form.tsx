@@ -11,7 +11,7 @@ import {
 } from 'vue';
 import type { FormItemsSchema } from './type';
 import { ElForm, ElFormItem, ElRow, type FormInstance } from 'element-plus';
-import { isEmpty, isString, useOmit } from 'co-utils-vue';
+import { isEmpty, isString, useOmit } from '@eqian/utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
 import { FORM_SCHEMA_MODEL } from './constants';

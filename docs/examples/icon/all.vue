@@ -2,7 +2,7 @@
 import { EpIcon } from 'e-plus-ui'
 import Icons from './svg.json'
 import {ref, watch} from "vue";
-import {isEmpty} from "co-utils-vue";
+import {isEmpty} from "@eqian/utils-vue";
 const iconsKeys = Object.keys(Icons)
 const selectKeys =ref<string[]>(iconsKeys)
 const getSelectOptions = ()=> {

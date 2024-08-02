@@ -1,6 +1,6 @@
 import { ElButton } from 'element-plus';
 import { computed, defineComponent, h, inject, type PropType } from 'vue';
-import { isArray, isObjectLike, isFunction, isString } from 'co-utils-vue';
+import { isArray, isObjectLike, isFunction, isString } from '@eqian/utils-vue';
 import type { ITableColumnConfig, OperationType } from '../type';
 export default defineComponent({
   name: 'EpButtons',

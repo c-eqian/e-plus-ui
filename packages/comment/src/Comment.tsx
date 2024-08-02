@@ -18,7 +18,7 @@ import type {
   IResolveParams,
   CommentLoadFn,
 } from '../type';
-import { isEmpty, deepObjectValue, useMerge, isFunction } from 'co-utils-vue';
+import { isEmpty, deepObjectValue, useMerge, isFunction } from '@eqian/utils-vue';
 import { defaultFields } from '../commentProps';
 import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
 import { useComment } from '../hooks/useComment';

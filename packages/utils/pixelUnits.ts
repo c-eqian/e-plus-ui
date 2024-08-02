@@ -1,4 +1,4 @@
-import { isNumeric, isString } from 'co-utils-vue';
+import { isNumeric, isString } from '@eqian/utils-vue';
 
 export const pixelUnits = (value: number | string) => {
   if (isString(value)) {

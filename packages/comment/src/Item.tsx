@@ -19,7 +19,7 @@ import {
   isEmpty,
   isFunction,
   useBeforeDate,
-} from 'co-utils-vue';
+} from '@eqian/utils-vue';
 import { __COMMENT_FIELD_CONFIG_KEY__, LEVEL_MAP } from '../constants';
 import { defaultFields } from '../commentProps';
 import Action from './Action.vue';

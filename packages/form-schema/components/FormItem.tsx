@@ -17,7 +17,7 @@ import {
   useFormProps,
 } from '../hooks/useFormItem';
 import { componentsMap } from './index';
-import { isFunction, isString } from 'co-utils-vue';
+import { isFunction, isString } from '@eqian/utils-vue';
 import { FORM_SCHEMA_MODEL } from '../constants';
 
 export default defineComponent({
