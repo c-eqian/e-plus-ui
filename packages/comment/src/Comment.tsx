@@ -113,7 +113,11 @@ export default defineComponent({
         item,
         getValueByKey('subComment', true)
       );
-      return _subComment && !isEmpty(_subComment) && !isEmpty(_subComment.list);
+      return (
+        _subComment &&
+        !isEmpty(_subComment) &&
+        !isEmpty(_subComment[getValueByKey('list', true)])
+      );
     };
     const getItemSlots = (
       _params: Partial<IResolveParams> & { slots?: any }
@@ -361,16 +365,17 @@ export default defineComponent({
         getValueByKey('subComment', true)
       );
       if (hasSub(item)) {
-        const { list = [], hasMore } = _subComment;
+        const { hasMore } = _subComment;
+        const list = _subComment[getValueByKey('list', true)];
         addMapValues(item, {
           parent: undefined,
-          children: list,
+          children: _subComment[getValueByKey('list', true)],
           $index: -1,
           index: $index,
         });
         return {
           default: () => {
-            const vNodes = list.map((sub: CommentDataRow, index: number) => {
+            const vNodes = list?.map((sub: CommentDataRow, index: number) => {
               return renderSubComment(sub, item, $index, index);
             });
             if (hasMore) {
@@ -390,16 +395,18 @@ export default defineComponent({
     };
     // 评论渲染
     const renderComment = () => {
-      const vNodes = this.computedData.list.map((item, index) => {
-        return renderCommentItem({
-          item,
-          isSubReply: false,
-          level1: {},
-          reply: {},
-          $index: index,
-          slots: () => renderSlot(item, index),
-        });
-      });
+      const vNodes = this.computedData[getValueByKey('list', true)]?.map(
+        (item, index) => {
+          return renderCommentItem({
+            item,
+            isSubReply: false,
+            level1: {},
+            reply: {},
+            $index: index,
+            slots: () => renderSlot(item, index),
+          });
+        }
+      );
       if (this.computedData.hasMore) {
         vNodes.push(renderLoadingMore(false));
       }
