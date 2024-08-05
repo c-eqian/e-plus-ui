@@ -5,7 +5,7 @@ $line: 3 !default;
   color: inherit;
 
   .cz-text-box {
-    margin-top: 5px;
+    //margin-top: 5px;
     // 会对过长的单词做词内断词处理，这样单词始终会在容器中，不会溢出容器
     word-wrap: break-word;
   }

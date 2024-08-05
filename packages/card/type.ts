@@ -5,6 +5,14 @@ export interface CardProps {
    */
   title?: string;
   /**
+   * 头像
+   */
+  avatar?: string;
+  /**
+   * 描述
+   */
+  description?: string;
+  /**
    * 阴影时机
    */
   shadow?: Shadow;

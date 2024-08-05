@@ -1,12 +1,20 @@
 <template>
   <div class="play">
-    <ep-card shadow="hover">
-      <Index></Index>
-    </ep-card>
+    <div class="cz-max-w-5xl cz-mx-auto cz-my-0 cz-w-96 cz-h-96">
+      <ep-card shadow="always" title="5555" description="描述内容描描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容描述内容述内容描述内容" avatar="https://tdesign.gtimg.com/site/source/card-demo.png">
+        <template #extra>
+          <el-button>按钮</el-button>
+        </template>
+        <template #footer>
+          <el-button>按钮</el-button>
+        </template>
+      </ep-card>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import Index from './index.vue';
+import { EpCard } from '../packages';
+// import Index from './index.vue';
 </script>
 <style lang="less">
 html,
