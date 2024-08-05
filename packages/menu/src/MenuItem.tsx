@@ -83,7 +83,7 @@ export default defineComponent({
         return renderComponent(
           item,
           isGroup(item) ? ElMenuItemGroup : ElSubMenu,
-          useFilterSubMenuProps(item).value,
+          getProps(item, useFilterSubMenuProps(item).value),
           isSubMenu(item)
             ? {
                 title: () => [renderIcon(item), item.title],
