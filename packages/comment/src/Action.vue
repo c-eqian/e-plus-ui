@@ -65,7 +65,7 @@ const _iconColor = computed(() => {
   <div
     class="cz-flex cz-space-x-10 cz-py-2 dark:cz-text-gray-400 cz-text-gray-600 cz-text-xs cz-justify-between"
   >
-    <div>
+    <div class="cz-flex-1 cz-flex cz-space-x-10">
       <div
         class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1"
         @click="handleLike"

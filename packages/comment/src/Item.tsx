@@ -329,17 +329,20 @@ export default defineComponent({
       }
       const actionsExtra = () => {
         const actionsSlotsVNode = getSlotsByName('actionsExtra');
-        if (actionsSlotsVNode) return actionsSlotsVNode;
         const _actionsExtra = getValueByKey('actionsExtra', true);
+        if (isFunction(_actionsExtra)) {
+          return _actionsExtra();
+        }
         if (_actionsExtra && isBoolean(_actionsExtra)) {
           return (
             <ActionsExtra
               onComplaint={(...args: any[]) => this.$emit('actions', ...args)}
               onDelete={(...args: any[]) => this.$emit('actions', ...args)}
+              v-slots={{
+                actions: () => actionsSlotsVNode,
+              }}
             ></ActionsExtra>
           );
-        } else if (isFunction(_actionsExtra)) {
-          return _actionsExtra();
         }
         return null;
       };

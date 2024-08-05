@@ -162,9 +162,10 @@ export default defineComponent({
       if (this.$slots.actions) {
         _slots.actions = () => this.$slots.actions(args as IResolveParams);
       }
-      if (this.$slots.actionsExtra) {
+      if (this.$slots.actionsExtra || this.$slots['actions-extra']) {
         _slots.actionsExtra = () =>
-          this.$slots.actionsExtra(args as IResolveParams);
+          this.$slots.actionsExtra?.(args as IResolveParams) ||
+          this.$slots['actions-extra']?.(args as IResolveParams);
       }
       if (this.$slots.editor) {
         _slots.editor = () => this.$slots.editor(args as IResolveParams);

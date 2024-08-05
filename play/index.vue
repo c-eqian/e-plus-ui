@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig, type ICommentData } from '../packages';
+import {
+  EpComment,
+  ICommentConfig,
+  type ICommentData,
+  EpLine,
+} from '../packages';
+import { Delete, Warning } from '@element-plus/icons-vue';
+import { ElButton } from 'element-plus';
 const commentData: ICommentData = {
   total: 99,
   list: [
@@ -43,6 +50,7 @@ const fieldsConfig: ICommentConfig = {
   // 显示IP属地
   showIpAddress: true,
   showLevel: true,
+  actionsExtra: true,
   // 如果字段也为ipAddress，可不填
   // ipAddress: 'ipAddress'
 };
@@ -50,7 +58,22 @@ const fieldsConfig: ICommentConfig = {
 
 <template>
   <div>
-    <ep-comment :data="commentData" :config="fieldsConfig"></ep-comment>
+    <ep-comment :data="commentData" :config="fieldsConfig">
+      <template #actions-extra="{ item }">
+        <div class="cz-flex cz-flex-col">
+          <el-button
+            v-if="item?.userInfo.userId === 2"
+            size="small"
+            link
+            type="danger"
+            :icon="Delete"
+            >删 除1</el-button
+          >
+          <EpLine></EpLine>
+          <el-button link size="small" :icon="Warning">投 诉2</el-button>
+        </div>
+      </template>
+    </ep-comment>
   </div>
 </template>
 
