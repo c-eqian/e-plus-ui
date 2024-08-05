@@ -12,7 +12,10 @@ export type GetTypeFrom<T = any> = keyof T extends infer E
 /**
  * 渲染器
  */
-export type CommentItemRender<T = any> = (scoped: {
+export type CommentItemRender<
+  T = any,
+  P = number | string | undefined
+> = (scoped: {
   /**
    * 当前评论
    */
@@ -29,13 +32,7 @@ export type CommentItemRender<T = any> = (scoped: {
    * 回复引用
    */
   reply?: T;
-}) =>
-  | VNode<any, any, any>
-  | VNode<any, any, any>[]
-  | null
-  | string
-  | number
-  | undefined;
+}) => VNode<any, any, any> | VNode<any, any, any>[] | P;
 /**
  * 评论人信息
  */
@@ -245,11 +242,6 @@ export type ICommentConfig<T = any> = {
    */
   showIpAddress?: boolean | CommentItemRender<T>;
   /**
-   * 更多操作
-   * @default false
-   */
-  moreOperations?: boolean | CommentItemRender<T>;
-  /**
    * 表情包
    * @default false
    */
@@ -259,11 +251,11 @@ export type ICommentConfig<T = any> = {
    */
   useEmojis?: boolean;
   /**
-   * 渲染操作
-   * 支持自定义
+   * 扩展渲染操作
+   * 支持自定义 默认内置，删除（delete）、投诉（complaint）
    * @default true
    */
-  actions?: boolean | CommentItemRender<T>;
+  actionsExtra?: boolean | CommentItemRender<T>;
   /**
    * 文本显示几行，超出显示...
    * @default 3
@@ -347,8 +339,19 @@ export interface IResolveParams {
  * 加载数据
  */
 export type LoadData = {
+  /**
+   * 是否是回复的评论
+   */
   isSubReply: boolean;
+  /**
+   * 当前评论项
+   */
   item: CommentDataRow;
+  /**
+   * 数据载入方法
+   * @param items
+   * @param hasMore
+   */
   resolve: (items: CommentDataRow[], hasMore?: boolean) => void;
 };
 /**
@@ -359,13 +362,42 @@ export type CommentLoadFn = (load: LoadData) => void;
  * 插槽
  */
 export type ItemSlots = {
+  /**
+   * 头像
+   */
   avatar: CommentItemRender;
+  /**
+   * 右侧
+   */
   right: CommentItemRender;
+  /**
+   * 左侧
+   */
   left: CommentItemRender;
+  /**
+   * 等级
+   */
   level: CommentItemRender;
+  /**
+   * 底部操作
+   */
   actions: CommentItemRender;
+  /**
+   * 扩展操作，如果使用actions，此插槽亦可以忽略
+   */
+  actionsExtra: CommentItemRender;
+  /**
+   * 输入框
+   */
   editor: CommentItemRender;
+  /**
+   * 内容
+   */
   content: CommentItemRender;
+  /**
+   * 默认插槽
+   * 内部使用，外部不支持
+   */
   default: any;
 };
 /**

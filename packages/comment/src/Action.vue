@@ -63,30 +63,35 @@ const _iconColor = computed(() => {
 
 <template>
   <div
-    class="cz-flex cz-space-x-10 cz-py-2 dark:cz-text-gray-400 cz-text-gray-600 cz-text-xs"
+    class="cz-flex cz-space-x-10 cz-py-2 dark:cz-text-gray-400 cz-text-gray-600 cz-text-xs cz-justify-between"
   >
-    <div
-      class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1"
-      @click="handleLike"
-      :class="{
-        'cz-text-[--global-checked-color]': isLike,
-      }"
-    >
-      <EpIcon :color="_iconColor">
-        <CollectionFill v-if="isLike" />
-        <Collection v-else />
-      </EpIcon>
-      <span
-        >{{ isLike ? '已赞' : '点赞' }}
-        {{ likeCount > 0 ? `${likeCount}` : '' }}</span
+    <div>
+      <div
+        class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1"
+        @click="handleLike"
+        :class="{
+          'cz-text-[--global-checked-color]': isLike,
+        }"
       >
+        <EpIcon :color="_iconColor">
+          <CollectionFill v-if="isLike" />
+          <Collection v-else />
+        </EpIcon>
+        <span
+          >{{ isLike ? '已赞' : '点赞' }}
+          {{ likeCount > 0 ? `${likeCount}` : '' }}</span
+        >
+      </div>
+      <div
+        class="cz-flex cz-select-none cz-cursor-pointer cz-items-center cz-space-x-1"
+        @click="handleReply"
+      >
+        <EpIcon><ChatDotSquare /></EpIcon>
+        <span>{{ state.reply ? '取消回复' : '回复' }}</span>
+      </div>
     </div>
-    <div
-      class="cz-flex cz-select-none cz-cursor-pointer cz-items-center cz-space-x-1"
-      @click="handleReply"
-    >
-      <EpIcon><ChatDotSquare /></EpIcon>
-      <span>{{ state.reply ? '取消回复' : '回复' }}</span>
+    <div v-if="$slots.actions && $slots.actions()">
+      <slot name="actions"></slot>
     </div>
   </div>
 </template>

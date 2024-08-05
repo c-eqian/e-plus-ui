@@ -25,7 +25,10 @@ import {
   isFunction,
 } from '@eqian/utils-vue';
 import { defaultFields } from '../commentProps';
-import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
+import {
+  __COMMENT_CLICK_KEY__,
+  __COMMENT_FIELD_CONFIG_KEY__,
+} from '../constants';
 import { useComment } from '../hooks/useComment';
 import LoadMore from './LoadMore.vue';
 export default defineComponent({
@@ -49,9 +52,9 @@ export default defineComponent({
       type: Function as PropType<CommentLoadFn>,
     },
   },
-  emits: ['click-reply', 'click-like', 'confirm-reply', 'load'],
-  slots: Object as SlotsType<ItemSlots>,
-  setup: (props) => {
+  emits: ['click-reply', 'click-like', 'confirm-reply', 'load', 'actions'],
+  slots: Object as SlotsType<Omit<ItemSlots, 'default'>>,
+  setup: (props, { emit }) => {
     const computedData = ref<ICommentData>(props.data as ICommentData);
     const computedConfig = computed(() => {
       return useMerge({}, defaultFields, props.config) as ICommentConfig;
@@ -74,6 +77,9 @@ export default defineComponent({
       computedData.value = props.data;
     });
     provide(__COMMENT_FIELD_CONFIG_KEY__, computedConfig);
+    provide(__COMMENT_CLICK_KEY__, {
+      actions: (...args: any[]) => emit('actions', ...args),
+    });
     /**
      * 获取值
      * @param key
@@ -156,6 +162,10 @@ export default defineComponent({
       if (this.$slots.actions) {
         _slots.actions = () => this.$slots.actions(args as IResolveParams);
       }
+      if (this.$slots.actionsExtra) {
+        _slots.actionsExtra = () =>
+          this.$slots.actionsExtra(args as IResolveParams);
+      }
       if (this.$slots.editor) {
         _slots.editor = () => this.$slots.editor(args as IResolveParams);
       }
@@ -226,6 +236,16 @@ export default defineComponent({
             });
           }}
           beforeReply={this.$props.beforeReply}
+          onActions={(args: any[]) =>
+            this.$emit('actions', ...args, {
+              item,
+              isSubReply,
+              level1,
+              reply,
+              $index,
+              index,
+            })
+          }
           onConfirm-reply={(args: any) => {
             this.$emit('confirm-reply', {
               ...args,

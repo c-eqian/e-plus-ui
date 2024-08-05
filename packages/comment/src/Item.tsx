@@ -26,6 +26,7 @@ import Action from './Action.vue';
 import Editor from '../../editor';
 import { onClickOutside } from '@vueuse/core';
 import TextFold from '../../text-fold';
+import ActionsExtra from './ActionsExtra.vue';
 
 export default defineComponent({
   name: 'CommentItem',
@@ -54,7 +55,7 @@ export default defineComponent({
     },
   },
   slots: Object as SlotsType<ItemSlots>,
-  emits: ['click-reply', 'click-like', 'confirm-reply'],
+  emits: ['click-reply', 'click-like', 'confirm-reply', 'actions'],
   setup(props) {
     const computedData = computed(() => props.data);
     const computedReply = computed(() => props.reply);
@@ -326,21 +327,45 @@ export default defineComponent({
         this.replyState.isCustomEditor = true;
         return slotsVNode;
       }
+      const actionsExtra = () => {
+        const actionsSlotsVNode = getSlotsByName('actionsExtra');
+        if (actionsSlotsVNode) return actionsSlotsVNode;
+        const _actionsExtra = getValueByKey('actionsExtra', true);
+        if (_actionsExtra && isBoolean(_actionsExtra)) {
+          return (
+            <ActionsExtra
+              onComplaint={(...args: any[]) => this.$emit('actions', ...args)}
+              onDelete={(...args: any[]) => this.$emit('actions', ...args)}
+            ></ActionsExtra>
+          );
+        } else if (isFunction(_actionsExtra)) {
+          return _actionsExtra();
+        }
+        return null;
+      };
       const isActions = getValueByKey('actions', true);
       if (isBoolean(isActions)) {
         return isActions
-          ? h(Action, {
-              ref: ($el) => (this.actionRef = $el),
-              likeCount:
-                this.computedData[getValueByKey('likeCount', true, true, true)],
-              modelValue:
-                this.computedData[getValueByKey('like', true, true, true)],
-              'onUpdate:modelValue': (value: any) =>
-                (this.computedData[getValueByKey('like', true, true, true)] =
-                  value),
-              onClickLike: (args: any) => this.$emit('click-like', args),
-              onClickReply: handleClickReply,
-            })
+          ? h(
+              Action,
+              {
+                ref: ($el) => (this.actionRef = $el),
+                likeCount:
+                  this.computedData[
+                    getValueByKey('likeCount', true, true, true)
+                  ],
+                modelValue:
+                  this.computedData[getValueByKey('like', true, true, true)],
+                'onUpdate:modelValue': (value: any) =>
+                  (this.computedData[getValueByKey('like', true, true, true)] =
+                    value),
+                onClickLike: (args: any) => this.$emit('click-like', args),
+                onClickReply: handleClickReply,
+              },
+              {
+                actions: () => actionsExtra(),
+              }
+            )
           : undefined;
       }
       if (isFunction(isActions)) {

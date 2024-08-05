@@ -1,3 +1,5 @@
+import { ICommentConfig } from './type';
+
 export const defaultFields = {
   commentFields: {
     commentId: 'commentId',
@@ -29,4 +31,4 @@ export const defaultFields = {
   hasMore: 'hasMore',
   foldBtnPosition: 'left',
   lines: 3,
-};
+} as ICommentConfig;
