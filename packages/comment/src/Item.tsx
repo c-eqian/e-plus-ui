@@ -339,7 +339,7 @@ export default defineComponent({
               onComplaint={(...args: any[]) => this.$emit('actions', ...args)}
               onDelete={(...args: any[]) => this.$emit('actions', ...args)}
               v-slots={{
-                actions: () => actionsSlotsVNode,
+                actions: actionsSlotsVNode ? () => actionsSlotsVNode : null,
               }}
             ></ActionsExtra>
           );

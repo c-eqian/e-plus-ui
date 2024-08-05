@@ -6,6 +6,7 @@ import {
   EpLine,
 } from 'e-plus-ui';
 import { ref } from 'vue'
+import {ElMessage} from "element-plus";
 const isUseSlot = ref(false);
 const commentData: ICommentData = {
   total: 99,
@@ -54,12 +55,15 @@ const fieldsConfig: ICommentConfig = {
   // 如果字段也为ipAddress，可不填
   // ipAddress: 'ipAddress'
 };
+const handleActions = (type, { item})=> {
+  ElMessage.success('点击' + (type===0 ? '删除': '投诉') + '-----' + item.userInfo.username)
+}
 </script>
 
 <template>
   <div>
     <el-button @click="isUseSlot=!isUseSlot">{{isUseSlot?'使用内置':'使用插槽'}}</el-button>
-    <ep-comment :data="commentData" :config="fieldsConfig">
+    <ep-comment :data="commentData" :config="fieldsConfig" @actions="handleActions">
       <template v-if="isUseSlot" #actions-extra="{ item }">
         <div class="cz-flex cz-flex-col">
           <el-button

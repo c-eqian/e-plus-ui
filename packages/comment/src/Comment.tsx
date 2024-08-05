@@ -225,7 +225,7 @@ export default defineComponent({
           level1={level1}
           isSubReply={isSubReply}
           reply={reply}
-          onClick-like={(args: any) => {
+          onClick-like={(...args: any) => {
             this.$emit('click-like', {
               ...args,
               item,
@@ -237,7 +237,7 @@ export default defineComponent({
             });
           }}
           beforeReply={this.$props.beforeReply}
-          onActions={(args: any[]) =>
+          onActions={(...args: any[]) =>
             this.$emit('actions', ...args, {
               item,
               isSubReply,
@@ -247,7 +247,7 @@ export default defineComponent({
               index,
             })
           }
-          onConfirm-reply={(args: any) => {
+          onConfirm-reply={(...args: any) => {
             this.$emit('confirm-reply', {
               ...args,
               item,
