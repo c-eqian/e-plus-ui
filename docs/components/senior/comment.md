@@ -61,6 +61,12 @@ comment/submit
 :::demo
 comment/load
 :::
+## 更多操作
+支持使用内置，默认支持删除、投诉；也可以使用插槽、或者配置的方法实现自定义按钮操作
+
+:::demo
+comment/actions-extra
+:::
 ## 自定义等级
 通过配置`showLevel`属性，自定义等级图标。
 :::demo
