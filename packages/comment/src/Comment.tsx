@@ -25,12 +25,10 @@ import {
   isFunction,
 } from '@eqian/utils-vue';
 import { defaultFields } from '../commentProps';
-import {
-  __COMMENT_CLICK_KEY__,
-  __COMMENT_FIELD_CONFIG_KEY__,
-} from '../constants';
+import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
 import { useComment } from '../hooks/useComment';
 import LoadMore from './LoadMore.vue';
+import { CommentEmits } from '../type';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -52,7 +50,7 @@ export default defineComponent({
       type: Function as PropType<CommentLoadFn>,
     },
   },
-  emits: ['click-reply', 'click-like', 'confirm-reply', 'load', 'actions'],
+  emits: CommentEmits,
   slots: Object as SlotsType<Omit<ItemSlots, 'default'>>,
   setup: (props, { emit }) => {
     const computedData = ref<ICommentData>(props.data as ICommentData);
@@ -77,9 +75,6 @@ export default defineComponent({
       computedData.value = props.data;
     });
     provide(__COMMENT_FIELD_CONFIG_KEY__, computedConfig);
-    provide(__COMMENT_CLICK_KEY__, {
-      actions: (...args: any[]) => emit('actions', ...args),
-    });
     /**
      * 获取值
      * @param key

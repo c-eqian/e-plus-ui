@@ -313,24 +313,29 @@ export interface IResolveParams<T = any> {
   $index: number;
   /**
    * 是否点赞，点赞事件具备
+   * 仅点击点赞时存在
    */
   isLike?: boolean | number;
   /**
    * 执行修改点赞状态
+   * 仅点击点赞时存在
    * @param val
    */
   likeDone?: (val: boolean | number) => void;
   /**
    * 提交回复，执行回调是否清空及关闭输入框
+   * 仅回复评论时存在
    * @param val
    */
   clear?: (val: boolean) => void;
   /**
    * 回复事件内容
+   * 仅回复评论时存在
    */
   value?: string;
   /**
    * 回复新增
+   * 仅回复评论时存在
    * @param items
    */
   resolve?: (items: T | T[]) => void;
@@ -405,11 +410,6 @@ export type ItemSlots = {
  */
 export type CommentEmits = {
   /**
-   * 点击回复之前处理
-   * @param data
-   */
-  'before-reply': (val: boolean) => boolean | void;
-  /**
    * 点赞事件
    * @param data
    */
@@ -419,6 +419,12 @@ export type CommentEmits = {
    * @param data
    */
   'confirm-reply': (data: IResolveParams) => void;
+  /**
+   * 更多操作按钮点击事件；如果时自定义时，将会失效
+   * @param type 0 删除，1 投诉
+   * @param IResolveParams
+   */
+  actions: (type: 0 | 1, IResolveParams) => void;
   /**
    * 加载数据
    * @param data
