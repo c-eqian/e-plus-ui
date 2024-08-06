@@ -286,11 +286,11 @@ export type ICommentConfig<T = any> = {
   commentFields?: ICommentFields<T>;
 };
 
-export interface IResolveParams {
+export interface IResolveParams<T = any> {
   /**
    * 当前评论项
    */
-  item: CommentDataRow;
+  item: T;
   /**
    * 是否是二级回复
    */
@@ -298,11 +298,11 @@ export interface IResolveParams {
   /**
    * 所属一级评论
    */
-  level1: CommentDataRow;
+  level1: T;
   /**
    * 回复
    */
-  reply: CommentDataRow;
+  reply: T;
   /**
    * 当前项索引
    */
@@ -333,7 +333,7 @@ export interface IResolveParams {
    * 回复新增
    * @param items
    */
-  resolve?: (items: CommentDataRow | CommentDataRow[]) => void;
+  resolve?: (items: T | T[]) => void;
 }
 /**
  * 加载数据
@@ -365,35 +365,35 @@ export type ItemSlots = {
   /**
    * 头像
    */
-  avatar: CommentItemRender;
+  avatar: IResolveParams;
   /**
    * 右侧
    */
-  right: CommentItemRender;
+  right: IResolveParams;
   /**
    * 左侧
    */
-  left: CommentItemRender;
+  left: IResolveParams;
   /**
    * 等级
    */
-  level: CommentItemRender;
+  level: IResolveParams;
   /**
    * 底部操作
    */
-  actions: CommentItemRender;
+  actions: IResolveParams;
   /**
    * 扩展操作，如果使用actions，此插槽亦可以忽略
    */
-  actionsExtra: CommentItemRender;
+  actionsExtra: IResolveParams;
   /**
    * 输入框
    */
-  editor: CommentItemRender;
+  editor: IResolveParams;
   /**
    * 内容
    */
-  content: CommentItemRender;
+  content: IResolveParams;
   /**
    * 默认插槽
    * 内部使用，外部不支持
