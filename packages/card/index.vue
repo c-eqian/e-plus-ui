@@ -39,7 +39,7 @@ const classes = computed(() => {
         </div>
         <div v-if="title" class="cz-card-header-title">
           <span>{{ title }}</span>
-          <TextFold v-if="avatar && description" line="1">
+          <TextFold v-if="avatar && description" :line="1">
             <span v-if="description" class="cz-card-header__description">{{
               description
             }}</span>

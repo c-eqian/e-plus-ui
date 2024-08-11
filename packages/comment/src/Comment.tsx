@@ -24,11 +24,10 @@ import {
   useMerge,
   isFunction,
 } from '@eqian/utils-vue';
-import { defaultFields } from '../commentProps';
+import { commentEmits, defaultFields } from '../commentProps';
 import { __COMMENT_FIELD_CONFIG_KEY__ } from '../constants';
 import { useComment } from '../hooks/useComment';
 import LoadMore from './LoadMore.vue';
-import { CommentEmits } from '../type';
 export default defineComponent({
   name: 'EpComment',
   props: {
@@ -50,7 +49,7 @@ export default defineComponent({
       type: Function as PropType<CommentLoadFn>,
     },
   },
-  emits: CommentEmits,
+  emits: commentEmits,
   slots: Object as SlotsType<Omit<ItemSlots, 'default'>>,
   setup: (props, { emit }) => {
     const computedData = ref<ICommentData>(props.data as ICommentData);

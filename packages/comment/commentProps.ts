@@ -32,3 +32,29 @@ export const defaultFields = {
   foldBtnPosition: 'left',
   lines: 3,
 } as ICommentConfig;
+/**
+ * 事件
+ */
+export const commentEmits = [
+  /**
+   * 点赞事件
+   * @param data
+   */
+  'click-like',
+  /**
+   * 提交回复
+   * @param data
+   */
+  'confirm-reply',
+  /**
+   * 更多操作按钮点击事件；如果时自定义时，将会失效
+   * @param type 0 删除，1 投诉
+   * @param IResolveParams
+   */
+  'actions',
+  /**
+   * 加载数据
+   * @param data
+   */
+  'load',
+];

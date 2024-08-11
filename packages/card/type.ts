@@ -1,4 +1,8 @@
 export type Shadow = 'always' | 'never' | 'hover';
+
+/**
+ * 参数属性
+ */
 export interface CardProps {
   /**
    * 标题
@@ -22,9 +26,24 @@ export interface CardProps {
  * 插槽名称
  */
 export type SlotsType = {
+  /**
+   * 标题插槽
+   */
   title: () => any;
+  /**
+   * 扩展插槽
+   */
   extra: () => any;
+  /**
+   * 内容插槽
+   */
   body: () => any;
+  /**
+   * footer插槽
+   */
   footer: () => any;
-  default: () => any;
+  /**
+   * 头像插槽
+   */
+  avatar: () => any;
 };

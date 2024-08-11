@@ -16,3 +16,10 @@
 :::demo
 card/base
 :::
+## 头像卡片
+
+基础的卡片用法。
+
+:::demo
+card/user
+:::
