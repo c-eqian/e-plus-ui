@@ -57,4 +57,4 @@ export type NoticeBarSlots = {
    * 右侧图标
    */
   'right-icon'?: any;
-}
+};
