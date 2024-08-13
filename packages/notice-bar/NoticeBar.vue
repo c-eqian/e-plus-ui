@@ -1,103 +1,107 @@
-<template>
-  <div
-    class="cz-px-4 cz-rounded cz-notice-bar"
-    :style="{ height: `${pixelUnits(height)}` }"
-  >
-    <div v-if="vertical">
-      <el-carousel
-        height="40px"
-        direction="vertical"
-        :autoplay="true"
-        indicator-position="none"
-        :interval="interval"
-      >
-        <el-carousel-item v-for="v in computedList" :key="v">{{
-          v
-        }}</el-carousel-item>
-      </el-carousel>
-    </div>
-    <div
-      v-else
-      :style="{ color, fontSize: `${fontSize}px` }"
-      class="cz-flex cz-items-center"
-    >
-      <slot name="prefixIcon"></slot>
-      <div
-        ref="noticeBoxRef"
-        class="cz-flex-1 cz-flex cz-items-center cz-relative cz-overflow-hidden"
-      >
-        <div ref="textRef" class="cz-whitespace-nowrap cz-absolute cz-left-0">
-          {{ computedList }}
-        </div>
-      </div>
-      <slot name="suffixIcon"></slot>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
-import { computed, nextTick, onMounted, reactive, ref } from 'vue';
-import { ElCarousel } from 'element-plus';
-import { NoticeBarProps } from './type';
+import { computed, nextTick, onMounted, type Ref, ref } from 'vue';
+import { useRafTimeout, useResizeObserver } from '@eqian/utils-vue';
+import type { NoticeBarProps } from './type';
 import { pixelUnits } from '../utils/pixelUnits';
-
+const verticalRef = ref<HTMLElement>();
+const horizontalRef = ref<HTMLElement>();
+const textRef = ref<HTMLElement>();
+const currentIndex = ref(0);
+const props = withDefaults(defineProps<NoticeBarProps>(), {
+  list: () => [],
+  speed: 3000,
+  width: '100%',
+  height: 50,
+  step: 100,
+  customStyle: () => ({}),
+});
+const computedVertical = computed(() => {
+  return props.list.length > 0;
+});
 defineOptions({
   name: 'EpNoticeBar',
 });
-const props = withDefaults(defineProps<NoticeBarProps>(), {
-  fontSize: 14,
-  height: 40,
-  delay: 1000,
-  speed: 100,
-  list: () => [],
-});
-
-const state = reactive({
-  boxWidth: 0,
-  textWidth: 0,
+const computedList = computed(() => props.list);
+const computedText = computed(() => props.text);
+const horizontal = ref({
+  order: 1,
   oneTime: 0,
   twoTime: 0,
-  order: 1,
+  warpWidth: 0,
+  textWidth: 0,
 });
-const noticeBoxRef = ref<HTMLDivElement>();
-const textRef = ref<HTMLDivElement>();
-const computedList = computed(() => props.list);
-const interval = computed(() => (props.delay > 2000 ? props.delay : 2000));
-
+// 计算垂直方向的样式
+const computedVerticalStyle = computed(() => {
+  return {
+    width: pixelUnits(props.width),
+    height: pixelUnits(props.height),
+    '--enter-move': pixelUnits(props.height),
+    '--leave-move': pixelUnits(-props.height),
+    ...props.customStyle,
+  };
+});
+const computedHorizontalStyle = computed(() => {
+  return {
+    width: pixelUnits(props.width),
+    height: pixelUnits(props.height),
+    '--text-width--': computedText.value?.length + 'em',
+  };
+});
+const verticalMove = () => {
+  currentIndex.value = (currentIndex.value + 1) % computedList.value.length;
+};
+const startMove = () => {
+  if (computedVertical.value) {
+    verticalMove(); // 垂直滚动
+    return;
+  } else {
+    changeAnimation();
+  }
+};
+const { start, close } = useRafTimeout(startMove, {
+  delay: props.speed,
+  isInterval: computedVertical.value,
+});
+useResizeObserver(
+  [verticalRef as Ref<HTMLElement>, horizontalRef as Ref<HTMLElement>],
+  () => {
+    startMove();
+  }
+);
+const reset = () => {
+  setTimeout(() => {
+    start();
+  }, props.speed);
+};
+// 改变 animation 动画调用
+const changeAnimation = () => {
+  if (horizontal.value.order === 1) {
+    textRef.value!.style.cssText = `animation: firstAnimation ${horizontal.value.oneTime}s  linear;opactity: 1;`;
+    horizontal.value.order = 2;
+  } else {
+    textRef.value!.style.cssText = `animation: lastAnimation ${horizontal.value.twoTime}s linear infinite; opacity: 1;`;
+  }
+};
+// 计算 animation 滚动时长
+const computeAnimationTime = () => {
+  horizontal.value.oneTime = horizontal.value.textWidth / props.step;
+  horizontal.value.twoTime =
+    (horizontal.value.textWidth + horizontal.value.warpWidth) / props.step;
+};
 // 初始化 animation 各项参数
 const initAnimation = () => {
   nextTick(() => {
-    state.boxWidth = noticeBoxRef.value?.offsetWidth || 0;
-    state.textWidth = textRef.value?.offsetWidth || 0;
+    horizontal.value.warpWidth = horizontalRef.value?.offsetWidth || 0;
+    horizontal.value.textWidth = textRef.value?.offsetWidth || 0;
     document.styleSheets[0].insertRule(
-      `@keyframes oneAnimation {0% {left: 0px;} 100% {left: -${state.textWidth}px;}}`
+      `@keyframes firstAnimation {0% {left: 0px;} 100% {left: -${horizontal.value.textWidth}px;}}`
     );
     document.styleSheets[0].insertRule(
-      `@keyframes twoAnimation {0% {left: ${state.boxWidth}px;} 100% {left: -${state.textWidth}px;}}`
+      `@keyframes lastAnimation {0% {left: ${horizontal.value.warpWidth}px;} 100% {left: -${horizontal.value.textWidth}px;}}`
     );
     computeAnimationTime();
-    setTimeout(() => {
-      changeAnimation();
-    }, props.delay);
   });
 };
-
-// 计算 animation 滚动时长
-const computeAnimationTime = () => {
-  state.oneTime = state.textWidth / props.speed;
-  state.twoTime = (state.textWidth + state.boxWidth) / props.speed;
-};
-
-// 改变 animation 动画调用
-const changeAnimation = () => {
-  if (!textRef.value) return;
-  if (state.order === 1) {
-    textRef.value.style.cssText = `animation: oneAnimation ${state.oneTime}s linear; opactity: 1;}`;
-    state.order = 2;
-  } else {
-    textRef.value.style.cssText = `animation: twoAnimation ${state.twoTime}s linear infinite; opacity: 1;`;
-  }
-};
-
 // 监听 animation 动画的结束
 const listenerAnimationend = () => {
   textRef.value?.addEventListener(
@@ -108,15 +112,47 @@ const listenerAnimationend = () => {
     false
   );
 };
-
-// 页面加载时
+const init = () => {
+  start();
+  if (!computedVertical.value) {
+    initAnimation();
+    listenerAnimationend();
+  }
+};
 onMounted(() => {
-  if (props.vertical) return;
-  initAnimation();
-  listenerAnimationend();
+  init();
 });
 </script>
 
-<style lang="scss" scoped>
-@use './style.scss';
+<template>
+  <div v-if="!computedVertical" :style="computedHorizontalStyle">
+    <div ref="horizontalRef" class="horizontal-wrap-text-box">
+      <div class="horizontal-wrap-text" ref="textRef">
+        {{ computedText }}
+      </div>
+    </div>
+  </div>
+  <div
+    v-else
+    :style="computedVerticalStyle"
+    ref="verticalRef"
+    class="slider-vertical"
+  >
+    <transition-group name="slide">
+      <div
+        @mouseenter="() => close()"
+        @mouseleave="reset"
+        class="scroll-view"
+        v-for="(item, index) in computedList"
+        :key="item"
+        v-show="currentIndex === index"
+      >
+        <div class="slide-text">{{ item }}</div>
+      </div>
+    </transition-group>
+  </div>
+</template>
+
+<style scoped lang="scss">
+@use './style';
 </style>

@@ -1,48 +1,36 @@
+import type { CSSProperties } from 'vue';
+
 export interface NoticeBarProps {
   /**
-   * 数据
-   * @default []
+   * 数据列表
+   * list 与 text必须传入一个，如果是list则以垂直方式滚动
    */
-  list: string[];
+  list?: string[];
   /**
-   * 大小
-   * @default 14
+   * 单行文本
+   * list 与 text必须传入一个，如果是text则以水平方式滚动
    */
-  fontSize?: number | string;
+  text?: string;
   /**
-   * 是否垂直滚动
-   * @default false
+   * 滚动区域宽度,如果传入数字，默认转成px单位
    */
-  vertical?: boolean;
+  width?: number | string;
   /**
-   * 通知栏高度
-   * @default 40
+   * 滚动区域高度,如果传入数字，默认转成px单位
    */
   height?: number | string;
   /**
-   * 动画延迟时间,单位ms
-   * @default 1000
+   * 自定义样式
    */
-  delay?: number;
+  customStyle?: CSSProperties;
   /**
-   * 滚动速率
-   * @default 100
+   * 滚动速度 单位ms
+   * @default 3000
    */
   speed?: number;
   /**
-   * 后缀图标
+   * 水平滚动动画每次执行时移动距离
+   * @default 100
    */
-  suffixIcon?: string;
-  /**
-   * 前缀图标
-   */
-  prefixIcon?: string;
-  /**
-   * 通知文本颜色
-   */
-  color?: string;
-  /**
-   * 通知背景色
-   */
-  background?: string;
+  step?: number;
 }
