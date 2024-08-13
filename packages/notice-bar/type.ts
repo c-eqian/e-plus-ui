@@ -2,6 +2,16 @@ import type { CSSProperties } from 'vue';
 
 export interface NoticeBarProps {
   /**
+   * 是否显示通知图标
+   * @default true
+   */
+  icon?: boolean;
+  /**
+   * 是否可关闭
+   * @default false
+   */
+  closeable?: boolean;
+  /**
    * 数据列表
    * list 与 text必须传入一个，如果是list则以垂直方式滚动
    */
@@ -33,4 +43,18 @@ export interface NoticeBarProps {
    * @default 100
    */
   step?: number;
+}
+
+/**
+ * 插槽
+ */
+export type NoticeBarSlots = {
+  /**
+   * 左侧图标
+   */
+  'left-icon'?: any;
+  /**
+   * 右侧图标
+   */
+  'right-icon'?: any;
 }

@@ -10,7 +10,7 @@ const list = [
 </script>
 
 <template>
-<EpNoticeBar list="不要等待，时机永远不会恰到好处">
+<EpNoticeBar :list="list">
 
 </EpNoticeBar>
 </template>

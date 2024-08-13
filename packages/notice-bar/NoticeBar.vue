@@ -3,10 +3,13 @@ import { computed, nextTick, onMounted, type Ref, ref } from 'vue';
 import { useRafTimeout, useResizeObserver } from '@eqian/utils-vue';
 import type { NoticeBarProps } from './type';
 import { pixelUnits } from '../utils/pixelUnits';
+import EpIcon from '../icon/Icon.vue';
 const verticalRef = ref<HTMLElement>();
 const horizontalRef = ref<HTMLElement>();
 const textRef = ref<HTMLElement>();
 const currentIndex = ref(0);
+const emits = defineEmits(['close']);
+const isClosed = ref(false);
 const props = withDefaults(defineProps<NoticeBarProps>(), {
   list: () => [],
   speed: 3000,
@@ -119,37 +122,60 @@ const init = () => {
     listenerAnimationend();
   }
 };
+const handleClose = () => {
+  isClosed.value = true;
+  close();
+  emits('close');
+};
 onMounted(() => {
   init();
 });
 </script>
 
 <template>
-  <div v-if="!computedVertical" :style="computedHorizontalStyle">
-    <div ref="horizontalRef" class="horizontal-wrap-text-box">
-      <div class="horizontal-wrap-text" ref="textRef">
-        {{ computedText }}
+  <div v-if="!isClosed" class="cz-notice-container">
+    <div v-if="props.icon || $slots['left-icon']" class="cz-notice-left-icon">
+      <EpIcon v-if="!$slots['left-icon']"><Bell /></EpIcon>
+      <slot v-else name="left-icon"></slot>
+    </div>
+    <div v-if="!computedVertical" :style="computedHorizontalStyle">
+      <div ref="horizontalRef" class="horizontal-wrap-text-box">
+        <div class="horizontal-wrap-text" ref="textRef">
+          {{ computedText }}
+        </div>
       </div>
     </div>
-  </div>
-  <div
-    v-else
-    :style="computedVerticalStyle"
-    ref="verticalRef"
-    class="slider-vertical"
-  >
-    <transition-group name="slide">
-      <div
-        @mouseenter="() => close()"
-        @mouseleave="reset"
-        class="scroll-view"
-        v-for="(item, index) in computedList"
-        :key="item"
-        v-show="currentIndex === index"
-      >
-        <div class="slide-text">{{ item }}</div>
-      </div>
-    </transition-group>
+    <div
+      v-else
+      :style="computedVerticalStyle"
+      ref="verticalRef"
+      class="slider-vertical"
+    >
+      <transition-group name="slide">
+        <div
+          @mouseenter="() => close()"
+          @mouseleave="reset"
+          class="scroll-view"
+          v-for="(item, index) in computedList"
+          :key="item"
+          v-show="currentIndex === index"
+        >
+          <div class="slide-text">{{ item }}</div>
+        </div>
+      </transition-group>
+    </div>
+    <div
+      v-if="props.closeable || $slots['right-icon']"
+      class="cz-notice-right-icon"
+    >
+      <EpIcon
+        v-if="props.closeable"
+        style="cursor: pointer"
+        @click="handleClose"
+        ><CircleClose
+      /></EpIcon>
+      <slot v-else name="right-icon"></slot>
+    </div>
   </div>
 </template>
 
