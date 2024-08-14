@@ -23,6 +23,10 @@ export default defineConfig({
                 text: '组件',
                 link: '/components/base/button'
             },
+          {
+            text: 'API',
+            link: '/components/generate/modules'
+          },
             {
                 text: '更新日志',
                 link: '/guide/CHANGELOG'
