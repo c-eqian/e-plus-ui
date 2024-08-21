@@ -61,3 +61,50 @@ table/header
 :::demo `树形数据`
 table/tableTree
 :::
+
+### 集成分页组件
+
+用法与`pagination`组件一致。
+1. 需要`pagination`设置为`true`开启分页组件，默认为`false`
+2. 预设`total`,`page`, `limit`,`pageSizes`属性，其他属性请配置`paExtra`
+
+<br>
+**注意：集成的分页组件需要设置`pa-`开头，如total需要配置`pa-total`**
+<br>
+
+:::demo `分页`
+table/pagination
+:::
+
+### 动态操作列
+可以使用`useEpTable`来简化`ref`操作
+
+<br>
+
+目前支持的操作方法与`ref`操作方法一致：
+
+- `validateField` 表单校验某字段
+- `validate` 表单检验
+- `clearValidate` 清除检验状态
+- `resetFields` 重置表单
+- `toggleRowSelection` 选中与否,可以通过单个/多组数据进行选中与否，支持对象、数字、字符串
+- `clearSelection` 清空选中状态
+- `addFieldColumns` 添加列，支持批量，支持根据`prop`添加到指定位置，默认尾部添加
+- `deleteFieldColumns` 根据`prop`删除列,支持批量
+- `updateFieldColumns`  根据`prop`更新列,支持批量
+  <br>
+
+**注意：toggleRowSelection方法中，数字、字符串（数组）情况下需要配置row-key唯一键， 同时ref中仅支持单行数据操作（暂定）**
+
+:::demo
+table/useTable
+:::
+
+
+### 单选
+
+需要配置`idKey`唯一值的key，同时需要启用`highlightCurrentRow`为`true`
+
+:::demo
+table/radio
+:::
