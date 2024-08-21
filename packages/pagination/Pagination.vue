@@ -20,7 +20,7 @@ import { computed } from 'vue';
 import type { IPaginationProps } from './type';
 defineOptions({
   name: 'EpPagination',
-})
+});
 const props = withDefaults(defineProps<IPaginationProps>(), {
   page: 1,
   limit: 20,
