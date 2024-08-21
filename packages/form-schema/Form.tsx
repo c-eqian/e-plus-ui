@@ -23,7 +23,7 @@ import { FormSchemaProps } from './types/formProps';
 export default defineComponent({
   name: 'EpFormSchema',
   props: FormSchemaProps,
-  emits: ['registry', 'search'],
+  emits: ['registry', 'search', 'reset'],
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
     const items = toRef(props.config.items);
@@ -139,7 +139,7 @@ export default defineComponent({
                 onSearch: () => this.emit('search', this.getFieldsValues()),
                 onReset: () => {
                   this.resetFieldsValues();
-                  this.emit('search', {});
+                  this.emit('reset', {});
                 },
               })
             )
