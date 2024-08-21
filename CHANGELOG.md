@@ -1,6 +1,33 @@
 # 更新日志 
 
 
+## [1.3.0](https://github.com/c-eqian/e-plus-ui/compare/v1.2.0...v1.3.0) (2024-08-21)
+
+
+###   Chores | 其他更新
+
+* release v1.2.0 ([76dcda7](https://github.com/c-eqian/e-plus-ui/commit/76dcda7bbdf8c10613c0d459c2280fb3f79956d5))
+
+
+### ✨ Features | 新功能
+
+* **card:** 卡片优化 ([a05ab67](https://github.com/c-eqian/e-plus-ui/commit/a05ab677de2bb72d39f68895b0084c9c438feadd))
+* **comment:** 评论扩展操作 ([e7845a9](https://github.com/c-eqian/e-plus-ui/commit/e7845a946df79791771035f9057073800a7ff7ba))
+* **comment:** 支持插槽方法扩展操作 ([ccc29a1](https://github.com/c-eqian/e-plus-ui/commit/ccc29a12dd785dc3b98ce53aab6b550c813a90c1))
+
+
+###   Bug Fixes | Bug 修复
+
+* **comment:** 更多按钮优化 ([7112f64](https://github.com/c-eqian/e-plus-ui/commit/7112f64d117946ce82a89f2d80980ac342db7994))
+* **comment:** 类型接口优化 ([de8abe8](https://github.com/c-eqian/e-plus-ui/commit/de8abe8b1f6f539189cdf64b294200e379db4565))
+* **comment:** 类型接口优化 ([04cb498](https://github.com/c-eqian/e-plus-ui/commit/04cb4980378f452155cb4c0a624402bd3e2558cb))
+* **menu:** 菜单优化 ([ca6dc0a](https://github.com/c-eqian/e-plus-ui/commit/ca6dc0a6905587a3da5e7c4ceff45f5d3f3fba39))
+* **notice:** 通知栏优化 ([7faef0a](https://github.com/c-eqian/e-plus-ui/commit/7faef0a6f2938f19c6a19fc1972e0db7bc31cd3e))
+* **notice:** 支持自定义图标 ([e54a49d](https://github.com/c-eqian/e-plus-ui/commit/e54a49d2ff3cfec75c387fc7378adae2f07f9a76))
+* **notice:** 支持自定义图标 ([ac82f96](https://github.com/c-eqian/e-plus-ui/commit/ac82f96c747c5b73d392d2713cd5f46def3344ca))
+* **pagination:** 修复导出 ([d747238](https://github.com/c-eqian/e-plus-ui/commit/d747238aa60438a32c1229ccb6d7084d656707c4))
+* **pagination:** 修复导出 ([a24ab98](https://github.com/c-eqian/e-plus-ui/commit/a24ab982ec7212a460abe7391a64c571768eea38))
+
 ## [1.2.0](https://github.com/c-eqian/e-plus-ui/compare/v1.1.2...v1.2.0) (2024-08-02)
 
 
