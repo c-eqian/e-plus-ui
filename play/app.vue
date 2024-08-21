@@ -16,7 +16,7 @@
         </template>
       </ep-card>
       <ep-card>
-        <Index></Index>
+        <Form></Form>
       </ep-card>
     </div>
   </div>
@@ -24,6 +24,7 @@
 <script setup lang="ts">
 import { EpCard } from '../packages';
 import Index from './index.vue';
+import Form from './form.vue';
 </script>
 <style lang="less">
 html,
