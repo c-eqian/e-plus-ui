@@ -1,22 +1,30 @@
 import type { FormSchemaReturn, UseFormSchemaReturnType } from '../type';
-import { nextTick, onUnmounted, ref, unref } from 'vue';
+import {
+  type ComponentInternalInstance,
+  ComponentPublicInstance,
+  nextTick,
+  onUnmounted,
+  ref,
+  unref,
+} from 'vue';
 
 export const useFormSchema = (): UseFormSchemaReturnType => {
-  const formInstance = ref<FormSchemaReturn | null>(null);
+  const formInstance = ref<ComponentInternalInstance | null>(null);
   const registeredRef = ref<boolean>(false);
   const getFormInstance = async () => {
     const instance = unref(formInstance);
     if (!instance) {
-      console.warn('获取表单示例失败~~');
+      console.warn(`获取表单示例失败-----[${instance}]`);
       return null;
     }
     await nextTick();
-    return instance;
+    return instance.proxy as FormSchemaReturn & ComponentPublicInstance;
   };
-  const registry = async (instance: FormSchemaReturn) => {
+  const registry = async (getInstance: () => ComponentInternalInstance) => {
     onUnmounted(() => {
       formInstance.value = null;
     });
+    const instance = getInstance();
     if (unref(formInstance) === instance && unref(registeredRef)) {
       return;
     }
@@ -48,8 +56,8 @@ export const useFormSchema = (): UseFormSchemaReturnType => {
       const instance = await getFormInstance();
       return instance?.setFieldsValues(values);
     },
-    getFieldsValues: <T = any>(serialize = true) => {
-      const instance = unref(formInstance);
+    getFieldsValues: async <T = any>(serialize = true) => {
+      const instance = await getFormInstance();
       return instance?.getFieldsValues(serialize) as T;
     },
     appendFields: async (item, to) => {
