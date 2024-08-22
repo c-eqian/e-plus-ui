@@ -6,6 +6,7 @@ import './theme/index.less';
  */
 export * from './table/type';
 export * from './table/hooks/useTable';
+export * from './hooks';
 export * from './table/packages/tableProps';
 export * from './form';
 export * from './virtual-list/type';
