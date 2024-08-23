@@ -14,7 +14,7 @@ async function build(v: 'rc' | 'alpha' | '' = '') {
   } else if (v === 'alpha') {
     execSync('npm run release:alpha', { stdio: 'inherit' });
   } else {
-    execSync('npm run release', { stdio: 'inherit' });
+    execSync('npm run release-static', { stdio: 'inherit' });
   }
   consola.info('版本构建成功 ...');
 }
