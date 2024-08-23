@@ -11,6 +11,7 @@ import type {
   RegisterFn,
   ComponentSlots,
 } from './types';
+import type { ComponentInternalInstance } from 'vue';
 /**
  * 列宽配置
  */
@@ -239,7 +240,7 @@ export interface UseFormSchemaReturnType extends FormSchemaReturn {
   /**
    * 表单注册函数
    */
-  registry: RegisterFn<FormSchemaReturn>;
+  registry: RegisterFn<ComponentInternalInstance>;
   /**
    * 表单实例
    */

@@ -1,7 +1,12 @@
+import { isFunction, isArray, isObject, isString } from '@eqian/utils-vue';
 import { ElButton } from 'element-plus';
-import { computed, defineComponent, h, inject, type PropType } from 'vue';
-import { isArray, isObjectLike, isFunction, isString } from '@eqian/utils-vue';
+import { defineComponent, h, inject, PropType, unref } from 'vue';
+
+import { useProps } from '../hooks/useProps';
+import { useHasPermission } from '../hooks/usePermission';
+
 import type { ITableColumnConfig, OperationType } from '../type';
+
 export default defineComponent({
   name: 'EpButtons',
   props: {
@@ -21,7 +26,8 @@ export default defineComponent({
   emits: ['click-btn'],
   setup(props) {
     const eventListeners: any = inject('EVENT-CLICKED');
-    const propsComputed = computed(() => props);
+    const appContext: any = inject('PINIA-KEY');
+    const propsComputed = useProps(props);
 
     const dynamicButtons = (label: string, props: any) => {
       return h(
@@ -59,6 +65,16 @@ export default defineComponent({
       const operationMap = getBaseMap(label, extra);
       return operationMap[item];
     };
+    const handlePermission = (permission: string[]) => {
+      if (!appContext?.$pinia) {
+        console.warn('未获取到pinia实例，请确认是否已注册！');
+        return false;
+      }
+      const { state } = appContext.$pinia;
+      if (!state || !unref(state)) return false;
+      const { permissions = [] } = unref(state)['USER-PERMISSION'];
+      return useHasPermission(permission, permissions);
+    };
     const createOperationNode = () => {
       const { operationType } = propsComputed.value.column;
       const { row, index, column } = propsComputed.value;
@@ -66,13 +82,7 @@ export default defineComponent({
         return operationType.map((item) => {
           if (isString(item)) {
             return createBaseOperation(item) as any;
-          } else if (isFunction(operationType)) {
-            return operationType({
-              row,
-              index,
-              column,
-            });
-          } else if (isObjectLike(item)) {
+          } else if (isObject(item)) {
             const {
               type,
               permission,
@@ -81,7 +91,11 @@ export default defineComponent({
               render,
             } = item;
             const isRender = () => {
-              return isFunction(permission) ? permission() : true;
+              return isFunction(permission)
+                ? permission()
+                : isArray(permission)
+                ? handlePermission(permission)
+                : true;
             };
             if (isFunction(render)) {
               return render({
@@ -107,18 +121,29 @@ export default defineComponent({
             return null;
           }
         });
+      } else if (isFunction(operationType)) {
+        return operationType?.({
+          row,
+          index,
+          column,
+        });
       }
     };
     /**
      * 基础操作
      */
     const getBaseMap = (label?: string, extra = {}) => {
-      const operationTypeLabel = {
-        add: '新增',
-        edit: '编辑',
-        delete: '删除',
-        view: '查看',
-      };
+      const { operationLabel } = propsComputed.value.column;
+      const operationTypeLabel = Object.assign(
+        {},
+        {
+          add: '新增',
+          edit: '编辑',
+          delete: '删除',
+          view: '查看',
+        },
+        operationLabel || {}
+      );
       return {
         add: dynamicButtons(label || operationTypeLabel.add, {
           ...{

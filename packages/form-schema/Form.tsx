@@ -1,6 +1,7 @@
 import {
   computed,
   defineComponent,
+  getCurrentInstance,
   h,
   onMounted,
   provide,
@@ -88,19 +89,11 @@ export default defineComponent({
     );
     const { getFieldsValues, setFieldsValues, resetFieldsValues } =
       useFormValues(getModel, updateFieldValue);
+    const getInstance = () => {
+      return getCurrentInstance();
+    };
     onMounted(() => {
-      emit('registry', {
-        validate,
-        resetFields,
-        clearValidate,
-        validateField,
-        setFieldsValues,
-        resetFieldsValues,
-        scrollIntoView,
-        deleteField,
-        appendFields,
-        getFieldsValues,
-      });
+      emit('registry', getInstance);
     });
     return {
       formModel,
@@ -113,6 +106,7 @@ export default defineComponent({
       getFieldsValues,
       resetFieldsValues,
       validate,
+      scrollIntoView,
       deleteField,
       resetFields,
       clearValidate,

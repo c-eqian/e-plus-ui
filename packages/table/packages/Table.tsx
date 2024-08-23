@@ -1,17 +1,19 @@
 import '../index.less';
 
+import { isEmpty } from '@eqian/utils-vue';
 import {
   ElForm,
   ElRadio,
   ElTable,
   ElTableColumn,
-  type FormInstance,
   type FormValidateCallback,
 } from 'element-plus';
 import {
   computed,
   defineComponent,
-  type PropType,
+  getCurrentInstance,
+  h,
+  onMounted,
   provide,
   ref,
   unref,
@@ -19,78 +21,25 @@ import {
   watchEffect,
 } from 'vue';
 
-import type { ITableColumnConfig, OperationType } from '../type';
-import EpTableColumn from './TableColumn';
+import Pagination from '../../pagination';
+import { useColumns } from '../hooks/useColumns';
+import { TableEmits, TableProps } from './tableProps';
+import type { ITableColumnConfig } from '../type';
+import AdvTableColumn from './TableColumn';
+type FormInstance = InstanceType<typeof ElForm>;
+
 export default defineComponent({
   name: 'EpTable',
-  props: {
-    data: {
-      type: Array as PropType<any[] /** 不知道数据的格式 */>,
-      default: () => [],
-    },
-    height: {
-      type: [Number, String],
-      default: '100%',
-    },
-    tooltipEffect: {
-      type: String,
-      default: 'dark',
-    },
-    border: {
-      type: Boolean,
-      default: false,
-    },
-    highlightCurrentRow: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * 配置highlightCurrentRow时需要
-     * 单选框
-     */
-    idKey: {
-      type: String,
-      default: '',
-    },
-    column: {
-      type: Array as PropType<ITableColumnConfig[]>,
-      default: () => [],
-    },
-    /**
-     * 是否使用表单验证
-     */
-    useFormValidation: {
-      type: Boolean,
-      default: false,
-    },
-    formModelExtender: {
-      type: Object,
-      default: () => ({}),
-    },
-    operationLabel: {
-      type: Object as PropType<Record<OperationType, string>>,
-      default: () => {
-        return {};
-      },
-    },
-  },
-  emits: [
-    'current-change',
-    'selection-change',
-    'click-row',
-    'click-btn',
-    'click-row-delete',
-    'click-row-add',
-    'click-row-view',
-    'click-row-edit',
-    'dbClick-row',
-  ],
-  setup(props, { emit }) {
-    const czFormRef = ref<FormInstance>();
+  inheritAttrs: true,
+  props: TableProps,
+  emits: TableEmits,
+  setup(props, { emit, attrs }) {
+    const epFormRef = ref<FormInstance>();
     const epTable = ref<InstanceType<typeof ElTable>>();
-    const dataComputed = computed(() => props.data);
+    const columns = ref(props.column);
+    const dataComputed = ref(props.data);
     const columnsComputed = computed(() => {
-      return props.column.filter((columnsItem) => {
+      return columns.value.filter((columnsItem) => {
         if (
           unref(columnsItem.columnsExtra) &&
           typeof unref(columnsItem.columnsExtra)?.visible === 'boolean'
@@ -100,6 +49,9 @@ export default defineComponent({
         return columnsItem;
       });
     });
+    watchEffect(() => {
+      dataComputed.value = props.data;
+    });
     provide('EVENT-CLICKED', {
       btn: (...args: any[]) => emit('click-btn', ...args),
       delete: (...args: any[]) => emit('click-row-delete', ...args),
@@ -107,6 +59,9 @@ export default defineComponent({
       add: (...args: any[]) => emit('click-row-add', ...args),
       edit: (...args: any[]) => emit('click-row-edit', ...args),
     });
+    const instance = getCurrentInstance();
+    const appContext = instance?.appContext.config.globalProperties;
+    provide('PINIA-KEY', appContext);
     const currentRow = ref<any>(null);
     const currentId = ref<string | number>('');
     /**
@@ -128,7 +83,7 @@ export default defineComponent({
      * @param field
      */
     const scrollIntoView = (field: string) => {
-      (czFormRef.value?.$el as HTMLElement)
+      (epFormRef.value?.$el as HTMLElement)
         ?.querySelector(`[field="${field}"]`)
         ?.scrollIntoView({
           behavior: 'smooth',
@@ -141,7 +96,7 @@ export default defineComponent({
      * @param arg
      */
     // const scrollToField: FormInstance['scrollToField'] = (...arg) => {
-    //   return czFormRef.value?.scrollToField(...arg);
+    //   return epFormRef.value?.scrollToField(...arg);
     // };
     /**
      * 对整个表单的内容进行验证
@@ -156,7 +111,7 @@ export default defineComponent({
       if (!props.useFormValidation) return true;
       if (isScrollToField) {
         try {
-          return await czFormRef.value?.validate(callback);
+          return await epFormRef.value?.validate(callback);
         } catch (error) {
           const fieldModel = error as Record<
             string,
@@ -169,37 +124,37 @@ export default defineComponent({
           return Promise.reject(error);
         }
       }
-      return czFormRef.value?.validate(callback);
+      return epFormRef.value?.validate(callback);
     };
     /**
      * 校验表单某个字段验证
      * @param arg
      */
     const validateField: FormInstance['validateField'] = (...arg) => {
-      if (!czFormRef.value) {
+      if (!epFormRef.value) {
         console.warn('表单启用失败，useFormValidation 是否配置正确');
         return Promise.resolve(true);
       }
-      return czFormRef.value?.validateField(...arg);
+      return epFormRef.value?.validateField(...arg);
     };
     /**
      * 重置表单
      * @param arg
      */
     const resetFields: FormInstance['resetFields'] = (...arg) => {
-      if (!czFormRef.value)
+      if (!epFormRef.value)
         console.warn('表单启用失败，useFormValidation 是否配置正确');
-      return czFormRef.value?.resetFields(...arg);
+      return epFormRef.value?.resetFields(...arg);
     };
     /**
      * 清空某个字段的表单有验证信息
      * @param arg
      */
     const clearValidate: FormInstance['clearValidate'] = (...arg) => {
-      if (!czFormRef.value) {
+      if (!epFormRef.value) {
         console.warn('表单启用失败，useFormValidation 是否配置正确');
       }
-      return czFormRef.value?.clearValidate(...arg);
+      return epFormRef.value?.clearValidate(...arg);
     };
     /**
      * 重置表单字段
@@ -212,11 +167,14 @@ export default defineComponent({
         }
       }
     );
-    watchEffect(() => {
-      if (!(props.data.length < 1)) {
-        props.useFormValidation && clearValidate();
+    watch(
+      () => [props.useFormValidation, props.data.length],
+      () => {
+        if (props.useFormValidation && props.data.length > 0) {
+          clearValidate();
+        }
       }
-    });
+    );
     /**
      * 双击行
      * @param list
@@ -227,18 +185,43 @@ export default defineComponent({
     const handleRowDbClick = (row: any) => {
       emit('dbClick-row', row);
     };
+    const getColumns = () => {
+      return columns;
+    };
+    const updateColumns = (_data: ITableColumnConfig[]) => {
+      columns.value = _data;
+    };
     /** 不知道数据的格式 */
     const handleCurrentChange = (row: any) => {
       currentRow.value = row;
       currentId.value = row?.[props.idKey!] ?? '';
       emit('current-change', row);
     };
+    const getTableInstance = (): any => {
+      return instance?.proxy;
+    };
+    const getData = () => {
+      return dataComputed.value;
+    };
+    const { addFieldColumns, deleteFieldColumns, updateFieldColumns } =
+      useColumns(() => {
+        return {
+          getColumns,
+          updateColumns,
+        };
+      });
+    onMounted(() => {
+      emit('registry', getTableInstance);
+    });
     return {
-      czFormRef,
+      epFormRef,
       epTable,
       dataComputed,
       columnsComputed,
       // dictValue,
+      getColumns,
+      getData,
+      updateColumns,
       formModels,
       currentId,
       currentRow,
@@ -246,6 +229,9 @@ export default defineComponent({
       clearValidate,
       validate,
       validateField,
+      addFieldColumns,
+      deleteFieldColumns,
+      updateFieldColumns,
       handleSelectionChange,
       handleRowDbClick,
       handleCurrentChange,
@@ -267,6 +253,7 @@ export default defineComponent({
     const setTableProps = () => {
       const _props = Object.assign({}, this.$props, this.$attrs);
       Reflect.deleteProperty(_props, 'column');
+      Reflect.deleteProperty(_props, 'data');
       Reflect.deleteProperty(_props, 'formModelExtender');
       Reflect.deleteProperty(_props, 'useFormValidation');
       return _props;
@@ -278,7 +265,7 @@ export default defineComponent({
       if (!this.$props.highlightCurrentRow || !this.$props.idKey) return null;
       return (
         <ElTableColumn
-          width="35"
+          width="55"
           align="center"
           v-slots={{
             default: ({ row }: any) => {
@@ -299,32 +286,82 @@ export default defineComponent({
       return (
         <ElTable
           ref="epTable"
+          stripe
           {...setTableProps()}
+          data={this.dataComputed}
           onRow-dblclick={this.handleRowDbClick}
           onSelection-change={this.handleSelectionChange}
           onCurrent-change={this.handleCurrentChange}
+          class="ep-el-table"
+          header-cell-class-name="ep-table__header"
+          cell-class-name="ep-table__cell"
         >
           {radioRender()}
           {this.$slots.default
             ? this.$slots.default()
             : this.columnsComputed.map((item) => {
                 return (
-                  <EpTableColumn
+                  <AdvTableColumn
                     useFormValidation={this.useFormValidation}
                     columns={this.columnsComputed}
                     columnItem={item}
                     key={item.prop || item.key}
                     v-slots={this.$slots}
-                  ></EpTableColumn>
+                  ></AdvTableColumn>
                 );
               })}
         </ElTable>
       );
     };
+    /**
+     * 分页
+     */
+    const handlePagination = () => {
+      const createUpdateModel = (key: string) => {
+        if (['page', 'limit'].includes(key)) {
+          return {
+            [`onUpdate:${key}`]: (val: any) => {
+              key === 'limit'
+                ? this.$emit('update:pa-limit', val)
+                : this.$emit('update:pa-page', val);
+            },
+          };
+        }
+        return {};
+      };
+      if (this.$props.pagination) {
+        const paProps = {} as any;
+        Object.keys(this.$props).forEach((key) => {
+          if (key.startsWith('pa')) {
+            const __key__ = key.replace('pa', '').toLowerCase();
+            if (key === 'paExtra' && !isEmpty(this.$props[key])) {
+              Object.keys(this.$props[key]).forEach((_key) => {
+                paProps[_key.replace('pa', '').toLowerCase()] =
+                  this.$props[key][_key];
+              });
+            } else {
+              paProps[__key__] = this.$props[key];
+            }
+            Object.assign(paProps, createUpdateModel(__key__));
+          }
+        });
+        return h(Pagination, {
+          ...paProps,
+          onPageChange: (...args: any[]) => this.$emit('page-change', ...args),
+        });
+      }
+    };
     return (
-      <ElForm ref="czFormRef" model={this.formModels}>
-        {tableRender()}
-      </ElForm>
+      <div>
+        {this.$props.useFormValidation ? (
+          <ElForm ref="epFormRef" model={this.formModels}>
+            {tableRender()}
+          </ElForm>
+        ) : (
+          tableRender()
+        )}
+        {handlePagination()}
+      </div>
     );
   },
 });
