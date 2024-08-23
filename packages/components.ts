@@ -3,6 +3,7 @@ type A = import('@vue/runtime-core').GlobalComponents;
 import EpButton from './button/index';
 import EpCard from './card/index';
 import EpLine from './line/index';
+import EpSkeleton from './skeleton/index';
 import { EpTable, EpTableColumn } from './table';
 import EpVirtualList from './virtual-list/index';
 import EpCopyText from './copy-text/index';
@@ -26,6 +27,7 @@ declare module '@vue/runtime-core' {
     EpButton: typeof EpButton;
     EpCard: typeof EpCard;
     EpLine: typeof EpLine;
+    EpSkeleton: typeof EpSkeleton;
     EpLetterLoading: typeof EpLetterLoading;
     EpDiamondLoading: typeof EpDiamondLoading;
     EpLoading: typeof EpLoading;
