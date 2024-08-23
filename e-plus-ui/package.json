@@ -4,8 +4,8 @@
   "author": "Eqian",
   "license": "MIT",
   "description": "一个基于element-plus的封装组件库，高效、简单",
-  "type": "module",
-  "main": "es/index.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",
   "web-types": "types/web-types.json",
@@ -29,13 +29,17 @@
   ],
   "exports": {
     ".": {
-      "import": {
-        "types": "./types/index.d.ts",
-        "default": "./es/index.js"
-      }
+      "types": "./types/index.d.ts",
+      "default": "./es/index.js",
+      "require": "./lib/index.js"
+    },
+    "./es": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.js"
     },
     "./lib/": "./lib/",
     "./es/": "./es/",
+    "./*": "./*",
     "./types/*": [
       "./types/*.d.ts"
     ]
