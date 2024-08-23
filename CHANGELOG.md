@@ -1,6 +1,30 @@
 # 更新日志 
 
 
+### [1.3.1](https://github.com/c-eqian/e-plus-ui/compare/v1.3.0...v1.3.1) (2024-08-23)
+
+
+### ✨ Features | 新功能
+
+* **docs:** 支持使用注册方法 ([7fe7329](https://github.com/c-eqian/e-plus-ui/commit/7fe7329d06c60da5f91da12224fbf053dcd54323))
+* **docs:** 支持使用注册方法 ([810679b](https://github.com/c-eqian/e-plus-ui/commit/810679bc735f1df80ca26e8dfbb0b13985a22bbd))
+* **form-schema:** 优化表单 ([f43b3c4](https://github.com/c-eqian/e-plus-ui/commit/f43b3c42b26549df24f014a931794f8da61ad210))
+* **form-schema:** 优化表单 ([566b7e0](https://github.com/c-eqian/e-plus-ui/commit/566b7e0a103ba02ea1e76901809ab1a49b7aa185))
+* **hooks:** 新增弹窗确认 ([d7398d4](https://github.com/c-eqian/e-plus-ui/commit/d7398d4f4fee763e16192439e7492fa619ccaa2e))
+* **table:** 支持使用注册方法 ([9d883ab](https://github.com/c-eqian/e-plus-ui/commit/9d883ab95f7a17ad2d369008323f50b4cffb8553))
+* **table:** 支持使用注册方法 ([6f2f144](https://github.com/c-eqian/e-plus-ui/commit/6f2f1447aa718e686a0f0c81493ed116b77e8f85))
+
+
+###   Bug Fixes | Bug 修复
+
+* **form-schema:** defineFormSchema默认类型修复 ([c1c6443](https://github.com/c-eqian/e-plus-ui/commit/c1c644397ff21bdaed08e5f30a8c820fe3e59b8b))
+
+
+###   Chores | 其他更新
+
+* **package.json:** 更改包路径 ([12e4731](https://github.com/c-eqian/e-plus-ui/commit/12e473173980adee14c4502fdb9dbbd8e8db2bc5))
+* release v1.3.0 ([0b7726b](https://github.com/c-eqian/e-plus-ui/commit/0b7726b4c944d3ac3c106b9c6879491c9228dd3f))
+
 ## [1.3.0](https://github.com/c-eqian/e-plus-ui/compare/v1.2.0...v1.3.0) (2024-08-21)
 
 
