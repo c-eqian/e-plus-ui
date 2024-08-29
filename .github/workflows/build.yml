@@ -45,3 +45,6 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: docs/.vitepress/dist
+          CLEAN: true # Automatically remove deleted files from the target branch
+          SINGLE_COMMIT: true # Only make a single commit to the target branch
+          PUBLISH_BRANCH: gh-pages # Specify that this action should create the branch if it doesn't exist
