@@ -1,6 +1,23 @@
 # 更新日志 
 
 
+## [1.4.0](https://github.com/c-eqian/e-plus-ui/compare/v1.3.1...v1.4.0) (2024-08-29)
+
+
+###   Chores | 其他更新
+
+* release v1.3.1 ([26421c9](https://github.com/c-eqian/e-plus-ui/commit/26421c9e0142986b17e91c9e7cda8896732d1582))
+
+
+### ✨ Features | 新功能
+
+* **skeleton:** 添加skeleton组件 ([472c83a](https://github.com/c-eqian/e-plus-ui/commit/472c83a38ad5f75cb9a7c372b9c4d0012e536d31))
+
+
+###   Bug Fixes | Bug 修复
+
+* **comment:** 修复评论回复，优化更多操作逻辑 ([698bcb3](https://github.com/c-eqian/e-plus-ui/commit/698bcb378cbcedecf28c82e1fa237a37d677ad69))
+
 ### [1.3.1](https://github.com/c-eqian/e-plus-ui/compare/v1.3.0...v1.3.1) (2024-08-23)
 
 
