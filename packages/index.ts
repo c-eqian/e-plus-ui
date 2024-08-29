@@ -36,6 +36,7 @@ import EpTextFold from './text-fold';
 import EpNoticeBar from './notice-bar';
 import EpIcon from './icon';
 import EpMenu from './menu';
+import EpSkeleton from './skeleton';
 /**
  * 高级组件
  */
@@ -53,6 +54,7 @@ const components: Record<string, Plugin> = {
   EpCopyText,
   EpImage,
   EpMenu,
+  EpSkeleton,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,
@@ -86,6 +88,7 @@ export {
   EpLine,
   EpImage,
   EpMenu,
+  EpSkeleton,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,

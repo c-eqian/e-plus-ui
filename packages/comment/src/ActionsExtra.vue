@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ElButton, ElIcon } from 'element-plus';
 import { More, Delete, Warning } from '@element-plus/icons-vue';
+import EpLine from '../../line/index.vue';
 const emits = defineEmits(['delete', 'complaint']);
 </script>
 
@@ -21,6 +22,7 @@ const emits = defineEmits(['delete', 'complaint']);
         @click="emits('delete', 0)"
         >删 除</el-button
       >
+      <ep-line></ep-line>
       <el-button
         link
         size="small"

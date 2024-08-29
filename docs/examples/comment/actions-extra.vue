@@ -8,6 +8,7 @@ import {
 import { ref } from 'vue'
 import {ElMessage} from "element-plus";
 const isUseSlot = ref(false);
+const commentRef= ref<InstanceType<typeof EpComment>>()
 const commentData: ICommentData = {
   total: 99,
   list: [
@@ -56,6 +57,9 @@ const fieldsConfig: ICommentConfig = {
   // ipAddress: 'ipAddress'
 };
 const handleActions = (type, { item})=> {
+  if (type === 0){
+    commentRef.value?.deleteComment(item)
+  }
   ElMessage.success('点击' + (type===0 ? '删除': '投诉') + '-----' + item.userInfo.username)
 }
 </script>
@@ -63,7 +67,7 @@ const handleActions = (type, { item})=> {
 <template>
   <div>
     <el-button @click="isUseSlot=!isUseSlot">{{isUseSlot?'使用内置':'使用插槽'}}</el-button>
-    <ep-comment :data="commentData" :config="fieldsConfig" @actions="handleActions">
+    <ep-comment ref="commentRef" :data="commentData" :config="fieldsConfig" @actions="handleActions">
       <template v-if="isUseSlot" #actions-extra="{ item }">
         <div class="cz-flex cz-flex-col">
           <el-button

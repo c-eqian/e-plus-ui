@@ -94,6 +94,7 @@ export default defineComponent({
       appendComments,
       updateComment,
       updateLikeCount,
+      deleteComment,
       loadData,
     } = useComment({
       data: computedData,
@@ -113,6 +114,7 @@ export default defineComponent({
       getParentNodes,
       clearMapValues,
       updateComment,
+      deleteComment,
       computedConfig,
       loadingMap,
       loadingStatus,
@@ -241,7 +243,7 @@ export default defineComponent({
               index,
             })
           }
-          onConfirm-reply={(...args: any) => {
+          onConfirm-reply={(args: any) => {
             this.$emit('confirm-reply', {
               ...args,
               item,
