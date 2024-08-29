@@ -1,1 +1,0 @@
-import{_ as n,C as c,o as r,c as s,H as t,w as o,a}from"./framework.330b59dd.js";const l={};function _(d,i){const e=c("ep-line");return r(),s("div",null,[t(e,{"border-width":"2"},{default:o(()=>[a("自定义宽度")]),_:1}),t(e,{linear:"",color:"blue"},{default:o(()=>[a("自定义颜色")]),_:1}),t(e,{margin:"16"},{default:o(()=>[a("自定义间距")]),_:1})])}const u=n(l,[["render",_]]);export{u as default};
