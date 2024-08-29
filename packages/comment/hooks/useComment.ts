@@ -190,7 +190,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
    * @param recordItem
    */
   const deleteComment = (recordItem: CommentDataRow) => {
-    if (!recordItem || !isEmpty(recordItem)) return;
+    if (!recordItem || isEmpty(recordItem)) return;
     const { getValueByKey } = instance;
     if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
