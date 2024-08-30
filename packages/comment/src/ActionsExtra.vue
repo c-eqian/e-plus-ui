@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ElButton, ElIcon } from 'element-plus';
+import { ElButton, ElIcon, ElPopover } from 'element-plus';
 import { More, Delete, Warning } from '@element-plus/icons-vue';
 import EpLine from '../../line/index.vue';
 const emits = defineEmits(['delete', 'complaint']);
