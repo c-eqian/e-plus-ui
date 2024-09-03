@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.4.1](https://github.com/c-eqian/e-plus-ui/compare/v1.4.0...v1.4.1) (2024-09-03)
+
+
+###   Chores | 其他更新
+
+* release v1.4.0 ([4fa8686](https://github.com/c-eqian/e-plus-ui/commit/4fa86868f483b8b8bfa75b971e057e7b17dec2b3))
+
+
+###   Bug Fixes | Bug 修复
+
+* **comment:** 修复拓展操作组件默认导入el-popover ([83a4fbe](https://github.com/c-eqian/e-plus-ui/commit/83a4fbe4145abae80676d1ba2cb9ed8b0f8c2ee6))
+
 ## [1.4.0](https://github.com/c-eqian/e-plus-ui/compare/v1.3.1...v1.4.0) (2024-08-29)
 
 
