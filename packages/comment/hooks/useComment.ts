@@ -50,7 +50,21 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     const key = instance.getValueByKey('commentId', true);
     return recordsDataMap.value.get(item[key]);
   };
-  const addMapValues = (item: CommentDataRow, values: CommentRecordMap) => {
+  const addMapValues = (
+    item: CommentDataRow,
+    values: CommentRecordMap,
+    parentReply?: CommentDataRow
+  ) => {
+    if (parentReply) {
+      const key = instance.getValueByKey('commentId', true);
+      const { children = [], ...data } =
+        recordsDataMap.value.get(parentReply[key]) ?? {};
+      children.push(item);
+      recordsDataMap.value.set(parentReply[key], {
+        ...data,
+        children,
+      });
+    }
     const key = instance.getValueByKey('commentId', true);
     recordsDataMap.value.set(item[key], values);
   };
@@ -212,6 +226,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     const { getValueByKey } = instance;
     if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
+      console.log(_recordItem);
       if (!_recordItem) return;
       const { $index, index, children } = _recordItem;
       if (index < 0) return;

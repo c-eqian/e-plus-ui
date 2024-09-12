@@ -340,13 +340,17 @@ export default defineComponent({
       const nodes: any[] = [];
       const dataLevel = getValueByKey('dataLevel');
       if (dataLevel === 2) {
-        const _reply = item[getValueByKey('reply', true)!] ?? {};
-        addMapValues(item, {
-          parent: level1,
-          children: [],
-          $index,
-          index,
-        });
+        const _reply = item[getValueByKey('reply', true)!] ?? undefined;
+        addMapValues(
+          item,
+          {
+            parent: level1,
+            children: [],
+            $index,
+            index,
+          }
+          // _reply
+        );
         if (isEmpty(_reply)) {
           nodes.push(
             renderCommentItem({ item, isSubReply: true, level1, $index, index })
