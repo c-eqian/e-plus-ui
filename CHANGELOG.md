@@ -1,6 +1,21 @@
 # 更新日志 
 
 
+## [1.5.0](https://github.com/c-eqian/e-plus-ui/compare/v1.4.1...v1.5.0) (2024-09-12)
+
+
+### ✨ Features | 新功能
+
+* **comment:** 配置支持新增评论时，是以倒序的方式插入还是升序的方式 ([62ab4f5](https://github.com/c-eqian/e-plus-ui/commit/62ab4f55acebb6032f00344f327f86403743d0e7))
+* **comment:** 支持以配置的形式格式化字段信息 ([bc50fbc](https://github.com/c-eqian/e-plus-ui/commit/bc50fbc0bdbc3bbdd9ad068904f0030b711228f8))
+* **comment:** 支持以配置的形式修改二级内容的样式，如背景色 ([f473619](https://github.com/c-eqian/e-plus-ui/commit/f47361977d1bc680792106074fbaf60f1b867892))
+
+
+###   Bug Fixes | Bug 修复
+
+* **comment:** 修复删除评论时，没有删除子评论 ([1a7dd3e](https://github.com/c-eqian/e-plus-ui/commit/1a7dd3e921f914a241bded54282b281f684e2444))
+* **comment:** 修复删除评论时，没有删除子评论 ([09c5b3d](https://github.com/c-eqian/e-plus-ui/commit/09c5b3d90c4097755cbae351b35a534271e42e91))
+
 ### [1.4.1](https://github.com/c-eqian/e-plus-ui/compare/v1.4.0...v1.4.1) (2024-09-03)
 
 
