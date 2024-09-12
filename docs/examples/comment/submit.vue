@@ -95,7 +95,7 @@ const handleReply = (data: IResolveParams) => {
       userId: 7,
       parentId: 666,
       commentId: 666,
-      createDate: '2024-07-06',
+      createDate: new Date(),
       text: value,
       reply: item
     })
@@ -128,6 +128,8 @@ const fieldsConfig: ICommentConfig = {
   subStyle: {
     background: '#eee'
   },
+  // 修改新增时，排序方法，默认desc，表示在前面插入数据（降序）
+  sortType: 'desc',
   emojis: initEmoji(),
 };
 const handleBefore = () => {

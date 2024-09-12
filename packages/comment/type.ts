@@ -237,6 +237,12 @@ export type ICommentConfig<T = any> = {
    */
   dataLevel?: number;
   /**
+   * 新增时，以哪个排序方式添加
+   * 排序方法，默认desc，表示在前面插入数据（降序）
+   * @default desc
+   */
+  sortType?: 'asc' | 'desc';
+  /**
    * 显示地址
    * 支持自定义返回
    * @default false

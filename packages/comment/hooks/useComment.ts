@@ -22,6 +22,9 @@ export type CommentRecordMap = {
 interface WatcherPropsData {
   data: Ref<ICommentData>;
 }
+const transformList = (items: CommentDataRow[] | CommentDataRow) => {
+  return isArray(items) ? items : [items];
+};
 export const useComment = (watcherPropsData: WatcherPropsData) => {
   // 一个父节点与子节点的映射
   const recordsDataMap = ref(new Map<string, CommentRecordMap>());
@@ -102,9 +105,15 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   ) => {
     const { list = [] } = watcherPropsData.data.value;
     const { getValueByKey } = instance;
+    const sortType = getValueByKey('sortType');
     //   首次回复
     if (!recordItem || isEmpty(recordItem)) {
-      watcherPropsData.data.value.list = list?.concat(items);
+      if (sortType === 'asc') {
+        watcherPropsData.data.value.list = list?.concat(items);
+      } else {
+        list.splice(0, 0, ...transformList(items));
+        watcherPropsData.data.value.list = list;
+      }
       watcherPropsData.data.value[getValueByKey('hasMore')] = !!hasMore;
       return;
     }
@@ -123,8 +132,14 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
           };
         }
         const _subList = list[newIndex][subCommentKey].list ?? [];
-        watcherPropsData.data.value.list[newIndex][subCommentKey].list =
-          _subList.concat(items);
+        if (sortType === 'asc') {
+          watcherPropsData.data.value.list[newIndex][subCommentKey].list =
+            _subList.concat(items);
+        } else {
+          _subList.splice(0, 0, ...transformList(items));
+          watcherPropsData.data.value.list[newIndex][subCommentKey].list =
+            _subList;
+        }
         watcherPropsData.data.value.list[newIndex][subCommentKey][
           getValueByKey('hasMore')
         ] = !!hasMore;
