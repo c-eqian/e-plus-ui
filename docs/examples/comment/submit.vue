@@ -124,6 +124,9 @@ const fieldsConfig: ICommentConfig = {
     avatar: 'avatarUrl',
     userId: 'userId',
   },
+  subStyle: {
+    background: '#eee'
+  },
   emojis: initEmoji(),
 };
 const handleBefore = () => {

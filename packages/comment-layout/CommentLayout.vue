@@ -1,6 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
+import { ref, type CSSProperties, type PropType, computed } from 'vue';
+const props = defineProps({
+  // 子评论的样式
+  subStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: () => {},
+  },
+});
+const computedSubStyle = computed(() => {
+  return props.subStyle;
+});
 defineOptions({
   name: 'EpCommentLayout',
 });
@@ -40,7 +49,8 @@ defineExpose({
       <!--          二级评论-->
       <div
         v-if="$slots.default && $slots.default()"
-        class="cz-bg-[#f8f9fa] dark:cz-bg-[#181818] cz-mb-2 cz-p-2 cz-px-4 cz-rounded"
+        :style="computedSubStyle"
+        class="cz-bg-[#f8f9fa] dark:cz-bg-[#181818] cz-comment-sub cz-mb-2 cz-p-2 cz-px-4 cz-rounded"
       >
         <slot></slot>
       </div>

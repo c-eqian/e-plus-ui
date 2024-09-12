@@ -422,7 +422,11 @@ export default defineComponent({
     };
     const renderItem = () => {
       return (
-        <CommentLayout ref="commentRef" v-slots={getSlots()}></CommentLayout>
+        <CommentLayout
+          ref="commentRef"
+          v-slots={getSlots()}
+          subStyle={getValueByKey('subStyle', true)}
+        ></CommentLayout>
       );
     };
     return renderItem();

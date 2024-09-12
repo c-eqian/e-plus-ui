@@ -1,4 +1,4 @@
-import type { VNode } from 'vue';
+import type { VNode, CSSProperties } from 'vue';
 import type { EmojiData } from '../editor/type';
 
 /**
@@ -280,6 +280,10 @@ export type ICommentConfig<T = any> = {
    * 默认头像
    */
   defaultAvatar?: string;
+  /**
+   * 子评论样式
+   */
+  subStyle?: CSSProperties;
   /**
    * 字段配置
    */
