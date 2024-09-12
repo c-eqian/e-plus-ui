@@ -1,5 +1,5 @@
 import { CommentDataRow, LoadData, ICommentData } from '../type';
-import { isArray, isEmpty, isFunction } from '@eqian/utils-vue';
+import { isArray, isBoolean, isEmpty, isFunction } from '@eqian/utils-vue';
 import { getCurrentInstance, type Ref, ref } from 'vue';
 export type CommentRecordMap = {
   /**
@@ -32,16 +32,17 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
   const resolve = (
     list: CommentDataRow[],
     data: LoadData & { loadDone: any },
-    hasMore?: boolean
+    hasMore?: boolean,
+    frontend?: boolean
   ) => {
     if (!isArray(list)) {
       throw new TypeError('[resolve] list must be an array');
     }
     const { isSubReply, loadDone, item } = data;
     if (isSubReply) {
-      appendComments(list, item, hasMore);
+      appendComments(list, item, hasMore, frontend);
     } else {
-      appendComments(list, {}, hasMore);
+      appendComments(list, {}, hasMore, frontend);
     }
     loadDone();
   };
@@ -97,18 +98,20 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
    * @param recordItem 如果为空，默认一级
    * @param items
    * @param hasMore
+   * @param frontend 是否插入到前端
    */
   const appendComments = (
     items: CommentDataRow[] | CommentDataRow,
     recordItem?: CommentDataRow,
-    hasMore?: boolean
+    hasMore?: boolean,
+    frontend?: boolean
   ) => {
     const { list = [] } = watcherPropsData.data.value;
     const { getValueByKey } = instance;
     const sortType = getValueByKey('sortType');
     //   首次回复
     if (!recordItem || isEmpty(recordItem)) {
-      if (sortType === 'asc') {
+      if ((isBoolean(frontend) && !frontend) || sortType === 'asc') {
         watcherPropsData.data.value.list = list?.concat(items);
       } else {
         list.splice(0, 0, ...transformList(items));
@@ -132,7 +135,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
           };
         }
         const _subList = list[newIndex][subCommentKey].list ?? [];
-        if (sortType === 'asc') {
+        if ((isBoolean(frontend) && !frontend) || sortType === 'asc') {
           watcherPropsData.data.value.list[newIndex][subCommentKey].list =
             _subList.concat(items);
         } else {
@@ -210,20 +213,33 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
       if (!_recordItem) return;
-      const { $index, index } = _recordItem;
+      const { $index, index, children } = _recordItem;
       if (index < 0) return;
       const { list = [] } = watcherPropsData.data.value;
+      // 递归删除子评论或者引用评论
+      const diffDelete = (_children: CommentDataRow[]) => {
+        _children?.forEach((item) => {
+          deleteComment(item);
+        });
+      };
       if (isEmpty(list)) return;
       // 父节点索引-1，一级
       if ($index < 0) {
         watcherPropsData.data.value.list.splice(index, 1);
+        diffDelete(children);
         return;
       }
       const subCommentKey = getValueByKey('subComment', true);
-      watcherPropsData.data.value.list[$index][subCommentKey].list.splice(
-        index,
-        1
-      );
+      if (
+        watcherPropsData.data.value.list[$index] &&
+        subCommentKey in watcherPropsData.data.value.list[$index]
+      ) {
+        watcherPropsData.data.value.list[$index][subCommentKey].list.splice(
+          index,
+          1
+        );
+        diffDelete(children);
+      }
     }
   };
   const loadData = (data: LoadData & { loadDone: any }) => {
@@ -234,7 +250,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       isSubReply,
       item,
       resolve: (items: CommentDataRow[], hasMore?: boolean) =>
-        resolve(items, data, hasMore),
+        resolve(items, data, hasMore, false),
     });
   };
   return {
