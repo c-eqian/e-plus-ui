@@ -56,6 +56,20 @@ comment/customEmoji
   - `level1` 当前被回复的评论的父级评论，即一级评论，如果`item`是一级， `level1`为`{}`，
 :::demo
 comment/submit
+::
+
+
+## 格式化数据
+可以通过配置中使用函数方法对内容（content）等进行数据格式化返回，同时支持标签字符串形式
+:::demo
+comment/format-item
+:::
+## 格式化数据
+可以通过配置中使用函数方法对内容（content）等进行数据格式化返回，同时支持标签字符串形式。
+<br>
+**注意：如果是动态显示字段，不是在字段里面配置格式化，而是在配置中，比如显示地址（ipaddress）**
+:::demo
+comment/format-item
 :::
 ## 加载数据
 :::demo

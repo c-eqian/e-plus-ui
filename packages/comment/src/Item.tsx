@@ -98,9 +98,14 @@ export default defineComponent({
       if (isBoolean(level) || configValue) {
         return deepObjectValue(config.value, _key);
       }
+      const newKey = deepObjectValue(config.value, _key) ?? _key;
+      //  如果是函数，比如自定义格式化函数这类，直接返回
+      if (isFunction(newKey)) {
+        return newKey;
+      }
       return deepObjectValue(
         level == 1 ? computedData.value : computedReply.value,
-        deepObjectValue(config.value, _key) ?? _key
+        newKey
       );
     };
     const getSlotsParameter = () => {
@@ -162,15 +167,16 @@ export default defineComponent({
      * 地址渲染
      */
     const renderAddress = (_level = 1) => {
-      const isShow = getValueByKey('showIpAddress', true);
-      if (isBoolean(isShow)) {
+      const ipAddress = getValueByKey('showIpAddress', true);
+      if (isBoolean(ipAddress)) {
         const address = getValueByKey('ipAddress', _level as any, false, true);
-
         return address ? (
           <span class="cz-inline-block cz-px-2 cz-text-[10px]">{`${address}`}</span>
         ) : undefined;
       }
-      return isFunction(isShow) ? isShow(this.getSlotsParameter()) : undefined;
+      return isFunction(ipAddress) ? (
+        <div v-html={ipAddress(this.getSlotsParameter())}></div>
+      ) : undefined;
     };
     /**
      * 渲染右边
@@ -243,11 +249,15 @@ export default defineComponent({
     const renderContentReply = () => {
       const { computedReply } = this;
       if (computedReply && !isEmpty(computedReply)) {
+        let _VNode = getValueByKey('content', 2, false, true);
+        _VNode = '“' + _VNode + '”';
+        if (isFunction(_VNode)) {
+          // 获取格式化内容的参数
+          _VNode = _VNode(this.getSlotsParameter());
+        }
         return (
           <div class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600">
-            <div class="cz-p-2">
-              “{getValueByKey('content', 2, false, true)}”
-            </div>
+            <div class="cz-p-2" v-html={_VNode}></div>
           </div>
         );
       }
@@ -261,7 +271,11 @@ export default defineComponent({
       if (slotsVNode) {
         return slotsVNode;
       }
-      const _VNode = getValueByKey('content', 1, false, true);
+      let _VNode = getValueByKey('content', 1, false, true);
+      if (isFunction(_VNode)) {
+        // 获取格式化内容的参数
+        _VNode = _VNode(this.getSlotsParameter());
+      }
       return _VNode ? (
         <div>
           <TextFold
@@ -269,7 +283,7 @@ export default defineComponent({
             is-fold={true}
             position={getValueByKey('foldBtnPosition', true)}
           >
-            {_VNode}
+            <div v-html={_VNode}></div>
           </TextFold>
           {renderContentReply()}
         </div>

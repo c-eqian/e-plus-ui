@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig, ICommentData, IResolveParams } from 'e-plus-ui';
+import { EpComment, ICommentConfig, ICommentData } from 'e-plus-ui';
 import { initEmoji } from '../../utils/emoji';
-import { ElMessage } from 'element-plus';
 import {ref} from "vue";
 const commentRef = ref<InstanceType<typeof EpComment>>()
-const isLogin = ref<boolean>(false);
 const commentData: ICommentData = {
   total: '99',
   list: [
@@ -16,6 +14,7 @@ const commentData: ICommentData = {
       userId: 1,
       commentId: 99,
       createDate: '2023-10-02',
+      city: '光明顶',
       like: true,
       likeCount: 1,
       // 非content字段
@@ -29,6 +28,7 @@ const commentData: ICommentData = {
             userId: 2,
             parentId: 99,
             commentId: 100,
+            city: '光明顶',
             likeCount: 99,
             createDate: '2023-12-02',
             text: '也许换个环境能激发一些新想法。',
@@ -39,6 +39,7 @@ const commentData: ICommentData = {
             userId: 3,
             parentId: 99,
             commentId: 101,
+            city: '光明顶',
             likeCount: 0,
             createDate: '2024-05-02',
             text: '张大侠，这光明顶上数百号人的性命就全在你一念之间！',
@@ -53,6 +54,7 @@ const commentData: ICommentData = {
       // 非content字段
       text: '婉儿，来~',
       commentId: 666,
+      city: '赵国',
       createDate: '2024-05-02',
       subComment: {
         total: 2,
@@ -62,6 +64,7 @@ const commentData: ICommentData = {
             avatarUrl: 'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
             userId: 7,
             parentId: 666,
+            city: '楚国',
             commentId: 667,
             likeCount: 0,
             createDate: '2024-07-06',
@@ -73,6 +76,7 @@ const commentData: ICommentData = {
             userId: 8,
             parentId: 666,
             commentId: 668,
+            city: '楚国',
             createDate: '2024-06-05',
             likeCount: 0,
             text: '等日后老子有一天修为高了，一定要让这煞星好看，大不了老子拼了……拼……',
@@ -83,71 +87,29 @@ const commentData: ICommentData = {
   ],
 };
 /**
- *
- * @param data
- */
-const handleReply = (data: IResolveParams) => {
-  const { resolve, clear, value, item } = data
-  setTimeout(()=>{
-    resolve({
-      commentName: '李慕婉',
-      avatarUrl: 'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
-      userId: 7,
-      parentId: 666,
-      commentId: 666,
-      createDate: '2024-07-06',
-      text: value,
-      reply: item
-    })
-    clear(true)
-  }, 500)
-};
-/** 点赞
- * @param data
- */
-const handleLike = (data: IResolveParams)=> {
-  if (!handleBefore()) return;
-  const { likeDone, isLike, item } = data
-  setTimeout(()=>{
-    likeDone(!isLike)
-    commentRef.value.updateLikeCount(item, !isLike ? item.likeCount + 1 : item.likeCount - 1)
-    ElMessage.success(!isLike? `点赞` : '取消点赞')
-  }, 500)
-}
-/**
  * 通过配置修改字段值
  */
 const fieldsConfig: ICommentConfig = {
   commentFields: {
-    content: 'text',
+    content: ({item})=> {
+      // 格式化内容
+      return `<div class="cz-text-blue-500">${item.text}</div>`
+    },
     username: 'commentName',
     avatar: 'avatarUrl',
     userId: 'userId',
   },
-  // 修改子评论盒子的背景色
-  subStyle: {
-    background: '#eee'
+  showIpAddress: ({item})=> {
+    return `<span class="cz-inline-block cz-px-2 cz-text-[10px]">${item.city}</span>`
   },
   emojis: initEmoji(),
 };
-const handleBefore = () => {
-  if (!isLogin.value){
-    ElMessage.error('请登录')
-    // 返回false不会执行文本输入
-    return false
-  }
-  return true
-}
 </script>
 
 <template>
   <div>
-    <ep-button @click="isLogin=!isLogin">{{isLogin ? '注销': '登录'}}</ep-button>
     <ep-comment
         ref="commentRef"
-      @confirm-reply="handleReply"
-        :before-reply="handleBefore"
-      @click-like="handleLike"
       :data="commentData"
       :config="fieldsConfig"
     ></ep-comment>

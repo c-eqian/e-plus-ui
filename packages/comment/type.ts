@@ -134,9 +134,10 @@ export interface ICommentData<T = any> {
 export type ICommentFields<T = any> = {
   /**
    * 评论内容
+   * 支持定义格式化内容，仅针对内容（content）
    * @default content
    */
-  content?: GetTypeFrom<T>;
+  content?: GetTypeFrom<T> | CommentItemRender<T>;
   /**
    * 创建时间
    * @default createDate
