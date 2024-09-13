@@ -1,0 +1,1 @@
+import{_ as s,C as o,o as _,c,H as t}from"./framework.7ecb6110.js";const a={},n={class:"demo-mr"};function r(p,d){const e=o("ep-image");return _(),c("div",n,[t(e,{url:"https://s3.bmp.ovh/imgs/2022/11/23/84077c18f8e3acfa.jpg"})])}const i=s(a,[["render",r],["__scopeId","data-v-591201d0"]]);export{i as default};
