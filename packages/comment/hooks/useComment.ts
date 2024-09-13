@@ -63,7 +63,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       recordsDataMap.value.set(parentReply[key], {
         ...data,
         children,
-      });
+      } as CommentRecordMap);
     }
     const key = instance.getValueByKey('commentId', true);
     recordsDataMap.value.set(item[key], values);
@@ -232,7 +232,7 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
       if (index < 0) return;
       const { list = [] } = watcherPropsData.data.value;
       // 递归删除子评论或者引用评论
-      const diffDelete = (_children: CommentDataRow[]) => {
+      const diffDelete = (_children: CommentDataRow[] = []) => {
         _children?.forEach((item) => {
           deleteComment(item);
         });
