@@ -226,7 +226,6 @@ export const useComment = (watcherPropsData: WatcherPropsData) => {
     const { getValueByKey } = instance;
     if (getValueByKey('dataLevel') < 3) {
       const _recordItem = getMapValues(recordItem);
-      console.log(_recordItem);
       if (!_recordItem) return;
       const { $index, index, children } = _recordItem;
       if (index < 0) return;

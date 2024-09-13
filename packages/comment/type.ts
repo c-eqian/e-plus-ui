@@ -294,7 +294,7 @@ export type ICommentConfig<T = any> = {
   /**
    * 字段配置
    */
-  commentFields?: ICommentFields<T>;
+  commentFields?: ICommentFields;
 };
 
 export interface IResolveParams<T = any> {
