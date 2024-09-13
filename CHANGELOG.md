@@ -1,6 +1,20 @@
 # 更新日志 
 
 
+### [1.5.1](https://github.com/c-eqian/e-plus-ui/compare/v1.5.0...v1.5.1) (2024-09-13)
+
+
+### ✨ Features | 新功能
+
+* **comment:** 等级支持模板字符串形式 ([9f217bc](https://github.com/c-eqian/e-plus-ui/commit/9f217bc767dd0f5477a526b38ffbf33bec4b1b76))
+* **comment:** 类型错误修复 ([642d5fa](https://github.com/c-eqian/e-plus-ui/commit/642d5fa1d956280bee08550b8aa28f9edd1709fc))
+
+
+###   Bug Fixes | Bug 修复
+
+* **comment:** 配置类型优化 ([bfb5376](https://github.com/c-eqian/e-plus-ui/commit/bfb53767e7fbd3b8e0087f2fd981652f127f4b2d))
+* **comment:** 优化使用h函数格式化时没有正确渲染 ([adb1307](https://github.com/c-eqian/e-plus-ui/commit/adb1307a0ac14ad2a7c9a455c206937d28bbda8a))
+
 ## [1.5.0](https://github.com/c-eqian/e-plus-ui/compare/v1.4.1...v1.5.0) (2024-09-12)
 
 
