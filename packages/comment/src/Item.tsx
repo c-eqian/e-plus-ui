@@ -195,7 +195,8 @@ export default defineComponent({
         return slotsVNode;
       }
       const _VNode = getValueByKey('showLevel', true);
-      if (isFunction(_VNode)) return _VNode(this.getSlotsParameter());
+      if (isFunction(_VNode))
+        return <div v-html={_VNode(this.getSlotsParameter())}></div>;
       if (_VNode) {
         const _level = getValueByKey('level', level, false, true);
         const levelData = LEVEL_MAP[_level] ?? LEVEL_MAP['6'];
