@@ -4,6 +4,7 @@ import {
   defineComponent,
   h,
   inject,
+  isVNode,
   nextTick,
   type PropType,
   ref,
@@ -143,6 +144,14 @@ export default defineComponent({
       return null;
     };
     /**
+     * 将格式化的数据转为真实的DOM
+     * @param vnValue
+     */
+    const transformNode = (vnValue: any) => {
+      if (isVNode(vnValue)) return vnValue;
+      return <div v-html={vnValue}></div>;
+    };
+    /**
      * 渲染头像
      */
     const renderAvatar = () => {
@@ -174,9 +183,11 @@ export default defineComponent({
           <span class="cz-inline-block cz-px-2 cz-text-[10px]">{`${address}`}</span>
         ) : undefined;
       }
-      return isFunction(ipAddress) ? (
-        <div v-html={ipAddress(this.getSlotsParameter())}></div>
-      ) : undefined;
+      if (isFunction(ipAddress)) {
+        const vnValue = ipAddress(this.getSlotsParameter());
+        return transformNode(vnValue);
+      }
+      return undefined;
     };
     /**
      * 渲染右边
@@ -195,8 +206,10 @@ export default defineComponent({
         return slotsVNode;
       }
       const _VNode = getValueByKey('showLevel', true);
-      if (isFunction(_VNode))
-        return <div v-html={_VNode(this.getSlotsParameter())}></div>;
+      if (isFunction(_VNode)) {
+        const vnValue = _VNode(this.getSlotsParameter());
+        return transformNode(vnValue);
+      }
       if (_VNode) {
         const _level = getValueByKey('level', level, false, true);
         const levelData = LEVEL_MAP[_level] ?? LEVEL_MAP['6'];
@@ -276,6 +289,9 @@ export default defineComponent({
       if (isFunction(_VNode)) {
         // 获取格式化内容的参数
         _VNode = _VNode(this.getSlotsParameter());
+        if (!isVNode(_VNode)) {
+          _VNode = <div v-html={_VNode}></div>;
+        }
       }
       return _VNode ? (
         <div>
@@ -284,7 +300,7 @@ export default defineComponent({
             is-fold={true}
             position={getValueByKey('foldBtnPosition', true)}
           >
-            <div v-html={_VNode}></div>
+            {_VNode}
           </TextFold>
           {renderContentReply()}
         </div>

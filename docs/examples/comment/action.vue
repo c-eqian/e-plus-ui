@@ -34,7 +34,9 @@ const commentData: ICommentData = {
  */
 const fieldsConfig: ICommentConfig = {
   // 显示IP属地
-  showIpAddress: true,
+  showIpAddress: ({item})=>{
+    return `<span class="cz-text-[10px] cz-px-3">来自·${item.ipAddress}</span>`
+  },
   showLevel: true,
   // 不显示点赞/回复操作
   actions: false

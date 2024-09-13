@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import {EpComment, ICommentConfig, type ICommentData} from 'e-plus-ui'
+import {EpComment, ICommentConfig, type ICommentData, EpIcon} from 'e-plus-ui'
+import { Auth } from '@e-plus-ui/icons'
+import  { h } from 'vue'
 const commentData: ICommentData = {
   title: '99',
   list: [
@@ -41,7 +43,13 @@ const commentData: ICommentData = {
 const fieldsConfig: ICommentConfig = {
   // 显示IP属地
   showIpAddress: true,
-  showLevel: true
+  showLevel: ()=> {
+    return h(EpIcon, {
+      width:12,
+      height:12,
+      color: '#f8c828'
+    }, [h(Auth)])
+  }
   // 如果字段也为ipAddress，可不填
   // ipAddress: 'ipAddress'
 };
