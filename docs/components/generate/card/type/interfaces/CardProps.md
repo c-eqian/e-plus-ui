@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/card/type.ts:14](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/card/type.ts#L14)
+packages/card/type.ts:14
 
 ***
 
@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/card/type.ts:18](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/card/type.ts#L18)
+packages/card/type.ts:18
 
 ***
 
@@ -42,7 +42,7 @@
 
 #### Defined in
 
-[packages/card/type.ts:22](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/card/type.ts#L22)
+packages/card/type.ts:22
 
 ***
 
@@ -54,4 +54,4 @@
 
 #### Defined in
 
-[packages/card/type.ts:10](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/card/type.ts#L10)
+packages/card/type.ts:10

@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[packages/form/type.ts:71](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L71)
+packages/form/type.ts:71
 
 ***
 
@@ -34,16 +34,16 @@
 
 #### Defined in
 
-[packages/form/type.ts:66](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L66)
+packages/form/type.ts:66
 
 ***
 
 ### size?
 
-> `optional` **size**: `""` \| `"small"` \| `"default"` \| `"large"`
+> `optional` **size**: `""` \| `"small"` \| `"large"` \| `"default"`
 
 用于控制该表单内组件的尺寸
 
 #### Defined in
 
-[packages/form/type.ts:75](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L75)
+packages/form/type.ts:75

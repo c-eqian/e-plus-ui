@@ -31,7 +31,7 @@ true
 
 ### commentFields?
 
-> `optional` **commentFields**: [`ICommentFields`](ICommentFields.md)\<`T`\>
+> `optional` **commentFields**: [`ICommentFields`](ICommentFields.md)
 
 字段配置
 
@@ -140,6 +140,25 @@ false
 false
 ```
 
+### sortType?
+
+> `optional` **sortType**: `"asc"` \| `"desc"`
+
+新增时，以哪个排序方式添加
+排序方法，默认desc，表示在前面插入数据（降序）
+
+#### Default
+
+```ts
+desc
+```
+
+### subStyle?
+
+> `optional` **subStyle**: `CSSProperties`
+
+子评论样式
+
 ### useEmojis?
 
 > `optional` **useEmojis**: `boolean`
@@ -148,4 +167,4 @@ false
 
 ## Defined in
 
-[packages/comment/type.ts:225](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/comment/type.ts#L225)
+packages/comment/type.ts:226

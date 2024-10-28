@@ -22,7 +22,7 @@ menu-item类型
 
 #### Defined in
 
-[packages/menu/type.ts:15](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L15)
+packages/menu/type.ts:15
 
 ***
 
@@ -49,7 +49,7 @@ node\_modules/element-plus/es/components/menu/src/menu-item.d.ts:12
 
 #### Defined in
 
-[packages/menu/type.ts:36](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L36)
+packages/menu/type.ts:36
 
 ***
 
@@ -61,7 +61,7 @@ node\_modules/element-plus/es/components/menu/src/menu-item.d.ts:12
 
 #### Defined in
 
-[packages/menu/type.ts:40](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L40)
+packages/menu/type.ts:40
 
 ***
 
@@ -87,7 +87,7 @@ node\_modules/element-plus/es/components/menu/src/menu-item.d.ts:5
 
 #### Defined in
 
-[packages/menu/type.ts:19](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L19)
+packages/menu/type.ts:19
 
 ***
 
@@ -117,7 +117,7 @@ node\_modules/element-plus/es/components/menu/src/menu-item.d.ts:6
 
 #### Defined in
 
-[packages/menu/type.ts:44](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L44)
+packages/menu/type.ts:44
 
 ***
 
@@ -129,7 +129,7 @@ node\_modules/element-plus/es/components/menu/src/menu-item.d.ts:6
 
 #### Defined in
 
-[packages/menu/type.ts:23](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L23)
+packages/menu/type.ts:23
 
 ***
 
@@ -141,7 +141,7 @@ node\_modules/element-plus/es/components/menu/src/menu-item.d.ts:6
 
 #### Defined in
 
-[packages/menu/type.ts:31](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L31)
+packages/menu/type.ts:31
 
 ***
 
@@ -153,4 +153,4 @@ node\_modules/element-plus/es/components/menu/src/menu-item.d.ts:6
 
 #### Defined in
 
-[packages/menu/type.ts:27](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L27)
+packages/menu/type.ts:27

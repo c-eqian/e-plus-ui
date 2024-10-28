@@ -11,6 +11,21 @@
    :::demo
    form-schema/base
    :::
+## 组件事件
+
+默认继承组件所有事件，通过组件配置参数`on`开头
+1. 基础的表单配置
+   :::demo
+   form-schema/events
+   :::
+
+## 组件关联
+
+目前支持通过某个组件来控制另一个组件的状态，如`dynamicDisable`动态配置禁用
+1. 基础的表单配置
+   :::demo
+   form-schema/relation
+   :::
 
 ## `useFormSchema`方法
 使用`useFormSchema`方法可以替代`ref`的操作，直接操作相关方法，可以提高一定的效率

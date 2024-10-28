@@ -22,7 +22,7 @@ form-item配置
 
 #### Defined in
 
-[packages/form/type.ts:137](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L137)
+packages/form/type.ts:137
 
 ***
 
@@ -34,7 +34,7 @@ form-item配置
 
 #### Defined in
 
-[packages/form/type.ts:141](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L141)
+packages/form/type.ts:141
 
 ***
 
@@ -56,7 +56,7 @@ form-item配置
 
 #### Defined in
 
-[packages/form/type.ts:169](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L169)
+packages/form/type.ts:169
 
 ***
 
@@ -68,7 +68,7 @@ form-item配置
 
 #### Defined in
 
-[packages/form/type.ts:106](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L106)
+packages/form/type.ts:106
 
 ***
 
@@ -81,7 +81,20 @@ form-item配置
 
 #### Defined in
 
-[packages/form/type.ts:129](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L129)
+packages/form/type.ts:129
+
+***
+
+### disabled?
+
+> `optional` **disabled**: `boolean`
+
+启用状态-是否可以编辑
+需要配置operationType使用
+
+#### Defined in
+
+packages/form/type.ts:119
 
 ***
 
@@ -101,20 +114,7 @@ form-item配置
 
 #### Defined in
 
-[packages/form/type.ts:159](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L159)
-
-***
-
-### disabled?
-
-> `optional` **disabled**: `boolean`
-
-启用状态-是否可以编辑
-需要配置operationType使用
-
-#### Defined in
-
-[packages/form/type.ts:119](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L119)
+packages/form/type.ts:159
 
 ***
 
@@ -126,7 +126,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:133](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L133)
+packages/form/type.ts:133
 
 ***
 
@@ -148,7 +148,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:164](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L164)
+packages/form/type.ts:164
 
 ***
 
@@ -160,7 +160,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:154](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L154)
+packages/form/type.ts:154
 
 ***
 
@@ -172,7 +172,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:150](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L150)
+packages/form/type.ts:150
 
 ***
 
@@ -184,7 +184,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:85](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L85)
+packages/form/type.ts:85
 
 ***
 
@@ -197,7 +197,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:146](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L146)
+packages/form/type.ts:146
 
 ***
 
@@ -209,7 +209,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:114](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L114)
+packages/form/type.ts:114
 
 ***
 
@@ -221,7 +221,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:89](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L89)
+packages/form/type.ts:89
 
 ***
 
@@ -234,7 +234,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:124](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L124)
+packages/form/type.ts:124
 
 ***
 
@@ -246,7 +246,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:110](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L110)
+packages/form/type.ts:110
 
 ***
 
@@ -258,7 +258,7 @@ el 额外参数
 
 #### Defined in
 
-[packages/form/type.ts:97](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L97)
+packages/form/type.ts:97
 
 ***
 
@@ -271,7 +271,7 @@ form-item表单的类型
 
 #### Defined in
 
-[packages/form/type.ts:102](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L102)
+packages/form/type.ts:102
 
 ***
 
@@ -283,4 +283,4 @@ form-item表单的类型
 
 #### Defined in
 
-[packages/form/type.ts:93](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L93)
+packages/form/type.ts:93

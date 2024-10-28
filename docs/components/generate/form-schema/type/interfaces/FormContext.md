@@ -22,4 +22,4 @@ form 数据对象
 
 #### Defined in
 
-[packages/form-schema/type.ts:163](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L163)
+packages/form-schema/type.ts:174

@@ -14,7 +14,7 @@
 
 ## Parameters
 
-• **formInstance**: `T`
+• **formInstance**
 
 ## Returns
 
@@ -22,4 +22,4 @@
 
 ## Defined in
 
-[packages/form-schema/types/index.ts:35](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/types/index.ts#L35)
+packages/form-schema/types/index.ts:35

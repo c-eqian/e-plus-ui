@@ -69,4 +69,4 @@
 
 ## Defined in
 
-[packages/comment/type.ts:369](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/comment/type.ts#L369)
+packages/comment/type.ts:380

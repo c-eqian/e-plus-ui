@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[packages/form/type.ts:52](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L52)
+packages/form/type.ts:52
 
 ***
 
@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[packages/form/type.ts:48](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L48)
+packages/form/type.ts:48
 
 ***
 
@@ -47,4 +47,4 @@
 
 #### Defined in
 
-[packages/form/type.ts:44](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L44)
+packages/form/type.ts:44

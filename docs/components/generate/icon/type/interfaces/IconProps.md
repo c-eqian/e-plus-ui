@@ -22,7 +22,7 @@ currentColor
 
 #### Defined in
 
-[packages/icon/type.ts:15](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/icon/type.ts#L15)
+packages/icon/type.ts:15
 
 ***
 
@@ -40,7 +40,7 @@ currentColor
 
 #### Defined in
 
-[packages/icon/type.ts:25](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/icon/type.ts#L25)
+packages/icon/type.ts:25
 
 ***
 
@@ -52,7 +52,7 @@ currentColor
 
 #### Defined in
 
-[packages/icon/type.ts:10](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/icon/type.ts#L10)
+packages/icon/type.ts:10
 
 ***
 
@@ -70,7 +70,7 @@ icon
 
 #### Defined in
 
-[packages/icon/type.ts:6](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/icon/type.ts#L6)
+packages/icon/type.ts:6
 
 ***
 
@@ -88,4 +88,4 @@ icon
 
 #### Defined in
 
-[packages/icon/type.ts:20](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/icon/type.ts#L20)
+packages/icon/type.ts:20

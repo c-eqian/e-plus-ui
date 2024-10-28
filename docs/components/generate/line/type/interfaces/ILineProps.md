@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[packages/line/type.ts:20](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L20)
+packages/line/type.ts:20
 
 ***
 
@@ -34,7 +34,7 @@
 
 #### Defined in
 
-[packages/line/type.ts:34](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L34)
+packages/line/type.ts:34
 
 ***
 
@@ -52,7 +52,7 @@ false
 
 #### Defined in
 
-[packages/line/type.ts:25](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L25)
+packages/line/type.ts:25
 
 ***
 
@@ -70,7 +70,7 @@ horizontal
 
 #### Defined in
 
-[packages/line/type.ts:10](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L10)
+packages/line/type.ts:10
 
 ***
 
@@ -89,7 +89,7 @@ false
 
 #### Defined in
 
-[packages/line/type.ts:45](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L45)
+packages/line/type.ts:45
 
 ***
 
@@ -107,7 +107,7 @@ false
 
 #### Defined in
 
-[packages/line/type.ts:39](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L39)
+packages/line/type.ts:39
 
 ***
 
@@ -120,7 +120,7 @@ false
 
 #### Defined in
 
-[packages/line/type.ts:30](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L30)
+packages/line/type.ts:30
 
 ***
 
@@ -138,4 +138,4 @@ left
 
 #### Defined in
 
-[packages/line/type.ts:15](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/line/type.ts#L15)
+packages/line/type.ts:15

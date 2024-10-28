@@ -64,4 +64,4 @@ footer插槽
 
 ## Defined in
 
-[packages/card/type.ts:28](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/card/type.ts#L28)
+packages/card/type.ts:28

@@ -16,4 +16,4 @@
 
 ## Defined in
 
-[packages/form-schema/type.ts:233](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L233)
+packages/form-schema/type.ts:244

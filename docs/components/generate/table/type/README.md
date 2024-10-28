@@ -21,8 +21,8 @@
 - [OperationType](type-aliases/OperationType.md)
 - [Permission](type-aliases/Permission.md)
 - [PermissionFn](type-aliases/PermissionFn.md)
-- [TRender](type-aliases/TRender.md)
 - [TagType](type-aliases/TagType.md)
+- [TRender](type-aliases/TRender.md)
 
 ### Functions
 

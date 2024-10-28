@@ -48,4 +48,4 @@ right
 
 ## Defined in
 
-[packages/text-fold/type.ts:1](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/text-fold/type.ts#L1)
+packages/text-fold/type.ts:1

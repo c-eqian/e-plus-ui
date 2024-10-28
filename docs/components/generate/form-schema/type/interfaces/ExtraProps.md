@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:57](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L57)
+packages/form-schema/type.ts:61
 
 ***
 
@@ -52,4 +52,16 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:62](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L62)
+packages/form-schema/type.ts:66
+
+***
+
+### groupOptions?
+
+> `optional` **groupOptions**: [`IGroupOptions`](../../types/options/interfaces/IGroupOptions.md)[] \| [`GroupOptionsApi`](../../types/options/type-aliases/GroupOptionsApi.md)
+
+分组配置项
+
+#### Defined in
+
+packages/form-schema/type.ts:70

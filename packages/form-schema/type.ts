@@ -123,11 +123,13 @@ export interface FormItemsSchema<T = any> {
   /**
    * 回车
    * @param value 当前值
+   * @deprecated  已废弃，如需使用事件，请使用组件参数
    */
   enter?: (value: any) => void;
   /**
    * 值改变时的方法
    * @param value 当前值
+   * @deprecated 已废弃，如需使用事件，请使用组件参数
    */
   change?: (value: any) => void;
   /**

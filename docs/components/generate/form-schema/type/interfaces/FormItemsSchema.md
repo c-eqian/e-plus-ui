@@ -14,7 +14,7 @@
 
 ## Properties
 
-### change()?
+### ~~change()?~~
 
 > `optional` **change**: (`value`) => `void`
 
@@ -30,9 +30,13 @@
 
 `void`
 
+#### Deprecated
+
+已废弃，如需使用事件，请使用组件参数
+
 #### Defined in
 
-[packages/form-schema/type.ts:123](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L123)
+packages/form-schema/type.ts:134
 
 ***
 
@@ -44,7 +48,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:109](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L109)
+packages/form-schema/type.ts:118
 
 ***
 
@@ -56,7 +60,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:113](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L113)
+packages/form-schema/type.ts:122
 
 ***
 
@@ -68,7 +72,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:127](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L127)
+packages/form-schema/type.ts:138
 
 ***
 
@@ -81,11 +85,11 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:84](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L84)
+packages/form-schema/type.ts:93
 
 ***
 
-### enter()?
+### ~~enter()?~~
 
 > `optional` **enter**: (`value`) => `void`
 
@@ -101,9 +105,13 @@
 
 `void`
 
+#### Deprecated
+
+已废弃，如需使用事件，请使用组件参数
+
 #### Defined in
 
-[packages/form-schema/type.ts:118](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L118)
+packages/form-schema/type.ts:128
 
 ***
 
@@ -115,7 +123,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:75](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L75)
+packages/form-schema/type.ts:84
 
 ***
 
@@ -127,7 +135,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:79](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L79)
+packages/form-schema/type.ts:88
 
 ***
 
@@ -139,7 +147,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:88](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L88)
+packages/form-schema/type.ts:97
 
 ***
 
@@ -151,7 +159,7 @@ model 的键名。 它可以是一个属性的值(如 a.b.0)
 
 #### Defined in
 
-[packages/form-schema/type.ts:71](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L71)
+packages/form-schema/type.ts:80
 
 ***
 
@@ -163,7 +171,7 @@ model 的键名。 它可以是一个属性的值(如 a.b.0)
 
 #### Defined in
 
-[packages/form-schema/type.ts:105](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L105)
+packages/form-schema/type.ts:114
 
 ***
 
@@ -175,7 +183,7 @@ model 的键名。 它可以是一个属性的值(如 a.b.0)
 
 #### Defined in
 
-[packages/form-schema/type.ts:92](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L92)
+packages/form-schema/type.ts:101
 
 ***
 
@@ -187,7 +195,7 @@ model 的键名。 它可以是一个属性的值(如 a.b.0)
 
 #### Defined in
 
-[packages/form-schema/type.ts:96](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L96)
+packages/form-schema/type.ts:105
 
 ***
 
@@ -200,4 +208,4 @@ form-item表单的类型
 
 #### Defined in
 
-[packages/form-schema/type.ts:101](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L101)
+packages/form-schema/type.ts:110

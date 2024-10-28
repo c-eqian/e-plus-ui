@@ -59,9 +59,10 @@ commentId
 
 ### content?
 
-> `optional` **content**: [`GetTypeFrom`](GetTypeFrom.md)\<`T`\>
+> `optional` **content**: [`GetTypeFrom`](GetTypeFrom.md)\<`T`\> \| [`CommentItemRender`](CommentItemRender.md)\<`T`\>
 
 评论内容
+支持定义格式化内容，仅针对内容（content）
 
 #### Default
 
@@ -216,4 +217,4 @@ userInfo.username
 
 ## Defined in
 
-[packages/comment/type.ts:134](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/comment/type.ts#L134)
+packages/comment/type.ts:134

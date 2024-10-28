@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[packages/pagination/type.ts:33](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L33)
+packages/pagination/type.ts:33
 
 ***
 
@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[packages/pagination/type.ts:37](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L37)
+packages/pagination/type.ts:37
 
 ***
 
@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[packages/pagination/type.ts:29](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L29)
+packages/pagination/type.ts:29
 
 ***
 
@@ -52,7 +52,7 @@
 
 #### Defined in
 
-[packages/pagination/type.ts:17](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L17)
+packages/pagination/type.ts:17
 
 ***
 
@@ -64,19 +64,7 @@
 
 #### Defined in
 
-[packages/pagination/type.ts:13](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L13)
-
-***
-
-### pageSizes?
-
-> `optional` **pageSizes**: `number`[]
-
-设置页码大小数
-
-#### Defined in
-
-[packages/pagination/type.ts:21](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L21)
+packages/pagination/type.ts:13
 
 ***
 
@@ -88,19 +76,31 @@
 
 #### Defined in
 
-[packages/pagination/type.ts:25](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L25)
+packages/pagination/type.ts:25
+
+***
+
+### pageSizes?
+
+> `optional` **pageSizes**: `number`[]
+
+设置页码大小数
+
+#### Defined in
+
+packages/pagination/type.ts:21
 
 ***
 
 ### size?
 
-> `optional` **size**: `"small"` \| `"default"` \| `"large"`
+> `optional` **size**: `"small"` \| `"large"` \| `"default"`
 
 分页大小
 
 #### Defined in
 
-[packages/pagination/type.ts:5](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L5)
+packages/pagination/type.ts:5
 
 ***
 
@@ -112,4 +112,4 @@
 
 #### Defined in
 
-[packages/pagination/type.ts:9](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/pagination/type.ts#L9)
+packages/pagination/type.ts:9

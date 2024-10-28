@@ -17,7 +17,7 @@ el组件参数
 
 #### Defined in
 
-[packages/table/type.ts:93](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L93)
+packages/table/type.ts:93
 
 ***
 
@@ -30,7 +30,7 @@ el组件参数
 
 #### Defined in
 
-[packages/table/type.ts:77](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L77)
+packages/table/type.ts:77
 
 ***
 
@@ -44,7 +44,7 @@ el组件参数
 
 #### Defined in
 
-[packages/table/type.ts:88](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L88)
+packages/table/type.ts:88
 
 ***
 
@@ -57,7 +57,7 @@ el组件参数
 
 #### Defined in
 
-[packages/table/type.ts:82](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L82)
+packages/table/type.ts:82
 
 ***
 
@@ -70,4 +70,4 @@ el组件参数
 
 #### Defined in
 
-[packages/table/type.ts:72](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L72)
+packages/table/type.ts:72

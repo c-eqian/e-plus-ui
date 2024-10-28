@@ -282,7 +282,7 @@ node\_modules/async-validator/dist-types/interface.d.ts:30
 
 #### Defined in
 
-[packages/form-schema/type.ts:25](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L25)
+packages/form-schema/type.ts:27
 
 ***
 

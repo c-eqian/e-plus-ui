@@ -18,4 +18,4 @@ form 数据对象
 
 #### Defined in
 
-[packages/form/type.ts:179](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form/type.ts#L179)
+packages/form/type.ts:179

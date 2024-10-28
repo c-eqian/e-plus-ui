@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[packages/table/type.ts:23](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L23)
+packages/table/type.ts:23
 
 ***
 
@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[packages/table/type.ts:15](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L15)
+packages/table/type.ts:15
 
 ***
 
@@ -47,7 +47,7 @@
 
 #### Defined in
 
-[packages/table/type.ts:27](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L27)
+packages/table/type.ts:27
 
 ***
 
@@ -59,4 +59,4 @@
 
 #### Defined in
 
-[packages/table/type.ts:19](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/table/type.ts#L19)
+packages/table/type.ts:19

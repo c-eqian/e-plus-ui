@@ -160,7 +160,7 @@ node\_modules/element-plus/es/components/menu/src/menu.d.ts:23
 
 #### Defined in
 
-[packages/menu/type.ts:55](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L55)
+packages/menu/type.ts:55
 
 ***
 
@@ -172,7 +172,7 @@ node\_modules/element-plus/es/components/menu/src/menu.d.ts:23
 
 #### Defined in
 
-[packages/menu/type.ts:54](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/menu/type.ts#L54)
+packages/menu/type.ts:54
 
 ***
 

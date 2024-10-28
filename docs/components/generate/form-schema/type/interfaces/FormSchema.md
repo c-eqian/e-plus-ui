@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[packages/form-schema/type.ts:150](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L150)
+packages/form-schema/type.ts:161
 
 ***
 
@@ -106,7 +106,7 @@ false
 
 #### Defined in
 
-[packages/form-schema/type.ts:145](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L145)
+packages/form-schema/type.ts:156
 
 ***
 
@@ -118,7 +118,7 @@ false
 
 #### Defined in
 
-[packages/form-schema/type.ts:154](https://github.com/c-eqian/e-plus-ui/blob/9afe3efca84f90347511649ce68bd1a732377c38/packages/form-schema/type.ts#L154)
+packages/form-schema/type.ts:165
 
 ***
 
@@ -250,7 +250,7 @@ node\_modules/element-plus/es/components/form/src/form.d.ts:27
 
 ### size?
 
-> `readonly` `optional` **size**: `EpPropMergeType`\<`StringConstructor`, `""` \| `"small"` \| `"default"` \| `"large"`, `unknown`\>
+> `readonly` `optional` **size**: `EpPropMergeType`\<`StringConstructor`, `""` \| `"small"` \| `"large"` \| `"default"`, `unknown`\>
 
 #### Inherited from
 
