@@ -53,11 +53,11 @@ export default defineConfig({
                     link: '',
                     items: generateSidebar('senior')
                 },
-              // {
-              //   text: 'API',
-              //   link: '',
-              //   items: generateSidebar('type')
-              // }
+              {
+                text: 'hooks',
+                link: '',
+                items: generateSidebar('hooks')
+              }
             ]
         },
         outline: {

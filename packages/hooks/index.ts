@@ -1,5 +1,6 @@
 import { ElMessageBox, type ElMessageBoxOptions } from 'element-plus';
-import { isBoolean, isFunction, useMerge } from '@eqian/utils-vue';
+import { isBoolean, isFunction, isString, useMerge } from '@eqian/utils-vue';
+import { VNode } from 'vue';
 export type UseActionMessage = {
   /**
    * 继续执行回调
@@ -10,7 +11,14 @@ export type UseActionMessage = {
    * 失败的回调
    */
   onReject?: (e: any) => void;
-  template?: '是否删除' | '是否修改';
+  /**
+   * HTML模板字符串，如果使用该值，将覆盖默认
+   */
+  HTMLString?: string | VNode;
+  /**
+   * 预设提示前缀
+   */
+  presetPrefix?: '是否删除' | '是否修改';
   /**
    * 参数
    */
@@ -19,13 +27,13 @@ export type UseActionMessage = {
 /**
  * 弹窗确认
  * @param config
- * @param options
+ * @param options element-plus 配置
  */
 export const useActionMessage = async (
   config: UseActionMessage,
   options?: ElMessageBoxOptions
 ) => {
-  const { onReject, onResolve, params, template } = config;
+  const { onReject, onResolve, params, HTMLString, presetPrefix } = config;
   const defaultOptions: ElMessageBoxOptions = {
     title: '提示',
     message: '是否继续？',
@@ -40,9 +48,9 @@ export const useActionMessage = async (
           (defaultOptions.confirmButtonText as string);
       };
       if (action === 'confirm') {
-        instance.confirmButtonLoading = true;
-        instance.confirmButtonText = '请稍后...';
         if (isFunction(onResolve)) {
+          instance.confirmButtonLoading = true;
+          instance.confirmButtonText = '请稍后...';
           const resolve = onResolve.call(null, params);
           if (resolve === undefined) {
             instance.confirmButtonLoading = false;
@@ -78,6 +86,8 @@ export const useActionMessage = async (
             return;
           }
           rejectRes();
+        } else {
+          done();
         }
         return;
       }
@@ -90,10 +100,16 @@ export const useActionMessage = async (
       defaultOptions,
       options ?? {}
     ) as ElMessageBoxOptions;
-    if (template) {
-      newOptions.message = `<span>${template}<strong style="color: red;">${options?.message}</strong>数据？</span>`;
-      newOptions.dangerouslyUseHTMLString = true;
+    let _html: any;
+    if (isString(HTMLString)) {
+      _html = `<span>${presetPrefix}<strong style="color: red;">${options?.message}</strong>数据？</span>`;
+    } else if (presetPrefix) {
+      _html = `<span>${presetPrefix}<strong style="color: red;">${options?.message}</strong>数据？</span>`;
+    } else {
+      _html = options?.message ?? '';
     }
+    newOptions.message = _html;
+    newOptions.dangerouslyUseHTMLString = true;
     await ElMessageBox(newOptions);
   } catch (e) {
     if (isFunction(onReject)) {
