@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+### [1.5.2](https://gitee.com/cyq13/e-plus-ui/compare/v1.5.1...v1.5.2) (2024-10-28)
+
+
+### ✨ Features | 新功能
+
+* **components:** 新增分组组件 ([33f43c8](https://gitee.com/cyq13/e-plus-ui/commit/33f43c81a59c92d8d89a412ddc1b7f96bb72cf34))
+
+
+###   Bug Fixes | Bug 修复
+
+* **components:** 修复分组组件在异步请求数据时，数据不更新 ([d7e7537](https://gitee.com/cyq13/e-plus-ui/commit/d7e75370108fcc8423b1f7e4e2dbf6d1ebbdf004))
+
 ### [1.5.1](https://github.com/c-eqian/e-plus-ui/compare/v1.5.0...v1.5.1) (2024-09-13)
 
 
