@@ -39,6 +39,7 @@ componentsMap.set('divider', ElDivider);
 componentsMap.set('divider', ElDivider);
 componentsMap.set('autocomplete', ElAutocomplete);
 componentsMap.set('select', ElSelect);
+componentsMap.set('select-group', ElSelect);
 /**
  * 扩展组件
  */

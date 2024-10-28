@@ -7,12 +7,20 @@ interface FormModel {
   cascade: string;
   render: string;
   test: string;
+  radioSingle: string
+  checkBoxGroup: string[]
+  selectGroup: string[]
+  selectGroup1: string[]
 }
 const formModel = ref({
   name: '哈哈哈哈',
   cascade: '',
   render: '',
   test: '',
+  radioSingle: '',
+  checkBoxGroup: [],
+  selectGroup: [],
+  selectGroup1: []
 });
 const modelValues = ref<FormModel>()
 const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
@@ -41,6 +49,114 @@ const formSchema = defineFormSchema<FormModel>({
       label: '输入框',
       prop: 'name',
       rules: true,
+    },
+    {
+      type: 'radio-group',
+      label: '分组单选',
+      prop: 'radioSingle',
+      rules: true,
+      componentProps: {
+        groupOptions: [
+          {
+            value: '1',
+            label: '测试'
+          },
+          {
+            value: '2',
+            label: '开发'
+          }
+        ]
+      }
+    },
+    {
+      type: 'checkbox-group',
+      label: '分组多选',
+      prop: 'checkBoxGroup',
+      rules: true,
+      defaultValue: [],
+      componentProps: {
+        groupOptions: [
+          {
+            value: '1',
+            label: '测试'
+          },
+          {
+            value: '2',
+            label: '开发'
+          }
+        ]
+      }
+    },
+    {
+      type: 'select-group',
+      label: '分组下拉',
+      prop: 'selectGroup',
+      rules: true,
+      defaultValue: [],
+      componentProps: {
+        groupOptions: [
+          {
+            label: '开发部',
+            children: [
+              {
+                value: '1',
+                label: '前端'
+              },
+              {
+                value: '2',
+                label: '后端'
+              }
+            ]
+          },
+          {
+            label: '测试部',
+            children: [
+              {
+                value: '3',
+                label: '测试'
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      type: 'select-group',
+      label: '请求分组下拉',
+      prop: 'selectGroup1',
+      rules: true,
+      componentProps: {
+        groupOptions: {
+          api: ()=> {
+            return new  Promise<any>((resolve)=>{
+              resolve([
+                {
+                  label: '产品部',
+                  children: [
+                    {
+                      value: '1',
+                      label: '产品1'
+                    },
+                    {
+                      value: '2',
+                      label: '产品2'
+                    }
+                  ]
+                },
+                {
+                  label: '运营部',
+                  children: [
+                    {
+                      value: '3',
+                      label: '运营部'
+                    }
+                  ]
+                }
+              ])
+            })
+          }
+        }
+      }
     },
     {
       type: 'input',

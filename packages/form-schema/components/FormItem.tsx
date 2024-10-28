@@ -77,7 +77,7 @@ export default defineComponent({
       if (optionsOrAPI !== void 0 && isArray(optionsOrAPI)) {
         options.value = optionsOrAPI;
       } else if (optionsOrAPI !== void 0) {
-        if (isEmpty(optionsOrAPI.params)) {
+        if (!isEmpty(optionsOrAPI.params)) {
           optionsOrAPI.api(optionsOrAPI.params).then((res) => {
             options.value = res;
           });

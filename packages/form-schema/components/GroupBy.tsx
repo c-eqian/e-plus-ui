@@ -1,4 +1,4 @@
-import { computed, defineComponent, h } from 'vue';
+import { computed, defineComponent, h, watchEffect } from 'vue';
 import {
   ElOptionGroup,
   ElOption,
@@ -30,27 +30,28 @@ export default defineComponent({
       );
     };
     const groupMap = {
-      [RADIO_GROUP_KEY]: baseRender(ElRadio, options.value),
-      [RADIO_BUTTON_GROUP_KEY]: baseRender(ElRadioButton, options.value),
-      [CHECKBOX_GROUP_KEY]: baseRender(ElCheckbox, options.value),
-      [SELECT_GROUP_KEY]: options.value.map((item) =>
-        h(
-          ElOptionGroup,
-          {
-            key: item.label,
-            ...useOmit(item, ['children']),
-          },
-          {
-            default: () => {
-              if (!isEmpty(item.children)) {
-                const { children = [] } = item;
-                return baseRender(ElOption, children);
-              }
+      [RADIO_GROUP_KEY]: () => baseRender(ElRadio, options.value),
+      [RADIO_BUTTON_GROUP_KEY]: () => baseRender(ElRadioButton, options.value),
+      [CHECKBOX_GROUP_KEY]: () => baseRender(ElCheckbox, options.value),
+      [SELECT_GROUP_KEY]: () =>
+        options.value.map((item) =>
+          h(
+            ElOptionGroup,
+            {
+              key: item.label,
+              ...useOmit(item, ['children']),
             },
-          }
-        )
-      ),
+            {
+              default: () => {
+                if (!isEmpty(item.children)) {
+                  const { children = [] } = item;
+                  return baseRender(ElOption, children);
+                }
+              },
+            }
+          )
+        ),
     };
-    return () => groupMap[comKey.value];
+    return groupMap[comKey.value];
   },
 });
