@@ -5,11 +5,18 @@ import {
   h,
   inject,
   type PropType,
+  ref,
   type Ref,
   type Slot,
   unref,
 } from 'vue';
-import { ElCol, ElFormItem } from 'element-plus';
+import {
+  ElCheckbox,
+  ElCol,
+  ElFormItem,
+  ElOptionGroup,
+  ElRadioGroup,
+} from 'element-plus';
 import type { FormItemsSchema, FormSchemaType } from '../type';
 import {
   useColProps,
@@ -17,9 +24,17 @@ import {
   useFormProps,
 } from '../hooks/useFormItem';
 import { componentsMap } from './index';
-import { isFunction, isString } from '@eqian/utils-vue';
-import { FORM_SCHEMA_MODEL } from '../constants';
-
+import { isArray, isEmpty, isFunction, isString } from '@eqian/utils-vue';
+import {
+  CHECKBOX_GROUP_KEY,
+  FORM_SCHEMA_MODEL,
+  GROUP_LIST,
+  RADIO_BUTTON_GROUP_KEY,
+  RADIO_GROUP_KEY,
+  SELECT_GROUP_KEY,
+} from '../constants';
+import { IGroupOptions } from '../types/options';
+import GroupComponent from './GroupBy';
 export default defineComponent({
   name: 'EpFormItem',
   props: {
@@ -51,16 +66,55 @@ export default defineComponent({
     const getModel = () => {
       return formModel;
     };
+    /**
+     * 渲染分组组件
+     * @param _type
+     * @param com
+     */
+    const groupBaseRender = (_type: FormSchemaType, com: any) => {
+      const optionsOrAPI = computedItem.value.componentProps?.groupOptions;
+      const options = ref<IGroupOptions[]>([]);
+      if (optionsOrAPI !== void 0 && isArray(optionsOrAPI)) {
+        options.value = optionsOrAPI;
+      } else if (optionsOrAPI !== void 0) {
+        if (isEmpty(optionsOrAPI.params)) {
+          optionsOrAPI.api(optionsOrAPI.params).then((res) => {
+            options.value = res;
+          });
+        } else {
+          optionsOrAPI.api().then((res) => {
+            options.value = res;
+          });
+        }
+      }
+      return h(
+        com,
+        {
+          modelValue: formModel.value[_props.prop],
+          'onUpdate:modelValue': (val: any) => {
+            formModel.value[_props.prop] = val;
+          },
+          ...useFormProps(computedItem, getModel),
+        },
+        {
+          default: () =>
+            h(GroupComponent, {
+              options: options.value,
+              componentKey: _type,
+            }),
+        }
+      );
+    };
     const getColSlots = () => {
       //   如果使用插槽
-      if (slotKey || slots[_props?.prop!]) {
-        return slots[slotKey || _props?.prop!]?.({
+      if (slotKey || (_props.prop && slots[_props.prop])) {
+        return slots[slotKey || _props.prop!]?.({
           item: computedItem,
           model: formModel,
         });
       }
       if (isFunction(render)) {
-        return render({
+        return render?.({
           item: unref(computedItem),
           model: formModel,
         });
@@ -69,6 +123,9 @@ export default defineComponent({
         const com = componentsMap.get(
           type as FormSchemaType
         ) as DefineComponent;
+        if (GROUP_LIST.includes(type)) {
+          return groupBaseRender(type, com);
+        }
         return h(
           com,
           {

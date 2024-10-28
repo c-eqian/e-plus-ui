@@ -4,11 +4,13 @@ import {
   ElAutocomplete,
   ElCascader,
   ElCheckbox,
+  ElCheckboxGroup,
   ElDatePicker,
   ElDivider,
   ElInput,
   ElInputNumber,
   ElRadio,
+  ElRadioGroup,
   ElRate,
   ElSlider,
   ElSwitch,
@@ -22,9 +24,11 @@ const componentsMap = new Map<FormSchemaType, Component<any>>();
  */
 componentsMap.set('input', ElInput);
 componentsMap.set('cascade', ElCascader);
-componentsMap.set('radio-group', ElRadio);
+componentsMap.set('radio', ElRadio);
+componentsMap.set('radio-group', ElRadioGroup);
 componentsMap.set('switch', ElSwitch);
-componentsMap.set('checkbox-group', ElCheckbox);
+componentsMap.set('checkbox', ElCheckbox);
+componentsMap.set('checkbox-group', ElCheckboxGroup);
 componentsMap.set('time-picker', ElTimePicker);
 componentsMap.set('time-select', ElTimeSelect);
 componentsMap.set('date-picker', ElDatePicker);

@@ -11,6 +11,7 @@ import type {
   RegisterFn,
   ComponentSlots,
 } from './types';
+import type { GroupOptionsApi, IGroupOptions } from './types/options';
 import type { ComponentInternalInstance } from 'vue';
 /**
  * 列宽配置
@@ -45,6 +46,8 @@ export type FormSchemaType =
   | 'tree-select'
   | 'checkbox-group'
   | 'radio-group'
+  | 'radio-button-group'
+  | 'select-group'
   | 'cascade';
 
 /**
@@ -61,7 +64,12 @@ export interface ExtraProps<T = any, P = any> {
    * @param scoped
    */
   dynamicShow?: (scoped: Scoped<T, P>) => boolean;
+  /**
+   * 分组配置项
+   */
+  groupOptions?: IGroupOptions[] | GroupOptionsApi;
 }
+
 /**
  * 表单项
  */
