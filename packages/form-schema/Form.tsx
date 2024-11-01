@@ -16,7 +16,7 @@ import { ElForm, ElFormItem, ElRow, type FormInstance } from 'element-plus';
 import { isEmpty, isFunction, isString, useOmit } from '@eqian/utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
-import { FORM_SCHEMA_MODEL } from './constants';
+import { FORM_SCHEMA_LISTENER, FORM_SCHEMA_MODEL } from './constants';
 import { useFormValidate } from './hooks/useFormValidate';
 import { useFormItem } from './hooks/useFormItem';
 import FilterButtons from './components/FilterButtons';
@@ -30,6 +30,7 @@ export default defineComponent({
     const formProps = computed(() => props.config);
     const items = toRef(props.config.items);
     const epFormSchemaRef = ref<FormInstance>();
+    const listenerEvents = ref();
     /**
      * 如果不传入model
      * 内部自动根据表单项创建，使用useFormSchema方法获取值
@@ -77,6 +78,7 @@ export default defineComponent({
       items.value = _items;
     };
     provide(FORM_SCHEMA_MODEL, formModel);
+    provide(FORM_SCHEMA_LISTENER, listenerEvents);
     const {
       validate,
       resetFields,
@@ -92,6 +94,9 @@ export default defineComponent({
       useFormValues(getModel, updateFieldValue);
     const getInstance = () => {
       return getCurrentInstance();
+    };
+    const listener = (args: Record<string, any>) => {
+      listenerEvents.value = args;
     };
     onMounted(() => {
       emit('registry', getInstance);
@@ -110,6 +115,7 @@ export default defineComponent({
       scrollIntoView,
       deleteField,
       getModel,
+      listener,
       resetFields,
       clearValidate,
       validateField,

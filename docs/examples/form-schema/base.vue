@@ -11,6 +11,7 @@ interface FormModel {
   checkBoxGroup: string[]
   selectGroup: string[]
   selectGroup1: string[]
+  select:string
 }
 const formModel = ref({
   name: '哈哈哈哈',
@@ -20,7 +21,8 @@ const formModel = ref({
   radioSingle: '',
   checkBoxGroup: [],
   selectGroup: [],
-  selectGroup1: []
+  selectGroup1: [],
+  select: ''
 });
 const modelValues = ref<FormModel>()
 const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
@@ -156,6 +158,24 @@ const formSchema = defineFormSchema<FormModel>({
             })
           }
         }
+      }
+    },
+    {
+      type: 'select-group',
+      label: '下拉配置',
+      prop: 'select',
+      rules: true,
+      componentProps: {
+        groupOptions: [
+          {
+            value: '1',
+            label: '前端'
+          },
+          {
+            value: '2',
+            label: '后端'
+          }
+        ]
       }
     },
     {

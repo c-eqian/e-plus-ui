@@ -24,9 +24,16 @@ import {
   useFormProps,
 } from '../hooks/useFormItem';
 import { componentsMap } from './index';
-import { isArray, isEmpty, isFunction, isString } from '@eqian/utils-vue';
+import {
+  isArray,
+  isEmpty,
+  isFunction,
+  isObject,
+  isString,
+} from '@eqian/utils-vue';
 import {
   CHECKBOX_GROUP_KEY,
+  FORM_SCHEMA_LISTENER,
   FORM_SCHEMA_MODEL,
   GROUP_LIST,
   RADIO_BUTTON_GROUP_KEY,
@@ -57,6 +64,7 @@ export default defineComponent({
     const columns = computed(() => props.columns);
     const { type, render, slotKey, ..._props } = computedItem.value;
     const formModel = inject<Ref<any>>(FORM_SCHEMA_MODEL, {} as any);
+    const listener = inject<Ref<any>>(FORM_SCHEMA_LISTENER, {} as any);
     const getComponentSlots = () => {
       if (computedItem.value?.componentProps?.slots) {
         return computedItem.value?.componentProps?.slots;
@@ -65,6 +73,29 @@ export default defineComponent({
     };
     const getModel = () => {
       return formModel;
+    };
+    const getListenerEvents = (item: FormItemsSchema) => {
+      const collector: Record<string, any> = {};
+      /**
+       * 事件应以onXX
+       */
+      if (listener.value && isObject(listener.value)) {
+        const entries = Object.entries(listener.value);
+        for (const [key, f] of entries) {
+          if (isFunction(f)) {
+            collector[key] = (...args: any) => {
+              f(
+                {
+                  item,
+                  model: formModel,
+                },
+                ...args
+              );
+            };
+          }
+        }
+      }
+      return collector;
     };
     /**
      * 渲染分组组件
@@ -95,6 +126,7 @@ export default defineComponent({
             formModel.value[_props.prop] = val;
           },
           ...useFormProps(computedItem, getModel),
+          ...getListenerEvents(computedItem.value),
         },
         {
           default: () =>
@@ -134,6 +166,7 @@ export default defineComponent({
               formModel.value[_props.prop] = val;
             },
             ...useFormProps(computedItem, getModel),
+            ...getListenerEvents(computedItem.value),
           },
           { ...getComponentSlots() }
         );

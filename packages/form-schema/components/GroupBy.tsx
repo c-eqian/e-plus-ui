@@ -33,9 +33,15 @@ export default defineComponent({
       [RADIO_GROUP_KEY]: () => baseRender(ElRadio, options.value),
       [RADIO_BUTTON_GROUP_KEY]: () => baseRender(ElRadioButton, options.value),
       [CHECKBOX_GROUP_KEY]: () => baseRender(ElCheckbox, options.value),
-      [SELECT_GROUP_KEY]: () =>
-        options.value.map((item) =>
-          h(
+      [SELECT_GROUP_KEY]: () => {
+        const hasChildren = options.value.some(
+          (item) => !isEmpty(item.children)
+        );
+        if (!hasChildren) {
+          return baseRender(ElOption, options.value);
+        }
+        return options.value.map((item) => {
+          return h(
             ElOptionGroup,
             {
               key: item.label,
@@ -49,8 +55,9 @@ export default defineComponent({
                 }
               },
             }
-          )
-        ),
+          );
+        });
+      },
     };
     return groupMap[comKey.value];
   },

@@ -236,6 +236,20 @@ export interface FormSchemaReturn {
    * @param prop
    */
   deleteField: <T = any>(prop: FormItemsSchema<T>['prop']) => Promise<void>;
+  /**
+   * 使用组件的事件
+   * 如onChange,回调参数为Scoped
+   * @param args
+   * @example
+   * ``` JavaScript
+   * listener({
+   * onChange:({model, item})=>{
+   * .....
+   * }
+   * })
+   * ```
+   */
+  listener: (...args: any) => Promise<void>;
 }
 
 /**

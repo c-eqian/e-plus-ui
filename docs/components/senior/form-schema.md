@@ -65,6 +65,38 @@ form-schema/slots
     - 如果在提供的表单组件中，不符合你的需求，那么你需要`render`进行自定义渲染
     - 虽然`type`是必填项，但是由于你使用的是自定义渲染，可以随意填写一个组件名称，避免在`ts`中类型检验错误
 
+
+## 事件监听器
+
+通常情况下，我们需要去监听有一个组件状态值的变化，而进行相关的数据处理，一般情况下，我们会在配置项中进行注册相关的事件。
+然后，在某些特殊情况下，比如将配置项抽离到单独的文件中，但是这样可能处理事件不是那么方便，为此，在此基础上，可以在`.vue`文件中使用一个`listener`侦听器
+去监听相关事件的回调，如`onChange`等
+<br>
+
+使用`useFormSchema`时，可以接收一个`对象（object）`作为参数，键为事件的名称，值为一个函数，回调参数`({model,item},v)`，其中，`v`为组件事件值
+<br>
+
+**注意：事件需要以`on`开头，大驼峰形式，为了统一，这里不会做过多的处理**
+
+1. useFormSchema参数监听器
+   :::demo
+   form-schema/listener
+   :::
+
+2. listener监听器
+ 除了可以将侦听器作为`useFormSchema`参数外，还可以使用`useFormSchema`的方法`listener`进行注册
+  如：
+    ```typescript
+    const { registry,listener} = useFormSchema();
+    onMounted(()=>{
+    listener({
+    onChange: (schema, v)=>{
+    console.log(schema, v);
+    }
+    })
+    })
+    ```
+   **注意：使用`listener`时，需要在组件挂载完成后再进行注册**
 ## 搜索栏
 
 在该表单的基础上增加了对搜索组件的支持，只需要配置`isSearch`即可。

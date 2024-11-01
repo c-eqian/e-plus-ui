@@ -7,8 +7,11 @@ import {
   ref,
   unref,
 } from 'vue';
+import { isObject } from '@eqian/utils-vue';
 
-export const useFormSchema = (): UseFormSchemaReturnType => {
+export const useFormSchema = (
+  _listener?: Record<string, any>
+): UseFormSchemaReturnType => {
   const formInstance = ref<ComponentInternalInstance | null>(null);
   const registeredRef = ref<boolean>(false);
   const getFormInstance = async () => {
@@ -30,6 +33,11 @@ export const useFormSchema = (): UseFormSchemaReturnType => {
     }
     formInstance.value = instance;
     registeredRef.value = true;
+    if (isObject(_listener)) {
+      (instance.proxy as FormSchemaReturn & ComponentPublicInstance)?.listener(
+        _listener
+      );
+    }
   };
   const instanceMethods: FormSchemaReturn = {
     validate: async (...args) => {
@@ -67,6 +75,10 @@ export const useFormSchema = (): UseFormSchemaReturnType => {
     deleteField: async (prop: string) => {
       const instance = await getFormInstance();
       return instance?.deleteField(prop);
+    },
+    listener: async (args: Record<string, any>) => {
+      const instance = await getFormInstance();
+      return instance?.listener(args);
     },
   };
   return {

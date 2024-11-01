@@ -1,4 +1,6 @@
 export const FORM_SCHEMA_MODEL = Symbol('FORM_SCHEMA_MODEL');
+export const FORM_SCHEMA_LISTENER = Symbol('FORM_SCHEMA_LISTENER');
+
 export const SELECT_GROUP_KEY = 'select-group';
 export const RADIO_GROUP_KEY = 'radio-group';
 export const RADIO_BUTTON_GROUP_KEY = 'radio-button-group';
