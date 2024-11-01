@@ -26,6 +26,13 @@
    :::demo
    form-schema/relation
    :::
+## 组件动态显示
+
+目前支持通过某个组件来控制另一个组件的状态，如`dynamicShow`动态配置是否显示
+1. 基础的表单配置
+   :::demo
+   form-schema/dynamic
+   :::
 
 ## `useFormSchema`方法
 使用`useFormSchema`方法可以替代`ref`的操作，直接操作相关方法，可以提高一定的效率

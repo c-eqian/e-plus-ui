@@ -9,10 +9,11 @@ import {
   Ref,
   ref,
   toRef,
+  unref,
 } from 'vue';
 import type { FormItemsSchema } from './type';
 import { ElForm, ElFormItem, ElRow, type FormInstance } from 'element-plus';
-import { isEmpty, isString, useOmit } from '@eqian/utils-vue';
+import { isEmpty, isFunction, isString, useOmit } from '@eqian/utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
 import { FORM_SCHEMA_MODEL } from './constants';
@@ -108,25 +109,40 @@ export default defineComponent({
       validate,
       scrollIntoView,
       deleteField,
+      getModel,
       resetFields,
       clearValidate,
       validateField,
     };
   },
   render() {
+    /**
+     * 需要动态渲染的
+     */
+    const renderDynamicShow = (item: FormItemsSchema) => {
+      if (isFunction(item.componentProps?.dynamicShow)) {
+        return item.componentProps?.dynamicShow({
+          model: this.getModel(),
+          item: item,
+        });
+      }
+      return true;
+    };
     const createRow = () => {
       return h(ElRow, null, () => {
-        const isFormValid = !!this.formProps.isSearch;
+        const isSearch = !!this.formProps.isSearch;
         const columns = this.formProps.columns;
         const itemNodes = this.items.map((item) => {
-          return h(FormItem, {
-            item,
-            key: item.prop || item.label,
-            isSearch: isFormValid,
-            columns,
-          });
+          return renderDynamicShow(item)
+            ? h(FormItem, {
+                item,
+                key: item.prop || item.label,
+                isSearch: isSearch,
+                columns,
+              })
+            : void 0;
         });
-        if (isFormValid) {
+        if (isSearch) {
           itemNodes.push(
             h(ElFormItem, null, () =>
               h(FilterButtons, {
