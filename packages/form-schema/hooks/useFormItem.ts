@@ -199,8 +199,37 @@ export const useFormItem = (
       }
     }
   };
+  /**
+   * 更新字段属性，如果不存在，将会进行新增
+   * @param prop
+   * @param item
+   * @param to
+   */
+  const updateOrAppendFields = (
+    prop: string,
+    item: FormItemsSchema,
+    to?: string
+  ) => {
+    if (!prop) return;
+    const formSchemas = getFormSchema();
+    const _indexProp = formSchemas.value.findIndex(
+      (schema) => schema.prop === prop
+    );
+    if (_indexProp > -1) {
+      const oddSchema = formSchemas.value[_indexProp];
+      if (item.prop) {
+        Reflect.deleteProperty(item, 'prop');
+      }
+      formSchemas.value[_indexProp] = useMerge(oddSchema, item);
+      console.log(formSchemas.value);
+      updateFormSchema(formSchemas.value);
+    } else {
+      appendFields(item, to);
+    }
+  };
   return {
     appendFields,
+    updateOrAppendFields,
     deleteField,
   };
 };

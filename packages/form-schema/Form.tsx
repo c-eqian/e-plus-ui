@@ -86,7 +86,7 @@ export default defineComponent({
       validateField,
       scrollIntoView,
     } = useFormValidate(epFormSchemaRef as Ref<FormInstance>);
-    const { appendFields, deleteField } = useFormItem(
+    const { appendFields, deleteField,updateOrAppendFields } = useFormItem(
       getFormSchema,
       updateFormSchema
     );
@@ -107,6 +107,7 @@ export default defineComponent({
       items,
       emit,
       epFormSchemaRef,
+      updateOrAppendFields,
       appendFields,
       setFieldsValues,
       getFieldsValues,

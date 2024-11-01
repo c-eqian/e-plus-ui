@@ -72,6 +72,10 @@ export const useFormSchema = (
       const instance = await getFormInstance();
       return instance?.appendFields(item, to);
     },
+    updateOrAppendFields: async (prop, item) => {
+      const instance = await getFormInstance();
+      return instance?.updateOrAppendFields(prop, item);
+    },
     deleteField: async (prop: string) => {
       const instance = await getFormInstance();
       return instance?.deleteField(prop);

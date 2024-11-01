@@ -232,6 +232,16 @@ export interface FormSchemaReturn {
     to?: FormItemsSchema<T>['prop'] | boolean
   ) => Promise<unknown>;
   /**
+   * 更新字段属性，如果不存在，将会进行新增
+   * @param prop
+   * @param item
+   * @param to
+   */
+  updateOrAppendFields: <T = any>(
+    prop: FormItemsSchema<T>['prop'],
+    item: FormItemsSchema<T>
+  ) => Promise<unknown>;
+  /**
    * 删除指定表单项
    * @param prop
    */

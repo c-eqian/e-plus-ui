@@ -46,7 +46,12 @@
    :::demo
    form-schema/useFormSchema
    :::
-## 自定义插槽/自定义渲染
+
+## 动态插入组件
+在很多时候，表单组件可能需要根据某个字段值进行控制另一组组件的状态，因此，在这里提供一个`updateOrAppendFields`方法进行更新属性，如果不存在，则进行添加
+   :::demo
+   form-schema/update-append
+   :::
 
 1. 由于表单组件是基于`element-plus`，因此你可以轻松的使用其几乎所有的API，包括插槽的使用。
     - 插槽的使用，需要定义在`componentProps`组件参数中，该参数将会仅处理组件的相关API
