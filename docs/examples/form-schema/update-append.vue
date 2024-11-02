@@ -4,10 +4,12 @@ import { ref } from 'vue';
 interface FormModel {
   post: string;
   name: string;
+  type: number;
 }
 const formModel = ref({
   post: '',
   name: '',
+  type: '1'
 });
 const postList = [
   {
@@ -55,8 +57,7 @@ const postList = [
 ]
 const getChildren = (value:string)=> {
   const l = postList.find(item=> item.value===value)
-  console.log(l);
-  return l.children
+  return l?.children ?? []
 }
 const { updateOrAppendFields, registry } = useFormSchema({
   onChange: ({item, model}, v:string)=>{
@@ -72,6 +73,13 @@ const { updateOrAppendFields, registry } = useFormSchema({
       })
       // 默认选择第一项
       model.value.name = getChildren(v)[0].value
+    } else if (item.prop==='type'){
+      // 修改部门是否可以选择
+      updateOrAppendFields('post', {
+      componentProps: {
+        disabled: model.value.type === '1',
+      }
+      })
     }
   }
 })
@@ -80,10 +88,28 @@ const formSchema = defineFormSchema<FormModel>({
   columns: 1,
   items: [
     {
+      type: 'radio-group',
+      label: '类型',
+      prop: 'type',
+      componentProps: {
+        groupOptions: [
+          {
+            label: '访客',
+            value: '1',
+          },
+          {
+            label: '管理员',
+            value: '2',
+          }
+          ]
+      }
+    },
+    {
       type: 'select-group',
       label: '部门',
       prop: 'post',
       componentProps: {
+        disabled: formModel.value.type === '1',
         groupOptions: postList.map(item=> {
           return {
             value: item.value,
