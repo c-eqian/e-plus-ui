@@ -82,7 +82,7 @@ const { updateOrAppendFields, registry } = useFormSchema({
       })
     }
   }
-})
+})    
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
   columns: 1,
