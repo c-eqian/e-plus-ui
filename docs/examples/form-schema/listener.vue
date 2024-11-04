@@ -15,17 +15,13 @@ const formModel = ref({
 });
 const {
   registry,
-  listener,
   getFieldsValues,
   validate,
-} = useFormSchema();
-onMounted(()=>{listener({
+} = useFormSchema({
   onChange: (schema, v)=>{
     console.log(schema, v);
   }
-})
-
-})
+});
 /**
  * 获取表单
  */
