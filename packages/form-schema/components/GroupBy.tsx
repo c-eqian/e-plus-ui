@@ -33,6 +33,7 @@ export default defineComponent({
       [RADIO_GROUP_KEY]: () => baseRender(ElRadio, options.value),
       [RADIO_BUTTON_GROUP_KEY]: () => baseRender(ElRadioButton, options.value),
       [CHECKBOX_GROUP_KEY]: () => baseRender(ElCheckbox, options.value),
+      select: () => baseRender(ElOption, options.value),
       [SELECT_GROUP_KEY]: () => {
         const hasChildren = options.value.some(
           (item) => !isEmpty(item.children)

@@ -102,6 +102,18 @@ form-schema/slots
     })
     ```
    **注意：使用`listener`时，需要在组件挂载完成后再进行注册**
+
+
+## 组件数据请求（api）
+在某些场景中，组件的数据是基于服务端的数据，而进行的数据请求，例如，下拉组件`（select）`等。因此，为了简化某些配置，支持通过api的形式进行请求。
+<br>
+ - 目前支持下拉组件`（select）`、`（select-group）`、单选组件`（radio-group）`、单选按钮组件`（radio-button-group）`、复选组件`（checkbox-group）`
+<br>
+ - 此外，如果组件类型是`type=select-group`时，在配置项中没有`children`属性，将会默认设置为`select`组件
+:::demo
+form-schema/api
+:::
+
 ## 搜索栏
 
 在该表单的基础上增加了对搜索组件的支持，只需要配置`isSearch`即可。

@@ -97,6 +97,7 @@ export default defineComponent({
       }
       return collector;
     };
+    const options = ref<IGroupOptions[]>([]);
     /**
      * 渲染分组组件
      * @param _type
@@ -104,19 +105,13 @@ export default defineComponent({
      */
     const groupBaseRender = (_type: FormSchemaType, com: any) => {
       const optionsOrAPI = computedItem.value.componentProps?.groupOptions;
-      const options = ref<IGroupOptions[]>([]);
       if (optionsOrAPI !== void 0 && isArray(optionsOrAPI)) {
         options.value = optionsOrAPI;
-      } else if (optionsOrAPI !== void 0) {
-        if (!isEmpty(optionsOrAPI.params)) {
-          optionsOrAPI.api(optionsOrAPI.params).then((res) => {
-            options.value = res;
-          });
-        } else {
-          optionsOrAPI.api().then((res) => {
-            options.value = res;
-          });
-        }
+      } else if (optionsOrAPI !== void 0 && options.value.length === 0) {
+        optionsOrAPI.api(optionsOrAPI.params).then((res) => {
+          console.log(_type, res);
+          options.value = res;
+        });
       }
       return h(
         com,
@@ -155,7 +150,10 @@ export default defineComponent({
         const com = componentsMap.get(
           type as FormSchemaType
         ) as DefineComponent;
-        if (GROUP_LIST.includes(type)) {
+        if (
+          GROUP_LIST.includes(type) ||
+          (type === 'select' && !isEmpty(_props.componentProps?.groupOptions))
+        ) {
           return groupBaseRender(type, com);
         }
         return h(
