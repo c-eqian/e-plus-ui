@@ -1,6 +1,24 @@
 # 更新日志 
 
 
+### [1.5.3](https://github.com/c-eqian/e-plus-ui/compare/v1.5.2...v1.5.3) (2024-11-06)
+
+
+### ✨ Features | 新功能
+
+* **form-schema:** 新增事件侦听器、下拉组件非分组时支持使用配置项 ([f0fa7de](https://github.com/c-eqian/e-plus-ui/commit/f0fa7dea5e98ecda160675264dfe955ebfbbfedf))
+* **form-schema:** 优化组件配置 ([0277128](https://github.com/c-eqian/e-plus-ui/commit/027712883d3ad60747295afa0f0c6d9f3bd6ceeb))
+* **form-schema:** 优化组件配置 ([e42f2af](https://github.com/c-eqian/e-plus-ui/commit/e42f2afa2c0cdae306e5d6263bf817a6164320ae))
+* **form-schema:** 支持动态修改属性 ([1d0821b](https://github.com/c-eqian/e-plus-ui/commit/1d0821b05e6c67156442a5cc3cdf658701c24000))
+* **form-schema:** 支持动态修改属性 ([9f7dcd9](https://github.com/c-eqian/e-plus-ui/commit/9f7dcd9daa5965c04faa18874f2f1a1d31d302f2))
+* **form-schema:** 支持动态修改属性 ([f857a43](https://github.com/c-eqian/e-plus-ui/commit/f857a438d5f3e16198dca3fc6cc0a3b32616c8ff))
+* **form-schema:** 支持配置动态控制组件显示 ([43b0ef6](https://github.com/c-eqian/e-plus-ui/commit/43b0ef6c83ccd9f65a4fb07a2a0e90bc475d668b))
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* **form-schema:** 优化 ([b5f524c](https://github.com/c-eqian/e-plus-ui/commit/b5f524c337fe7ff358c0814737760b9de7119ad6))
+
 ### [1.5.2](https://gitee.com/cyq13/e-plus-ui/compare/v1.5.1...v1.5.2) (2024-10-28)
 
 
