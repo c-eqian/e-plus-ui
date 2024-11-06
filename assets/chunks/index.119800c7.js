@@ -1,0 +1,1 @@
+import{y as o}from"../app.b841b261.js";import{d as t,o as r,b as a,l as n}from"./framework.7d49762d.js";import"./theme.81dc4f77.js";const f=t({__name:"index",setup(s){const e=["辛勤的蜜蜂永没有时间悲哀","我这个人走得很慢，但是我从不后退","深窥自己的心，而后发觉一切的奇迹在你自己","苦难磨炼一些人，也毁灭另一些人","不要等待，时机永远不会恰到好处"];return(c,p)=>(r(),a(n(o),{list:e}))}});export{f as default};
