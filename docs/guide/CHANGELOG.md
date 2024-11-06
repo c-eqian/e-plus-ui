@@ -1,6 +1,8 @@
 # 更新日志 
 
 
+### [1.5.4](https://github.com/c-eqian/e-plus-ui/compare/v1.5.3...v1.5.4) (2024-11-06)
+
 ### [1.5.3](https://github.com/c-eqian/e-plus-ui/compare/v1.5.2...v1.5.3) (2024-11-06)
 
 
