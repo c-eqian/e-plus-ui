@@ -9,7 +9,6 @@ import {
   Ref,
   ref,
   toRef,
-  unref,
 } from 'vue';
 import type { FormItemsSchema } from './type';
 import { ElForm, ElFormItem, ElRow, type FormInstance } from 'element-plus';
@@ -86,7 +85,7 @@ export default defineComponent({
       validateField,
       scrollIntoView,
     } = useFormValidate(epFormSchemaRef as Ref<FormInstance>);
-    const { appendFields, deleteField,updateOrAppendFields } = useFormItem(
+    const { appendFields, deleteField, updateOrAppendFields } = useFormItem(
       getFormSchema,
       updateFormSchema
     );
