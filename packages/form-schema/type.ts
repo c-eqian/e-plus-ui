@@ -151,9 +151,10 @@ export interface FormItemsSchema<T = any> {
 export interface FormSchema<T = any> extends Partial<FormProps> {
   /**
    * 是否使用查询表单，设置此参数，表单相关属性会失效，仅提供查询模式
+   * 也可以设置一个number值，如果大于0，默认设置为搜索模式，并且根据该值设置显示几行，否则显示一行
    * @default false
    */
-  isSearch?: boolean;
+  isSearch?: boolean | number;
   /**
    * 显示列数
    * @default 3

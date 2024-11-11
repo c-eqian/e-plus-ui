@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import {defineFormSchema, EpFormSchema} from 'e-plus-ui';
-import { h, ref } from 'vue';
-import { ElInput } from 'element-plus';
+import {  ref } from 'vue';
 interface FormModel {
   name: string;
-  cascade: string;
   post: string;
   dept: string;
+  phone: string;
+  motto: string;
 }
 const formModel = ref({
-  name: '哈哈哈哈',
+  name: 'Eqian',
   post: '',
   dept: '',
+  phone: '',
+  motto: ''
 });
-const modelValues = ref<FormModel>()
 const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
 /**
  * 获取表单
@@ -37,16 +38,28 @@ const formSchema = defineFormSchema<FormModel>({
       type: 'input',
       label: '用户',
       prop: 'name',
+      // 给一个默认值，如果重置后不需要清空该字段值时
+      defaultValue: 'Eqian'
     },
     {
       type: 'input',
       label: '岗位',
-      prop: 'name',
+      prop: 'post',
     },
     {
       type: 'input',
       label: '部门',
       prop: 'dept'
+    },
+    {
+      type: 'input',
+      label: '手机号',
+      prop: 'phone'
+    },
+    {
+      type: 'input',
+      label: '座右铭',
+      prop: 'motto'
     },
   ],
 });

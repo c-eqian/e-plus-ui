@@ -11,11 +11,8 @@ import {
   unref,
 } from 'vue';
 import {
-  ElCheckbox,
   ElCol,
   ElFormItem,
-  ElOptionGroup,
-  ElRadioGroup,
 } from 'element-plus';
 import type { FormItemsSchema, FormSchemaType } from '../type';
 import {
@@ -32,13 +29,9 @@ import {
   isString,
 } from '@eqian/utils-vue';
 import {
-  CHECKBOX_GROUP_KEY,
   FORM_SCHEMA_LISTENER,
   FORM_SCHEMA_MODEL,
   GROUP_LIST,
-  RADIO_BUTTON_GROUP_KEY,
-  RADIO_GROUP_KEY,
-  SELECT_GROUP_KEY,
 } from '../constants';
 import { IGroupOptions } from '../types/options';
 import GroupComponent from './GroupBy';
@@ -109,7 +102,6 @@ export default defineComponent({
         options.value = optionsOrAPI;
       } else if (optionsOrAPI !== void 0 && options.value.length === 0) {
         optionsOrAPI.api(optionsOrAPI.params).then((res) => {
-          console.log(_type, res);
           options.value = res;
         });
       }
@@ -174,7 +166,7 @@ export default defineComponent({
     const createCol = () => {
       return h(
         ElCol,
-        { ...useColProps(computedItem.value, columns) },
+        { ...useColProps(computedItem.value, columns, isSearch) },
         {
           default: () =>
             h(

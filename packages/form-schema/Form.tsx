@@ -9,17 +9,19 @@ import {
   Ref,
   ref,
   toRef,
+  VNode,
 } from 'vue';
 import type { FormItemsSchema } from './type';
-import { ElForm, ElFormItem, ElRow, type FormInstance } from 'element-plus';
+import { ElCol, ElForm, ElRow, type FormInstance } from 'element-plus';
 import { isEmpty, isFunction, isString, useOmit } from '@eqian/utils-vue';
 import FormItem from './components/FormItem';
 import { useFormValues } from './hooks/useFormValues';
 import { FORM_SCHEMA_LISTENER, FORM_SCHEMA_MODEL } from './constants';
 import { useFormValidate } from './hooks/useFormValidate';
 import { useFormItem } from './hooks/useFormItem';
-import FilterButtons from './components/FilterButtons';
+import FilterButtons from './components/QueryButtons.vue';
 import { FormSchemaProps } from './types/formProps';
+import { useItemsProps } from './hooks/useItemsProps';
 
 export default defineComponent({
   name: 'EpFormSchema',
@@ -28,25 +30,34 @@ export default defineComponent({
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
     const items = toRef(props.config.items);
+    const { itemsCaches, configItems, renderItems } = useItemsProps(
+      items,
+      formProps.value.isSearch,
+      formProps.value.columns
+    );
     const epFormSchemaRef = ref<FormInstance>();
     const listenerEvents = ref();
     /**
      * 如果不传入model
      * 内部自动根据表单项创建，使用useFormSchema方法获取值
+     * 如果传入默认值，重置时，使用该默认值
      */
     const createModel = () => {
-      const emptyModel: Record<string, any> = Object.create(null);
+      const _model = isEmpty(props.model) ? Object.create(null) : props.model;
       items.value.forEach((item) => {
         if (isString(item.prop)) {
-          emptyModel[item.prop] = item.defaultValue ?? '';
+          _model[item.prop] = _model[item.prop]
+            ? _model[item.prop]
+            : item.defaultValue ?? '';
         }
       });
-      return emptyModel;
+      console.log(_model);
+      return _model;
     };
     /**
      * 是否传入model
      */
-    const formModel = toRef(isEmpty(props.model) ? createModel() : props.model);
+    const formModel = toRef(createModel());
     const getModel = () => {
       return formModel;
     };
@@ -76,6 +87,9 @@ export default defineComponent({
     const updateFormSchema = (_items: FormItemsSchema[]) => {
       items.value = _items;
     };
+    const updateSearchSchema = (isToggle: boolean) => {
+      renderItems.value = isToggle ? configItems.value : itemsCaches.value;
+    };
     provide(FORM_SCHEMA_MODEL, formModel);
     provide(FORM_SCHEMA_LISTENER, listenerEvents);
     const {
@@ -103,9 +117,10 @@ export default defineComponent({
     return {
       formModel,
       formProps,
-      items,
+      renderItems,
       emit,
       epFormSchemaRef,
+      updateSearchSchema,
       updateOrAppendFields,
       appendFields,
       setFieldsValues,
@@ -115,6 +130,7 @@ export default defineComponent({
       scrollIntoView,
       deleteField,
       getModel,
+      createModel,
       listener,
       resetFields,
       clearValidate,
@@ -135,10 +151,11 @@ export default defineComponent({
       return true;
     };
     const createRow = () => {
-      return h(ElRow, null, () => {
-        const isSearch = !!this.formProps.isSearch;
+      const isSearch = !!this.formProps.isSearch;
+      const renderNodes: VNode[] = [];
+      const formItemsRender = h(ElRow, null, () => {
         const columns = this.formProps.columns;
-        const itemNodes = this.items.map((item) => {
+        return this.renderItems.map((item) => {
           return renderDynamicShow(item)
             ? h(FormItem, {
                 item,
@@ -148,21 +165,30 @@ export default defineComponent({
               })
             : void 0;
         });
-        if (isSearch) {
-          itemNodes.push(
-            h(ElFormItem, null, () =>
-              h(FilterButtons, {
+      });
+      renderNodes.push(formItemsRender);
+      // 处理查询
+      if (isSearch) {
+        const row = (
+          <ElRow>
+            <ElCol class={'!cz-flex cz-justify-end cz-w-100%'}>
+              {h(FilterButtons, {
                 onSearch: () => this.emit('search', this.getFieldsValues()),
                 onReset: () => {
                   this.resetFieldsValues();
-                  this.emit('reset', {});
+                  this.formModel = this.createModel();
+                  this.emit('reset', this.formModel);
                 },
-              })
-            )
-          );
-        }
-        return itemNodes;
-      });
+                onToggle: (v: boolean) => {
+                  this.updateSearchSchema(v);
+                },
+              })}
+            </ElCol>
+          </ElRow>
+        );
+        renderNodes.push(row);
+      }
+      return renderNodes;
     };
     /**
      * 渲染表单
