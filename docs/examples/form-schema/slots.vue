@@ -12,7 +12,7 @@ const formModel = ref({
   name: '使用组件插槽',
   cascade: '',
   render: '自定义渲染',
-  test: '',
+  test: '模板插槽',
 });
 const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
 /**
@@ -29,7 +29,7 @@ const formSchema = defineFormSchema<FormModel>({
   items: [
     {
       type: 'input',
-      label: '使用插槽',
+      label: '组件插槽',
       prop: 'name',
       rules: true,
       componentProps: {
@@ -55,25 +55,34 @@ const formSchema = defineFormSchema<FormModel>({
         });
       },
     },
+    {
+      label: '模板插槽',
+      prop: 'test',
+      rules: true,
+      placeholder: '自定义模板插槽'
+      // 可以自定义插槽名称
+      // slotKey: 'test'
+    }
   ],
 });
 </script>
 
 <template>
-  <ep-card title="使用组件插槽和自定义渲染">
+  <div class="cz-py-4">
     <div class="cz-py-4">
-      <div class="cz-py-4">
-        <p>{{formModel}}</p>
-        <el-button @click="handleGet">获取表单</el-button>
-      </div>
-      <ep-form-schema
-          ref="formSchemaRef"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <p>{{formModel}}</p>
+      <el-button @click="handleGet">获取表单</el-button>
     </div>
-  </ep-card>
+    <ep-form-schema
+      ref="formSchemaRef"
+      :config="formSchema"
+      :model="formModel"
+    >
+      <template #test="{model, item}">
+        <el-input :placeholder="item.placeholder" v-model="model.value.test"></el-input>
+      </template>
+    </ep-form-schema>
+  </div>
 </template>
 
 <style scoped lang="scss">

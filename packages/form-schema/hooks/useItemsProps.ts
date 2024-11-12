@@ -13,6 +13,7 @@ export function useItemsProps(
       reactive({
         configItems: items,
         itemsCaches,
+        needToggle: false,
         renderItems: items,
       })
     );
@@ -26,6 +27,7 @@ export function useItemsProps(
       reactive({
         configItems: items.value,
         itemsCaches,
+        needToggle: false,
         renderItems: items.value,
       })
     );
@@ -40,6 +42,7 @@ export function useItemsProps(
     reactive({
       configItems: items.value,
       itemsCaches,
+      needToggle: true,
       renderItems: itemsCaches,
     })
   );

@@ -114,12 +114,27 @@ form-schema/slots
 form-schema/api
 :::
 
+## 使用插槽
+如果`form-schema`内置组件没有满足要求，`form-schema`支持使用prop值作为插槽名称（如果没有设置`slotKey`）；
+<br>
+如果使用插槽回调参数model进行绑定自定义组件值，因为是响应式的Ref，因此需要`model.value`；或者可以使用自定义model
+
+:::demo
+form-schema/slots
+:::
+
 ## 搜索栏
 
 在该表单的基础上增加了对搜索组件的支持，只需要配置`isSearch`即可。如果没有配置`columns`，默认情况下，只显示三列，如果`isSearch`是一个数值，那么显示行数为该数值,否则默认为`1`；
-显示的个数为`isSearch * columns`
+显示的个数为`isSearch * columns`；如果items长度不足以`isSearch * columns`时，展开按钮将会隐藏
 <br>
-
 :::demo
 form-schema/search
+:::
+
+## 搜索栏-插槽
+
+支持使用插槽自定义搜索组件以及追加搜索组件
+:::demo
+form-schema/search-slots
 :::

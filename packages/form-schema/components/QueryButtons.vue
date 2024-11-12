@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { ElButton } from 'element-plus';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 const emits = defineEmits(['search', 'reset', 'toggle']);
 defineOptions({
   name: 'QueryButtons',
 });
+const props = defineProps({
+  needToggle: {
+    type: Boolean,
+    default: false,
+  },
+});
+const needToggle = computed(() => props.needToggle);
 const isUnfolding = ref(false);
 const handleUnfolding = () => {
   isUnfolding.value = !isUnfolding.value;
@@ -14,11 +21,15 @@ const handleUnfolding = () => {
 
 <template>
   <div>
-    <ElButton type="primary" icon="Search" @click="emits('search')"
-      >搜索</ElButton
-    >
-    <ElButton icon="Refresh" @click="emits('reset')">重置</ElButton>
-    <ElButton link @click="handleUnfolding">
+    <slot name="query-buttons"> </slot>
+    <template v-if="!$slots['query-buttons']">
+      <ElButton type="primary" icon="Search" @click="emits('search')"
+        >搜索</ElButton
+      >
+      <ElButton icon="Refresh" @click="emits('reset')">重置</ElButton>
+    </template>
+    <slot name="query-add"></slot>
+    <ElButton v-if="needToggle" link @click="handleUnfolding">
       {{ isUnfolding ? '收起' : '展开' }}
       <el-icon v-if="isUnfolding">
         <ArrowUp />

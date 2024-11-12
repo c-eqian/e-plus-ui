@@ -281,3 +281,19 @@ export interface UseFormSchemaReturnType extends FormSchemaReturn {
    */
   getFormInstance: FormSchemaInstance;
 }
+/**
+ * 表单插槽
+ */
+export type FormSchemaSlots = {
+  /**
+   * 搜索模式下，自定义搜索
+   */
+  'query-buttons': () => void;
+  /**
+   * 搜索模式下，添加搜索按钮
+   */
+  'query-add': () => void;
+
+  // 自定义组件插槽
+  [k: string]: Render<any, FormItemsSchema>;
+};

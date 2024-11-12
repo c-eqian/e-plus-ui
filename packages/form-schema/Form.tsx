@@ -8,10 +8,11 @@ import {
   reactive,
   Ref,
   ref,
+  type SlotsType,
   toRef,
   VNode,
 } from 'vue';
-import type { FormItemsSchema } from './type';
+import type { FormItemsSchema, FormSchemaSlots } from './type';
 import { ElCol, ElForm, ElRow, type FormInstance } from 'element-plus';
 import { isEmpty, isFunction, isString, useOmit } from '@eqian/utils-vue';
 import FormItem from './components/FormItem';
@@ -27,10 +28,11 @@ export default defineComponent({
   name: 'EpFormSchema',
   props: FormSchemaProps,
   emits: ['registry', 'search', 'reset'],
+  slots: Object as SlotsType<FormSchemaSlots>,
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
     const items = toRef(props.config.items);
-    const { itemsCaches, configItems, renderItems } = useItemsProps(
+    const { itemsCaches, configItems, renderItems, needToggle } = useItemsProps(
       items,
       formProps.value.isSearch,
       formProps.value.columns
@@ -45,13 +47,12 @@ export default defineComponent({
     const createModel = () => {
       const _model = isEmpty(props.model) ? Object.create(null) : props.model;
       items.value.forEach((item) => {
-        if (isString(item.prop)) {
+        if (item.prop && isString(item.prop)) {
           _model[item.prop] = _model[item.prop]
             ? _model[item.prop]
             : item.defaultValue ?? '';
         }
       });
-      console.log(_model);
       return _model;
     };
     /**
@@ -118,6 +119,7 @@ export default defineComponent({
       formModel,
       formProps,
       renderItems,
+      needToggle,
       emit,
       epFormSchemaRef,
       updateSearchSchema,
@@ -138,6 +140,27 @@ export default defineComponent({
     };
   },
   render() {
+    // 获取插槽
+    const getSlots = (
+      item: FormItemsSchema,
+      slotName?: string
+    ): VNode | VNode[] | undefined => {
+      const slotKey = slotName
+        ? slotName
+        : item.slotKey
+        ? item.slotKey
+        : item.prop;
+      const slotsTemp = slotKey
+        ? this.$slots[slotKey]?.({ item, model: this.formModel })
+        : void 0;
+      if (slotsTemp) {
+        return slotsTemp;
+      }
+      if (slotName) return void 0;
+      return isFunction(item.render)
+        ? (item.render({ item, model: this.formModel }) as VNode)
+        : void 0;
+    };
     /**
      * 需要动态渲染的
      */
@@ -157,12 +180,18 @@ export default defineComponent({
         const columns = this.formProps.columns;
         return this.renderItems.map((item) => {
           return renderDynamicShow(item)
-            ? h(FormItem, {
-                item,
-                key: item.prop || item.label,
-                isSearch: isSearch,
-                columns,
-              })
+            ? h(
+                FormItem,
+                {
+                  item,
+                  key: item.prop || item.label,
+                  isSearch: isSearch,
+                  columns,
+                },
+                {
+                  ...this.$slots,
+                }
+              )
             : void 0;
         });
       });
@@ -172,17 +201,24 @@ export default defineComponent({
         const row = (
           <ElRow>
             <ElCol class={'!cz-flex cz-justify-end cz-w-100%'}>
-              {h(FilterButtons, {
-                onSearch: () => this.emit('search', this.getFieldsValues()),
-                onReset: () => {
-                  this.resetFieldsValues();
-                  this.formModel = this.createModel();
-                  this.emit('reset', this.formModel);
+              {h(
+                FilterButtons,
+                {
+                  needToggle: this.needToggle,
+                  onSearch: () => this.emit('search', this.getFieldsValues()),
+                  onReset: () => {
+                    this.resetFieldsValues();
+                    this.formModel = this.createModel();
+                    this.emit('reset', this.formModel);
+                  },
+                  onToggle: (v: boolean) => {
+                    this.updateSearchSchema(v);
+                  },
                 },
-                onToggle: (v: boolean) => {
-                  this.updateSearchSchema(v);
-                },
-              })}
+                {
+                  ...this.$slots,
+                }
+              )}
             </ElCol>
           </ElRow>
         );
