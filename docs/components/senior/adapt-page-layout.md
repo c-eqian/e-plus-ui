@@ -20,3 +20,8 @@ adapt-page-layout/with-toolbar
 :::demo
 adapt-page-layout/with-pagination
 :::
+
+## 自定义样式
+:::demo
+adapt-page-layout/style
+:::

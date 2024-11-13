@@ -4,11 +4,11 @@ export type ContainerType =
   | 'search'
   | 'footer'
   | 'toolbar'
-  | 'table'
+  | 'content'
   | 'adapt';
 export type ContainerTypeCls = `${ContainerType}Class`;
 export type ContainerTypeStyles = `${ContainerType}Style`;
-type AdaptTablePropsConfig = {
+type AdaptPageLayoutConfig = {
   /**
    * 额外的高度，如果出现其他额外高度计算时
    * @default 0
@@ -19,6 +19,6 @@ type AdaptTablePropsConfig = {
 } & {
   [P in ContainerTypeStyles]?: CSSProperties;
 };
-export type AdaptTableProps = {
-  config?: AdaptTablePropsConfig | Ref<AdaptTablePropsConfig>;
+export type AdaptPageLayoutProps = {
+  config?: AdaptPageLayoutConfig | Ref<AdaptPageLayoutConfig>;
 };

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, reactive, ref, unref } from 'vue';
 import { useCalcElHeight, useResizeListener } from './hooks/useAdaptPageLayout';
-import { useDebounce, useOmit, useThrottle } from '@eqian/utils-vue';
+import { useDebounce, useMerge, useOmit, useThrottle } from '@eqian/utils-vue';
 import {
-  AdaptTableProps,
+  AdaptPageLayoutProps,
   ContainerTypeCls,
   ContainerTypeStyles,
 } from './types';
@@ -11,10 +11,12 @@ import {
 defineOptions({
   name: 'EpAdaptPageLayout',
 });
-const props = withDefaults(defineProps<AdaptTableProps>(), {
+const props = withDefaults(defineProps<AdaptPageLayoutProps>(), {
   config: () => ({ extraHeight: 0 }),
 });
-const config = computed(() => unref(props.config));
+const config = computed(() =>
+  useMerge({ extraHeight: 0 }, unref(props.config))
+);
 const adaptPageLayoutRef = ref<HTMLDivElement | null>(null);
 const headerRef = ref<HTMLDivElement | null>(null);
 const searchRef = ref<HTMLDivElement | null>(null);
@@ -101,8 +103,8 @@ const getClsOrStyle = (key: ContainerTypeCls | ContainerTypeStyles) => {
     <div
       v-if="$slots.content"
       ref="contentRef"
-      :class="getClsOrStyle('tableClass')"
-      :style="getClsOrStyle('tableStyle')"
+      :class="getClsOrStyle('contentClass')"
+      :style="getClsOrStyle('contentStyle')"
     >
       <slot name="content" :height="adaptPageHeight.cHeight"></slot>
     </div>
