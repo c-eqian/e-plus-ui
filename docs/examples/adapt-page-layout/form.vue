@@ -5,7 +5,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineFormSchema, useFormSchema } from '../packages';
+import { defineFormSchema, useFormSchema } from 'e-plus-ui';
 const { resetFields } = useFormSchema();
 interface FormModel {
   name: string;

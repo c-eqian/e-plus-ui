@@ -4,6 +4,8 @@ import EpButton from './button/index';
 import EpCard from './card/index';
 import EpLine from './line/index';
 import EpSkeleton from './skeleton/index';
+import EpAdaptTable from './adapt-table/index';
+import EpAdaptPageLayout from './adapt-page-layout';
 import { EpTable, EpTableColumn } from './table';
 import EpVirtualList from './virtual-list/index';
 import EpCopyText from './copy-text/index';
@@ -47,6 +49,8 @@ declare module '@vue/runtime-core' {
     EpNoticeBar: typeof EpNoticeBar;
     EpIcon: typeof EpIcon;
     EpMenu: typeof EpMenu;
+    EpAdaptTable: typeof EpAdaptTable;
+    EpAdaptPageLayout: typeof EpAdaptPageLayout;
   }
 }
 

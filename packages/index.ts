@@ -37,6 +37,9 @@ import EpNoticeBar from './notice-bar';
 import EpIcon from './icon';
 import EpMenu from './menu';
 import EpSkeleton from './skeleton';
+import EpAdaptPageLayout from './adapt-page-layout';
+import EpAdaptTable from './adapt-table';
+
 /**
  * 高级组件
  */
@@ -55,6 +58,8 @@ const components: Record<string, Plugin> = {
   EpImage,
   EpMenu,
   EpSkeleton,
+  EpAdaptPageLayout,
+  EpAdaptTable,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,
@@ -89,6 +94,8 @@ export {
   EpImage,
   EpMenu,
   EpSkeleton,
+  EpAdaptPageLayout,
+  EpAdaptTable,
   EpLetterLoading,
   EpDiamondLoading,
   EpLoading,
