@@ -13,8 +13,8 @@ export default defineComponent({
   name: 'EpMenuItem',
   props: {
     items: {
-      type: Array as PropType<MenuItemProps>,
-      default: () => [],
+      type: Object as PropType<MenuItemProps>,
+      default: () => ({}),
     },
   },
   setup() {},

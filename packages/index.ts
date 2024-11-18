@@ -39,6 +39,7 @@ import EpIcon from './icon';
 import EpMenu from './menu';
 import EpSkeleton from './skeleton';
 import EpAdaptPageLayout from './adapt-page-layout';
+import EpManagerLayout from './manager-layout';
 import EpAdaptTable from './adapt-table';
 
 /**
@@ -60,6 +61,7 @@ const components: Record<string, Plugin> = {
   EpMenu,
   EpSkeleton,
   EpAdaptPageLayout,
+  EpManagerLayout,
   EpAdaptTable,
   EpLetterLoading,
   EpDiamondLoading,
@@ -96,6 +98,7 @@ export {
   EpMenu,
   EpSkeleton,
   EpAdaptPageLayout,
+  EpManagerLayout,
   EpAdaptTable,
   EpLetterLoading,
   EpDiamondLoading,

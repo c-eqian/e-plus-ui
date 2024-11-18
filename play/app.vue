@@ -1,37 +1,61 @@
 <template>
   <div class="play">
-    <div class="cz-w-full cz-h-full cz-bg-white cz-p-3">
-      <ep-adapt-page-layout>
-        <template #header>
-          <div>
-            <h6>反馈管理</h6>
-          </div>
-        </template>
-        <template #search>
-          <Form></Form>
-        </template>
-        <template #toolbar>
-          <div>
-            <el-button size="small" type="primary" icon="Plus">新增</el-button>
-            <el-button size="small" type="success" icon="FolderAdd"
-              >导入</el-button
-            >
-            <el-button size="small" type="danger" icon="Delete">删除</el-button>
-          </div>
-        </template>
-        <template #content="{ height }">
-          <Table :height="height"></Table>
-        </template>
-        <template #footer>
-          <ep-pagination :total="100"></ep-pagination>
-        </template>
-      </ep-adapt-page-layout>
-    </div>
+    <ep-manager-layout :config="_config">
+      <template #main>
+        <adapt-layout></adapt-layout>
+      </template>
+      <template #header>
+        <div class="toolbar">
+          <el-dropdown>
+            <el-icon style="margin-right: 8px; margin-top: 1px">
+              <setting />
+            </el-icon>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>View</el-dropdown-item>
+                <el-dropdown-item>Add</el-dropdown-item>
+                <el-dropdown-item>Delete</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+          <span>Tom</span>
+        </div>
+      </template>
+    </ep-manager-layout>
   </div>
 </template>
 <script setup lang="ts">
-import Form from './form.vue';
-import Table from './table.vue';
+import AdaptLayout from './adapt-layout.vue';
+import { defineMenu } from '../packages';
+import { ManagerBasic } from '../packages/manager-layout/type';
+import { Ref, ref } from 'vue';
+const _config: Ref<ManagerBasic> = ref({
+  menus: defineMenu({
+    items: [
+      {
+        path: '/',
+        title: '首页',
+      },
+      {
+        path: '/user/manage',
+        title: '用户管理',
+        children: [
+          {
+            path: '/user/list',
+            title: '用户列表',
+          },
+          {
+            path: '/user/permission',
+            title: '用户权限',
+          },
+        ],
+      },
+    ],
+  }),
+  classNames: {
+    headerClass: 'cz-bg-[#cae1fe]',
+  },
+});
 </script>
 <style lang="less">
 html,
@@ -39,7 +63,6 @@ body,
 #app {
   width: 100%;
   height: 100%;
-  padding: 10px;
   margin: 0;
   background-color: #ebeff4;
   display: flex;
@@ -49,7 +72,7 @@ body,
   justify-content: center;
 }
 .play {
-  width: 800px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
 }
 </style>

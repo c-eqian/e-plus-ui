@@ -6,6 +6,7 @@ import EpLine from './line/index';
 import EpSkeleton from './skeleton/index';
 import EpAdaptTable from './adapt-table/index';
 import EpAdaptPageLayout from './adapt-page-layout';
+import EpManagerLayout from './manager-layout';
 import { EpTable, EpTableColumn } from './table';
 import EpVirtualList from './virtual-list/index';
 import EpCopyText from './copy-text/index';
@@ -51,6 +52,7 @@ declare module '@vue/runtime-core' {
     EpMenu: typeof EpMenu;
     EpAdaptTable: typeof EpAdaptTable;
     EpAdaptPageLayout: typeof EpAdaptPageLayout;
+    EpManagerLayout: typeof EpManagerLayout;
   }
 }
 
