@@ -1,6 +1,17 @@
 # 更新日志 
 
 
+### [1.5.5](https://github.com/c-eqian/e-plus-ui/compare/v1.5.4...v1.5.5) (2024-11-18)
+
+
+### ✨ Features | 新功能
+
+* **form-schema:** 搜索模式新增插槽 ([25860e2](https://github.com/c-eqian/e-plus-ui/commit/25860e27e4aa4150602d53d196863b219e6c5086))
+* **form-schema:** 新增数据页布局 ([5d325d2](https://github.com/c-eqian/e-plus-ui/commit/5d325d2659f16a2dedea084d1fe6588e351f5982))
+* **form-schema:** 新增数据页布局 ([1a78b3c](https://github.com/c-eqian/e-plus-ui/commit/1a78b3c09a53c0f81b0b6875d83a438dffbad7c1))
+* **form-schema:** 优化数据页布局 ([c31523a](https://github.com/c-eqian/e-plus-ui/commit/c31523a20f9def88bc1cc44545f819ebd82c122c))
+* **form-schema:** 优化搜索表单 ([2efaf9c](https://github.com/c-eqian/e-plus-ui/commit/2efaf9c6e366e24aa5468d2b18769cab22ca677e))
+
 ### [1.5.4](https://github.com/c-eqian/e-plus-ui/compare/v1.5.3...v1.5.4) (2024-11-06)
 
 ### [1.5.3](https://github.com/c-eqian/e-plus-ui/compare/v1.5.2...v1.5.3) (2024-11-06)
