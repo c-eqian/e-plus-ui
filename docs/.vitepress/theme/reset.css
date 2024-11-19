@@ -1,0 +1,26 @@
+@media (min-width: 1440px) {
+    .VPSidebar {
+        padding-left: 32px!important;
+        width: auto!important;
+    }
+    .VPNavBar.has-sidebar .title{
+        padding-left: 32px!important;
+    }
+    .VPContent.has-sidebar[data-v-98ddab3d] {
+        padding-right: 0!important;
+        padding-left: var(--vp-sidebar-width)!important;
+    }
+    .VPDoc.has-aside .content-container {
+        max-width: calc((100vw - var(--vp-sidebar-width))) !important;
+    }
+    .VPNavBar.has-sidebar .content[data-v-cf6e7c5e] {
+        padding-right: 32px!important;
+        padding-left: calc(var(--vp-sidebar-width))!important;
+    }
+}
+
+  @media (min-width: 768px) {
+      .VPNavBarSearch {
+          flex-grow: 0!important;
+      }
+  }

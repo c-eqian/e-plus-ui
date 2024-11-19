@@ -12,7 +12,7 @@ import { EpTextFold, EpCard } from 'e-plus-ui'
     </EpTextFold>
   </EpCard>
   <EpCard title="控制在左边边显示" shadow="always">
-    <EpTextFold is-fold position="left" :line="5">
+    <EpTextFold is-fold position="left" :line="3">
       即在评论的数据结构中，包含一级评论、二级评论，总共两个层级.
       如果有回复二级评论的话， 这条评论也称为二级评论，只不过在这一条评论数据中，也要包含被回复的二级评论的数据（字段，reply）
       即在评论的数据结构中，包含一级评论、二级评论，总共两个层级. 如果有回复二级评论的话， 这条评论也称为二级评论，只不过在这一条评论数据中，也要包含被回复的二级评论的数据（字段，reply）

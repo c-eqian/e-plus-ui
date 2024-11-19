@@ -34,20 +34,6 @@ import Form from './form.vue';
 import Table from './table.vue';
 </script>
 <style lang="less">
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  margin: 0;
-  background-color: #ebeff4;
-  display: flex;
-  flex-flow: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 .play {
   width: 800px;
   height: 600px;

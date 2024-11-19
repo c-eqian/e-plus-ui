@@ -29,7 +29,9 @@
     "prismjs": "^1.29.0",
     "sass": "^1.77.2",
     "unplugin-vue-components": "^0.22.12",
-    "vitepress": "1.0.0-rc.12",
     "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "vitepress": "^1.5.0"
   }
 }

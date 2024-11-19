@@ -1,5 +1,6 @@
 // .vitepress/theme/index.js
 import './style.css'
+import './reset.css'
 import DefaultTheme from "vitepress/theme";
 // import "element-plus/dist/index.css";
 import { AntDesignContainer } from '@vitepress-demo-preview/component'
@@ -13,6 +14,7 @@ import 'tailwindcss/components.css';
 import 'tailwindcss/utilities.css';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import { icons } from '@e-plus-ui/icons/global'
 import locale from 'element-plus/dist/locale/zh-cn.mjs'
 // 图标并进行全局注册

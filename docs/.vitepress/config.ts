@@ -14,6 +14,9 @@ export default defineConfig({
     themeConfig: {
         // logo: 'https://s1.ax1x.com/2022/09/10/vOVha6.jpg',
         logo: 'https://s3.bmp.ovh/imgs/2022/12/21/0aedf538ece60a2f.png',
+      search: {
+          provider:'local'
+      },
         nav: [
             {
                 text: '指南',
