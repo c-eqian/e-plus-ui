@@ -23,6 +23,11 @@ export interface ManagerBasic {
    */
   mainPadding?: string | number;
   /**
+   * 侧边栏宽度
+   * @default 200px
+   */
+  asideWidth?: string | number;
+  /**
    * 主区域切换动画
    * @default true
    */

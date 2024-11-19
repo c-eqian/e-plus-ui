@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import type { ManagerLayout } from './type';
-import { computed, defineAsyncComponent, provide, unref } from 'vue';
+import {
+  computed,
+  defineAsyncComponent,
+  provide,
+  shallowRef,
+  unref,
+  watch,
+} from 'vue';
 import { isFunction, useMerge } from '@eqian/utils-vue';
 import { __MANAGER_LAYOUT_KEY__ } from './constants';
 import { managerProps } from './managerProps';
+const adminPage = shallowRef();
 const props = withDefaults(defineProps<ManagerLayout>(), {
   config: () => ({
     layout: 'LTB',
@@ -22,16 +30,25 @@ const layout = computed(() => {
   return unref(props.config).layout;
 });
 const computedProps = computed(() =>
-  useMerge(unref(props.config), managerProps)
+  useMerge(managerProps, unref(props.config))
 );
 provide(__MANAGER_LAYOUT_KEY__, computedProps);
-const adminPage = defineAsyncComponent(() => {
-  return layout.value === 'TLB'
-    ? import('./components/TLB.vue')
-    : layout.value === 'TTB'
-    ? import('./components/TTB.vue')
-    : import('./components/LTB.vue');
-});
+
+watch(
+  () => layout.value,
+  () => {
+    adminPage.value = defineAsyncComponent(() => {
+      return layout.value === 'TLB'
+        ? import('./components/TLB.vue')
+        : layout.value === 'TTB'
+        ? import('./components/TTB.vue')
+        : import('./components/LTB.vue');
+    });
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <template>

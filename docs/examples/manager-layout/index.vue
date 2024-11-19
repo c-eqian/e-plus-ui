@@ -14,7 +14,7 @@
               <el-dropdown-menu>
                 <el-dropdown-item icon="House">我的主页</el-dropdown-item>
                 <el-dropdown-item icon="Setting" command="layout"
-                  >切换布局</el-dropdown-item
+                >切换布局</el-dropdown-item
                 >
                 <el-dropdown-item icon="User">退出登录</el-dropdown-item>
               </el-dropdown-menu>
@@ -28,14 +28,13 @@
 </template>
 <script setup lang="ts">
 import AdaptLayout from './adapt-layout.vue';
-import { defineMenu } from '../packages';
-import { ManagerBasic } from '../packages/manager-layout/type';
+import { defineMenu } from 'e-plus-ui';
+import { ManagerBasic } from 'e-plus-ui';
 import { h, Ref, ref } from 'vue';
 import { ElIcon } from 'element-plus';
 import { Edit } from '@element-plus/icons-vue';
 const _config: Ref<ManagerBasic> = ref({
   layout: 'LTB',
-  asideWidth: '180px',
   menus: defineMenu({
     items: [
       {
@@ -75,21 +74,8 @@ const handleClick = (cmd: string) => {
 };
 </script>
 <style lang="less">
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  background-color: #ebeff4;
-  display: flex;
-  flex-flow: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 .play {
   width: 100%;
-  height: 100%;
+  height: 800px;
 }
 </style>

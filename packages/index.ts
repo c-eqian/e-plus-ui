@@ -17,6 +17,7 @@ export * from './pagination';
 export * from './icon';
 export * from './menu';
 export * from './adapt-page-layout/types';
+export * from './manager-layout/type';
 /**
  * 导出工具函数
  */
