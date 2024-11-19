@@ -73,7 +73,8 @@ export default defineComponent({
           ElMenuItem,
           getProps(item, useFilterMenuItemProps(item).value),
           {
-            default: () => [renderIcon(item), item.title],
+            default: () => renderIcon(item),
+            title: () => item.title,
           }
         );
       });
@@ -86,7 +87,7 @@ export default defineComponent({
           getProps(item, useFilterSubMenuProps(item).value),
           isSubMenu(item)
             ? {
-                title: () => [renderIcon(item), item.title],
+                title: () => [renderIcon(item), <span>{item.title}</span>],
                 default: () =>
                   isGroup(item)
                     ? renderGroup(item.children)
@@ -97,7 +98,8 @@ export default defineComponent({
                 ElMenuItem,
                 getProps(item, useFilterMenuItemProps(item).value),
                 {
-                  default: () => [renderIcon(item), item.title],
+                  default: () => renderIcon(item),
+                  title: () => item.title,
                 }
               )
         );
@@ -107,7 +109,8 @@ export default defineComponent({
           ElMenuItem,
           getProps(item, useFilterMenuItemProps(item).value),
           {
-            default: () => [renderIcon(item), item.title],
+            default: () => renderIcon(item),
+            title: () => item.title,
           }
         );
       }
