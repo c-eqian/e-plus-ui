@@ -22,7 +22,7 @@
 
 #### Defined in
 
-packages/image/type.ts:30
+[packages/image/type.ts:30](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/image/type.ts#L30)
 
 ***
 
@@ -40,7 +40,7 @@ packages/image/type.ts:30
 
 #### Defined in
 
-packages/image/type.ts:15
+[packages/image/type.ts:15](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/image/type.ts#L15)
 
 ***
 
@@ -58,7 +58,7 @@ true
 
 #### Defined in
 
-packages/image/type.ts:35
+[packages/image/type.ts:35](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/image/type.ts#L35)
 
 ***
 
@@ -76,7 +76,7 @@ false
 
 #### Defined in
 
-packages/image/type.ts:25
+[packages/image/type.ts:25](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/image/type.ts#L25)
 
 ***
 
@@ -94,7 +94,7 @@ false
 
 #### Defined in
 
-packages/image/type.ts:20
+[packages/image/type.ts:20](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/image/type.ts#L20)
 
 ***
 
@@ -106,7 +106,7 @@ url
 
 #### Defined in
 
-packages/image/type.ts:5
+[packages/image/type.ts:5](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/image/type.ts#L5)
 
 ***
 
@@ -124,4 +124,4 @@ packages/image/type.ts:5
 
 #### Defined in
 
-packages/image/type.ts:10
+[packages/image/type.ts:10](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/image/type.ts#L10)

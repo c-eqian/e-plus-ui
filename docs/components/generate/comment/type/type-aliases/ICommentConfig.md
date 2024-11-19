@@ -167,4 +167,4 @@ desc
 
 ## Defined in
 
-packages/comment/type.ts:226
+[packages/comment/type.ts:226](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/comment/type.ts#L226)

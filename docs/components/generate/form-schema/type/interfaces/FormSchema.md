@@ -32,7 +32,7 @@
 
 #### Defined in
 
-packages/form-schema/type.ts:161
+[packages/form-schema/type.ts:162](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L162)
 
 ***
 
@@ -94,9 +94,10 @@ node\_modules/element-plus/es/components/form/src/form.d.ts:25
 
 ### isSearch?
 
-> `optional` **isSearch**: `boolean`
+> `optional` **isSearch**: `number` \| `boolean`
 
 是否使用查询表单，设置此参数，表单相关属性会失效，仅提供查询模式
+也可以设置一个number值，如果大于0，默认设置为搜索模式，并且根据该值设置显示几行，否则显示一行
 
 #### Default
 
@@ -106,7 +107,7 @@ false
 
 #### Defined in
 
-packages/form-schema/type.ts:156
+[packages/form-schema/type.ts:157](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L157)
 
 ***
 
@@ -118,7 +119,7 @@ packages/form-schema/type.ts:156
 
 #### Defined in
 
-packages/form-schema/type.ts:165
+[packages/form-schema/type.ts:166](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L166)
 
 ***
 

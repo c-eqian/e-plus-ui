@@ -28,4 +28,4 @@
 
 ## Defined in
 
-packages/menu/type.ts:58
+[packages/menu/type.ts:58](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/menu/type.ts#L58)

@@ -12,4 +12,4 @@
 
 ## Defined in
 
-packages/line/type.ts:4
+[packages/line/type.ts:4](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/line/type.ts#L4)

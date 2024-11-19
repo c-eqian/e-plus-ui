@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [1.5.6](https://github.com/c-eqian/e-plus-ui/compare/v1.5.5...v1.5.6) (2024-11-19)
+
+
+###   Bug Fixes | Bug 修复
+
+* **Menu:** 修复menu菜单折叠情况下，标题不隐藏 ([30c298a](https://github.com/c-eqian/e-plus-ui/commit/30c298a22ddb7133090cab368e5549399ffa5729))
+
+
+### ✨ Features | 新功能
+
+* **manager-layout:** 新增中后台管理布局 ([ffde17e](https://github.com/c-eqian/e-plus-ui/commit/ffde17ec596d8e8e2d3fd92e29a644c7eae340c3))
+* **manager-layout:** 优化 ([5833568](https://github.com/c-eqian/e-plus-ui/commit/583356870441cbe8e3c917dfd7ad56ce5ac6f88a))
+
 ### [1.5.5](https://github.com/c-eqian/e-plus-ui/compare/v1.5.4...v1.5.5) (2024-11-18)
 
 

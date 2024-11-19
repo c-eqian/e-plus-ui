@@ -42,7 +42,7 @@
 
 #### Defined in
 
-packages/form-schema/type.ts:230
+[packages/form-schema/type.ts:231](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L231)
 
 ***
 
@@ -66,7 +66,7 @@ packages/form-schema/type.ts:230
 
 #### Defined in
 
-packages/form-schema/type.ts:224
+[packages/form-schema/type.ts:225](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L225)
 
 ***
 
@@ -94,7 +94,7 @@ packages/form-schema/type.ts:224
 
 #### Defined in
 
-packages/form-schema/type.ts:238
+[packages/form-schema/type.ts:249](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L249)
 
 ***
 
@@ -132,7 +132,7 @@ true
 
 #### Defined in
 
-packages/form-schema/type.ts:190
+[packages/form-schema/type.ts:191](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L191)
 
 ***
 
@@ -144,7 +144,42 @@ packages/form-schema/type.ts:190
 
 #### Defined in
 
-packages/form-schema/type.ts:257
+[packages/form-schema/type.ts:282](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L282)
+
+***
+
+### listener()
+
+> **listener**: (...`args`) => `Promise`\<`void`\>
+
+使用组件的事件
+如onChange,回调参数为Scoped
+
+#### Parameters
+
+• ...**args**: `any`
+
+#### Returns
+
+`Promise`\<`void`\>
+
+#### Example
+
+``` JavaScript
+listener({
+onChange:({model, item})=>{
+.....
+}
+})
+```
+
+#### Inherited from
+
+[`FormSchemaReturn`](FormSchemaReturn.md).[`listener`](FormSchemaReturn.md#listener)
+
+#### Defined in
+
+[packages/form-schema/type.ts:263](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L263)
 
 ***
 
@@ -156,7 +191,7 @@ packages/form-schema/type.ts:257
 
 #### Defined in
 
-packages/form-schema/type.ts:253
+[packages/form-schema/type.ts:278](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L278)
 
 ***
 
@@ -180,7 +215,7 @@ packages/form-schema/type.ts:253
 
 #### Defined in
 
-packages/form-schema/type.ts:219
+[packages/form-schema/type.ts:220](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L220)
 
 ***
 
@@ -204,7 +239,7 @@ packages/form-schema/type.ts:219
 
 #### Defined in
 
-packages/form-schema/type.ts:200
+[packages/form-schema/type.ts:201](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L201)
 
 ***
 
@@ -232,7 +267,37 @@ packages/form-schema/type.ts:200
 
 #### Defined in
 
-packages/form-schema/type.ts:195
+[packages/form-schema/type.ts:196](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L196)
+
+***
+
+### updateOrAppendFields()
+
+> **updateOrAppendFields**: \<`T`\>(`prop`, `item`) => `Promise`\<`unknown`\>
+
+更新字段属性，如果不存在，将会进行新增
+
+#### Type Parameters
+
+• **T** = `any`
+
+#### Parameters
+
+• **prop**: keyof `T` *extends* `E` ? `E` *extends* `string` ? `E`\<`E`\> : `string` : `string`
+
+• **item**: [`FormItemsSchema`](FormItemsSchema.md)\<`T`\>
+
+#### Returns
+
+`Promise`\<`unknown`\>
+
+#### Inherited from
+
+[`FormSchemaReturn`](FormSchemaReturn.md).[`updateOrAppendFields`](FormSchemaReturn.md#updateorappendfields)
+
+#### Defined in
+
+[packages/form-schema/type.ts:241](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L241)
 
 ***
 
@@ -262,7 +327,7 @@ packages/form-schema/type.ts:195
 
 #### Defined in
 
-packages/form-schema/type.ts:206
+[packages/form-schema/type.ts:207](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L207)
 
 ***
 
@@ -286,4 +351,4 @@ packages/form-schema/type.ts:206
 
 #### Defined in
 
-packages/form-schema/type.ts:214
+[packages/form-schema/type.ts:215](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/form-schema/type.ts#L215)

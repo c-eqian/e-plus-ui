@@ -22,7 +22,7 @@
 
 #### Defined in
 
-packages/comment/type.ts:124
+[packages/comment/type.ts:124](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/comment/type.ts#L124)
 
 ***
 
@@ -34,7 +34,7 @@ packages/comment/type.ts:124
 
 #### Defined in
 
-packages/comment/type.ts:128
+[packages/comment/type.ts:128](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/comment/type.ts#L128)
 
 ***
 
@@ -46,4 +46,4 @@ packages/comment/type.ts:128
 
 #### Defined in
 
-packages/comment/type.ts:120
+[packages/comment/type.ts:120](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/comment/type.ts#L120)

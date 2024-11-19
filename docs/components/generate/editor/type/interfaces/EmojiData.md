@@ -20,7 +20,7 @@
 
 #### Defined in
 
-packages/editor/type.ts:5
+[packages/editor/type.ts:5](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/editor/type.ts#L5)
 
 ***
 
@@ -32,4 +32,4 @@ packages/editor/type.ts:5
 
 #### Defined in
 
-packages/editor/type.ts:9
+[packages/editor/type.ts:9](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/editor/type.ts#L9)

@@ -16,7 +16,7 @@
 
 #### Defined in
 
-packages/pagination/type.ts:33
+[packages/pagination/type.ts:33](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L33)
 
 ***
 
@@ -28,7 +28,7 @@ packages/pagination/type.ts:33
 
 #### Defined in
 
-packages/pagination/type.ts:37
+[packages/pagination/type.ts:37](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L37)
 
 ***
 
@@ -40,7 +40,7 @@ packages/pagination/type.ts:37
 
 #### Defined in
 
-packages/pagination/type.ts:29
+[packages/pagination/type.ts:29](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L29)
 
 ***
 
@@ -52,7 +52,7 @@ packages/pagination/type.ts:29
 
 #### Defined in
 
-packages/pagination/type.ts:17
+[packages/pagination/type.ts:17](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L17)
 
 ***
 
@@ -64,7 +64,7 @@ packages/pagination/type.ts:17
 
 #### Defined in
 
-packages/pagination/type.ts:13
+[packages/pagination/type.ts:13](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L13)
 
 ***
 
@@ -76,7 +76,7 @@ packages/pagination/type.ts:13
 
 #### Defined in
 
-packages/pagination/type.ts:25
+[packages/pagination/type.ts:25](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L25)
 
 ***
 
@@ -88,7 +88,7 @@ packages/pagination/type.ts:25
 
 #### Defined in
 
-packages/pagination/type.ts:21
+[packages/pagination/type.ts:21](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L21)
 
 ***
 
@@ -100,7 +100,7 @@ packages/pagination/type.ts:21
 
 #### Defined in
 
-packages/pagination/type.ts:5
+[packages/pagination/type.ts:5](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L5)
 
 ***
 
@@ -112,4 +112,4 @@ packages/pagination/type.ts:5
 
 #### Defined in
 
-packages/pagination/type.ts:9
+[packages/pagination/type.ts:9](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/pagination/type.ts#L9)

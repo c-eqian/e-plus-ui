@@ -21,5 +21,6 @@
 ### Type Aliases
 
 - [FormSchemaInstance](type-aliases/FormSchemaInstance.md)
+- [FormSchemaSlots](type-aliases/FormSchemaSlots.md)
 - [FormSchemaType](type-aliases/FormSchemaType.md)
 - [IFormItemCol](type-aliases/IFormItemCol.md)

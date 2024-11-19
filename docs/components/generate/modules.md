@@ -6,6 +6,7 @@
 
 ## Modules
 
+- [adapt-page-layout/types](adapt-page-layout/types/README.md)
 - [card/type](card/type/README.md)
 - [comment/type](comment/type/README.md)
 - [editor/type](editor/type/README.md)
@@ -20,6 +21,7 @@
 - [image/type](image/type/README.md)
 - [line/type](line/type/README.md)
 - [loading/type](loading/type/README.md)
+- [manager-layout/type](manager-layout/type/README.md)
 - [menu/type](menu/type/README.md)
 - [notice-bar/type](notice-bar/type/README.md)
 - [pagination/type](pagination/type/README.md)

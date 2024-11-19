@@ -293,7 +293,6 @@ export type FormSchemaSlots = {
    * 搜索模式下，添加搜索按钮
    */
   'query-add': () => void;
-
   // 自定义组件插槽
-  [k: string]: Render<any, FormItemsSchema>;
+  [k: string]: any;
 };

@@ -23,7 +23,7 @@
 
 #### Defined in
 
-packages/table/type.ts:33
+[packages/table/type.ts:33](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/table/type.ts#L33)
 
 ***
 
@@ -36,4 +36,4 @@ packages/table/type.ts:33
 
 #### Defined in
 
-packages/table/type.ts:38
+[packages/table/type.ts:38](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/table/type.ts#L38)

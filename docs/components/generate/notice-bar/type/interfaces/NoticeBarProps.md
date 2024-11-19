@@ -22,7 +22,7 @@ false
 
 #### Defined in
 
-packages/notice-bar/type.ts:13
+[packages/notice-bar/type.ts:13](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L13)
 
 ***
 
@@ -34,7 +34,7 @@ packages/notice-bar/type.ts:13
 
 #### Defined in
 
-packages/notice-bar/type.ts:35
+[packages/notice-bar/type.ts:35](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L35)
 
 ***
 
@@ -46,7 +46,7 @@ packages/notice-bar/type.ts:35
 
 #### Defined in
 
-packages/notice-bar/type.ts:31
+[packages/notice-bar/type.ts:31](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L31)
 
 ***
 
@@ -64,7 +64,7 @@ true
 
 #### Defined in
 
-packages/notice-bar/type.ts:8
+[packages/notice-bar/type.ts:8](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L8)
 
 ***
 
@@ -77,7 +77,7 @@ list 与 text必须传入一个，如果是list则以垂直方式滚动
 
 #### Defined in
 
-packages/notice-bar/type.ts:18
+[packages/notice-bar/type.ts:18](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L18)
 
 ***
 
@@ -95,7 +95,7 @@ packages/notice-bar/type.ts:18
 
 #### Defined in
 
-packages/notice-bar/type.ts:40
+[packages/notice-bar/type.ts:40](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L40)
 
 ***
 
@@ -113,7 +113,7 @@ packages/notice-bar/type.ts:40
 
 #### Defined in
 
-packages/notice-bar/type.ts:45
+[packages/notice-bar/type.ts:45](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L45)
 
 ***
 
@@ -126,7 +126,7 @@ list 与 text必须传入一个，如果是text则以水平方式滚动
 
 #### Defined in
 
-packages/notice-bar/type.ts:23
+[packages/notice-bar/type.ts:23](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L23)
 
 ***
 
@@ -138,4 +138,4 @@ packages/notice-bar/type.ts:23
 
 #### Defined in
 
-packages/notice-bar/type.ts:27
+[packages/notice-bar/type.ts:27](https://github.com/c-eqian/e-plus-ui/blob/583356870441cbe8e3c917dfd7ad56ce5ac6f88a/packages/notice-bar/type.ts#L27)
