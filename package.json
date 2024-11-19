@@ -1,6 +1,6 @@
 {
   "name": "e-plus-ui",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "license": "MIT",
   "description": "a component library for Vue 3",
   "workspaces": [
@@ -12,7 +12,6 @@
     "build:release": "esno script/release.ts",
     "dev:docs": "pnpm -C docs dev",
     "build:docs": "pnpm -C docs docs:build",
-    "dev:layer": "pnpm -C docs/document-layer dev",
     "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
@@ -22,6 +21,7 @@
     "build:types": " node ./script/generate.docs.js",
     "build:table": " node ./script/generate.table.js",
     "test": "vitest run",
+    "typedoc": "typedoc",
     "remove": "rimraf docs/node_modules/ play/node_modules/ ./node_modules/",
     "lint:eslint": "eslint \"packages/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
