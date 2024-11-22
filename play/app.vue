@@ -28,8 +28,7 @@
 </template>
 <script setup lang="ts">
 import AdaptLayout from './adapt-layout.vue';
-import { defineMenu } from '../packages';
-import { ManagerBasic } from '../packages/manager-layout/type';
+import { defineMenu, ManagerBasic } from '../packages';
 import { h, Ref, ref } from 'vue';
 import { ElIcon } from 'element-plus';
 import { Edit } from '@element-plus/icons-vue';

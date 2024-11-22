@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EpMenu from '../../menu';
 import { ElScrollbar, ElIcon } from 'element-plus';
-import { DArrowLeft, DArrowRight } from '@element-plus/icons-vue';
+import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue';
 import { computed, type ComputedRef, inject, ref, unref } from 'vue';
 import { __MANAGER_LAYOUT_KEY__ } from '../constants';
 import { ManagerBasic } from '../type';
@@ -20,17 +20,19 @@ const asideWidth = computed(() => {
 </script>
 
 <template>
-  <ElScrollbar class="!cz-h-full cz-layout-scroll">
-    <div class="cz-h-full cz-relative">
+  <div class="cz-h-full cz-relative">
+    <ElScrollbar class="!cz-h-full cz-layout-scroll">
       <EpMenu class="cz-h-full cz-layout-aside" :menu-config="menus"> </EpMenu>
-      <div class="cz-absolute cz-top-1/2 cz-right-0 cz-z-10">
-        <ElIcon class="cz-cursor-pointer" @click="isFoldMenu = !isFoldMenu">
-          <DArrowLeft v-show="!isFoldMenu" />
-          <DArrowRight v-show="isFoldMenu" />
-        </ElIcon>
-      </div>
+    </ElScrollbar>
+    <div
+      class="cz-absolute cz-top-1/2 cz-border cz-bg-[var(--el-color-white)] cz-border-[var(--el-border-color-light)] cz-flex cz-items-center cz-justify-center cz-rounded-full cz-right-0 cz-z-10 cz-h-6 cz-w-6 cz-translate-x-1/2"
+    >
+      <ElIcon class="cz-cursor-pointer" @click="isFoldMenu = !isFoldMenu">
+        <ArrowLeft v-show="!isFoldMenu" />
+        <ArrowRight v-show="isFoldMenu" />
+      </ElIcon>
     </div>
-  </ElScrollbar>
+  </div>
 </template>
 
 <style scoped lang="scss">
