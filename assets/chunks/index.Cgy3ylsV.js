@@ -1,0 +1,1 @@
+import{_ as o,B as n,o as s,b as c,w as r,a}from"./framework.BSdzK2b1.js";const _={};function p(x,e){const t=n("ep-copy-text");return s(),c(t,{text:"复制内容"},{default:r(()=>e[0]||(e[0]=[a("点我复制")])),_:1})}const d=o(_,[["render",p]]);export{d as default};

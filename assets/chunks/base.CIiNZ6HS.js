@@ -1,0 +1,1 @@
+import{_ as a,B as c,o as n,c as r,G as d,w as t,a as o}from"./framework.BSdzK2b1.js";const _={},l={class:"cz-h-full"};function f(p,e){const s=c("ep-card");return n(),r("div",l,[d(s,{title:"标题"},{title:t(()=>e[0]||(e[0]=[o(" 自定义标题 ")])),default:t(()=>[e[1]||(e[1]=o(" 这是卡片 "))]),_:1})])}const m=a(_,[["render",f],["__scopeId","data-v-df7b35dc"]]);export{m as default};
