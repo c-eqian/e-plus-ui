@@ -1,6 +1,19 @@
 # 更新日志 
 
 
+### [1.5.7](https://github.com/c-eqian/e-plus-ui/compare/v1.5.6...v1.5.7) (2024-11-28)
+
+
+### ✨ Features | 新功能
+
+* **manager-layout:** 优化菜单折叠 ([d4241a3](https://github.com/c-eqian/e-plus-ui/commit/d4241a3893f96f2dc621aa1274356a77bb5a5e11))
+
+
+###   Bug Fixes | Bug 修复
+
+* **table:** 修复permission回调参数缺少 ([44607e9](https://github.com/c-eqian/e-plus-ui/commit/44607e946a56a1a1b79cc081f2fee858bd7711f2))
+* **table:** 优化 ([fe834df](https://github.com/c-eqian/e-plus-ui/commit/fe834df24b58f17615018174add239a2a1991bbe))
+
 ### [1.5.6](https://github.com/c-eqian/e-plus-ui/compare/v1.5.5...v1.5.6) (2024-11-19)
 
 
