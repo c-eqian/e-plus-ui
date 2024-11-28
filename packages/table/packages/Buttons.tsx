@@ -92,7 +92,11 @@ export default defineComponent({
             } = item;
             const isRender = () => {
               return isFunction(permission)
-                ? permission()
+                ? permission({
+                    row,
+                    index,
+                    column,
+                  })
                 : isArray(permission)
                 ? handlePermission(permission)
                 : true;

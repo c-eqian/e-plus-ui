@@ -62,9 +62,9 @@ export type TRender<T = any> = (
   | undefined;
 
 export type OperationType = 'add' | 'edit' | 'delete' | 'view';
-export type PermissionFn = () => boolean;
-export type Permission = string[] | PermissionFn;
-export interface OperationTypeMap {
+export type PermissionFn<T = any> = (scoped: IRenderData<T>) => boolean;
+export type Permission<T = any> = string[] | PermissionFn<T>;
+export interface OperationTypeMap<T = any> {
   /**
    * 操作类型，可以使用内置、亦可以使用自定义
    * 如果使用自定义时，type的值将会作为事件的回调参数
@@ -85,7 +85,7 @@ export interface OperationTypeMap {
    * 接收一个数组（预留-使用接口权限校验）
    * 或接收一个具有返回布尔值的方法，false将不会显示该操作
    */
-  permission?: Permission;
+  permission?: Permission<T>;
   /**
    * 额外参数
    * el组件参数
@@ -181,7 +181,7 @@ export interface ITableColumnConfig<T = any> extends ExtraParameters {
    * 需要type=operation
    * 操作类型， 默认add(新增) edit(修改) delete(删除) view(查看)
    */
-  operationType?: (OperationType | OperationTypeMap)[] | TRender;
+  operationType?: (OperationType | OperationTypeMap<T>)[] | TRender<T>;
 }
 
 /**
