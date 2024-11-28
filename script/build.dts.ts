@@ -19,6 +19,7 @@ async function rollupTypes() {
     ]);
     console.log('generate types successfully.');
   } catch (error) {
+    console.error(`ERROR: The command failed. stdout:${error}`);
     console.error(`ERROR: The command failed. stdout:${error.stdout}`);
   }
 }

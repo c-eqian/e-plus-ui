@@ -64,6 +64,9 @@ export default (): UserConfigExport => {
     },
     css: {
       preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler', // 修改api调用方式
+        },
         less: {
           javascriptEnabled: true,
         },

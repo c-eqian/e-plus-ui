@@ -20,6 +20,13 @@ export default ({ mode }): UserConfigExport => {
         },
       ],
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        },
+      },
+    },
     plugins: [vue(), vueJsx()],
     build: {
       cssCodeSplit: false,

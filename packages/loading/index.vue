@@ -30,5 +30,5 @@ const isLoadingValue = computed(() => props.loading);
 </template>
 
 <style scoped lang="scss">
-@import 'index';
+@use 'index';
 </style>

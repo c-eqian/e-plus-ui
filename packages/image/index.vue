@@ -54,5 +54,5 @@ const computedImageCls = computed(() => {
 </template>
 
 <style lang="less" scoped>
-@import 'image.scss';
+@use 'image.scss';
 </style>

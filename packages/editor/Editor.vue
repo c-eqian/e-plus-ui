@@ -174,7 +174,7 @@ defineExpose({
 </template>
 
 <style lang="scss" scoped>
-@import 'style.scss';
+@use 'style.scss';
 
 //@media (min-width: 960px) {
 //  .comment-textarea {
