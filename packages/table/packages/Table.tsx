@@ -256,6 +256,11 @@ export default defineComponent({
       Reflect.deleteProperty(_props, 'data');
       Reflect.deleteProperty(_props, 'formModelExtender');
       Reflect.deleteProperty(_props, 'useFormValidation');
+      Reflect.deleteProperty(_props, 'paExtra');
+      Reflect.deleteProperty(_props, 'operationlabel');
+      Reflect.deleteProperty(_props, 'palimit');
+      Reflect.deleteProperty(_props, 'sortable');
+      Reflect.deleteProperty(_props, 'papagesizes');
       return _props;
     };
     /**

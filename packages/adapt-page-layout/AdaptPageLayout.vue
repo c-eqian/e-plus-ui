@@ -23,24 +23,23 @@ const searchRef = ref<HTMLDivElement | null>(null);
 const toolbarRef = ref<HTMLDivElement | null>(null);
 const contentRef = ref<HTMLDivElement | null>(null);
 const footerRef = ref<HTMLDivElement | null>(null);
-const adaptPageHeight = reactive({
+const adaptPageHeight = ref({
   aHeight: 0,
   hHeight: 0,
   sHeight: 0,
   tHeight: 0,
-  cHeight: 0,
   fHeight: 0,
 });
-
+const cHeight = ref(0);
 const calcElHeight = () => {
-  adaptPageHeight.aHeight = useCalcElHeight(adaptPageLayoutRef).ch;
-  adaptPageHeight.hHeight = useCalcElHeight(headerRef)._h;
-  adaptPageHeight.sHeight = useCalcElHeight(searchRef)._h;
-  adaptPageHeight.tHeight = useCalcElHeight(toolbarRef)._h;
-  adaptPageHeight.fHeight = useCalcElHeight(footerRef)._h;
-  adaptPageHeight.cHeight =
-    adaptPageHeight.aHeight -
-    Object.values(useOmit(adaptPageHeight, ['cHeight', 'aHeight'])).reduce(
+  adaptPageHeight.value.aHeight = useCalcElHeight(adaptPageLayoutRef).ch;
+  adaptPageHeight.value.hHeight = useCalcElHeight(headerRef)._h;
+  adaptPageHeight.value.sHeight = useCalcElHeight(searchRef)._h;
+  adaptPageHeight.value.tHeight = useCalcElHeight(toolbarRef)._h;
+  adaptPageHeight.value.fHeight = useCalcElHeight(footerRef)._h;
+  cHeight.value =
+    adaptPageHeight.value.aHeight -
+    Object.values(useOmit(adaptPageHeight.value, ['aHeight'])).reduce(
       (a, b) => a + b,
       unref(config).extraHeight
     );
@@ -62,7 +61,7 @@ useResizeListener(calcElHeightThrottleFn, [
   toolbarRef,
 ]);
 const getClsOrStyle = (key: ContainerTypeCls | ContainerTypeStyles) => {
-  return unref(config)[key] ?? '';
+  return unref(config)[key] ?? null;
 };
 </script>
 
@@ -106,7 +105,7 @@ const getClsOrStyle = (key: ContainerTypeCls | ContainerTypeStyles) => {
       :class="getClsOrStyle('contentClass')"
       :style="getClsOrStyle('contentStyle')"
     >
-      <slot name="content" :height="adaptPageHeight.cHeight"></slot>
+      <slot name="content" :height="cHeight"></slot>
     </div>
     <div
       v-if="$slots.footer"

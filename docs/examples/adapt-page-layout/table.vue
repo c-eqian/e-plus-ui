@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { defineTableColumns } from 'e-plus-ui';
-import { computed } from '@vue/runtime-core';
+import { computed, watchEffect } from '@vue/runtime-core';
 const props = defineProps({
   height: {
     type: Number,
     default: 100,
   },
 });
-const height = computed(() => props.height);
+const _height = computed(() => props.height);
+watchEffect(() => {
+  console.log('_height', _height.value);
+  console.log('props', props.height);
+});
 const tableData = [
   {
     date: '2016-05-03',
@@ -107,7 +111,7 @@ const column = defineTableColumns<(typeof tableData)[0]>([
 </script>
 
 <template>
-  <ep-table :height="height" :data="tableData" :column> </ep-table>
+  <ep-table :height="_height" :data="tableData" :column> </ep-table>
 </template>
 
 <style scoped lang="scss"></style>

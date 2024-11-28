@@ -6,14 +6,14 @@
     .VPNavBar.has-sidebar .title{
         padding-left: 32px!important;
     }
-    .VPContent.has-sidebar[data-v-98ddab3d] {
+    .VPContent.has-sidebar {
         padding-right: 0!important;
         padding-left: var(--vp-sidebar-width)!important;
     }
     .VPDoc.has-aside .content-container {
         max-width: calc((100vw - var(--vp-sidebar-width))) !important;
     }
-    .VPNavBar.has-sidebar .content[data-v-cf6e7c5e] {
+    .VPNavBar.has-sidebar .content {
         padding-right: 32px!important;
         padding-left: calc(var(--vp-sidebar-width))!important;
     }

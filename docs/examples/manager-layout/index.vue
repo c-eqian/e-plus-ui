@@ -73,7 +73,7 @@ const handleClick = (cmd: string) => {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .play {
   width: 100%;
   height: 800px;
