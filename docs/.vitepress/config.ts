@@ -5,6 +5,7 @@ export default defineConfig({
     lang: 'zh-CN',
     title: 'EPlus-UI',
     description: '组件库',
+    base: '/e-plus-ui/',
     head: [['link', { rel: 'icon', href: 'https://s3.bmp.ovh/imgs/2022/12/21/0aedf538ece60a2f.png' }]],
     markdown: {
         lineNumbers: true,
