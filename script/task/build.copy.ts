@@ -1,10 +1,10 @@
 import path from 'path';
 import { copy } from 'fs-extra';
-import { buildEnterPath, outDir, projectRoot } from '../paths';
+import { buildEnterPath, outDir } from '../paths';
 
 // 复制包文件
 async function copyPackageFile() {
-  const readme = path.resolve(projectRoot, 'README.md');
+  const readme = path.resolve(buildEnterPath, 'README.md');
   await copy(readme, path.resolve(outDir, 'README.md'));
   const packageJson = path.resolve(buildEnterPath, 'package.json');
   await copy(packageJson, path.resolve(outDir, 'package.json'));
