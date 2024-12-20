@@ -1,10 +1,11 @@
 <script setup lang="ts">
-  import { EpMenu, defineMenu } from 'e-plus-ui'
-  import { Edit } from '@element-plus/icons-vue'
-  import {  ElIcon } from 'element-plus'
-  import { h, reactive, ref } from 'vue';
-  const isCollapse = ref(false)
-  const config = defineMenu(reactive({
+import { Edit } from '@element-plus/icons-vue';
+import { defineMenu, EpMenu } from 'e-plus-ui';
+import { ElIcon } from 'element-plus';
+import { h, reactive, ref } from 'vue';
+const isCollapse = ref(false);
+const config = defineMenu(
+  reactive({
     collapse: isCollapse,
     items: [
       {
@@ -40,20 +41,17 @@
             icon: () => h(ElIcon, null, () => h(Edit))
           }
         ]
-      },
+      }
     ]
-  }))
+  })
+);
 </script>
 
 <template>
-    <div style="height: 380px;width: 200px">
-      <el-button @click="isCollapse=!isCollapse">{{ isCollapse ? '折叠': '展开' }}</el-button>
-      <EpMenu :menu-config="config">
-
-      </EpMenu>
-    </div>
+  <div style="height: 380px; width: 200px">
+    <el-button @click="isCollapse = !isCollapse">{{ isCollapse ? '折叠' : '展开' }}</el-button>
+    <EpMenu :menu-config="config" />
+  </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

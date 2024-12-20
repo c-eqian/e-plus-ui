@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import {EpComment, EpImage, type ICommentData, EpIcon} from 'e-plus-ui'
-import { Lv2, Lv8 } from '@e-plus-ui/icons'
+import { EpComment, type ICommentData } from 'e-plus-ui';
 
-
-import {h} from 'vue'
 const commentData: ICommentData = {
   title: '99',
   list: [
@@ -22,27 +19,26 @@ const commentData: ICommentData = {
     {
       userInfo: {
         username: '王林',
-        avatar: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+        avatar:
+          'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
         userId: 2
       },
       ipAddress: '广州',
       level: 5,
       content: '你知道什么是妥协吗？是彼此都退让一步，达成一致意见。',
       commentId: 66,
-      createDate: '2023-05-02',
+      createDate: '2023-05-02'
     }
   ]
-}
+};
 </script>
 
 <template>
-    <ep-comment :data="commentData">
-      <template #right="{item}">
-        <span class="cz-text-[12px]">{{item.createDate}}</span>
-      </template>
-    </ep-comment>
+  <ep-comment :data="commentData">
+    <template #right="{ item }">
+      <span class="cz-text-[12px]">{{ item.createDate }}</span>
+    </template>
+  </ep-comment>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

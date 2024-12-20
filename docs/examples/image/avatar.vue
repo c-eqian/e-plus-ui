@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+import { EpImage } from 'e-plus-ui';
+const image1 = 'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg';
+const image2 = 'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg';
+</script>
+
 <template>
   <div class="demo-mr">
     <EpImage round :url="image1" width="200" height="200" />
@@ -12,28 +18,16 @@
     <EpImage round :url="image2" width="24" height="24" />
   </div>
   <div class="demo-mr">
-    <EpImage round  width="24" height="24" >
-      用
-    </EpImage>
+    <EpImage round width="24" height="24"> 用 </EpImage>
   </div>
   <div class="demo-mr">
-    <EpImage round  width="36" height="36" >
-      用户
-    </EpImage>
+    <EpImage round width="36" height="36"> 用户 </EpImage>
   </div>
   <div class="demo-mr">
-    <EpImage round  width="56" height="56" style="font-size: 16px" >
-      用户
-    </EpImage>
+    <EpImage round width="56" height="56" style="font-size: 16px"> 用户 </EpImage>
   </div>
 </template>
-<script lang="ts" setup>
-import { EpImage } from 'e-plus-ui'
-const image1 =
-    'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg';
-const image2 =
-    'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg';
-</script>
+
 <style scoped lang="scss">
 .demo-mr {
   padding: 30px 0;

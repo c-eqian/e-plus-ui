@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import {defineFormSchema, EpFormSchema} from 'e-plus-ui';
-import { h, ref } from 'vue';
+import { defineFormSchema, EpFormSchema } from 'e-plus-ui';
 import { ElInput } from 'element-plus';
-interface FormModel {
+import { h, ref } from 'vue';
+type FormModel = {
   name: string;
   cascade: string;
   render: string;
   test: string;
-  radioSingle: string
-  checkBoxGroup: string[]
-  selectGroup: string[]
-  selectGroup1: string[]
-  select:string
-}
+  radioSingle: string;
+  checkBoxGroup: string[];
+  selectGroup: string[];
+  selectGroup1: string[];
+  select: string;
+};
 const formModel = ref({
   name: '哈哈哈哈',
   cascade: '',
@@ -24,9 +24,9 @@ const formModel = ref({
   selectGroup1: [],
   select: ''
 });
-const modelValues = ref<FormModel>()
-const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
-const formSchemaRef2 = ref<InstanceType<typeof EpFormSchema>>()
+const modelValues = ref<FormModel>();
+const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>();
+const formSchemaRef2 = ref<InstanceType<typeof EpFormSchema>>();
 /**
  * 获取表单
  */
@@ -35,13 +35,13 @@ const handleGet = async () => {
   await formSchemaRef.value?.validate();
   console.log('获取表单值', formModel.value);
 };
-const handleGetValues = async ()=>{
+const handleGetValues = async () => {
   // 校验
   await formSchemaRef2.value?.validate();
   // 使用getFieldsValues方法获取表单值
   modelValues.value = formSchemaRef2.value?.getFieldsValues() as FormModel;
-  console.log('getFieldsValues获取表单值',modelValues.value );
-}
+  console.log('getFieldsValues获取表单值', modelValues.value);
+};
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
   columns: 1,
@@ -50,7 +50,7 @@ const formSchema = defineFormSchema<FormModel>({
       type: 'input',
       label: '输入框',
       prop: 'name',
-      rules: true,
+      rules: true
     },
     {
       type: 'radio-group',
@@ -129,8 +129,8 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       componentProps: {
         groupOptions: {
-          api: ()=> {
-            return new  Promise<any>((resolve)=>{
+          api: () => {
+            return new Promise<any>(resolve => {
               resolve([
                 {
                   label: '产品部',
@@ -154,8 +154,8 @@ const formSchema = defineFormSchema<FormModel>({
                     }
                   ]
                 }
-              ])
-            })
+              ]);
+            });
           }
         }
       }
@@ -184,12 +184,12 @@ const formSchema = defineFormSchema<FormModel>({
       prop: 'render',
       render: ({ model, item }) => {
         return h(ElInput, {
-          modelValue: model.value[item.prop],
+          modelValue: model.value[item.prop] as string,
           'onUpdate:modelValue': (val: any) => {
             model.value[item.prop] = val;
-          },
+          }
         });
-      },
+      }
     },
     {
       type: 'cascade',
@@ -210,13 +210,13 @@ const formSchema = defineFormSchema<FormModel>({
               {
                 value: 'navigation',
                 label: 'Navigation'
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 });
 </script>
 
@@ -224,32 +224,21 @@ const formSchema = defineFormSchema<FormModel>({
   <ep-card title="带有model的表单" shadow="always">
     <div class="cz-py-4">
       <div class="cz-py-4">
-        <p>{{formModel}}</p>
+        <p>{{ formModel }}</p>
         <el-button @click="handleGet">获取表单</el-button>
       </div>
-      <ep-form-schema
-          ref="formSchemaRef"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />
     </div>
   </ep-card>
   <ep-card title="不使用model的表单" shadow="always">
     <div class="cz-py-4">
       <div class="cz-py-4">
-        <p>{{modelValues}}</p>
+        <p>{{ modelValues }}</p>
         <el-button @click="handleGetValues">获取表单</el-button>
       </div>
-      <ep-form-schema
-          ref="formSchemaRef2"
-          :config="formSchema"
-      >
-      </ep-form-schema>
+      <ep-form-schema ref="formSchemaRef2" :config="formSchema" />
     </div>
   </ep-card>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

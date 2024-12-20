@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {EpComment, ICommentConfig, type ICommentData, EpIcon} from 'e-plus-ui'
-import { Auth } from '@e-plus-ui/icons'
-import  { h } from 'vue'
+import { Auth } from '@e-plus-ui/icons';
+import { EpComment, EpIcon, type ICommentConfig, type ICommentData } from 'e-plus-ui';
+import { h } from 'vue';
 const commentData: ICommentData = {
-  title: '99',
+  total: 99,
   list: [
     {
       userInfo: {
@@ -15,13 +15,14 @@ const commentData: ICommentData = {
       ipAddress: '深圳',
       level: 1,
       createDate: '2016-05-02',
-      content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
-          'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
-          'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
-          'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
-          'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
-          'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
-          'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。'
+      content:
+        'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
+        'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
+        'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
+        'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
+        'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
+        'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。' +
+        'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。'
     },
     {
       userInfo: {
@@ -33,35 +34,36 @@ const commentData: ICommentData = {
       level: 5,
       content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
       commentId: 66,
-      createDate: '2018-05-02',
+      createDate: '2018-05-02'
     }
   ]
-}
+};
 /**
  * 配置
  */
 const fieldsConfig: ICommentConfig = {
   // 显示IP属地
   showIpAddress: true,
-  showLevel: ()=> {
-    return h(EpIcon, {
-      width:12,
-      height:12,
-      color: '#f8c828'
-    }, [h(Auth)])
+  showLevel: () => {
+    return h(
+      EpIcon,
+      {
+        width: 12,
+        height: 12,
+        color: '#f8c828'
+      },
+      [h(Auth)]
+    );
   }
   // 如果字段也为ipAddress，可不填
   // ipAddress: 'ipAddress'
 };
-
 </script>
 
 <template>
   <div>
-    <ep-comment :data="commentData" :config="fieldsConfig"></ep-comment>
+    <ep-comment :data="commentData" :config="fieldsConfig" />
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

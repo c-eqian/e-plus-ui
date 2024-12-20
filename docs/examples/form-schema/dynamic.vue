@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import {defineFormSchema, EpFormSchema} from 'e-plus-ui';
+import { defineFormSchema, EpFormSchema } from 'e-plus-ui';
 import { ref } from 'vue';
-interface FormModel {
+type FormModel = {
   name: string;
   name1: string;
-  radioSingle: string
-}
+  radioSingle: string;
+};
 const formModel = ref({
   name: '哈哈哈哈',
   name1: '',
-  radioSingle: '',
+  radioSingle: ''
 });
-const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
+const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>();
 
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
@@ -42,28 +42,21 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       placeholder: '通过单选组件控制是否显示',
       componentProps: {
-        dynamicShow: ({model})=> {
-          return model.value.radioSingle === '1'
-        },
+        dynamicShow: ({ model }) => {
+          return model.value.radioSingle === '1';
+        }
       }
     }
-  ],
+  ]
 });
 </script>
 
 <template>
   <ep-card title="动态控制组件显示" shadow="always">
     <div class="cz-py-4">
-      <ep-form-schema
-        ref="formSchemaRef"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />
     </div>
   </ep-card>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

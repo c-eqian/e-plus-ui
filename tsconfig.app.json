@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "types": ["node", "vite/client", "types/env.d"],
+    /* Bundler mode */
+    "moduleResolution": "Node",
+    "allowImportingTsExtensions": false,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@e-plus-ui/*": ["packages/*"],
+      "e-plus-ui": ["packages/e-plus-ui"]
+    },
+    "preserveSymlinks": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "playground/src/**/*.ts",
+    "playground/src/**/*.tsx",
+    "playground/src/**/*.vue",
+    "script/**/*",
+    "packages/**/*.ts",
+    "packages/**/*.js",
+    "packages/**/*.d.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue"
+  ]
+}

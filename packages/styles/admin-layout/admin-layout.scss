@@ -1,0 +1,12 @@
+.cz-admin-layout{
+  .el-scrollbar__wrap {
+    height: 100% !important;
+  }
+  .el-scrollbar__wrap > * {
+    height: 100% !important;
+  }
+ .cz-layout-aside:not(.el-menu--collapse) {
+    width: var(--layout-aside-width, 200px);
+  }
+}
+

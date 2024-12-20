@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import {defineFormSchema, EpFormSchema} from 'e-plus-ui';
-import {  ref } from 'vue';
-interface FormModel {
-  radioSingle: string
-  checkBoxGroup: string[]
-  selectGroup: string[]
-  select:string
-}
+import { defineFormSchema, EpFormSchema } from 'e-plus-ui';
+import { ref } from 'vue';
+type FormModel = {
+  radioSingle: string;
+  checkBoxGroup: string[];
+  selectGroup: string[];
+  select: string;
+};
 const formModel = ref({
   radioSingle: '',
   checkBoxGroup: [],
   selectGroup: [],
   select: ''
 });
-const modelValues = ref<FormModel>()
-const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
-const formSchemaRef2 = ref<InstanceType<typeof EpFormSchema>>()
+const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>();
 /**
  * 获取表单
  */
@@ -24,13 +22,6 @@ const handleGet = async () => {
   await formSchemaRef.value?.validate();
   console.log('获取表单值', formModel.value);
 };
-const handleGetValues = async ()=>{
-  // 校验
-  await formSchemaRef2.value?.validate();
-  // 使用getFieldsValues方法获取表单值
-  modelValues.value = formSchemaRef2.value?.getFieldsValues() as FormModel;
-  console.log('getFieldsValues获取表单值',modelValues.value );
-}
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
   columns: 1,
@@ -61,10 +52,10 @@ const formSchema = defineFormSchema<FormModel>({
       defaultValue: [],
       componentProps: {
         groupOptions: {
-          api: (params: any)=> {
-            return new  Promise<any>((resolve)=>{
+          api: (params: any) => {
+            return new Promise<any>(resolve => {
               console.log('请求参数', params);
-              setTimeout(()=>{
+              setTimeout(() => {
                 resolve([
                   {
                     value: '1',
@@ -74,15 +65,14 @@ const formSchema = defineFormSchema<FormModel>({
                     value: '2',
                     label: '开发'
                   }
-                ])
-              }, 1000)
-            })
+                ]);
+              }, 1000);
+            });
           },
           // 携带参数
           params: {}
-        },
+        }
       }
-
     },
     {
       type: 'select-group',
@@ -91,9 +81,9 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       componentProps: {
         groupOptions: {
-          api: ()=> {
-            return new  Promise<any>((resolve)=>{
-              setTimeout(()=>{
+          api: () => {
+            return new Promise<any>(resolve => {
+              setTimeout(() => {
                 resolve([
                   {
                     label: '产品部',
@@ -117,9 +107,9 @@ const formSchema = defineFormSchema<FormModel>({
                       }
                     ]
                   }
-                ])
-              }, 1500)
-            })
+                ]);
+              }, 1500);
+            });
           }
         }
       }
@@ -131,9 +121,9 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       componentProps: {
         groupOptions: {
-          api: ()=> {
-            return new  Promise<any>((resolve)=>{
-              setTimeout(()=>{
+          api: () => {
+            return new Promise<any>(resolve => {
+              setTimeout(() => {
                 resolve([
                   {
                     value: '1',
@@ -143,14 +133,14 @@ const formSchema = defineFormSchema<FormModel>({
                     value: '2',
                     label: '产品2'
                   }
-                ])
-              }, 1500)
-            })
+                ]);
+              }, 1500);
+            });
           }
         }
       }
-    },
-  ],
+    }
+  ]
 });
 </script>
 
@@ -158,19 +148,12 @@ const formSchema = defineFormSchema<FormModel>({
   <ep-card title="使用api请求" shadow="always">
     <div class="cz-py-4">
       <div class="cz-py-4">
-        <p>{{formModel}}</p>
+        <p>{{ formModel }}</p>
         <el-button @click="handleGet">获取表单</el-button>
       </div>
-      <ep-form-schema
-          ref="formSchemaRef"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />
     </div>
   </ep-card>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

@@ -1,13 +1,11 @@
 # 版本
 ![NPM dev or peer Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/peer/vue)
-![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/%40eqian%2Futils-vue)
+![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/co-utils-vue)
 ![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/element-plus)
 
 
 # 介绍
-![NPM Version](https://img.shields.io/npm/v/e-plus-ui)![NPM Downloads](https://img.shields.io/npm/dm/e-plus-ui)![NPM License](https://img.shields.io/npm/l/e-plus-ui)![GitHub Release Date](https://img.shields.io/github/release-date/c-eqian/e-plus-ui)
-
-
+![NPM Version](https://img.shields.io/npm/v/e-plus-ui)![NPM Downloads](https://img.shields.io/npm/dm/e-plus-ui)
 
 
 `EPlus-UI`，一个精心打造的基于`element-plus`的组件库，`EPlus-UI`旨在消除冗余代码，让开发过程变得更为高效、流畅，强调灵活性和可配置性。
@@ -38,7 +36,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 // 导入组件库
 import EPlusUI from 'e-plus-ui';
-import 'e-plus-ui/lib/index.css'
+import 'e-plus-ui/styles/index.css'
 
 const app = createApp(App);
 app.use(EPlusUI);

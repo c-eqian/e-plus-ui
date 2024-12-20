@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {EpComment, ICommentConfig, type ICommentData, EpCard} from 'e-plus-ui'
+import { EpComment, type ICommentConfig, type ICommentData } from 'e-plus-ui';
 const commentData: ICommentData = {
-  title: '99',
+  total: 99,
   list: [
     {
       userInfo: {
@@ -25,7 +25,7 @@ const commentData: ICommentData = {
       level: 5,
       content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
       commentId: 66,
-      createDate: '2018-05-02',
+      createDate: '2018-05-02'
     },
     {
       userInfo: {
@@ -49,7 +49,7 @@ const commentData: ICommentData = {
       level: 2,
       content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
       commentId: 66,
-      createDate: '2018-05-02',
+      createDate: '2018-05-02'
     },
     {
       userInfo: {
@@ -73,10 +73,10 @@ const commentData: ICommentData = {
       level: 6,
       content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
       commentId: 66,
-      createDate: '2018-05-02',
+      createDate: '2018-05-02'
     }
   ]
-}
+};
 /**
  * 配置
  */
@@ -88,9 +88,7 @@ const fieldsConfig: ICommentConfig = {
 </script>
 
 <template>
-    <ep-comment :data="commentData" :config="fieldsConfig"></ep-comment>
+  <ep-comment :data="commentData" :config="fieldsConfig" />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

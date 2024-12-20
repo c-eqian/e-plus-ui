@@ -1,18 +1,11 @@
 <script setup lang="ts">
-import { shallowRef, onMounted, defineAsyncComponent, ref, computed } from 'vue';
-import { getModule } from '../../../utils/module';
-import { isClient, useClipboard, useToggle } from '@vueuse/core';
-import { CaretTop, Expand, CopyDocument } from '@element-plus/icons-vue';
+import { CaretTop, CopyDocument, Expand } from '@element-plus/icons-vue';
+import { useClipboard, useToggle } from '@vueuse/core';
+import { ElCollapseTransition, ElDivider, ElIcon, ElTooltip } from 'element-plus';
+import { computed, defineAsyncComponent, onMounted, ref, shallowRef, type Component } from 'vue';
 import { $message } from '../../../utils/message';
+import { getModule } from '../../../utils/module';
 import SourceCode from './vp-source-code.vue';
-import {
-  ElDivider,
-  ElTooltip,
-  ElIcon,
-  ElCollapseTransition,
-} from 'element-plus';
-
-import type { Component } from 'vue';
 
 const props = defineProps<{
   demos?: object;
@@ -25,12 +18,10 @@ const props = defineProps<{
 const demo = shallowRef<Component>();
 const sourceCodeRef = ref<HTMLButtonElement>();
 
-const decodedDescription = computed(() =>
-  decodeURIComponent(props.description!)
-)
+const decodedDescription = computed(() => decodeURIComponent(props.description!));
 
-const { text, isSupported, copy } = useClipboard({
-  source: decodeURIComponent(props.rawSource),
+const { text, copy } = useClipboard({
+  source: decodeURIComponent(props.rawSource)
 });
 const [sourceVisible, toggleSourceVisible] = useToggle();
 
@@ -59,50 +50,51 @@ const copyCode = async () => {
   }
 };
 
-onMounted(async () => {
+onMounted(() => {
   console.log(props.path);
   demo.value = defineAsyncComponent(getModule(props.path));
 });
 </script>
+
 <template>
   <ClientOnly>
     <div class="example">
       <div class="example-wrapper">
-      <p text="sm" v-html="decodedDescription" />
-      <component :is="demo" v-if="demo" v-bind="$attrs" />
+        <p text="sm" v-html="decodedDescription" />
+        <component :is="demo" v-if="demo" v-bind="$attrs" />
       </div>
       <ElDivider class="m-0" />
       <div class="op-btns">
         <ElTooltip
-            content="复制代码"
-            :show-arrow="false"
-            :trigger="['hover', 'focus']"
-            :trigger-keys="[]"
+          content="复制代码"
+          :show-arrow="false"
+          :trigger="['hover', 'focus']"
+          :trigger-keys="[]"
         >
           <ElIcon
-              :size="16"
-              aria-label="copy-code"
-              class="op-btn"
-              tabindex="0"
-              role="button"
-              @click="copyCode"
-              @keydown.prevent.enter="copyCode"
-              @keydown.prevent.space="copyCode"
+            :size="16"
+            aria-label="copy-code"
+            class="op-btn"
+            tabindex="0"
+            role="button"
+            @click="copyCode"
+            @keydown.prevent.enter="copyCode"
+            @keydown.prevent.space="copyCode"
           >
             <CopyDocument />
           </ElIcon>
         </ElTooltip>
         <ElTooltip
-            content="查看代码"
-            :show-arrow="false"
-            :trigger="['hover', 'focus']"
-            :trigger-keys="[]"
+          content="查看代码"
+          :show-arrow="false"
+          :trigger="['hover', 'focus']"
+          :trigger-keys="[]"
         >
           <button
-              ref="sourceCodeRef"
-              :aria-label="sourceVisible ? 'hide-source' : 'view-source'"
-              class="reset-btn el-icon op-btn"
-              @click="toggleSourceVisible()"
+            ref="sourceCodeRef"
+            :aria-label="sourceVisible ? 'hide-source' : 'view-source'"
+            class="reset-btn el-icon op-btn"
+            @click="toggleSourceVisible()"
           >
             <ElIcon :size="16">
               <Expand />
@@ -116,12 +108,12 @@ onMounted(async () => {
 
       <Transition name="el-fade-in-linear">
         <div
-            v-show="sourceVisible"
-            class="example-float-control"
-            tabindex="0"
-            role="button"
-            @click="toggleSourceVisible(false)"
-            @keydown="onSourceVisibleKeydown"
+          v-show="sourceVisible"
+          class="example-float-control"
+          tabindex="0"
+          role="button"
+          @click="toggleSourceVisible(false)"
+          @keydown="onSourceVisibleKeydown"
         >
           <ElIcon :size="16">
             <CaretTop />
@@ -132,13 +124,14 @@ onMounted(async () => {
     </div>
   </ClientOnly>
 </template>
+
 <style scoped lang="scss">
 .m-0 {
   margin-top: 8px !important;
 }
 .example {
   border: 1px solid #dcdfe6;
-  &-wrapper{
+  &-wrapper {
     padding: 0 15px;
   }
 }

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {EpComment, EpImage, type ICommentData, EpIcon} from 'e-plus-ui'
-import { Level6 } from '@e-plus-ui/icons'
-import {isEmpty} from "@eqian/utils-vue";
+import { Level6 } from '@e-plus-ui/icons';
+import { isEmpty } from '@eqian/utils-vue';
+import { EpComment, EpIcon, type ICommentData } from 'e-plus-ui';
 const commentData: ICommentData = {
-  title: '99',
+  total: 99,
   list: [
     {
       userInfo: {
@@ -29,12 +29,13 @@ const commentData: ICommentData = {
             ipAddress: '深圳',
             level: 1,
             createDate: '2022-11-02',
-            content: '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。',
+            content: '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。'
           },
           {
             userInfo: {
               username: '王林',
-              avatar: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+              avatar:
+                'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
               userId: 2
             },
             commentId: 39,
@@ -52,7 +53,8 @@ const commentData: ICommentData = {
               ipAddress: '深圳',
               level: 1,
               createDate: '2022-11-02',
-              content: '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。',
+              content:
+                '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。'
             }
           },
           {
@@ -69,55 +71,55 @@ const commentData: ICommentData = {
             reply: {
               userInfo: {
                 username: '王林',
-                avatar: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+                avatar:
+                  'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
                 userId: 2
               },
               commentId: 39,
               ipAddress: '广州',
               level: 1,
               createDate: '2024-05-02',
-              content: '有时候遗忘比记住要好得多。',
+              content: '有时候遗忘比记住要好得多。'
             }
-          },
+          }
         ]
       }
     },
     {
       userInfo: {
         username: '王林',
-        avatar: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+        avatar:
+          'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
         userId: 2
       },
       ipAddress: '广州',
       level: 5,
       content: '你知道什么是妥协吗？是彼此都退让一步，达成一致意见。',
       commentId: 66,
-      createDate: '2023-05-02',
+      createDate: '2023-05-02'
     }
   ]
-}
+};
 </script>
 
 <template>
-    <ep-comment :data="commentData">
-      <template #left="{item, isSubReply, level1, reply}">
-        <div class="cz-flex cz-items-center">
-          <div class="cz-relative cz-w-fit">
-            <span class="cz-pr-1">{{item.userInfo.username}}</span>
-          </div>
-          <ep-icon width="20" height="20" color="#409EFF">
-            <Level6></Level6>
-          </ep-icon>
-          <span class="cz-inline-block cz-px-2 cz-text-[10px]">{{item.ipAddress}}</span>
-          <div v-if="isSubReply && !isEmpty(reply)">
-            <strong  class="cz-px-1">回复</strong>
-            <span class="cz-pr-1">{{reply.userInfo.username}}</span>
-          </div>
+  <ep-comment :data="commentData">
+    <template #left="{ item, isSubReply, reply }">
+      <div class="cz-flex cz-items-center">
+        <div class="cz-relative cz-w-fit">
+          <span class="cz-pr-1">{{ item.userInfo.username }}</span>
         </div>
-      </template>
-    </ep-comment>
+        <ep-icon width="20" height="20" color="#409EFF">
+          <Level6 />
+        </ep-icon>
+        <span class="cz-inline-block cz-px-2 cz-text-[10px]">{{ item.ipAddress }}</span>
+        <div v-if="isSubReply && !isEmpty(reply)">
+          <strong class="cz-px-1">回复</strong>
+          <span class="cz-pr-1">{{ reply.userInfo.username }}</span>
+        </div>
+      </div>
+    </template>
+  </ep-comment>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

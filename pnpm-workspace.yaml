@@ -1,3 +1,6 @@
 packages:
-  - play
-  - docs
+  - 'play'
+  - 'docs'
+  - 'packages/**'
+  - 'create-template'
+  - 'script'

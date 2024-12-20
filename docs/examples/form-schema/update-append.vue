@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {defineFormSchema, EpFormSchema, useFormSchema} from 'e-plus-ui';
+import { defineFormSchema, EpFormSchema, useFormSchema } from 'e-plus-ui';
 import { ref } from 'vue';
-interface FormModel {
+type FormModel = {
   post: string;
   name: string;
   type: number;
-}
+};
 const formModel = ref({
   post: '',
   name: '',
@@ -18,11 +18,11 @@ const postList = [
     children: [
       {
         value: '1-1',
-        label: '测试组长',
+        label: '测试组长'
       },
       {
         value: '1-2',
-        label: '高级测试',
+        label: '高级测试'
       }
     ]
   },
@@ -32,11 +32,11 @@ const postList = [
     children: [
       {
         value: '2-1',
-        label: '前端开发',
+        label: '前端开发'
       },
       {
         value: '2-2',
-        label: '后端开发',
+        label: '后端开发'
       }
     ]
   },
@@ -46,22 +46,22 @@ const postList = [
     children: [
       {
         value: '3-1',
-        label: '高级产品',
+        label: '高级产品'
       },
       {
         value: '3-2',
-        label: '实习产品',
+        label: '实习产品'
       }
     ]
   }
-]
-const getChildren = (value:string)=> {
-  const l = postList.find(item=> item.value===value)
-  return l?.children ?? []
-}
+];
+const getChildren = (value: string) => {
+  const l = postList.find(item => item.value === value);
+  return l?.children ?? [];
+};
 const { updateOrAppendFields, registry } = useFormSchema({
-  onChange: ({item, model}, v:string)=>{
-    if (item.prop==='post'){
+  onChange: ({ item, model }: any, v: string) => {
+    if (item.prop === 'post') {
       // 添加或者更新属性配置
       updateOrAppendFields('name', {
         type: 'select-group',
@@ -70,19 +70,19 @@ const { updateOrAppendFields, registry } = useFormSchema({
         componentProps: {
           groupOptions: getChildren(v)
         }
-      })
+      });
       // 默认选择第一项
-      model.value.name = getChildren(v)[0].value
-    } else if (item.prop==='type'){
+      model.value.name = getChildren(v)[0].value;
+    } else if (item.prop === 'type') {
       // 修改部门是否可以选择
       updateOrAppendFields('post', {
-      componentProps: {
-        disabled: model.value.type === '1',
-      }
-      })
+        componentProps: {
+          disabled: model.value.type === '1'
+        }
+      });
     }
   }
-})    
+});
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
   columns: 1,
@@ -95,13 +95,13 @@ const formSchema = defineFormSchema<FormModel>({
         groupOptions: [
           {
             label: '访客',
-            value: '1',
+            value: '1'
           },
           {
             label: '管理员',
-            value: '2',
+            value: '2'
           }
-          ]
+        ]
       }
     },
     {
@@ -110,31 +110,24 @@ const formSchema = defineFormSchema<FormModel>({
       prop: 'post',
       componentProps: {
         disabled: formModel.value.type === '1',
-        groupOptions: postList.map(item=> {
+        groupOptions: postList.map(item => {
           return {
             value: item.value,
             label: item.label
-          }
+          };
         })
       }
-    },
-  ],
+    }
+  ]
 });
 </script>
 
 <template>
   <ep-card title="动态更新组件" shadow="always">
     <div class="cz-py-4">
-      <ep-form-schema
-        @registry="registry"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <ep-form-schema :config="formSchema" :model="formModel" @registry="registry" />
     </div>
   </ep-card>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

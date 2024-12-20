@@ -9,9 +9,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export const getFiles = (
-  dir: string = path.resolve(__dirname, '../components')
-): string[] => {
+export const getFiles = (dir: string = path.resolve(__dirname, '../components')): string[] => {
   const mdList: string[] = [];
   const isDir = (d: string) => {
     const stat = fs.statSync(d);

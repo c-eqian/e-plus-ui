@@ -2,7 +2,6 @@
 // import chalk from 'chalk'
 import escapeHtml from 'escape-html';
 import prism from 'prismjs';
-import _console from 'consola';
 // import loadLanguages from ''
 
 // prism is listed as actual dep so it's ok to require

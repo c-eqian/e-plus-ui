@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig } from 'e-plus-ui';
+import { EpComment, type ICommentConfig } from 'e-plus-ui';
 
 const commentData = {
-  total: '99',
+  total: 99,
   list: [
     {
       // 非username字段
@@ -13,7 +13,7 @@ const commentData = {
       commentId: 99,
       createDate: '2023-10-02',
       // 非content字段
-      text: '你周末一般都喜欢干什么呀？',
+      text: '你周末一般都喜欢干什么呀？'
     },
     {
       commentName: '王林',
@@ -22,9 +22,9 @@ const commentData = {
       // 非content字段
       text: '如果有一天自己变成了超人你最想干什么呢？',
       commentId: 666,
-      createDate: '2018-05-02',
-    },
-  ],
+      createDate: '2018-05-02'
+    }
+  ]
 };
 
 /**
@@ -35,14 +35,14 @@ const fieldsConfig: ICommentConfig = {
     content: 'text',
     username: 'commentName',
     avatar: 'avatar',
-    userId: 'userId',
+    userId: 'userId'
   }
 };
 </script>
 
 <template>
   <div>
-    <ep-comment :data="commentData" :config="fieldsConfig"></ep-comment>
+    <ep-comment :data="commentData" :config="fieldsConfig" />
   </div>
 </template>
 

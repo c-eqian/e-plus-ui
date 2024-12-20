@@ -7,22 +7,16 @@ import mdContainer from 'markdown-it-container';
 import { highlight } from '../../utils/highlight';
 // @ts-ignore
 import tag from '../plugins/tag';
-import type Token from 'markdown-it/lib/token';
 import type Renderer from 'markdown-it/lib/renderer';
+import type Token from 'markdown-it/lib/token';
 
 const localMd = MarkdownIt().use(tag);
 
-interface ContainerOpts {
+type ContainerOpts = {
   marker?: string | undefined;
-  validate?(params: string): boolean;
-  render?(
-    tokens: Token[],
-    index: number,
-    options: any,
-    env: any,
-    self: Renderer
-  ): string;
-}
+  validate?: (params: string) => boolean;
+  render?: (tokens: Token[], index: number, options: any, env: any, self: Renderer) => string;
+};
 
 export const mdPlugin = (md: MarkdownIt) => {
   // @ts-ignore
@@ -45,9 +39,10 @@ export const mdPlugin = (md: MarkdownIt) => {
             'utf-8'
           );
         }
-        if (!source) { // @ts-ignore
+        if (!source) {
+          // @ts-ignore
           // console.error(`Incorrect source file: ${sourceFile}`)
-          return
+          return;
           // throw new Error(`Incorrect source file: ${sourceFile}`);
         }
 
@@ -59,6 +54,6 @@ export const mdPlugin = (md: MarkdownIt) => {
       } else {
         return '</Demo>';
       }
-    },
+    }
   } as ContainerOpts);
 };

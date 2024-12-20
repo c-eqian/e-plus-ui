@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import {defineFormSchema, EpFormSchema} from 'e-plus-ui';
+import { defineFormSchema, EpFormSchema } from 'e-plus-ui';
 import { ref } from 'vue';
-interface FormModel {
+type FormModel = {
   name: string;
   cascade: string;
   render: string;
   test: string;
-  radioSingle: string
-  checkBoxGroup: string[]
-  selectGroup: string[]
-  selectGroup1: string[]
-}
+  radioSingle: string;
+  checkBoxGroup: string[];
+  selectGroup: string[];
+  selectGroup1: string[];
+};
 const formModel = ref({
   name: '哈哈哈哈',
   cascade: '',
@@ -21,7 +21,7 @@ const formModel = ref({
   selectGroup: [],
   selectGroup1: []
 });
-const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
+const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>();
 
 const formSchema = defineFormSchema<FormModel>({
   labelPosition: 'right',
@@ -34,7 +34,7 @@ const formSchema = defineFormSchema<FormModel>({
       rules: true,
       componentProps: {
         // 监听值发生改变
-        onChange: (value:any) => {
+        onChange: (value: any) => {
           console.log(value);
         }
       }
@@ -65,7 +65,7 @@ const formSchema = defineFormSchema<FormModel>({
       defaultValue: [],
       componentProps: {
         // 监听值发生改变
-        onChange: (value:any) => {
+        onChange: (value: any) => {
           console.log(value);
         },
         groupOptions: [
@@ -79,8 +79,8 @@ const formSchema = defineFormSchema<FormModel>({
           }
         ]
       }
-    },
-  ],
+    }
+  ]
 });
 </script>
 
@@ -88,18 +88,11 @@ const formSchema = defineFormSchema<FormModel>({
   <ep-card title="events 事件监听" shadow="always">
     <div class="cz-py-4">
       <div class="cz-py-4">
-        <p>{{formModel}}</p>
+        <p>{{ formModel }}</p>
       </div>
-      <ep-form-schema
-        ref="formSchemaRef"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />
     </div>
   </ep-card>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

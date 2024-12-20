@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import {EpComment, EpImage, type ICommentData, EpIcon} from 'e-plus-ui'
-import { Level6 } from '@e-plus-ui/icons'
-import {isEmpty} from "@eqian/utils-vue";
+import { isEmpty } from '@eqian/utils-vue';
+import { EpComment, type ICommentData } from 'e-plus-ui';
 const commentData: ICommentData = {
-  title: '99',
+  total: 99,
   list: [
     {
       userInfo: {
@@ -29,12 +28,13 @@ const commentData: ICommentData = {
             ipAddress: '深圳',
             level: 1,
             createDate: '2022-11-02',
-            content: '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。',
+            content: '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。'
           },
           {
             userInfo: {
               username: '王林',
-              avatar: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+              avatar:
+                'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
               userId: 2
             },
             commentId: 39,
@@ -52,7 +52,8 @@ const commentData: ICommentData = {
               ipAddress: '深圳',
               level: 1,
               createDate: '2022-11-02',
-              content: '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。',
+              content:
+                '生活总是让我们遍体鳞伤，但到后来，那些受伤的地方一定会变成我们最强壮的地方。'
             }
           },
           {
@@ -69,48 +70,51 @@ const commentData: ICommentData = {
             reply: {
               userInfo: {
                 username: '王林',
-                avatar: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+                avatar:
+                  'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
                 userId: 2
               },
               commentId: 39,
               ipAddress: '广州',
               level: 1,
               createDate: '2024-05-02',
-              content: '有时候遗忘比记住要好得多。',
+              content: '有时候遗忘比记住要好得多。'
             }
-          },
+          }
         ]
       }
     },
     {
       userInfo: {
         username: '王林',
-        avatar: 'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
+        avatar:
+          'https://tse1-mm.cn.bing.net/th/id/OIP-C.cb2tZuoVupOeB2xofO630wHaEK?rs=1&pid=ImgDetMain',
         userId: 2
       },
       ipAddress: '广州',
       level: 5,
       content: '你知道什么是妥协吗？是彼此都退让一步，达成一致意见。',
       commentId: 66,
-      createDate: '2023-05-02',
+      createDate: '2023-05-02'
     }
   ]
-}
+};
 </script>
 
 <template>
-    <ep-comment :data="commentData">
-      <template #content="{item, isSubReply, level1, reply}">
-        <div>
-          {{item.content}}
-          <div v-if="isSubReply && !isEmpty(reply)" class="cz-border cz-rounded-2xl cz-my-1 cz-text-[12px] cz-text-gray-600">
-            <div class="cz-p-2">{{reply.content}}</div>
-          </div>
+  <ep-comment :data="commentData">
+    <template #content="{ item, isSubReply, reply }">
+      <div>
+        {{ item.content }}
+        <div
+          v-if="isSubReply && !isEmpty(reply)"
+          class="cz-border cz-rounded-2xl cz-my-1 cz-text-[12px] cz-text-gray-600"
+        >
+          <div class="cz-p-2">{{ reply.content }}</div>
         </div>
-      </template>
-    </ep-comment>
+      </div>
+    </template>
+  </ep-comment>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

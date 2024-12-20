@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig} from 'e-plus-ui'
-import {initEmoji} from "../../utils/emoji";
+import { EpComment, type ICommentConfig } from 'e-plus-ui';
+import { initEmoji } from '../../utils/emoji';
 const commentData = {
   title: '99',
   list: [
@@ -22,10 +22,10 @@ const commentData = {
       },
       content: 'SVG 图标提供额外的属性, 提供的详细属性请继续阅读。',
       commentId: 66,
-      createDate: '2018-05-02',
+      createDate: '2018-05-02'
     }
   ]
-}
+};
 
 /**
  * 通过配置修改字段值
@@ -33,15 +33,13 @@ const commentData = {
 const fieldsConfig: ICommentConfig = {
   emojis: initEmoji(),
   useEmojis: true
-}
+};
 </script>
 
 <template>
   <div>
-    <ep-comment :data="commentData" :config="fieldsConfig"></ep-comment>
+    <ep-comment :data="commentData" :config="fieldsConfig" />
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import {defineFormSchema, EpFormSchema} from 'e-plus-ui';
-import {  ref } from 'vue';
-interface FormModel {
+import { defineFormSchema, EpFormSchema } from 'e-plus-ui';
+import { ref } from 'vue';
+type FormModel = {
   name: string;
   post: string;
   dept: string;
   phone: string;
   motto: string;
-}
+};
 const formModel = ref({
   name: 'Eqian',
   post: '',
@@ -15,7 +15,7 @@ const formModel = ref({
   phone: '',
   motto: ''
 });
-const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
+const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>();
 /**
  * 获取表单
  */
@@ -44,7 +44,7 @@ const formSchema = defineFormSchema<FormModel>({
     {
       type: 'input',
       label: '岗位',
-      prop: 'post',
+      prop: 'post'
     },
     {
       type: 'input',
@@ -60,8 +60,8 @@ const formSchema = defineFormSchema<FormModel>({
       type: 'input',
       label: '座右铭',
       prop: 'motto'
-    },
-  ],
+    }
+  ]
 });
 </script>
 
@@ -71,16 +71,9 @@ const formSchema = defineFormSchema<FormModel>({
       <div class="cz-py-4">
         <el-button @click="handleGet">获取表单</el-button>
       </div>
-      <ep-form-schema
-          ref="formSchemaRef"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />
     </div>
   </ep-card>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

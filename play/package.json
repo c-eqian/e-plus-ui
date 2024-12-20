@@ -1,9 +1,0 @@
-{
-  "private": true,
-  "name": "@e-ui/play",
-  "type": "module",
-  "scripts": {
-    "dev": "vite"
-  },
-  "license": "ISC"
-}

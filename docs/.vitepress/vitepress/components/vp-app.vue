@@ -1,3 +1,1 @@
-<template>
-  自定义页面
-</template>
+<template>自定义页面</template>

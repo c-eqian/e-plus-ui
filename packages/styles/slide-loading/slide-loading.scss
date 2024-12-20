@@ -1,0 +1,102 @@
+.cz-loading-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.cz-loading-bar.wave {
+  width: 5px;
+  height: 30px;
+  margin: 0 5px;
+  background-color: #d7afe2;
+  animation: loading 1s ease-in-out infinite;
+
+  &:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 0.3s;
+  }
+}
+
+.cz-loading-bar.beat {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  animation-name: loading-beat;
+  /* 动画完成一个周期所需要的时间 */
+  animation-duration: .8s;
+  /* 定义动画从何时开始（延迟） */
+  animation-delay: 0s;
+  /* 动画播放次数（无限） */
+  animation-iteration-count: infinite;
+
+  &:nth-child(1) {
+    background: #E6804A;
+  }
+
+  &:nth-child(2) {
+    background: #FFD14E;
+    animation-delay: .2s;
+  }
+
+  &:nth-child(3) {
+    background: #54BFFF;
+    animation-delay: .4s;
+  }
+
+  &:nth-child(4) {
+    background: #59D8AB;
+    animation-delay: .6s;
+    animation-name: loading-beat-last;
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1, 2.5);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes loading-beat {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.5);
+  }
+  50%, 75%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes loading-beat-last {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  25%, 50% {
+    transform: translateY(-8px) scale(1.5);
+  }
+  60% {
+    transform: translateY(0px) scale(1);
+  }
+}

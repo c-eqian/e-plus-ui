@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { EpComment, ICommentConfig, ICommentData } from 'e-plus-ui';
+import { EpComment, type ICommentConfig, type ICommentData } from 'e-plus-ui';
+import { ref } from 'vue';
 import { initEmoji } from '../../utils/emoji';
-import {ref} from 'vue'
 const commentData = ref<ICommentData>({
   total: 0,
   list: []
@@ -11,22 +11,23 @@ const commentData = ref<ICommentData>({
  * @param data
  */
 const handleLoad = () => {
-  setTimeout(()=>{
+  setTimeout(() => {
     commentData.value = {
       total: 1,
       list: [
         {
           commentName: '李慕婉',
-          avatarUrl: 'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
+          avatarUrl:
+            'https://puui.qpic.cn/vpic_cover/l3535rml86l/l3535rml86l_1704079822_hz.jpg/496',
           userId: 7,
           parentId: 666,
           commentId: 666,
           createDate: '2024-07-06',
-          text: '内容内容',
+          text: '内容内容'
         }
       ]
-    }
-  }, 500)
+    };
+  }, 500);
 };
 
 /**
@@ -37,20 +38,16 @@ const fieldsConfig: ICommentConfig = {
     content: 'text',
     username: 'commentName',
     avatar: 'avatarUrl',
-    userId: 'userId',
+    userId: 'userId'
   },
-  emojis: initEmoji(),
+  emojis: initEmoji()
 };
-
 </script>
 
 <template>
   <div>
     <ep-button @click="handleLoad">加载</ep-button>
-    <ep-comment
-      :data="commentData"
-      :config="fieldsConfig"
-    ></ep-comment>
+    <ep-comment :data="commentData" :config="fieldsConfig" />
   </div>
 </template>
 

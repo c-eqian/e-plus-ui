@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import {defineFormSchema, EpFormSchema} from 'e-plus-ui';
-import { h, ref } from 'vue';
+import { defineFormSchema, EpFormSchema } from 'e-plus-ui';
 import { ElInput } from 'element-plus';
-interface FormModel {
+import { h, ref } from 'vue';
+type FormModel = {
   name: string;
   cascade: string;
   render: string;
   test: string;
-}
+};
 const formModel = ref({
   name: '使用组件插槽',
   cascade: '',
   render: '自定义渲染',
-  test: '模板插槽',
+  test: '模板插槽'
 });
-const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>()
+const formSchemaRef = ref<InstanceType<typeof EpFormSchema>>();
 /**
  * 获取表单
  */
@@ -38,9 +38,9 @@ const formSchema = defineFormSchema<FormModel>({
         slots: {
           prepend: () => [h('div', 'https://')],
           append: () => [h('div', 'https://')],
-          prefix: () => [h('div', 'https://')],
-        },
-      },
+          prefix: () => [h('div', 'https://')]
+        }
+      }
     },
     {
       type: 'input',
@@ -51,9 +51,9 @@ const formSchema = defineFormSchema<FormModel>({
           modelValue: model.value[item.prop],
           'onUpdate:modelValue': (val: any) => {
             model.value[item.prop] = val;
-          },
+          }
         });
-      },
+      }
     },
     {
       label: '模板插槽',
@@ -63,28 +63,22 @@ const formSchema = defineFormSchema<FormModel>({
       // 可以自定义插槽名称
       // slotKey: 'test'
     }
-  ],
+  ]
 });
 </script>
 
 <template>
   <div class="cz-py-4">
     <div class="cz-py-4">
-      <p>{{formModel}}</p>
+      <p>{{ formModel }}</p>
       <el-button @click="handleGet">获取表单</el-button>
     </div>
-    <ep-form-schema
-      ref="formSchemaRef"
-      :config="formSchema"
-      :model="formModel"
-    >
-      <template #test="{model, item}">
-        <el-input :placeholder="item.placeholder" v-model="model.value.test"></el-input>
+    <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel">
+      <template #test="{ model, item }">
+        <el-input v-model="model.value.test" :placeholder="item.placeholder" />
       </template>
     </ep-form-schema>
   </div>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

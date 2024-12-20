@@ -1,0 +1,58 @@
+.cz-notice-container {
+  display: flex;
+  background: #eee;
+  color: #000;
+  border-radius: 6px;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: space-around;
+  .cz-notice-left-icon, .cz-notice-right-icon {
+    padding: 0 5px;
+  }
+}
+.horizontal-wrap-text-box {
+  flex: 1;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  .horizontal-wrap-text {
+    white-space: nowrap;
+    position: absolute;
+    left: 0;
+  }
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 1s ease;
+}
+.slide-enter-from {
+  transform: translateY(var(--enter-move));
+  opacity: 0;
+}
+.slide-leave-to {
+  transform: translateY(var(--leave-move));
+  opacity: 0;
+}
+.slider-vertical {
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+  .scroll-view {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    .slide-text {
+      line-height: 1.57;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+  }
+}

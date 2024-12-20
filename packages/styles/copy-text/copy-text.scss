@@ -1,0 +1,35 @@
+.is-flex {
+  display: flex;
+  // 水平排列
+  &.is-justify-center {
+    justify-content: center;
+  }
+  &.is-justify-end {
+    justify-content: end;
+  }
+  &.is-justify-space-between {
+    justify-content: space-between;
+  }
+  &.is-justify-space-around {
+    justify-content: space-around;
+  }
+  // 垂直方向
+  &.is-align-middle {
+    align-items: center;
+  }
+  &.is-align-bottom {
+    align-items: flex-end;
+  }
+}
+
+.cz-copy-text{
+   .icon {
+    margin-left: 5px;
+    opacity: 0.6;
+    font-size: 16px;
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+}

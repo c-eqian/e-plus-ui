@@ -1,0 +1,31 @@
+{
+  "name": "create-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "unbuild",
+    "dev": "unbuild --stub && node ./index"
+  },
+  "bin": {
+    "e-plus-ui": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/c-eqian/plus-ui.git"
+  },
+  "files": [
+    "dist",
+    "index.js"
+  ],
+  "private": false,
+  "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "kolorist": "^1.8.0",
+    "picocolors": "^1.1.1",
+    "prompts": "^2.4.2",
+    "unbuild": "^2.0.0"
+  }
+}

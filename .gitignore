@@ -1,26 +1,33 @@
-.DS_Store
-node_modules/
-package-lock.json
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
 
 # Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
-.vscode
+.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-e-plus-ui/lib
-e-plus-ui/es
-e-plus-ui/types
-e-plus-ui/umd
-# yarn
-yarn-lock
-yarn-error.log
+*.sw?
 
+.eslintcache
+
+/e-plus-ui
+
+tsconfig.build.tsbuildinfo
 # docs
 docs/.vitepress/cache
 docs/.vitepress/dist
-.yalc
-yalc.lock
-docs/.yalc
-docs/yalc.lock

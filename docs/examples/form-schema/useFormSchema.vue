@@ -1,33 +1,27 @@
 <script setup lang="ts">
 import { defineFormSchema, useFormSchema } from 'e-plus-ui';
-import { h, ref } from 'vue';
 import { ElInput } from 'element-plus';
-interface FormModel {
+import { h, ref } from 'vue';
+type FormModel = {
   name: string;
   cascade: string;
   render: string;
   test: string;
-}
+};
 const formModel = ref({
   name: '哈哈哈哈',
   cascade: '',
   render: '',
-  test: '',
+  test: ''
 });
-const {
-  registry,
-  getFieldsValues,
-  validate,
-  setFieldsValues,
-  appendFields,
-  deleteField,
-} = useFormSchema();
+const { registry, getFieldsValues, validate, setFieldsValues, appendFields, deleteField } =
+  useFormSchema();
 /**
  * 设置表单值
  */
 const handleSet = () => {
   setFieldsValues({
-    test: '新增',
+    test: '新增'
   });
 };
 /**
@@ -42,7 +36,7 @@ const handleAdd = (to: boolean | keyof FormModel) => {
       prop: 'test',
       label: '新增',
       type: 'input',
-      rules: true,
+      rules: true
     },
     to
   );
@@ -70,9 +64,9 @@ const formSchema = defineFormSchema<FormModel>({
         slots: {
           prepend: () => [h('div', 'https://')],
           append: () => [h('div', 'https://')],
-          prefix: () => [h('div', 'https://')],
-        },
-      },
+          prefix: () => [h('div', 'https://')]
+        }
+      }
     },
     {
       type: 'input',
@@ -83,9 +77,9 @@ const formSchema = defineFormSchema<FormModel>({
           modelValue: model.value[item.prop],
           'onUpdate:modelValue': (val: any) => {
             model.value[item.prop] = val;
-          },
+          }
         });
-      },
+      }
     },
     {
       type: 'cascade',
@@ -105,21 +99,21 @@ const formSchema = defineFormSchema<FormModel>({
                 children: [
                   {
                     value: 'consistency',
-                    label: 'Consistency',
+                    label: 'Consistency'
                   },
                   {
                     value: 'feedback',
-                    label: 'Feedback',
+                    label: 'Feedback'
                   },
                   {
                     value: 'efficiency',
-                    label: 'Efficiency',
+                    label: 'Efficiency'
                   },
                   {
                     value: 'controllability',
-                    label: 'Controllability',
-                  },
-                ],
+                    label: 'Controllability'
+                  }
+                ]
               },
               {
                 value: 'navigation',
@@ -127,20 +121,20 @@ const formSchema = defineFormSchema<FormModel>({
                 children: [
                   {
                     value: 'side nav',
-                    label: 'Side Navigation',
+                    label: 'Side Navigation'
                   },
                   {
                     value: 'top nav',
-                    label: 'Top Navigation',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
+                    label: 'Top Navigation'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 });
 </script>
 
@@ -152,21 +146,12 @@ const formSchema = defineFormSchema<FormModel>({
         <el-button @click="handleSet">设置值</el-button>
         <el-button @click="handleAdd(true)">添加表单</el-button>
         <el-button @click="handleAdd(false)">添加表单到第一个位置</el-button>
-        <el-button @click="handleAdd('name')"
-        >添加表单到name之后位置</el-button
-        >
+        <el-button @click="handleAdd('name')">添加表单到name之后位置</el-button>
         <el-button @click="handleDeleteField">删除cascade项</el-button>
       </div>
-      <ep-form-schema
-        @registry="registry"
-        :config="formSchema"
-        :model="formModel"
-      >
-      </ep-form-schema>
+      <ep-form-schema :config="formSchema" :model="formModel" @registry="registry" />
     </div>
   </ep-card>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
