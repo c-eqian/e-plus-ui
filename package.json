@@ -68,7 +68,6 @@
     "commitlint-config-cz": "^0.13.3",
     "compare-func": "^2.0.0",
     "consola": "^3.2.3",
-    "cz-customizable": "^7.3.0",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
     "husky": "^9.1.7",
@@ -86,11 +85,6 @@
   "sideEffects": [
     "**/*.css"
   ],
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-customizable"
-    }
-  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
