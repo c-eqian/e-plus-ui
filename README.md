@@ -1,7 +1,8 @@
 # 版本
 ![NPM dev or peer Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/peer/vue)
-![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/co-utils-vue)
-![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/element-plus)
+![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/%40eqian%2Futils-vue)
+![NPM dev or peer Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/peer/element-plus)
+
 
 
 # 介绍
