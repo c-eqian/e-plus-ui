@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp --require ../node_modules/@esbuild-kit/cjs-loader -f gulpfile.ts",
-    "release": "gulp --require ../node_modules/@esbuild-kit/cjs-loader -f publish-task.ts",
+    "start": "node --require tsx/cjs ../node_modules/gulp-cli/bin/gulp.js -f gulpfile.ts",
+    "release": "node --require tsx/cjs ../node_modules/gulp-cli/bin/gulp.js -f publish-task.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,7 +14,6 @@
   },
   "private": true,
   "devDependencies": {
-    "@esbuild-kit/cjs-loader": "^2.4.4",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@types/gulp": "^4.0.17",
