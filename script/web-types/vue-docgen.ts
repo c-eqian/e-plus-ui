@@ -61,47 +61,49 @@ export async function generateDocWebTypes() {
     };
     return baseContent;
   }
-  const docContent = content.map(doc => {
-    let description = doc.description?.trim() ?? '';
-    doc.docsBlocks?.forEach((block: string) => {
-      description += block;
-    });
-    chalkLog.success(
-      `[${chalk.blue(doc.name ?? doc.displayName)}]  ${chalk.green('generate success')}`
-    );
-    return {
-      tags: [
-        {
-          name: doc.name ?? doc.displayName,
-          description,
-          attributes: doc.props?.map(prop => {
-            return {
-              name: prop.name,
-              required: prop.required,
-              description: prop.description,
-              value: {
-                kind: 'expression',
-                type: prop.type ? handleMultiTypes(prop.type) : 'any'
-              },
-              default: prop.defaultValue?.value
-            };
-          }),
-          events: doc.events?.map(event => ({
-            name: event.name,
-            description: event.description
-          })),
-          slots: doc.slots?.map(slot => ({
-            name: slot.name,
-            description: slot.description
-          })),
-          source: {
-            // module: ensureRelative(path.relative(config.cwd, absolutePath)),
-            symbol: doc.name ?? doc.displayName
+  const docContent = content
+    .filter(doc => (doc.name || doc.displayName).startsWith('Ep'))
+    .map(doc => {
+      let description = doc.description?.trim() ?? '';
+      doc.docsBlocks?.forEach((block: string) => {
+        description += block;
+      });
+      chalkLog.success(
+        `[${chalk.blue(doc.name ?? doc.displayName)}]  ${chalk.green('generate success')}`
+      );
+      return {
+        tags: [
+          {
+            name: doc.name ?? doc.displayName,
+            description,
+            attributes: doc.props?.map(prop => {
+              return {
+                name: prop.name,
+                required: prop.required,
+                description: prop.description,
+                value: {
+                  kind: 'expression',
+                  type: prop.type ? handleMultiTypes(prop.type) : 'any'
+                },
+                default: prop.defaultValue?.value
+              };
+            }),
+            events: doc.events?.map(event => ({
+              name: event.name,
+              description: event.description
+            })),
+            slots: doc.slots?.map(slot => ({
+              name: slot.name,
+              description: slot.description
+            })),
+            source: {
+              // module: ensureRelative(path.relative(config.cwd, absolutePath)),
+              symbol: doc.name ?? doc.displayName
+            }
           }
-        }
-      ]
-    };
-  });
+        ]
+      };
+    });
   const baseContent = await genBaseContent();
   baseContent.contributions.html = {
     'description-markup': 'markdown',
