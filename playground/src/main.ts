@@ -5,4 +5,5 @@ import App from './App.vue';
 import './style.css';
 import '@e-plus-ui/styles/index.scss';
 import 'element-plus/theme-chalk/index.css';
+import '@e-plus-ui/tailwind-config/tailwind.css';
 createApp(App).use(ElementPlus).use(installer).mount('#app');

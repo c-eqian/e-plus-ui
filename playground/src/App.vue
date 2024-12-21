@@ -1,27 +1,9 @@
 <script setup lang="ts">
-// import { EpLine } from '@e-plus-ui/pure';
-import { ref } from 'vue';
-const loading = ref(true);
-const handleSwitch = () => {
-  loading.value = !loading.value;
-};
+import EpAuthPage from './components/auth-page/AuthPage.vue';
 </script>
 
 <template>
-  <div class="cz-w-[500px]">
-    <ep-card title="loading">
-      <ep-button @click="handleSwitch">切换</ep-button>
-      <ep-slide-loading :loading />
-    </ep-card>
-    <ep-card title="diamond-loading">
-      <template #body>
-        <ep-diamond-loading :size="40" />
-      </template>
-    </ep-card>
-    <ep-card title="letter-loading">
-      <ep-letter-loading />
-    </ep-card>
-  </div>
+  <EpAuthPage />
 </template>
 
 <style scoped>
