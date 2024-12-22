@@ -57,7 +57,7 @@ export type ComponentTypeProps = {
 /**
  * 使用映射类型创建一个新类型，该类型将每个组件类型映射到其对应的属性类型
  */
-export type ComponentPropsByType<P = any> = P extends keyof ComponentTypeProps
+export type ComponentPropsByType<P> = P extends keyof ComponentTypeProps
   ? ComponentTypeProps[P]
   : Record<string, any>;
 export type ComponentSlots = {
@@ -118,26 +118,7 @@ export type GroupOptionsApi = {
 /**
  * el-基础控件
  */
-export type FormSchemaType =
-  | 'input-number'
-  | 'input'
-  | 'select'
-  | 'autocomplete'
-  | 'switch'
-  | 'rate'
-  | 'radio'
-  | 'divider'
-  | 'slider'
-  | 'checkbox'
-  | 'time-picker'
-  | 'date-picker'
-  | 'time-select'
-  | 'tree-select'
-  | 'checkbox-group'
-  | 'radio-group'
-  | 'radio-button-group'
-  | 'select-group'
-  | 'cascade';
+export type FormSchemaType = ('radio-button-group' | 'select-group') | keyof ComponentTypeProps;
 
 /**
  * 扩展组件参数
@@ -226,9 +207,7 @@ export type FormItemsSchema<T = any> = {
    */
   componentProps?: Partial<ComponentSlots> &
     ExtraProps<T, FormItemsSchema<T>> &
-    ComponentPropsByType<
-      FormItemsSchema['type'] extends FormSchemaType ? FormItemsSchema['type'] : string
-    >;
+    ComponentPropsByType<FormItemsSchema['type']>;
 };
 
 /**
