@@ -1,3 +1,4 @@
+import type { FormSchema } from '@e-plus-ui/element';
 export type AuthPageProps = {
   /**
    * 登录标题，如果为`false`或者为空则不显示
@@ -13,7 +14,7 @@ export type AuthPageProps = {
    * 是否使用注册
    * @default false
    */
-  useRegistry: boolean;
+  useRegistry?: boolean;
   /**
    * 是否使用用户协议
    */
@@ -42,4 +43,20 @@ export type AuthPageProps = {
    * 背景图片
    */
   bgUrl?: string;
+  /**
+   * 表单配置，如果没有，则使用默认
+   */
+  formSchema?: FormSchema | (() => FormSchema);
+};
+
+/**
+ * events事件
+ */
+export type AuthEmits = {
+  /**
+   * 提交
+   * @param e
+   * @param data 如果有自定义`form-schema`插槽，值将会是`null`
+   */
+  (e: 'confirm', data: any): void;
 };
