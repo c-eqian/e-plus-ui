@@ -157,10 +157,8 @@ export default defineComponent({
       }
       return true;
     };
-    const createRow = () => {
-      const isSearch = !!this.formProps.isSearch;
-      const renderNodes: VNode[] = [];
-      const formItemsRender = h(ElRow, null, () => {
+    const createItemRender = (isSearch: boolean) => {
+      return h(ElRow, null, () => {
         const columns = this.formProps.columns;
         return this.renderItems.map((item: FormItemsSchema) => {
           return renderDynamicShow(item)
@@ -179,31 +177,46 @@ export default defineComponent({
             : undefined;
         });
       });
+    };
+    const createRenderFilter = () => {
+      return h(
+        FilterButtons,
+        {
+          needToggle: this.needToggle,
+          onSearch: () => this.emit('search', this.getFieldsValues()),
+          onReset: () => {
+            this.resetFieldsValues();
+            this.formModel = this.createModel();
+            this.emit('reset', this.formModel);
+          },
+          onToggle: (v: boolean) => {
+            this.updateSearchSchema(v);
+          }
+        },
+        {
+          ...this.$slots
+        }
+      );
+    };
+    const createRow = () => {
+      const isSearch = !!this.formProps.isSearch;
+      const inline = !!this.formProps.inline;
+      const renderNodes: VNode[] = [];
+      const formItemsRender = createItemRender(isSearch);
+      if (isSearch && inline) {
+        return (
+          <div class={'cz-flex cz-w-full'}>
+            <div class={'cz-flex-1'}>{formItemsRender}</div>
+            {createRenderFilter()}
+          </div>
+        );
+      }
       renderNodes.push(formItemsRender);
       // 处理查询
       if (isSearch) {
         const row = (
           <ElRow>
-            <ElCol class={'!cz-flex cz-justify-end cz-w-100%'}>
-              {h(
-                FilterButtons,
-                {
-                  needToggle: this.needToggle,
-                  onSearch: () => this.emit('search', this.getFieldsValues()),
-                  onReset: () => {
-                    this.resetFieldsValues();
-                    this.formModel = this.createModel();
-                    this.emit('reset', this.formModel);
-                  },
-                  onToggle: (v: boolean) => {
-                    this.updateSearchSchema(v);
-                  }
-                },
-                {
-                  ...this.$slots
-                }
-              )}
-            </ElCol>
+            <ElCol class={'!cz-flex cz-justify-end cz-w-100%'}>{createRenderFilter()}</ElCol>
           </ElRow>
         );
         renderNodes.push(row);

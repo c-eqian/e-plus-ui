@@ -226,6 +226,11 @@ export type FormSchema<T = any> = {
    */
   columns?: number;
   /**
+   * 搜索按钮是否与搜索框在同一行
+   * @default false
+   */
+  inline?: boolean;
+  /**
    * 表单项配置
    */
   items: FormItemsSchema<T>[];

@@ -3,12 +3,7 @@ import type { Config } from 'tailwindcss';
 
 export const DEFAULT_CONFIG = {
   prefix: 'cz-',
-  content: [
-    '**/*.{js,ts,jsx,tsx,vue}',
-    '**/*.{js,ts,jsx,tsx,vue}',
-    '**/*/index.html',
-    '!**/node_modules/**'
-  ],
+  content: ['**/*.{js,ts,jsx,tsx,vue}', '**/*/index.html', '!**/node_modules/**'],
   // 3.4
   darkMode: ['class', '[class="dark"]'],
   theme: {
