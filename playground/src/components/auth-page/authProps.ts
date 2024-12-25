@@ -55,5 +55,6 @@ export const authProps = {
   forgetPasswordText: '找回密码',
   rememberText: '记住密码',
   useRemember: true,
+  offsetR: '230px',
   formSchema: () => FORM_CONFIG
 } satisfies AuthPageProps;

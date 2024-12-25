@@ -40,6 +40,16 @@ export type AuthPageProps = {
    */
   forgetPasswordText?: string;
   /**
+   * 是否居中,如果`true`， offsetR自动为`50%`
+   * @default false
+   */
+  center?: boolean;
+  /**
+   * 距离右边偏移量
+   * @default 230px
+   */
+  offsetR?: string | number;
+  /**
    * 背景图片
    */
   bgUrl?: string;
@@ -49,6 +59,12 @@ export type AuthPageProps = {
   formSchema?: FormSchema | (() => FormSchema);
 };
 
+export type AuthPageConfig = {
+  /**
+   * 参数配置
+   */
+  config?: AuthPageProps;
+};
 /**
  * events事件
  */

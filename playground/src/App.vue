@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import EpAuthPage from './components/auth-page/AuthPage.vue';
+const bgUrl = new URL('./assets/login-page-bg.svg', import.meta.url).href;
 </script>
 
 <template>
-  <EpAuthPage />
+  <EpAuthPage :config="{ bgUrl, offsetR: '200' }" />
 </template>
 
 <style scoped>
