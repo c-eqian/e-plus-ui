@@ -1,4 +1,5 @@
 import { Lock, User } from '@element-plus/icons-vue';
+import { markRaw } from 'vue';
 import { defineFormSchema } from '../../form-schema';
 import type { AuthPageProps } from './type';
 
@@ -18,7 +19,7 @@ export const FORM_CONFIG = defineFormSchema({
         }
       ],
       componentProps: {
-        prefixIcon: User
+        prefixIcon: markRaw(User)
       }
     },
     {
@@ -29,7 +30,7 @@ export const FORM_CONFIG = defineFormSchema({
       componentProps: {
         type: 'password',
         showPassword: true,
-        prefixIcon: Lock
+        prefixIcon: markRaw(Lock)
       },
       rules: [
         {
