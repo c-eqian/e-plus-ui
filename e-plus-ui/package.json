@@ -1,6 +1,6 @@
 {
   "name": "e-plus-ui",
-  "version": "1.6.0-beta.2",
+  "version": "1.6.0-beta.3",
   "author": "Eqian",
   "license": "MIT",
   "description": "一个基于element-plus的封装组件库，高效、简单",
@@ -56,17 +56,15 @@
     ]
   },
   "peerDependencies": {
-    "@element-plus/icons-vue": ">=2.3.1",
     "element-plus": ">=2.7.6",
-    "vue": ">=3.3.0",
-    "@eqian/utils-vue": ">=3.1.0"
+    "vue": ">=3.3.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@e-plus-ui/icons": "^1.3.0",
-    "@eqian/utils-vue": "^3.1.2"
+    "@e-plus-ui/icons": "^1.3.1",
+    "@eqian/utils-vue": "^3.1.0"
   },
   "browserslist": [
     "current node",

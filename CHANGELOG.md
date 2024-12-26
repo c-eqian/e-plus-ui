@@ -1,6 +1,18 @@
 # 更新日志 
 
 
+## [1.6.0-beta.3](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.2...v1.6.0-beta.3) (2024-12-26)
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* 删除@element-plus/icons-vue图标库 ([7b0a962](https://github.com/c-eqian/e-plus-ui/commit/7b0a962d39031797b4ccbc07bd1d0cba8f7ee1ac))
+
+
+### ♻️ Code Refactoring | 代码重构
+
+* 前缀由cz-统一为ep- ([14ba8db](https://github.com/c-eqian/e-plus-ui/commit/14ba8dbf5cefbec29f984ec31480412d22a69e80))
+
 ## [1.6.0-beta.2](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.1...v1.6.0-beta.2) (2024-12-26)
 
 
