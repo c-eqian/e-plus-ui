@@ -4,6 +4,7 @@ import { tailwindConfig } from '@e-plus-ui/tailwind-config';
 import chalk from 'chalk';
 import consola from 'consola';
 import cssnano from 'cssnano';
+import { readFile, writeFile } from 'fs-extra';
 import { dest, src } from 'gulp';
 import autoprefixer from 'gulp-autoprefixer';
 import gulpSass from 'gulp-sass';
@@ -88,14 +89,15 @@ const buildTailwindCss = async () => {
       .pipe(dest(path.resolve(outEsDir, 'tailwind-config')))
       .pipe(dest(path.resolve(outLibDir, 'tailwind-config')))
       .pipe(dest(path.resolve(outStylesPath, 'tailwind')))
-      .pipe(dest(path.resolve(styleCssPath, 'tailwind')))
       .on('end', resolve);
   });
 };
 export const buildStyles = async () => {
   await buildTailwindCss();
+  const data = await readFile(path.resolve(outStylesPath, 'tailwind', 'tailwind.css'));
+  await writeFile(path.resolve(styleCssPath, 'tailwind', 'tailwind.scss'), data, 'utf-8');
   await buildGlobalVarsSCss();
-  // await remove(path.resolve(styleCssPath, 'tailwind'));
+  await writeFile(path.resolve(styleCssPath, 'tailwind', 'tailwind.scss'), '', 'utf-8');
 };
 
 // export { buildGlobalVarsSCss, buildTailwindCss };

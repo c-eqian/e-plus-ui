@@ -65,7 +65,10 @@ export const rollupReplaceExport = (): RollupPlugin => {
         const relative = path
           .relative(normalizedTargetFilePath, normalizedPackagesPath)
           .replace(/\\/g, '/');
-        const code = _code.replaceAll(PREFIX_PACKAGE_NAME, relative === '' ? '.' : relative);
+        const code = _code
+          .replaceAll('@e-plus-ui/icons', '@copy-plus-ui/icons')
+          .replaceAll(PREFIX_PACKAGE_NAME, relative === '' ? '.' : relative)
+          .replaceAll('@copy-plus-ui/icons', '@e-plus-ui/icons');
         const magicString = new MagicString(code);
         return {
           code,
