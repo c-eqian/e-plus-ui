@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import fs from 'fs-extra';
-import { projectRoot, rootPackage } from './paths';
+import { buildEnterPackage, projectRoot, rootPackage } from './paths';
 import type { OutputOptions, RollupBuild } from 'rollup';
 export const excludeFiles = (files: string[]) => {
   const excludes = ['node_modules'];
@@ -32,7 +32,7 @@ export const getPackageDependencies = (pkgPath: string) => {
   };
 };
 export const generateExternal = (options: { full: boolean }) => {
-  const { dependencies, peerDependencies } = getPackageDependencies(rootPackage);
+  const { dependencies, peerDependencies } = getPackageDependencies(buildEnterPackage);
   return (id: string) => {
     const packages: string[] = [...peerDependencies];
     if (!options.full) {

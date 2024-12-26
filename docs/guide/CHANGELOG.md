@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+## [1.6.0-beta.2](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.1...v1.6.0-beta.2) (2024-12-26)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修复using `shallowRef` instead of `ref`警告 ([28da623](https://github.com/c-eqian/e-plus-ui/commit/28da62306b716fb5607a35b82a1448a9ac6e5d13))
+
 ## [1.6.0-beta.1](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.0...v1.6.0-beta.1) (2024-12-26)
 
 ## [1.6.0-beta.0](https://github.com/c-eqian/e-plus-ui/compare/v1.5.7...v1.6.0-beta.0) (2024-12-26)

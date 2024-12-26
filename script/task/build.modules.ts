@@ -9,12 +9,11 @@ import esbuild from 'rollup-plugin-esbuild';
 import { packagesPath, PREFIX_NAME } from '../paths';
 // import { viteAlias } from '../plugins';
 import postcss from 'rollup-plugin-postcss';
-import { rollupReplaceExport } from '../plugins';
 import { excludeFiles, generateExternal, writeBundles } from '../utils';
 import { buildConfig } from './build.config';
 const rollupPlugins: any[] = [
   // viteAlias(),
-  rollupReplaceExport(),
+  // rollupReplaceExport(),
   vue({
     isProduction: true,
     template: {

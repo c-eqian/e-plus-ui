@@ -17,6 +17,7 @@ export const outStylesPath = resolve(outDir, 'styles');
 // 组件包路径
 export const packagesPath = resolve(projectRoot, 'packages');
 export const buildEnterPath = resolve(packagesPath, PREFIX_NAME);
+export const buildEnterPackage = resolve(buildEnterPath, 'package.json');
 
 // element-plus组件目录
 export const ePlusPath = resolve(packagesPath, 'element');
