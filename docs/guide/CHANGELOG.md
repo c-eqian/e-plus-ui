@@ -1,6 +1,8 @@
 # 更新日志 
 
 
+## [1.6.0-beta.1](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.0...v1.6.0-beta.1) (2024-12-26)
+
 ## [1.6.0-beta.0](https://github.com/c-eqian/e-plus-ui/compare/v1.5.7...v1.6.0-beta.0) (2024-12-26)
 
 
