@@ -1,7 +1,6 @@
-import { withInstall, type SFCWithInstall } from '@e-plus-ui/utils';
 import Menu from './src/Menu';
 import type { MenuProps } from './src/type';
-export const EpMenu: SFCWithInstall<typeof Menu> = withInstall(Menu);
+export const EpMenu: typeof Menu = Menu;
 export * from './src/type';
 /**
  * 定义方法

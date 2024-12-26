@@ -1,4 +1,3 @@
-import { withInstall, type SFCWithInstall } from '@e-plus-ui/utils';
 import Editor from './src/Editor.vue';
-export const EpEditor: SFCWithInstall<typeof Editor> = withInstall(Editor);
+export const EpEditor: typeof Editor = Editor;
 export * from './src/type';

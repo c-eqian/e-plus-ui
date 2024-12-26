@@ -1,3 +1,4 @@
+import { withInstall } from '@e-plus-ui/utils';
 import * as _pureComponents from './components';
 import type { App } from 'vue';
 export * from './components';
@@ -7,7 +8,8 @@ const pureInstall = (app: App, options?: any): void => {
   (app as any)[__PU_INSTALLED_KEY__] = true;
   for (const key of Object.keys(_pureComponents)) {
     if (!key && !key.startsWith('Ep')) continue;
-    app.use((_pureComponents as any)[key], options);
+    const installComponent = withInstall((_pureComponents as any)[key]);
+    app.use(installComponent, options);
   }
 };
 export { pureInstall };

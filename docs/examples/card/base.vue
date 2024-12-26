@@ -1,7 +1,5 @@
 <script setup lang="ts"></script>
 
-<script setup lang="ts"></script>
-
 <template>
   <div class="cz-h-full">
     <ep-card title="标题">

@@ -11,8 +11,10 @@
     "noImplicitAny": true,
     "skipLibCheck": true,
     "jsx": "preserve",
+    "baseUrl": ".",
+    "types": ["../types/global"],
     "paths": {
-      "e-plus-ui*": ["../packages/*"]
+      "e-plus-ui": ["../packages/e-plu-ui"]
     }
   }
 }

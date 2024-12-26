@@ -1,3 +1,4 @@
+import { withInstall } from '@e-plus-ui/utils';
 import * as _elementComponents from './components';
 import type { App } from 'vue';
 export * from './components';
@@ -8,7 +9,8 @@ const elementInstall = (app: App, options?: any): void => {
   (app as any)[__EP_INSTALLED_KEY__] = true;
   for (const key of Object.keys(_elementComponents)) {
     if (!key && !key.startsWith('Ep')) continue;
-    app.use((_elementComponents as any)[key], options);
+    const installComponent = withInstall((_elementComponents as any)[key]);
+    app.use(installComponent, options);
   }
 };
 export { elementInstall };
