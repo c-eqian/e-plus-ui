@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ElButton } from 'element-plus';
+import { ArrowDown, ArrowUp } from '@e-plus-ui/icons';
+import { ElButton, ElIcon } from 'element-plus';
 import { computed, ref } from 'vue';
 const emits = defineEmits(['search', 'reset', 'toggle']);
 defineOptions({

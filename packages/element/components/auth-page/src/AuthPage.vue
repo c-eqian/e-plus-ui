@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EpFormSchema, useFormSchema } from '@e-plus-ui/element';
+import { EpFormSchema, useFormSchema } from '@e-plus-ui/element/components/form-schema';
 import { pixelUnits } from '@e-plus-ui/utils';
 import { isFunction } from '@eqian/utils-vue';
 import { computed, useSlots } from 'vue';

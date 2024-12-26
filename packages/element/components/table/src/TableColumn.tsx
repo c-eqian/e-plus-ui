@@ -1,4 +1,4 @@
-import { EpCopyText } from '@e-plus-ui/element';
+import { EpCopyText } from '@e-plus-ui/element/components/copy-text';
 import { isFunction, useFormatDate, useLabelByVal, useOmit, usePick } from '@eqian/utils-vue';
 import { ElButton, ElFormItem, ElTableColumn, ElTag } from 'element-plus';
 

@@ -1,7 +1,7 @@
-import { EpPagination, type OperationType } from '@e-plus-ui/element';
+import { EpPagination } from '@e-plus-ui/element/components/pagination';
 import { isEmpty } from '@eqian/utils-vue';
-
 import { ElForm, ElRadio, ElTable, ElTableColumn, type FormValidateCallback } from 'element-plus';
+
 import {
   computed,
   defineComponent,
@@ -17,8 +17,8 @@ import {
 } from 'vue';
 import { useColumns } from './hooks/useColumns';
 import AdvTableColumn from './TableColumn';
+import type { OperationType, TableColumnConfig } from './type';
 
-import type { TableColumnConfig } from './type';
 // import './style.scss';
 type FormInstance = InstanceType<typeof ElForm>;
 
