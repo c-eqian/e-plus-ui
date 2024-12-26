@@ -82,9 +82,8 @@ export async function createType(componentName, path) {
  */
 export async function createEnter(componentName, exportName, path, framework) {
   const code = `
-    import { withInstall, type SFCWithInstall } from '@e-plus-ui/utils';
     import ${componentName} from './src/${componentName}${framework === 'tsx' ? '' : `.${framework}`}';
-    export const ${exportName}: SFCWithInstall<typeof ${componentName}> = withInstall(${componentName});
+    export const ${exportName}: typeof ${componentName} = ${componentName};
     export * from './src/type';
     `;
   await ensureDir(dirname(path));
