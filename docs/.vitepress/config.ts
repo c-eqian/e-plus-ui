@@ -59,6 +59,11 @@ export default defineConfig({
           items: generateSidebar('senior')
         },
         {
+          text: '组件模板',
+          link: '',
+          items: generateSidebar('template')
+        },
+        {
           text: 'hooks',
           link: '',
           items: generateSidebar('hooks')

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EpAuthPage from './components/auth-page/AuthPage.vue';
+import { EpAuthPage } from '@e-plus-ui/element';
 const bgUrl = new URL('./assets/login-page-bg.svg', import.meta.url).href;
 </script>
 

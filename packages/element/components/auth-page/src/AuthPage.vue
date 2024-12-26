@@ -94,28 +94,3 @@ const handleConfirm = async () => {
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.cz-auth-container {
-  background-size: cover;
-  background: var(--auth-bg-image) no-repeat fixed center center;
-  .cz-auth-login {
-    &--title {
-      position: relative;
-      width: fit-content;
-      &:before {
-        position: absolute;
-        content: '';
-        width: 50%;
-        left: 0;
-        height: 5px;
-        bottom: -5px;
-        background-color: #116ee7;
-      }
-    }
-  }
-  .cz-service-agreement--text {
-    color: #3c93ff;
-  }
-}
-</style>

@@ -15,3 +15,5 @@ export * from './components/form-schema';
 export * from './components/comment-layout';
 
 export * from './components/comment';
+
+export * from './components/auth-page';

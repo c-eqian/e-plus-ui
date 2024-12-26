@@ -21,6 +21,7 @@ declare module 'vue' {
         EpCommentLayout: typeof import('@e-plus-ui/element/components')['EpCommentLayout'];
         EpComment: typeof import('@e-plus-ui/element/components')['EpComment'];
         EpCard: typeof import('@e-plus-ui/pure/components')['EpCard'];
+        EpAuthPage: typeof import('@e-plus-ui/element/components')['EpAuthPage'];
     }
 }
 
