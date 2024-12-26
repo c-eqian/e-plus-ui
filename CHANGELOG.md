@@ -1,6 +1,35 @@
 # 更新日志 
 
 
+## [1.6.0-beta.0](https://github.com/c-eqian/e-plus-ui/compare/v1.5.7...v1.6.0-beta.0) (2024-12-26)
+
+
+### ♻️ Code Refactoring | 代码重构
+
+* **all:** 重构组件；使用pnpm monorepo 管理 ([6b5ceb0](https://github.com/c-eqian/e-plus-ui/commit/6b5ceb07c3f31e15baf10b4d09820dabe16ffa4c))
+* **all:** 重构组件；使用pnpm monorepo 管理 ([96772ec](https://github.com/c-eqian/e-plus-ui/commit/96772ec1ea26559cf04e4bb891a5fd24495db85b))
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* 优化模块导出，增强组件类型提示 ([864731f](https://github.com/c-eqian/e-plus-ui/commit/864731fc1ca907daf2ef973faffccf46034ed43e))
+* **form-schema:** 优化使用组件类型参数提示 ([21d3600](https://github.com/c-eqian/e-plus-ui/commit/21d3600bbe3d4aa82c0c02ec947ff46e590f6923))
+
+
+### ✨ Features | 新功能
+
+* 添加auth登录模板 ([a546efe](https://github.com/c-eqian/e-plus-ui/commit/a546efe5d623e7cc5dc719f02aac94f743e06fc1))
+* **form-schema:** 支持在搜索模式下搜索按钮与表单在同一行 ([20c5648](https://github.com/c-eqian/e-plus-ui/commit/20c5648e33267aa4f6c311a4842ea05777c7ba2a))
+
+
+### ✏️ Documentation | 文档
+
+* 取消button文档 ([1c1398e](https://github.com/c-eqian/e-plus-ui/commit/1c1398e2620f5c4e410323e95897a1dd6eb3354f))
+* 修改路径 ([bfd63e0](https://github.com/c-eqian/e-plus-ui/commit/bfd63e006368070eb30b4fb8fa0751309eb100eb))
+* 修改文档说明 ([4d0e6ec](https://github.com/c-eqian/e-plus-ui/commit/4d0e6ec61c8e0b4391eb42f0779976480df7d275))
+* 修改文档说明 ([f6c0649](https://github.com/c-eqian/e-plus-ui/commit/f6c0649125c955e56337dae4d1c93242100a9b5d))
+* 修改文档说明 ([0c5af7b](https://github.com/c-eqian/e-plus-ui/commit/0c5af7b5e134149724edc25e6301f7d8aa8a5296))
+
 ### [1.5.7](https://github.com/c-eqian/e-plus-ui/compare/v1.5.6...v1.5.7) (2024-11-28)
 
 

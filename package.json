@@ -1,7 +1,7 @@
 {
   "name": "plus-ui",
   "private": true,
-  "version": "1.5.7",
+  "version": "1.6.0-beta.0",
   "type": "module",
   "scripts": {
     "dev": "pnpm -C playground dev",
@@ -21,6 +21,7 @@
     "lint:fix": "eslint --cache --fix",
     "lint": "eslint --ext .ts,.js,.jsx,.vue .",
     "version": "standard-version",
+    "beta": "pnpm run version --prerelease beta && pnpm run -C script release",
     "release": "pnpm run version && pnpm run -C script release",
     "prepare": "husky",
     "commit": "git add . && git-cz && git push"
