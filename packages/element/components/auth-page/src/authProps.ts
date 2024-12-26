@@ -1,4 +1,4 @@
-import { Lock, User } from '@element-plus/icons-vue';
+import { Lock, User } from '@e-plus-ui/icons';
 import { markRaw } from 'vue';
 import { defineFormSchema } from '../../form-schema';
 import type { AuthPageProps } from './type';

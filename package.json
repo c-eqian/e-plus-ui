@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@e-plus-ui/element": "workspace:*",
-    "@e-plus-ui/icons": "^1.3.0",
+    "@e-plus-ui/icons": "^1.3.1",
     "@e-plus-ui/pure": "workspace:*",
     "@e-plus-ui/styles": "workspace:*",
     "@e-plus-ui/tailwind-config": "workspace:*",

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { ArrowLeft, ArrowRight } from '@e-plus-ui/icons';
 import { pixelUnits } from '@e-plus-ui/utils';
-import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue';
 import { ElIcon, ElScrollbar } from 'element-plus';
 import { computed, inject, ref, unref, type ComputedRef } from 'vue';
 import EpMenu from '../../../menu/src/Menu';

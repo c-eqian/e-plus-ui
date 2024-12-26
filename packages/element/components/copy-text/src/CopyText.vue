@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CopyDocument } from '@element-plus/icons-vue';
+import { CopyDocument } from '@e-plus-ui/icons';
 import { ElIcon, ElMessage } from 'element-plus';
 import { computed, nextTick, onMounted, onUnmounted, onUpdated, ref } from 'vue';
 import type { ICopyTextProps } from './type';

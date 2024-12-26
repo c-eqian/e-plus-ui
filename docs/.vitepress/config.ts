@@ -26,7 +26,7 @@ export default defineConfig({
       },
       {
         text: '组件',
-        link: '/components/base/button'
+        link: '/components/base/card'
       },
       {
         text: 'API',

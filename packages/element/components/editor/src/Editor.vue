@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import { Position } from '@e-plus-ui/icons';
 import { EpImage } from '@e-plus-ui/pure';
-import { Position } from '@element-plus/icons-vue';
 import { ElButton, ElPopover } from 'element-plus';
 import { nextTick, onBeforeUnmount, ref, watchEffect } from 'vue';
 import type { EditorProps, EmojiData } from './type';
