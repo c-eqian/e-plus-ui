@@ -10,7 +10,7 @@
 
 <style scoped lang="scss">
 .demo-mr {
-  .cz-button {
+  .ep-button {
     margin-right: 10px;
   }
 }

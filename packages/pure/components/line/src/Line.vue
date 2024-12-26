@@ -33,22 +33,22 @@ const getPosition = computed(() => {
 });
 const varStyles = computed(() => {
   return {
-    '--cz-line-offset': getPosition.value,
-    '--cz-line-margin':
+    '--ep-line-offset': getPosition.value,
+    '--ep-line-margin':
       props.direction === 'horizontal'
         ? `${pixelUnits(props.margin)} 0`
         : `0 ${pixelUnits(props.margin)}`,
-    '--cz-line-border-width': pixelUnits(props.borderWidth),
-    '--cz-line-border-color': props.color || 'var(--global-neutral-color-5)'
+    '--ep-line-border-width': pixelUnits(props.borderWidth),
+    '--ep-line-border-color': props.color || 'var(--global-neutral-color-5)'
   };
 });
 const styleName = computed(() => {
   return {
-    'cz-line-text__right': props.position === 'right',
-    'cz-line-text__left': props.position === 'left',
-    'cz-line-text__offset': !!props.offset,
-    'cz-line-horizontal': props.direction === 'horizontal',
-    'cz-line-vertical': props.direction === 'vertical',
+    'ep-line-text__right': props.position === 'right',
+    'ep-line-text__left': props.position === 'left',
+    'ep-line-text__offset': !!props.offset,
+    'ep-line-horizontal': props.direction === 'horizontal',
+    'ep-line-vertical': props.direction === 'vertical',
     'is-dashed': props.dashed,
     'is-center': props.position === 'center' && !props.offset,
     'is-linear': (props.position === 'center' && props.linear) || (!hasText.value && props.linear)
@@ -58,8 +58,8 @@ const styleName = computed(() => {
 
 <template>
   <div :style="varStyles">
-    <div class="cz-line" :class="styleName">
-      <span :class="{ 'cz-line-text': hasText }">
+    <div class="ep-line" :class="styleName">
+      <span :class="{ 'ep-line-text': hasText }">
         <slot name="default" />
       </span>
     </div>

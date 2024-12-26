@@ -39,8 +39,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="cz-text-fold" :style="{ '--line-clamp-num': computedLine }">
-    <div ref="textFoldRef" class="cz-text-box" :class="{ 'over-hidden': currentIsFold }">
+  <div class="ep-text-fold" :style="{ '--line-clamp-num': computedLine }">
+    <div ref="textFoldRef" class="ep-text-box" :class="{ 'over-hidden': currentIsFold }">
       <div ref="textBoxRef">
         <el-button
           v-if="isMaxLine && computedIsFold && props.position === 'right'"
@@ -55,10 +55,10 @@ onUnmounted(() => {
         <slot />
       </div>
     </div>
-    <div class="cz-text__action cz-select-none">
+    <div class="ep-text__action ep-select-none">
       <div
         v-if="isMaxLine && computedIsFold && props.position === 'left'"
-        class="cz-text__btn"
+        class="ep-text__btn"
         @click="currentIsFold = !currentIsFold"
       >
         <slot name="expand" :is-fold="currentIsFold">

@@ -101,7 +101,7 @@ const column = defineTableColumns<(typeof tableData)[0]>([
 
 <template>
   <div class="play">
-    <div class="cz-w-full cz-h-full cz-bg-white cz-p-3">
+    <div class="ep-w-full ep-h-full ep-bg-white ep-p-3">
       <ep-adapt-page>
         <template #search>
           <Form />

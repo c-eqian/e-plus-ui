@@ -8,9 +8,9 @@ const handleSwitch = () => {
 </script>
 
 <template>
-  <div class="cz-space-y-3">
+  <div class="ep-space-y-3">
     <ep-card title="loading">
-      <ep-button @click="handleSwitch">切换</ep-button>
+      <el-button @click="handleSwitch">切换</el-button>
       <ep-slide-loading :loading />
     </ep-card>
     <ep-card title="diamond-loading">

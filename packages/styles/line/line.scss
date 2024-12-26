@@ -1,16 +1,16 @@
-.cz-line {
+.ep-line {
   &-horizontal{
     display: flex;
     align-items: center;
-    margin: var(--cz-line-margin);
+    margin: var(--ep-line-margin);
     width: 100%;
     &::before,
     &::after {
       position: relative;
-      width: var(--cz-line-offset);
-      border-bottom-width: var(--cz-line-border-width);
+      width: var(--ep-line-offset);
+      border-bottom-width: var(--ep-line-border-width);
       border-bottom-style: solid;
-      border-bottom-color: var(--cz-line-border-color);
+      border-bottom-color: var(--ep-line-border-color);
       /* 设置边框的平铺方式 */
       border-image-repeat: stretch;
       content: '';
@@ -21,10 +21,10 @@
     top: -.06em;
     display: inline-block;
     height: 1rem;
-    margin: var(--cz-line-margin);
+    margin: var(--ep-line-margin);
     vertical-align: middle;
     border-top: 0;
-    border-inline-start: var(--cz-line-border-width) solid var(--cz-line-border-color);
+    border-inline-start: var(--ep-line-border-width) solid var(--ep-line-border-color);
   }
   &-text {
     display: inline-block;
@@ -36,35 +36,35 @@
     &__left,
     &__offset {
       &::before {
-        width: var(--cz-line-offset);
+        width: var(--ep-line-offset);
       }
       &::after {
-        width: calc(100% - var(--cz-line-offset));
+        width: calc(100% - var(--ep-line-offset));
       }
     }
     &__right {
       &::before {
-        width: calc(100% - var(--cz-line-offset));
+        width: calc(100% - var(--ep-line-offset));
       }
       &::after {
-        width: var(--cz-line-offset);
+        width: var(--ep-line-offset);
       }
     }
   }
 }
-.cz-line.is-dashed {
+.ep-line.is-dashed {
   &::before,
   &::after {
     border-bottom-style: dashed !important;
   }
 }
-.cz-line.is-center.is-linear {
+.ep-line.is-center.is-linear {
   &::before{
     /* 使用border-image来应用渐变效果 */
-    border-image: linear-gradient(to right, transparent, var(--cz-line-border-color)) 30 30 round;
+    border-image: linear-gradient(to right, transparent, var(--ep-line-border-color)) 30 30 round;
   }
   &::after{
     /* 使用border-image来应用渐变效果 */
-    border-image: linear-gradient(to left, transparent, var(--cz-line-border-color)) 30 30 round;
+    border-image: linear-gradient(to left, transparent, var(--ep-line-border-color)) 30 30 round;
   }
 }

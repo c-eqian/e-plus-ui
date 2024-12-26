@@ -53,7 +53,7 @@ const formSchema = defineFormSchema<FormModel>({
 
 <template>
   <ep-card title="relation 关联组件" shadow="always">
-    <div class="cz-py-4">
+    <div class="ep-py-4">
       <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />
     </div>
   </ep-card>

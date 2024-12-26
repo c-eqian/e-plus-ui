@@ -74,7 +74,7 @@ const buildTailwindCss = async () => {
           tailwindcss({
             config: {
               ...tailwindConfig(),
-              prefix: 'cz-',
+              prefix: 'ep-',
               content: [
                 `${packagesPath}/**/*.{js,ts,jsx,tsx,vue}`,
                 `${packagesPath}/**/*.{js,ts,jsx,tsx,vue}`,

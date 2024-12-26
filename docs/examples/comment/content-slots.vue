@@ -108,9 +108,9 @@ const commentData: ICommentData = {
         {{ item.content }}
         <div
           v-if="isSubReply && !isEmpty(reply)"
-          class="cz-border cz-rounded-2xl cz-my-1 cz-text-[12px] cz-text-gray-600"
+          class="ep-border ep-rounded-2xl ep-my-1 ep-text-[12px] ep-text-gray-600"
         >
-          <div class="cz-p-2">{{ reply.content }}</div>
+          <div class="ep-p-2">{{ reply.content }}</div>
         </div>
       </div>
     </template>

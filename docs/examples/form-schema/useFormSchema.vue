@@ -140,8 +140,8 @@ const formSchema = defineFormSchema<FormModel>({
 
 <template>
   <ep-card title="表单">
-    <div class="cz-py-4">
-      <div class="cz-py-4">
+    <div class="ep-py-4">
+      <div class="ep-py-4">
         <el-button @click="handleGet">获取</el-button>
         <el-button @click="handleSet">设置值</el-button>
         <el-button @click="handleAdd(true)">添加表单</el-button>

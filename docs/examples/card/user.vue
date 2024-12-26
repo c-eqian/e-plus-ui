@@ -3,7 +3,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="cz-h-full">
+  <div class="ep-h-full">
     <ep-card
       title="李慕婉"
       description="云天宗"
@@ -16,7 +16,7 @@
 
 <style scoped lang="scss">
 .demo-mr {
-  .cz-button {
+  .ep-button {
     margin-right: 10px;
   }
 }

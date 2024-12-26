@@ -36,7 +36,7 @@ const commentData: ICommentData = {
 <template>
   <ep-comment :data="commentData">
     <template #right="{ item }">
-      <span class="cz-text-[12px]">{{ item.createDate }}</span>
+      <span class="ep-text-[12px]">{{ item.createDate }}</span>
     </template>
   </ep-comment>
 </template>

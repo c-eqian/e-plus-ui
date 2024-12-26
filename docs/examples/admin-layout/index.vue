@@ -36,7 +36,7 @@ const _config: Ref<AdminBasicProps> = ref({
     ]
   }),
   classNames: {
-    headerClass: 'cz-bg-[#cae1fe]'
+    headerClass: 'ep-bg-[#cae1fe]'
   }
 });
 const handleClick = (cmd: string) => {
@@ -53,7 +53,7 @@ const handleClick = (cmd: string) => {
         <adapt-layout />
       </template>
       <template #header>
-        <div class="cz-flex cz-justify-end cz-items-center cz-h-full">
+        <div class="ep-flex ep-justify-end ep-items-center ep-h-full">
           <el-dropdown @command="handleClick">
             <el-avatar src="https://s3.bmp.ovh/imgs/2022/11/23/f0fcebdd69e0360a.jpeg" />
             <template #dropdown>

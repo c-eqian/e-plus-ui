@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<DiamondLoadingProps>(), {
 const _diamondStyle = ref({
   width: `${parseInt(`${props.size / 4}`, 10)}px`,
   height: `${parseInt(`${props.size / 4}`, 10)}px`,
-  '--cz-diamond-bg-color': props.bgColor
+  '--ep-diamond-bg-color': props.bgColor
 });
 const diamondStyle = computed(() => _diamondStyle.value);
 const styles = computed(() => {
@@ -24,10 +24,10 @@ const styles = computed(() => {
 </script>
 
 <template>
-  <div :style="styles" class="cz-spinner-loading spinner--rotate-diamond">
-    <div :style="diamondStyle" class="cz-diamond-loading" />
-    <div :style="diamondStyle" class="cz-diamond-loading" />
-    <div :style="diamondStyle" class="cz-diamond-loading" />
+  <div :style="styles" class="ep-spinner-loading spinner--rotate-diamond">
+    <div :style="diamondStyle" class="ep-diamond-loading" />
+    <div :style="diamondStyle" class="ep-diamond-loading" />
+    <div :style="diamondStyle" class="ep-diamond-loading" />
   </div>
 </template>
 

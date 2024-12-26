@@ -20,14 +20,14 @@ const asideWidth = computed(() => {
 </script>
 
 <template>
-  <div class="cz-h-full cz-relative" :style="{ '--layout-aside-width': asideWidth }">
-    <ElScrollbar class="!cz-h-full cz-layout-scroll">
-      <EpMenu class="cz-h-full cz-layout-aside" :menu-config="menus" />
+  <div class="ep-h-full ep-relative" :style="{ '--layout-aside-width': asideWidth }">
+    <ElScrollbar class="!ep-h-full ep-layout-scroll">
+      <EpMenu class="ep-h-full ep-layout-aside" :menu-config="menus" />
     </ElScrollbar>
     <div
-      class="cz-absolute cz-top-1/2 cz-border cz-bg-[var(--el-color-white)] cz-border-[var(--el-border-color-light)] cz-flex cz-items-center cz-justify-center cz-rounded-full cz-right-0 cz-z-10 cz-h-6 cz-w-6 cz-translate-x-1/2"
+      class="ep-absolute ep-top-1/2 ep-border ep-bg-[var(--el-color-white)] ep-border-[var(--el-border-color-light)] ep-flex ep-items-center ep-justify-center ep-rounded-full ep-right-0 ep-z-10 ep-h-6 ep-w-6 ep-translate-x-1/2"
     >
-      <ElIcon class="cz-cursor-pointer" @click="isFoldMenu = !isFoldMenu">
+      <ElIcon class="ep-cursor-pointer" @click="isFoldMenu = !isFoldMenu">
         <ArrowLeft v-show="!isFoldMenu" />
         <ArrowRight v-show="isFoldMenu" />
       </ElIcon>

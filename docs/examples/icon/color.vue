@@ -1,15 +1,15 @@
 <template>
   <div class="demo-mr">
-    <cz-icon icon="success" color="green" />
-    <cz-icon icon="success" color="red" />
-    <cz-icon icon="success" color="blue" />
-    <cz-icon icon="success" color="yellow" />
+    <ep-icon icon="success" color="green" />
+    <ep-icon icon="success" color="red" />
+    <ep-icon icon="success" color="blue" />
+    <ep-icon icon="success" color="yellow" />
   </div>
 </template>
 
 <style scoped lang="scss">
 .demo-mr {
-  .cz-icon {
+  .ep-icon {
     margin-right: 10px;
     font-size: 30px;
   }

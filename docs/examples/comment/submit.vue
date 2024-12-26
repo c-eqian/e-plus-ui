@@ -147,7 +147,7 @@ const handleBefore = () => {
 
 <template>
   <div>
-    <ep-button @click="isLogin = !isLogin">{{ isLogin ? '注销' : '登录' }}</ep-button>
+    <el-button @click="isLogin = !isLogin">{{ isLogin ? '注销' : '登录' }}</el-button>
     <ep-comment
       ref="commentRef"
       :before-reply="handleBefore"

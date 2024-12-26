@@ -26,19 +26,19 @@ const computedImageStyle = computed<any>(() => {
 });
 const computedImageCls = computed(() => {
   return {
-    'hover:cz-scale-150': props.scale
+    'hover:ep-scale-150': props.scale
   };
 });
 </script>
 
 <template>
   <span
-    class="cz-inline-flex cz-justify-center cz-items-center cz-text-center cz-text-sm cz-cursor-pointer cz-w-full cz-box-border cz-overflow-hidden cz-h-full"
+    class="ep-inline-flex ep-justify-center ep-items-center ep-text-center ep-text-sm ep-cursor-pointer ep-w-full ep-box-border ep-overflow-hidden ep-h-full"
     :style="computedImageStyle"
     :class="{
-      'cz-rounded-full': props.round,
-      'cz-bg-[#c0c4cc]': !!$slots.default,
-      'cz-text-gray-50': !!$slots.default,
+      'ep-rounded-full': props.round,
+      'ep-bg-[#c0c4cc]': !!$slots.default,
+      'ep-text-gray-50': !!$slots.default,
       'is-skeleton': props.loading && !$slots.default
     }"
   >
@@ -47,7 +47,7 @@ const computedImageCls = computed(() => {
       :src="imageUrl"
       alt=""
       :class="computedImageCls"
-      class="cz-w-full cz-block cz-h-full cz-bg-cover cz-object-cover cz-bg-center cz-bg-no-repeat"
+      class="ep-w-full ep-block ep-h-full ep-bg-cover ep-object-cover ep-bg-center ep-bg-no-repeat"
       style="transition: all 0.5s ease 0.1s"
       v-bind="$attrs"
       @error="e => emits('error', e)"

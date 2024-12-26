@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { EpComment, type ICommentConfig, type ICommentData } from 'e-plus-ui';
 import { ref } from 'vue';
 import { initEmoji } from '../../utils/emoji';
+import type { ICommentConfig, ICommentData } from 'e-plus-ui';
 const commentData = ref<ICommentData>({
   total: 0,
   list: []
@@ -46,8 +46,8 @@ const fieldsConfig: ICommentConfig = {
 
 <template>
   <div>
-    <ep-button @click="handleLoad">加载</ep-button>
-    <ep-comment :data="commentData" :config="fieldsConfig" />
+    <el-button @click="handleLoad">加载</el-button>
+    <el-comment :data="commentData" :config="fieldsConfig" />
   </div>
 </template>
 

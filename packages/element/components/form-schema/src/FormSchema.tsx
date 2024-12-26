@@ -205,8 +205,8 @@ export default defineComponent({
       const formItemsRender = createItemRender(isSearch);
       if (isSearch && inline) {
         return (
-          <div class={'cz-flex cz-w-full'}>
-            <div class={'cz-flex-1'}>{formItemsRender}</div>
+          <div class={'ep-flex ep-w-full'}>
+            <div class={'ep-flex-1'}>{formItemsRender}</div>
             {createRenderFilter()}
           </div>
         );
@@ -216,7 +216,7 @@ export default defineComponent({
       if (isSearch) {
         const row = (
           <ElRow>
-            <ElCol class={'!cz-flex cz-justify-end cz-w-100%'}>{createRenderFilter()}</ElCol>
+            <ElCol class={'!ep-flex ep-justify-end ep-w-100%'}>{createRenderFilter()}</ElCol>
           </ElRow>
         );
         renderNodes.push(row);

@@ -1,7 +1,7 @@
-.cz-auth-container {
+.ep-auth-container {
   background-size: cover;
   background: var(--auth-bg-image) no-repeat fixed center center;
-  .cz-auth-login {
+  .ep-auth-login {
     &--title {
       position: relative;
       width: fit-content;
@@ -16,7 +16,7 @@
       }
     }
   }
-  .cz-service-agreement--text {
+  .ep-service-agreement--text {
     color: #3c93ff;
   }
 }

@@ -96,14 +96,14 @@ const fieldsConfig: ICommentConfig = {
   commentFields: {
     content: ({ item }) => {
       // 格式化内容
-      return `<div class="cz-text-blue-500">${item.text}</div>`;
+      return `<div class="ep-text-blue-500">${item.text}</div>`;
     },
     username: 'commentName',
     avatar: 'avatarUrl',
     userId: 'userId'
   },
   showIpAddress: ({ item }) => {
-    return `<span class="cz-inline-block cz-px-2 cz-text-[10px]">${item.city}</span>`;
+    return `<span class="ep-inline-block ep-px-2 ep-text-[10px]">${item.city}</span>`;
   },
   emojis: initEmoji()
 };

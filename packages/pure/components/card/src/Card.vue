@@ -21,31 +21,31 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div class="cz-card cz-bg-white dark:cz-bg-dark-2" :class="classes">
-    <div v-if="$slots.title || title || $slots.extra" class="cz-card-header cz-space-x-1">
-      <div class="cz-card-header-wrapper cz-space-x-1">
-        <div v-if="$slots.avatar || avatar" class="cz-flex cz-items-center">
+  <div class="ep-card ep-bg-white dark:ep-bg-dark-2" :class="classes">
+    <div v-if="$slots.title || title || $slots.extra" class="ep-card-header ep-space-x-1">
+      <div class="ep-card-header-wrapper ep-space-x-1">
+        <div v-if="$slots.avatar || avatar" class="ep-flex ep-items-center">
           <Image v-if="avatar" :url="avatar" :height="36" :width="36" round />
           <slot name="avatar" />
         </div>
-        <div v-if="title" class="cz-card-header-title">
+        <div v-if="title" class="ep-card-header-title">
           <span>{{ title }}</span>
           <TextFold v-if="avatar && description" :line="1">
-            <span v-if="description" class="cz-card-header__description">{{ description }}</span>
+            <span v-if="description" class="ep-card-header__description">{{ description }}</span>
           </TextFold>
-          <span v-else-if="description" class="cz-card-header__description">{{ description }}</span>
+          <span v-else-if="description" class="ep-card-header__description">{{ description }}</span>
         </div>
         <slot v-else-if="$slots.title" name="title" />
       </div>
-      <div v-if="$slots.extra" class="cz-card-header-extra">
+      <div v-if="$slots.extra" class="ep-card-header-extra">
         <slot name="extra" />
       </div>
     </div>
-    <div class="cz-card-body">
+    <div class="ep-card-body">
       <slot v-if="$slots.body" name="body" />
       <slot v-else />
     </div>
-    <div v-if="$slots.footer" class="cz-card-footer">
+    <div v-if="$slots.footer" class="ep-card-footer">
       <slot name="footer" />
     </div>
   </div>

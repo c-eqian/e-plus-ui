@@ -179,7 +179,7 @@ const handleActions = (type: 0 | 1, { item }: any) => {
       @actions="handleActions"
     >
       <template v-if="isUseSlot" #actions-extra="{ item }">
-        <div class="cz-flex cz-flex-col">
+        <div class="ep-flex ep-flex-col">
           <el-button
             v-if="item?.userInfo.userId === 2"
             size="small"

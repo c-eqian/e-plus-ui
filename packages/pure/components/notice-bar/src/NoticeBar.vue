@@ -129,8 +129,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="!isClosed" class="cz-notice-container">
-    <div v-if="props.icon || $slots['left-icon']" class="cz-notice-left-icon">
+  <div v-if="!isClosed" class="ep-notice-container">
+    <div v-if="props.icon || $slots['left-icon']" class="ep-notice-left-icon">
       <EpIcon v-if="!$slots['left-icon']"><Bell /></EpIcon>
       <slot v-else name="left-icon" />
     </div>
@@ -155,7 +155,7 @@ onMounted(() => {
         </div>
       </transition-group>
     </div>
-    <div v-if="props.closeable || $slots['right-icon']" class="cz-notice-right-icon">
+    <div v-if="props.closeable || $slots['right-icon']" class="ep-notice-right-icon">
       <EpIcon v-if="props.closeable" style="cursor: pointer" @click="handleClose"
         ><CircleClose
       /></EpIcon>

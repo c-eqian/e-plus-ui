@@ -24,12 +24,12 @@ defineOptions({
 </script>
 
 <template>
-  <i class="cz-icon cz-inline-flex" :style="computedStyle">
+  <i class="ep-icon ep-inline-flex" :style="computedStyle">
     <slot v-if="$slots.default" />
     <svg
       v-else
       aria-hidden="true"
-      class="cz-fill-current"
+      class="ep-fill-current"
       :width="pixelUnits(props.width)"
       :height="pixelUnits(props.height)"
     >

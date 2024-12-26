@@ -146,8 +146,8 @@ const formSchema = defineFormSchema<FormModel>({
 
 <template>
   <ep-card title="使用api请求" shadow="always">
-    <div class="cz-py-4">
-      <div class="cz-py-4">
+    <div class="ep-py-4">
+      <div class="ep-py-4">
         <p>{{ formModel }}</p>
         <el-button @click="handleGet">获取表单</el-button>
       </div>

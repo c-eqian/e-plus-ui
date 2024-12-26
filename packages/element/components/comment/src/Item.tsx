@@ -169,7 +169,7 @@ export default defineComponent({
       if (isBoolean(ipAddress)) {
         const address = getValueByKey('ipAddress', _level as any, false, true);
         return address ? (
-          <span class="cz-inline-block cz-px-2 cz-text-[10px]">{`${address}`}</span>
+          <span class="ep-inline-block ep-px-2 ep-text-[10px]">{`${address}`}</span>
         ) : undefined;
       }
       if (isFunction(ipAddress)) {
@@ -216,7 +216,7 @@ export default defineComponent({
       if (computedReply && !isEmpty(computedReply)) {
         return (
           <>
-            <strong class="cz-px-1">回复</strong>
+            <strong class="ep-px-1">回复</strong>
             {getValueByKey('username', 2, false, true)}
             {renderLevel(2)}
             {renderAddress(2)}
@@ -234,9 +234,9 @@ export default defineComponent({
         return slotsVNode;
       }
       return (
-        <div class="cz-flex cz-items-center">
-          <div class="cz-relative cz-w-fit">
-            <span class="cz-pr-1">{getValueByKey('username', 1, false, true)}</span>
+        <div class="ep-flex ep-items-center">
+          <div class="ep-relative ep-w-fit">
+            <span class="ep-pr-1">{getValueByKey('username', 1, false, true)}</span>
           </div>
           {renderLevel(1)}
           {renderAddress()}
@@ -257,8 +257,8 @@ export default defineComponent({
           _VNode = _VNode(this.getSlotsParameter());
         }
         return (
-          <div class="cz-border cz-my-1 cz-text-[12px] cz-text-gray-600">
-            <div class="cz-p-2" v-html={_VNode}></div>
+          <div class="ep-border ep-my-1 ep-text-[12px] ep-text-gray-600">
+            <div class="ep-p-2" v-html={_VNode}></div>
           </div>
         );
       }

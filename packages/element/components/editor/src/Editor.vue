@@ -75,10 +75,10 @@ defineExpose({
 </script>
 
 <template>
-  <div class="cz-w-full cz-editor">
+  <div class="ep-w-full ep-editor">
     <div class="editor-input-wrapper" :class="[isTextareaFocus ? 'is-focus' : '']">
-      <div class="cz-flex">
-        <div class="avatar cz-pt-1.5">
+      <div class="ep-flex">
+        <div class="avatar ep-pt-1.5">
           <EpImage
             width="24"
             height="24"
@@ -86,8 +86,8 @@ defineExpose({
             url="https://s3.bmp.ovh/imgs/2024/05/02/f298a3b692dca2ba.jpg"
           />
         </div>
-        <div class="cz-ml-3 cz-w-full">
-          <div class="editor-input cz-relative">
+        <div class="ep-ml-3 ep-w-full">
+          <div class="editor-input ep-relative">
             <textarea
               ref="textareaRef"
               v-model.trim="valueComputed"
@@ -98,28 +98,28 @@ defineExpose({
             />
           </div>
           <div
-            class="emoji-container cz-py-1.5 cz-items-center cz-flex"
-            :class="[props.useEmojis ? 'cz-justify-between' : 'cz-justify-end']"
+            class="emoji-container ep-py-1.5 ep-items-center ep-flex"
+            :class="[props.useEmojis ? 'ep-justify-between' : 'ep-justify-end']"
           >
             <el-popover trigger="click" width="260px" @show="isShow = true" @hide="isShow = false">
               <template #reference>
-                <div v-if="props.useEmojis" class="cz-cursor-pointer" title="表情包" />
+                <div v-if="props.useEmojis" class="ep-cursor-pointer" title="表情包" />
               </template>
               <div
                 ref="emojiRef"
-                class="emoji-wrapper cz-max-h-40 cz-overflow-y-auto animate__fadeInDown"
+                class="emoji-wrapper ep-max-h-40 ep-overflow-y-auto animate__fadeInDown"
               >
                 <span
                   v-for="item in emojiList"
                   :key="item.name"
-                  class="emoji-item cz-p-[5px]"
+                  class="emoji-item ep-p-[5px]"
                   @click="handleClickEmoji(item)"
                 >
                   <img
                     :src="item.url"
                     :title="item.name"
                     :alt="item.name"
-                    class="cz-w-6 cz-h-6 emoji"
+                    class="ep-w-6 ep-h-6 emoji"
                   />
                 </span>
               </div>

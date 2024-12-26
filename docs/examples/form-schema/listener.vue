@@ -46,8 +46,8 @@ const formSchema = defineFormSchema<FormModel>({
 
 <template>
   <ep-card title="表单">
-    <div class="cz-py-4">
-      <div class="cz-py-4">
+    <div class="ep-py-4">
+      <div class="ep-py-4">
         <el-button @click="handleGet">获取</el-button>
       </div>
       <ep-form-schema :config="formSchema" :model="formModel" @registry="registry" />

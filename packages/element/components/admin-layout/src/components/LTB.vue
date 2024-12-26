@@ -7,8 +7,8 @@ const props = useComputedProps();
 </script>
 
 <template>
-  <div class="cz-ltb-layout cz-admin-layout cz-h-full cz-w-full">
-    <ElContainer class="cz-w-full cz-h-full">
+  <div class="ep-ltb-layout ep-admin-layout ep-h-full ep-w-full">
+    <ElContainer class="ep-w-full ep-h-full">
       <slot v-if="$slots.aside" name="aside" />
       <Aside v-else :class="props.classNames?.asideClass" />
       <ElContainer>
@@ -17,7 +17,7 @@ const props = useComputedProps();
         </ElHeader>
         <ElMain
           v-if="$slots.main"
-          class="cz-w-full cz-h-full"
+          class="ep-w-full ep-h-full"
           :style="{
             '--el-main-padding': pixelUnits(props.mainPadding ?? '10px')
           }"

@@ -16,24 +16,24 @@ defineExpose({
 </script>
 
 <template>
-  <div class="cz-flex cz-h-full cz-w-full cz-comment-box last:cz-mt-3">
+  <div class="ep-flex ep-h-full ep-w-full ep-comment-box last:ep-mt-3">
     <div v-if="$slots.avatar">
       <slot name="avatar" />
     </div>
-    <div class="cz-flex-1 cz-text-sm">
-      <div class="cz-flex cz-text-[#945c5f] cz-text-sm">
-        <div v-if="$slots.left" class="cz-flex-1 cz-px-2 cz-text-sm">
+    <div class="ep-flex-1 ep-text-sm">
+      <div class="ep-flex ep-text-[#945c5f] ep-text-sm">
+        <div v-if="$slots.left" class="ep-flex-1 ep-px-2 ep-text-sm">
           <slot name="left" />
         </div>
         <div v-if="$slots.right">
           <slot name="right" />
         </div>
       </div>
-      <div class="cz-px-2 cz-py-2">
-        <div v-if="$slots.content" class="cz-w-full">
+      <div class="ep-px-2 ep-py-2">
+        <div v-if="$slots.content" class="ep-w-full">
           <slot name="content" />
         </div>
-        <div ref="replyRef" class="cz-pt-2 cz-w-full">
+        <div ref="replyRef" class="ep-pt-2 ep-w-full">
           <div v-if="$slots.actions">
             <slot name="actions" />
           </div>
@@ -46,7 +46,7 @@ defineExpose({
       <div
         v-if="$slots.default && $slots.default()"
         :style="computedSubStyle"
-        class="cz-bg-[#f8f9fa] dark:cz-bg-[#181818] cz-comment-sub cz-mb-2 cz-p-2 cz-px-4 cz-rounded"
+        class="ep-bg-[#f8f9fa] dark:ep-bg-[#181818] ep-comment-sub ep-mb-2 ep-p-2 ep-px-4 ep-rounded"
       >
         <slot name="default" />
       </div>

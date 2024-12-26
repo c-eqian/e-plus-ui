@@ -62,14 +62,14 @@ const getClsOrStyle = (key: ContainerTypeCls | ContainerTypeStyles) => {
 <template>
   <div
     ref="adaptPageLayoutRef"
-    class="cz-h-full cz-w-full"
+    class="ep-h-full ep-w-full"
     :class="getClsOrStyle('adaptClass')"
     :style="getClsOrStyle('adaptStyle')"
   >
     <div
       v-if="$slots.header"
       ref="headerRef"
-      class="cz-border-dashed cz-border-b cz-py-1"
+      class="ep-border-dashed ep-border-b ep-py-1"
       :class="getClsOrStyle('headerClass')"
       :style="getClsOrStyle('headerStyle')"
     >
@@ -78,7 +78,7 @@ const getClsOrStyle = (key: ContainerTypeCls | ContainerTypeStyles) => {
     <div
       v-if="$slots.search"
       ref="searchRef"
-      class="cz-border-dashed cz-border-b cz-py-3"
+      class="ep-border-dashed ep-border-b ep-py-3"
       :class="getClsOrStyle('searchClass')"
       :style="getClsOrStyle('searchStyle')"
     >
@@ -87,7 +87,7 @@ const getClsOrStyle = (key: ContainerTypeCls | ContainerTypeStyles) => {
     <div
       v-if="$slots.toolbar"
       ref="toolbarRef"
-      class="cz-border-dashed cz-border-b cz-py-3"
+      class="ep-border-dashed ep-border-b ep-py-3"
       :class="getClsOrStyle('toolbarClass')"
       :style="getClsOrStyle('toolbarStyle')"
     >
@@ -104,7 +104,7 @@ const getClsOrStyle = (key: ContainerTypeCls | ContainerTypeStyles) => {
     <div
       v-if="$slots.footer"
       ref="footerRef"
-      class="cz-py-2 cz-flex cz-justify-end"
+      class="ep-py-2 ep-flex ep-justify-end"
       :class="getClsOrStyle('footerClass')"
       :style="getClsOrStyle('footerStyle')"
     >

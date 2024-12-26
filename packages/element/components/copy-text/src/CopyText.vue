@@ -73,7 +73,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="cz-copy-text"
+    class="ep-copy-text"
     :class="[
       type ? `is-${type}` : '',
       type && justify ? `is-justify-${justify}` : '',

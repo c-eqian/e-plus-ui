@@ -69,8 +69,8 @@ const formSchema = defineFormSchema<FormModel>({
 
 <template>
   <ep-card title="搜索栏" shadow="always">
-    <div class="cz-py-4">
-      <div class="cz-py-4">
+    <div class="ep-py-4">
+      <div class="ep-py-4">
         <el-button @click="handleGet">获取表单</el-button>
       </div>
       <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />

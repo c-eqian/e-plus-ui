@@ -9,7 +9,7 @@
   <ep-line dashed>虚线</ep-line>
   <ep-line linear>居中渐变</ep-line>
   <h2>垂直方向</h2>
-  <div class="cz-flex">
+  <div class="ep-flex">
     <ep-line direction="vertical" linear />
     <div>链接</div>
     <ep-line direction="vertical" margin="16" />

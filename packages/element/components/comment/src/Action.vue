@@ -63,13 +63,13 @@ const _iconColor = computed(() => {
 
 <template>
   <div
-    class="cz-flex cz-space-x-10 cz-py-2 dark:cz-text-gray-400 cz-text-gray-600 cz-text-xs cz-justify-between"
+    class="ep-flex ep-space-x-10 ep-py-2 dark:ep-text-gray-400 ep-text-gray-600 ep-text-xs ep-justify-between"
   >
-    <div class="cz-flex-1 cz-flex cz-space-x-10">
+    <div class="ep-flex-1 ep-flex ep-space-x-10">
       <div
-        class="cz-flex cz-items-center cz-cursor-pointer cz-space-x-1"
+        class="ep-flex ep-items-center ep-cursor-pointer ep-space-x-1"
         :class="{
-          'cz-text-[--global-checked-color]': isLike
+          'ep-text-[--global-checked-color]': isLike
         }"
         @click="handleLike"
       >
@@ -80,7 +80,7 @@ const _iconColor = computed(() => {
         <span>{{ isLike ? '已赞' : '点赞' }} {{ likeCount > 0 ? `${likeCount}` : '' }}</span>
       </div>
       <div
-        class="cz-flex cz-select-none cz-cursor-pointer cz-items-center cz-space-x-1"
+        class="ep-flex ep-select-none ep-cursor-pointer ep-items-center ep-space-x-1"
         @click="handleReply"
       >
         <EpIcon><ChatDotSquare /></EpIcon>

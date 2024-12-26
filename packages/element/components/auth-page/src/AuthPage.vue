@@ -38,28 +38,28 @@ const handleConfirm = async () => {
 
 <template>
   <div
-    class="cz-auth-container cz-h-full cz-w-full cz-relative"
+    class="ep-auth-container ep-h-full ep-w-full ep-relative"
     :style="{
       '--auth-bg-image': config.bgUrl
         ? `url(${config.bgUrl})`
         : `linear-gradient(0deg,#FFF1EB 0%,#ACE0F9 100%)`,
-      '--cz-absolute-right': config.center ? '50%' : pixelUnits(config.offsetR)
+      '--ep-absolute-right': config.center ? '50%' : pixelUnits(config.offsetR)
     }"
   >
     <div
-      class="cz-absolute cz-h-full cz-flex cz-items-center cz-right-[--cz-absolute-right]"
+      class="ep-absolute ep-h-full ep-flex ep-items-center ep-right-[--ep-absolute-right]"
       :class="{
-        'cz-translate-x-1/2': !!config.center
+        'ep-translate-x-1/2': !!config.center
       }"
     >
       <div
         v-if="!$slots.default"
-        class="cz-bg-[#fff]/70 cz-auth-login cz-border-2 cz-border-white cz-flex cz-flex-col cz-min-h-96 cz-rounded-3xl cz-w-[380px] cz-py-5 cz-px-10"
+        class="ep-bg-[#fff]/70 ep-auth-login ep-border-2 ep-border-white ep-flex ep-flex-col ep-min-h-96 ep-rounded-3xl ep-w-[380px] ep-py-5 ep-px-10"
       >
-        <div class="cz-pt-2 cz-pb-5">
-          <h1 class="cz-auth-login--title cz-font-[500] cz-text-2xl">{{ config.loginTitle }}</h1>
+        <div class="ep-pt-2 ep-pb-5">
+          <h1 class="ep-auth-login--title ep-font-[500] ep-text-2xl">{{ config.loginTitle }}</h1>
         </div>
-        <div class="cz-flex-1 cz-auth-login--form cz-pt-5">
+        <div class="ep-flex-1 ep-auth-login--form ep-pt-5">
           <EpFormSchema
             v-if="!$slots['form-schema']"
             :config="formSchemaConfig"
@@ -67,8 +67,8 @@ const handleConfirm = async () => {
           >
             <template #remember>
               <div
-                class="cz-flex cz-items-center cz-w-full"
-                :class="config.useRemember ? 'cz-justify-between' : 'cz-justify-end'"
+                class="ep-flex ep-items-center ep-w-full"
+                :class="config.useRemember ? 'ep-justify-between' : 'ep-justify-end'"
               >
                 <el-checkbox v-if="config.useRemember">{{ config.rememberText }}</el-checkbox>
                 <el-button plain text type="primary">{{ config.forgetPasswordText }}</el-button>
@@ -77,16 +77,16 @@ const handleConfirm = async () => {
           </EpFormSchema>
           <slot v-else name="form-schema" />
         </div>
-        <div class="cz-w-full cz-auth-login--btn cz-mb-10">
-          <el-button class="cz-w-full" type="primary" @click="handleConfirm">{{
+        <div class="ep-w-full ep-auth-login--btn ep-mb-10">
+          <el-button class="ep-w-full" type="primary" @click="handleConfirm">{{
             config.loginText
           }}</el-button>
           <div
             v-if="config.useUserAgent"
-            class="cz-service-agreement cz-text-center cz-py-3 cz-text-xs"
+            class="ep-service-agreement ep-text-center ep-py-3 ep-text-xs"
           >
-            <span class="cz-text-[#99999a]">登录即视为同意</span>
-            <a href="#" class="cz-pl-2 cz-service-agreement--text">《服务协议》</a>
+            <span class="ep-text-[#99999a]">登录即视为同意</span>
+            <a href="#" class="ep-pl-2 ep-service-agreement--text">《服务协议》</a>
           </div>
         </div>
       </div>

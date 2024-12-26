@@ -39,18 +39,18 @@ watch(
         </el-select>
       </template>
     </el-input>
-    <div v-for="key in selectKeys" :key="key" class="cz-w-full">
+    <div v-for="key in selectKeys" :key="key" class="ep-w-full">
       <h2>{{ key }}</h2>
-      <div class="cz-grid cz-grid-cols-3 cz-grid-rows-3 cz-gap-2">
+      <div class="ep-grid ep-grid-cols-3 ep-grid-rows-3 ep-gap-2">
         <div
           v-for="(icon, index) in Icons[key]"
           :key="index"
-          class="cz-flex cz-p-6 cz-space-y-2 cz-flex-col"
+          class="ep-flex ep-p-6 ep-space-y-2 ep-flex-col"
         >
           <ep-icon color="#67C23A" width="24" height="24">
             <component :is="icon" />
           </ep-icon>
-          <span class="cz-text-sm">
+          <span class="ep-text-sm">
             <ep-copy-text>
               {{ icon }}
             </ep-copy-text>

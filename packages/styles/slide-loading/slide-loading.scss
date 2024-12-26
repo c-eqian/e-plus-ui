@@ -1,4 +1,4 @@
-.cz-loading-container {
+.ep-loading-container {
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -6,7 +6,7 @@
   height: 50px;
 }
 
-.cz-loading-bar.wave {
+.ep-loading-bar.wave {
   width: 5px;
   height: 30px;
   margin: 0 5px;
@@ -30,7 +30,7 @@
   }
 }
 
-.cz-loading-bar.beat {
+.ep-loading-bar.beat {
   display: inline-block;
   width: 10px;
   height: 10px;

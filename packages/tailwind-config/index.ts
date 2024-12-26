@@ -2,7 +2,7 @@ import plugin from 'tailwindcss/plugin';
 import type { Config } from 'tailwindcss';
 
 export const DEFAULT_CONFIG = {
-  prefix: 'cz-',
+  prefix: 'ep-',
   content: ['**/*.{js,ts,jsx,tsx,vue}', '**/*/index.html', '!**/node_modules/**'],
   // 3.4
   darkMode: ['class', '[class="dark"]'],

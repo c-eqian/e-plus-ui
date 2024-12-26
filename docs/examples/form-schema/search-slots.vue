@@ -55,7 +55,7 @@ const handleReset = () => {
 
 <template>
   <ep-card title="自定义搜索" shadow="always">
-    <div class="cz-py-4">
+    <div class="ep-py-4">
       <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel">
         <template #query-buttons>
           <el-button type="primary" size="small" @click="handleSearch">查询</el-button>

@@ -13,12 +13,12 @@ const isLoadingValue = computed(() => props.loading);
 </script>
 
 <template>
-  <div v-if="isLoadingValue" class="cz-loading-container">
+  <div v-if="isLoadingValue" class="ep-loading-container">
     <div
       v-for="item in [1, 2, 3, 4]"
       :key="item"
-      class="cz-loading-bar"
-      :class="`cz-loading-bar-${item} ${props.loadingType}`"
+      class="ep-loading-bar"
+      :class="`ep-loading-bar-${item} ${props.loadingType}`"
     />
   </div>
 </template>

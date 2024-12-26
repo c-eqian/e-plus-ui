@@ -11,8 +11,8 @@ const props = defineProps({
 });
 const cls = computed(() => {
   return {
-    'cz-ml-10': !props.isReply,
-    'cz-ml-6': props.isReply
+    'ep-ml-10': !props.isReply,
+    'ep-ml-6': props.isReply
   };
 });
 const emits = defineEmits(['load']);
@@ -32,7 +32,7 @@ const handleLoad = () => {
 
 <template>
   <div
-    class="cz-text-xs cz-flex cz-items-center cz-cursor-pointer cz-space-x-1 cz-text-[--global-primary-color]"
+    class="ep-text-xs ep-flex ep-items-center ep-cursor-pointer ep-space-x-1 ep-text-[--global-primary-color]"
     :class="cls"
   >
     <ElButton type="primary" plain :loading="isLoading" link :icon="ArrowDown" @click="handleLoad">

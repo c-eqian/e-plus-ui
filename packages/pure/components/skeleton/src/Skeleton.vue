@@ -11,21 +11,21 @@ const loading = computed(() => props.loading);
 </script>
 
 <template>
-  <div class="cz-w-full cz-h-full">
+  <div class="ep-w-full ep-h-full">
     <div
       v-if="loading"
-      class="cz-border cz-border-blue-300 cz-shadow cz-rounded-md cz-p-4 cz-max-w-sm cz-w-full cz-mx-auto"
+      class="ep-border ep-border-blue-300 ep-shadow ep-rounded-md ep-p-4 ep-max-w-sm ep-w-full ep-mx-auto"
     >
-      <div class="cz-animate-pulse cz-flex cz-space-x-4">
-        <div class="cz-rounded-full cz-bg-slate-700 cz-h-10 cz-w-10" />
-        <div class="cz-flex-1 cz-space-y-6 cz-py-1">
-          <div class="cz-h-2 cz-bg-slate-700 cz-rounded" />
-          <div class="cz-space-y-3">
-            <div class="cz-grid cz-grid-cols-3 cz-gap-4">
-              <div class="cz-h-2 cz-bg-slate-700 cz-rounded cz-col-span-2" />
-              <div class="cz-h-2 cz-bg-slate-700 cz-rounded cz-col-span-1" />
+      <div class="ep-animate-pulse ep-flex ep-space-x-4">
+        <div class="ep-rounded-full ep-bg-slate-700 ep-h-10 ep-w-10" />
+        <div class="ep-flex-1 ep-space-y-6 ep-py-1">
+          <div class="ep-h-2 ep-bg-slate-700 ep-rounded" />
+          <div class="ep-space-y-3">
+            <div class="ep-grid ep-grid-cols-3 ep-gap-4">
+              <div class="ep-h-2 ep-bg-slate-700 ep-rounded ep-col-span-2" />
+              <div class="ep-h-2 ep-bg-slate-700 ep-rounded ep-col-span-1" />
             </div>
-            <div class="cz-h-2 cz-bg-slate-700 cz-rounded" />
+            <div class="ep-h-2 ep-bg-slate-700 ep-rounded" />
           </div>
         </div>
       </div>

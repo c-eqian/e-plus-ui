@@ -2,7 +2,7 @@ import plugin from 'tailwindcss/plugin';
 import type { Config } from 'tailwindcss';
 
 export default {
-  prefix: 'cz-',
+  prefix: 'ep-',
   content: [
     '../packages/**/*.{js,ts,jsx,tsx,vue}',
     './examples/**/*.{js,ts,jsx,tsx,vue}',

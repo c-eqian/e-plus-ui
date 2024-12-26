@@ -6,7 +6,7 @@
 
 <style scoped lang="scss">
 .demo-mr {
-  .cz-image {
+  .ep-image {
     margin-right: 50px;
   }
 }

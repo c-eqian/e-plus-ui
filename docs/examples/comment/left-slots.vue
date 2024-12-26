@@ -105,17 +105,17 @@ const commentData: ICommentData = {
 <template>
   <ep-comment :data="commentData">
     <template #left="{ item, isSubReply, reply }">
-      <div class="cz-flex cz-items-center">
-        <div class="cz-relative cz-w-fit">
-          <span class="cz-pr-1">{{ item.userInfo.username }}</span>
+      <div class="ep-flex ep-items-center">
+        <div class="ep-relative ep-w-fit">
+          <span class="ep-pr-1">{{ item.userInfo.username }}</span>
         </div>
         <ep-icon width="20" height="20" color="#409EFF">
           <Level6 />
         </ep-icon>
-        <span class="cz-inline-block cz-px-2 cz-text-[10px]">{{ item.ipAddress }}</span>
+        <span class="ep-inline-block ep-px-2 ep-text-[10px]">{{ item.ipAddress }}</span>
         <div v-if="isSubReply && !isEmpty(reply)">
-          <strong class="cz-px-1">回复</strong>
-          <span class="cz-pr-1">{{ reply.userInfo.username }}</span>
+          <strong class="ep-px-1">回复</strong>
+          <span class="ep-pr-1">{{ reply.userInfo.username }}</span>
         </div>
       </div>
     </template>

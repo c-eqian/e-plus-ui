@@ -2,19 +2,19 @@ $accent: #41b883;
 $duration: 1500ms;
 $timing: linear;
 $count: 4;
-.cz-spinner-loading {
+.ep-spinner-loading {
   position: relative;
   * {
     line-height: 0;
     box-sizing: border-box;
   }
 
-  .cz-diamond-loading {
+  .ep-diamond-loading {
     position: absolute;
     left: 0;
     top: 0;
     border-radius: 2px;
-    background: var(--cz-diamond-bg-color);
+    background: var(--ep-diamond-bg-color);
     transform: translateX(-50%) rotate(45deg) scale(0);
     animation: diamonds $duration $timing infinite;
     @for $i from 1 through $count {

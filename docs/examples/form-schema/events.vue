@@ -86,8 +86,8 @@ const formSchema = defineFormSchema<FormModel>({
 
 <template>
   <ep-card title="events 事件监听" shadow="always">
-    <div class="cz-py-4">
-      <div class="cz-py-4">
+    <div class="ep-py-4">
+      <div class="ep-py-4">
         <p>{{ formModel }}</p>
       </div>
       <ep-form-schema ref="formSchemaRef" :config="formSchema" :model="formModel" />

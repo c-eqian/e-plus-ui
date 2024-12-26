@@ -1,18 +1,18 @@
 
-.cz-text-fold {
+.ep-text-fold {
   font-size: 14px;
   line-height: 20px;
   color: inherit;
 
-  .cz-text-box {
+  .ep-text-box {
     //margin-top: 5px;
     // 会对过长的单词做词内断词处理，这样单词始终会在容器中，不会溢出容器
     word-wrap: break-word;
   }
 
-  .cz-text__action {
+  .ep-text__action {
     margin-bottom: 5px;
-    .cz-text__btn {
+    .ep-text__btn {
       display: inline-block;
       line-height: 22px;
       cursor: pointer;
@@ -32,8 +32,8 @@
 }
 
 // position为end时，展开按钮位置及状态样式
-.cz-text-fold {
-  .cz-text-box {
+.ep-text-fold {
+  .ep-text-box {
     display: flex;
     > div {
       &::before {

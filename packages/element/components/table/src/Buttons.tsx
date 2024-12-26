@@ -171,7 +171,7 @@ export default defineComponent({
       h(
         'div',
         {
-          class: 'cz-table__buttons'
+          class: 'ep-table__buttons'
         },
         {
           default: () => createOperationNode()

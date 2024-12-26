@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<LetterLoadingProps>(), {
 });
 const _innerStyles = ref({
   transform: `scale(${props.size / 2 / 75})`,
-  '--cz-letter-bg-color': props.bgColor
+  '--ep-letter-bg-color': props.bgColor
 });
 const innerStyles = computed(() => _innerStyles.value);
 const styles = computed(() => {
@@ -31,13 +31,13 @@ const faces = computed(() => {
 </script>
 
 <template>
-  <div :style="styles" class="cz-spinner cz-spinner--socker">
-    <div :style="innerStyles" class="cz-spinner-inner">
-      <div class="cz-cube cz-panelLoad">
+  <div :style="styles" class="ep-spinner ep-spinner--socker">
+    <div :style="innerStyles" class="ep-spinner-inner">
+      <div class="ep-cube ep-panelLoad">
         <div
           v-for="{ side, letter } of faces"
           :key="side"
-          :class="`cz-cube-face cz-cube-face-${side}`"
+          :class="`ep-cube-face ep-cube-face-${side}`"
         >
           {{ letter }}
         </div>
