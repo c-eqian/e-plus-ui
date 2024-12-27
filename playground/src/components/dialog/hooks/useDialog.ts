@@ -1,3 +1,4 @@
+import { tryExecPromise } from '@e-plus-ui/utils';
 import { isBoolean, isFunction } from '@eqian/utils-vue';
 import { computed, getCurrentInstance, ref, type SetupContext } from 'vue';
 import type { DialogEmits, DialogProps } from '../type';
@@ -19,6 +20,9 @@ export const useDialog = (props: DialogProps) => {
   const handleSwitchFullScreen = () => {
     isUseFullScreen.value = !isUseFullScreen.value;
   };
+  const handleSwitchVisible = (v: boolean) => {
+    dialogVisible.value = v;
+  };
   const handleSwitchLoading = (v: boolean) => {
     if (isBoolean(v)) {
       confirmLoading.value = v;
@@ -34,7 +38,7 @@ export const useDialog = (props: DialogProps) => {
   const closeLoading = (isClose: boolean) => {
     handleSwitchLoading(false);
     if (isClose) {
-      dialogVisible.value = false;
+      handleSwitchVisible(false);
     }
   };
   /**
@@ -47,6 +51,18 @@ export const useDialog = (props: DialogProps) => {
       ...dialogProps,
       ...args,
       ...baseProps.value,
+      beforeClose: () => {
+        if (isFunction(props.beforeClose)) {
+          try {
+            const ok = props.beforeClose();
+            if (ok) {
+              handleSwitchVisible(false);
+            }
+          } catch {}
+        } else {
+          handleSwitchVisible(false);
+        }
+      },
       handleSwitchFullScreen
     };
   };
@@ -58,29 +74,33 @@ export const useDialog = (props: DialogProps) => {
       confirmLoading: footerProps.value.footerProps?.isUseConfirmLoading
         ? confirmLoading.value
         : false,
-      beforeConfirm: () => {
+      beforeConfirm: async () => {
         if (isFunction(props.beforeConfirm)) {
           if (footerProps.value.footerProps?.isUseConfirmLoading) {
             handleSwitchLoading(true);
           }
           try {
-            const ok = props.beforeConfirm();
+            const ok = await tryExecPromise(props.beforeConfirm);
             if (ok) {
               closeLoading(true);
             }
           } catch {
             closeLoading(false);
           }
+        } else {
+          handleSwitchVisible(true);
         }
       },
-      beforeClose: () => {
+      beforeClose: async () => {
         if (isFunction(props.beforeClose)) {
           try {
-            const ok = props.beforeClose();
+            const ok = await tryExecPromise(props.beforeClose);
             if (ok) {
-              dialogVisible.value = true;
+              handleSwitchVisible(false);
             }
           } catch {}
+        } else {
+          handleSwitchVisible(false);
         }
       }
     };

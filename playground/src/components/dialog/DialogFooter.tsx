@@ -33,7 +33,7 @@ export default defineComponent({
             >
               确定
             </ElButton>
-            <ElButton>取消</ElButton>
+            <ElButton onClick={() => this.propsRef.beforeClose?.()}>取消</ElButton>
           </div>
         </div>
       </>

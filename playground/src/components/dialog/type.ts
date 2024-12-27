@@ -102,7 +102,7 @@ export type DialogEmits = {
 export type SlotsKey = keyof DialogSlots;
 
 export type HeaderProps = DialogComponentProps & {
-  close?: () => void;
+  beforeClose?: () => void;
   switchFullScreen?: () => void;
   titleId?: string;
   [key: string]: any;

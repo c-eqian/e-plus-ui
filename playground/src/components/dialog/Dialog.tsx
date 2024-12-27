@@ -49,7 +49,7 @@ export default defineComponent({
         return (close: () => void, titleId: string, titleClass: string) =>
           renderHeader.value.renderHeader?.(close, titleId, titleClass);
       }
-      return (args: any[]) => {
+      return (...args: any[]) => {
         const headerProps = this.getHeaderProps(...args);
         return <DialogHeader {...headerProps}></DialogHeader>;
       };

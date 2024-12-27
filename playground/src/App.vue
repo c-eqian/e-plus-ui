@@ -10,11 +10,19 @@ const dialogProps: DialogComponentProps = {
   title: '组件式弹窗'
 };
 const handleConfirm = () => {
-  ElMessage.success('确定');
   return new Promise(resolve => {
     setTimeout(() => {
+      ElMessage.success('确定');
       resolve(true);
-    });
+    }, 3000);
+  });
+};
+const handleClose = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      ElMessage.success('取消');
+      resolve(true);
+    }, 3000);
   });
 };
 </script>
@@ -29,6 +37,7 @@ const handleConfirm = () => {
       isUseConfirmLoading: true
     }"
     :before-confirm="handleConfirm"
+    :before-close="handleClose"
   >
     <div>默认内容</div>
     <div>默认内容</div>

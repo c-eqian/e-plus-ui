@@ -35,7 +35,7 @@ export default defineComponent({
             </div>
           ) : null}
           {isShowClose ? (
-            <div class={'ep-cursor-pointer'} onClick={() => this.propsRef?.close?.()}>
+            <div class={'ep-cursor-pointer'} onClick={() => this.propsRef?.beforeClose?.()}>
               <ElIcon>
                 <Close />
               </ElIcon>
