@@ -11,6 +11,12 @@ export default eslintPresets([
     name: 'test'
   },
   {
+    name: "custom-rules",
+    rules: {
+      'no-void': 'off'
+    }
+  },
+  {
     name: 'file-naming',
     plugins: {
       'file-naming': fileNamingPlugin,
