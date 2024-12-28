@@ -1,27 +1,34 @@
-import { tryExecPromise } from '@e-plus-ui/utils';
+import { tryCall, tryExecPromise } from '@e-plus-ui/utils';
 import { isBoolean, isFunction } from '@eqian/utils-vue';
-import { computed, getCurrentInstance, ref, type SetupContext } from 'vue';
-import type { DialogEmits, DialogProps } from '../type';
+import { computed, ref } from 'vue';
+import type { DialogPropsWithEmits } from '../type';
 import { useDialogProps } from './useDialogProps.ts';
 
-export const useDialog = (props: DialogProps) => {
-  const instance = getCurrentInstance()!;
-  const emit = instance.emit as SetupContext<DialogEmits>['emit'];
+export const useDialog = (props: DialogPropsWithEmits) => {
+  // const instance = getCurrentInstance()!;
+  const {
+    'onUpdate:visible': onUpdateVisible,
+    onClose,
+    onClosed,
+    onCloseAutoFocus,
+    onOpened,
+    onOpenAutoFocus
+  } = props;
   const isUseFullScreen = ref(false);
   const confirmLoading = ref(false);
+  const handleSwitchVisible = (v: boolean) => {
+    dialogVisible.value = v;
+  };
   const dialogVisible = computed({
     get() {
       return props.visible;
     },
     set(v) {
-      emit('update:visible', v);
+      tryCall(onUpdateVisible, v);
     }
   });
   const handleSwitchFullScreen = () => {
     isUseFullScreen.value = !isUseFullScreen.value;
-  };
-  const handleSwitchVisible = (v: boolean) => {
-    dialogVisible.value = v;
   };
   const handleSwitchLoading = (v: boolean) => {
     if (isBoolean(v)) {
@@ -84,11 +91,12 @@ export const useDialog = (props: DialogProps) => {
             if (ok) {
               closeLoading(true);
             }
-          } catch {
+          } catch (e) {
             closeLoading(false);
+            console.error(e);
           }
         } else {
-          handleSwitchVisible(true);
+          handleSwitchVisible(false);
         }
       },
       beforeClose: async () => {
@@ -105,16 +113,26 @@ export const useDialog = (props: DialogProps) => {
       }
     };
   };
-
+  const handleBindClicked = () => {
+    return {
+      onClose,
+      onCloseAutoFocus,
+      onOpened,
+      onClosed,
+      onOpenAutoFocus
+    };
+  };
   return {
     dialogVisible,
     confirmLoading,
     isUseFullScreen,
     handleSwitchFullScreen,
     handleSwitchLoading,
+    handleSwitchVisible,
     getDialogProps,
     getHeaderProps,
     getFooterProps,
-    closeLoading
+    closeLoading,
+    handleBindClicked
   };
 };

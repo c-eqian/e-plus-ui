@@ -30,6 +30,11 @@ export type RenderHeader = (
   titleClass: string
 ) => VNode | VNode[] | Element | Element[] | string;
 
+/**
+ * 底部渲染
+ */
+export type RenderFooter = (done: CallbackVoid) => VNode | VNode[] | Element | Element[] | string;
+
 export type BeforeConfirm = () => boolean | undefined | Promise<void>;
 /**
  * 提取`el-dialog`参数，取消`modelValue`
@@ -79,6 +84,11 @@ export type DialogProps = {
    */
   renderHeader?: RenderHeader;
   /**
+   * 自定义渲染底部
+   * 自定义渲染时，接受一个回调函数用于关闭弹窗
+   */
+  renderFooter?: RenderFooter;
+  /**
    * el-dialog参数
    */
   dialogProps?: DialogComponentProps;
@@ -96,7 +106,13 @@ export type DialogSlots = {
  * emits 事件
  */
 export type DialogEmits = {
-  'update:visible': (v: boolean) => void;
+  'onUpdate:visible': (v: boolean) => void;
+  onOpen: () => boolean;
+  onOpened: () => boolean;
+  onClose: () => boolean;
+  onClosed: () => boolean;
+  onOpenAutoFocus: () => boolean;
+  onCloseAutoFocus: () => boolean;
 };
 
 export type SlotsKey = keyof DialogSlots;
@@ -127,3 +143,5 @@ export type FooterProps = {
    */
   position?: 'center' | 'left' | 'right';
 };
+
+export type DialogPropsWithEmits = DialogEmits & DialogProps;

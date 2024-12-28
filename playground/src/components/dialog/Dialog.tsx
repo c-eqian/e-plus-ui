@@ -11,7 +11,6 @@ import type { DialogSlots, SlotsKey } from './type';
 export default defineComponent({
   name: 'EpDialog',
   props: dialogProps,
-  emits: ['update:visible', 'confirm', 'cancel'],
   slots: Object as SlotsType<DialogSlots>,
   setup(props) {
     const handleSwitchFullScreen = () => {
@@ -23,6 +22,8 @@ export default defineComponent({
       confirmLoading,
       handleSwitchLoading,
       closeLoading,
+      handleBindClicked,
+      handleSwitchVisible,
       getDialogProps,
       getHeaderProps,
       getFooterProps
@@ -31,8 +32,10 @@ export default defineComponent({
       dialogVisible,
       isUseFullScreen,
       confirmLoading,
+      handleBindClicked,
       handleSwitchFullScreen,
       handleSwitchLoading,
+      handleSwitchVisible,
       closeLoading,
       getHeaderProps,
       getDialogProps,
@@ -56,6 +59,10 @@ export default defineComponent({
     };
     // 渲染底部内容
     const renderFooter = () => {
+      const _renderFooter = useDialogProps(this.$props, ['renderFooter']).value;
+      if (isFunction(_renderFooter.renderFooter)) {
+        return () => _renderFooter.renderFooter?.(() => this.handleSwitchVisible(false));
+      }
       return () => {
         const footerProps = this.getFooterProps();
         return <DialogFooter {...footerProps}></DialogFooter>;
@@ -86,6 +93,7 @@ export default defineComponent({
         <ElDialog
           v-model={this.dialogVisible}
           {...this.getDialogProps()}
+          {...this.handleBindClicked()}
           showClose={false}
           fullscreen={this.isUseFullScreen}
           v-slots={renderSlots()}

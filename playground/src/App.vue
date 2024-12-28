@@ -25,6 +25,9 @@ const handleClose = () => {
     }, 3000);
   });
 };
+const handleOpened = () => {
+  console.log('打开后');
+};
 </script>
 
 <template>
@@ -38,6 +41,7 @@ const handleClose = () => {
     }"
     :before-confirm="handleConfirm"
     :before-close="handleClose"
+    @opened="handleOpened"
   >
     <div>默认内容</div>
     <div>默认内容</div>
