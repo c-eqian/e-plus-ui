@@ -1,6 +1,7 @@
 import { ElButton } from 'element-plus';
-import { computed, defineComponent } from 'vue';
-import type { FooterProps } from './type.ts';
+import { defineComponent, toRef, type PropType } from 'vue';
+import { useDialogFooter } from './hooks/useDialogFooter.ts';
+import type { FooterBtnProps, FooterProps } from './type.ts';
 type BaseFooterProps = FooterProps & {
   confirmLoading?: boolean;
   beforeConfirm: () => void;
@@ -8,32 +9,40 @@ type BaseFooterProps = FooterProps & {
 };
 export default defineComponent({
   name: 'DialogFooter',
+  props: {
+    isUseConfirmLoading: Boolean,
+    buttons: Object as PropType<FooterBtnProps>,
+    position: String as PropType<BaseFooterProps['position']>,
+    confirmLoading: Boolean,
+    beforeConfirm: Function as PropType<BaseFooterProps['beforeClose']>,
+    beforeClose: Function as PropType<BaseFooterProps['beforeClose']>
+  },
   setup(props: BaseFooterProps, { attrs }) {
-    const propsRef = computed<BaseFooterProps>(() => {
-      return { ...props, ...attrs };
+    const { getPositionClass, beforeConfirm, beforeClose } = useDialogFooter({
+      ...props,
+      ...attrs
     });
+    const confirmLoading = toRef(props, 'confirmLoading');
     return {
-      propsRef
+      getPositionClass,
+      beforeConfirm,
+      confirmLoading,
+      beforeClose
     };
   },
   render() {
-    const footerPositionClass = () => {
-      if (this.propsRef.position === 'left') return 'ep-justify-start';
-      if (this.propsRef.position === 'right') return 'ep-justify-end';
-      return 'ep-justify-center';
-    };
     return (
       <>
-        <div class={`ep-flex ep-items-center ${footerPositionClass()}`}>
+        <div class={`ep-flex ep-items-center ${this.getPositionClass()}`}>
           <div>
             <ElButton
-              onClick={() => this.propsRef?.beforeConfirm?.()}
+              onClick={() => this.beforeConfirm?.()}
               type={'primary'}
-              loading={this.propsRef.confirmLoading}
+              loading={this.confirmLoading}
             >
               确定
             </ElButton>
-            <ElButton onClick={() => this.propsRef.beforeClose?.()}>取消</ElButton>
+            <ElButton onClick={() => this.beforeClose?.()}>取消</ElButton>
           </div>
         </div>
       </>

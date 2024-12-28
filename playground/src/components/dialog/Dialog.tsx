@@ -13,9 +13,6 @@ export default defineComponent({
   props: dialogProps,
   slots: Object as SlotsType<DialogSlots>,
   setup(props) {
-    const handleSwitchFullScreen = () => {
-      isUseFullScreen.value = !isUseFullScreen.value;
-    };
     const {
       dialogVisible,
       isUseFullScreen,
@@ -24,6 +21,7 @@ export default defineComponent({
       closeLoading,
       handleBindClicked,
       handleSwitchVisible,
+      handleSwitchFullScreen,
       getDialogProps,
       getHeaderProps,
       getFooterProps
