@@ -4,7 +4,11 @@ import type { VNode } from 'vue';
 type Btn = 'confirm' | 'cancel';
 type Render = () => VNode;
 type CallbackVoid = () => void;
-type FooterBtnMap = {
+export type FooterBtnMap = {
+  /**
+   * 按钮类型，如果使用自定义render，随便一个值都可以
+   */
+  type?: Btn;
   // 自定义渲染
   render?: Render;
   /**
@@ -19,7 +23,7 @@ type FooterBtnMap = {
 /**
  * 底部按钮参数
  */
-export type FooterBtnProps = FooterBtnMap | FooterBtnMap[] | Btn[];
+export type FooterBtnProps = FooterBtnMap | FooterBtnMap[] | Btn[] | (FooterBtnMap | Btn)[];
 
 /**
  * 头部渲染
@@ -130,6 +134,7 @@ export type HeaderProps = DialogComponentProps & {
 export type FooterProps = {
   /**
    * 按钮配置 默认为`confirm`（确定），`cancel`（取消）
+   * 如果不需要渲染按钮，设置为空数组即可，如`[]`
    */
   buttons?: FooterBtnProps;
   /**
