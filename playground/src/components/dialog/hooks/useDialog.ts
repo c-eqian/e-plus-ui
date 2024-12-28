@@ -48,6 +48,18 @@ export const useDialog = (props: DialogPropsWithEmits) => {
       handleSwitchVisible(false);
     }
   };
+  const beforeClose = async () => {
+    if (isFunction(props.beforeClose)) {
+      try {
+        const ok = await tryExecPromise(props.beforeClose);
+        if (ok) {
+          handleSwitchVisible(false);
+        }
+      } catch {}
+    } else {
+      handleSwitchVisible(false);
+    }
+  };
   /**
    * 获取顶部参数
    */
@@ -58,18 +70,7 @@ export const useDialog = (props: DialogPropsWithEmits) => {
       ...dialogProps,
       ...args,
       ...baseProps.value,
-      beforeClose: () => {
-        if (isFunction(props.beforeClose)) {
-          try {
-            const ok = props.beforeClose();
-            if (ok) {
-              handleSwitchVisible(false);
-            }
-          } catch {}
-        } else {
-          handleSwitchVisible(false);
-        }
-      },
+      beforeClose,
       handleSwitchFullScreen
     };
   };
@@ -99,18 +100,7 @@ export const useDialog = (props: DialogPropsWithEmits) => {
           handleSwitchVisible(false);
         }
       },
-      beforeClose: async () => {
-        if (isFunction(props.beforeClose)) {
-          try {
-            const ok = await tryExecPromise(props.beforeClose);
-            if (ok) {
-              handleSwitchVisible(false);
-            }
-          } catch {}
-        } else {
-          handleSwitchVisible(false);
-        }
-      }
+      beforeClose
     };
   };
   const handleBindClicked = () => {
