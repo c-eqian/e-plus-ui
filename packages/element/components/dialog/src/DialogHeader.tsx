@@ -16,7 +16,14 @@ export default defineComponent({
   render() {
     // 渲染标题
     const renderTitle = () => {
-      return <h3 id={this.propsRef.titleId}>{this.propsRef.title || '信息弹窗'}</h3>;
+      return (
+        <h3
+          class={'!ep-p-0 !ep-m-0 !ep-text-[16px] ep-dialog-header__title'}
+          id={this.propsRef.titleId}
+        >
+          {this.propsRef.title || '信息弹窗'}
+        </h3>
+      );
     };
     const renderCustom = () => {
       const isShowClose = this.propsRef.isShowClose === void 0 ? true : !!this.propsRef.isShowClose;

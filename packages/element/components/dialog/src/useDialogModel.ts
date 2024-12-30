@@ -3,19 +3,15 @@ import Dialog from './Dialog';
 import type { UseDialogModelOptions, UseDialogReturn } from './type';
 
 const getAppendToElement = (appendTo?: string | HTMLElement | null): HTMLElement => {
-  let _appendTo: HTMLElement = document.body;
   if (appendTo) {
     if (typeof appendTo === 'string') {
-      _appendTo = document.getElementById(appendTo) ?? document.body;
+      return document.getElementById(appendTo) ?? document.body;
     }
     if (appendTo instanceof HTMLElement) {
-      _appendTo = appendTo;
-    }
-    if (!(appendTo instanceof HTMLElement)) {
-      _appendTo = document.body;
+      return appendTo;
     }
   }
-  return _appendTo;
+  return document.body;
 };
 export function useDialogModel(options: UseDialogModelOptions): UseDialogReturn {
   const { render: _render, immediate, slots, ...ops } = options as UseDialogModelOptions;
@@ -57,8 +53,8 @@ export function useDialogModel(options: UseDialogModelOptions): UseDialogReturn 
         }
       },
       {
-        default: _render,
-        ...slots
+        ...slots,
+        default: _render
       }
     );
     // 渲染到元素节点上

@@ -18,7 +18,7 @@ export type FooterBtnMap = {
   /**
    * element-plus按钮组件参数
    */
-  componentProps?: ButtonProps;
+  componentProps?: Partial<ButtonProps>;
 };
 /**
  * 底部按钮参数
@@ -39,7 +39,7 @@ export type RenderHeader = (
  */
 export type RenderFooter = (done: CallbackVoid) => VNode | VNode[] | Element | Element[] | string;
 
-export type BeforeConfirm = boolean | undefined | Promise<unknown>;
+export type BeforeConfirm = boolean | undefined | Promise<unknown> | void;
 /**
  * 提取`el-dialog`参数，取消`modelValue`
  */
@@ -107,12 +107,12 @@ export type DialogEmits = {
    * 确认按钮，如果返回`false`或者返回一个promise,错误时将阻止关闭
    * 或者直接调用done回调进行关闭
    * */
-  onConfirm: (done: CallbackVoid) => BeforeConfirm;
+  onConfirmed: (done: CallbackVoid) => BeforeConfirm;
   /**
    * 关闭按钮 如果返回`false`或者返回一个promise,错误时将阻止关闭
    * 或者直接调用done回调进行关闭
    * */
-  onCancel: (done: CallbackVoid) => BeforeConfirm;
+  onCanceled: (done: CallbackVoid) => BeforeConfirm;
   /** 继承el-dialog 事件 */
   onOpen: () => void;
   onOpened: () => void;

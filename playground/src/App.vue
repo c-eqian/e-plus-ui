@@ -49,8 +49,8 @@ const { open } = useDialogModel({
         position: 'center',
         isUseConfirmLoading: true
       }"
-      @confirm="handleConfirm"
-      @cancel="handleClose"
+      @confirmed="handleConfirm"
+      @canceled="handleClose"
       @opened="handleOpened"
     >
       <div>默认内容</div>

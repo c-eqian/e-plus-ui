@@ -12,8 +12,8 @@ export const useDialog = (props: DialogPropsWithEmits) => {
     onClosed,
     onCloseAutoFocus,
     onOpened,
-    onConfirm,
-    onCancel,
+    onConfirmed,
+    onCanceled,
     onOpenAutoFocus
   } = props;
   const isUseFullScreen = ref(false);
@@ -35,7 +35,7 @@ export const useDialog = (props: DialogPropsWithEmits) => {
   const handleSwitchLoading = (v: boolean) => {
     if (isBoolean(v)) {
       confirmLoading.value = v;
-    } else {
+    } else if (confirmLoading.value) {
       confirmLoading.value = false;
     }
   };
@@ -51,10 +51,10 @@ export const useDialog = (props: DialogPropsWithEmits) => {
     }
   };
   const beforeClose = async () => {
-    if (isFunction(onCancel)) {
+    if (isFunction(onCanceled)) {
       try {
-        const ok = await tryExecPromise(onCancel, () => handleSwitchVisible(false));
-        if (ok) {
+        const ok = await tryExecPromise(onCanceled, () => handleSwitchVisible(false));
+        if (ok || ok === void 0) {
           handleSwitchVisible(false);
         }
       } catch {}
@@ -85,13 +85,13 @@ export const useDialog = (props: DialogPropsWithEmits) => {
         ? confirmLoading.value
         : false,
       beforeConfirm: async () => {
-        if (isFunction(onConfirm)) {
+        if (isFunction(onConfirmed)) {
           if (footerProps.value.footerProps?.isUseConfirmLoading) {
             handleSwitchLoading(true);
           }
           try {
-            const ok = await tryExecPromise(onConfirm, () => closeLoading(true));
-            if (ok) {
+            const ok = await tryExecPromise(onConfirmed, () => closeLoading(true));
+            if (ok || ok === void 0) {
               closeLoading(true);
             }
           } catch (e) {
