@@ -32,7 +32,7 @@ const { open } = useDialogModel({
     h('div', null, {
       default: () => '韩时尚'
     }),
-  onConfirm: handleConfirm,
+  onConfirmed: handleConfirm,
   footerProps: {
     isUseConfirmLoading: true
   }

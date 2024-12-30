@@ -1,5 +1,6 @@
 import { Close, FullScreen } from '@e-plus-ui/icons';
 import { EpLine } from '@e-plus-ui/pure/components/line';
+import { EpTextFold } from '@e-plus-ui/pure/components/text-fold';
 import { ElIcon } from 'element-plus';
 import { computed, defineComponent } from 'vue';
 import type { HeaderProps } from './type';
@@ -17,12 +18,13 @@ export default defineComponent({
     // 渲染标题
     const renderTitle = () => {
       return (
-        <h3
-          class={'!ep-p-0 !ep-m-0 !ep-text-[16px] ep-dialog-header__title'}
-          id={this.propsRef.titleId}
-        >
-          {this.propsRef.title || '信息弹窗'}
-        </h3>
+        <div class={'ep-flex-1 ep-dialog-header__title ep-w-full'}>
+          <EpTextFold line={1}>
+            <h3 class={'!ep-p-0 !ep-m-0 !ep-text-[16px]'} id={this.propsRef.titleId}>
+              {this.propsRef.title || '信息弹窗'}
+            </h3>
+          </EpTextFold>
+        </div>
       );
     };
     const renderCustom = () => {
