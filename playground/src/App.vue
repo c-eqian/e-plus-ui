@@ -32,7 +32,7 @@ const { open } = useDialogModel({
     h('div', null, {
       default: () => '韩时尚'
     }),
-  beforeConfirm: handleConfirm,
+  onConfirm: handleConfirm,
   footerProps: {
     isUseConfirmLoading: true
   }
@@ -49,8 +49,8 @@ const { open } = useDialogModel({
         position: 'center',
         isUseConfirmLoading: true
       }"
-      :before-confirm="handleConfirm"
-      :before-close="handleClose"
+      @confirm="handleConfirm"
+      @cancel="handleClose"
       @opened="handleOpened"
     >
       <div>默认内容</div>

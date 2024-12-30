@@ -8,12 +8,12 @@ export const isPromiseLike = <T = any>(value: T | PromiseLike<T>): value is Prom
   return value instanceof Promise || isFunction((value as any)?.then);
 };
 
-export const tryExecPromise = async <T extends Function>(fn: T) => {
+export const tryExecPromise = async <T extends Function, A extends any[]>(fn: T, ...args: A) => {
   if (isFunction(fn)) {
     if (isPromiseLike(fn)) {
-      return await fn();
+      return await fn(...args);
     } else {
-      return fn();
+      return fn(...args);
     }
   }
 };
