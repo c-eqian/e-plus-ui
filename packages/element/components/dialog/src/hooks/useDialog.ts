@@ -2,7 +2,7 @@ import { tryCall, tryExecPromise } from '@e-plus-ui/utils';
 import { isBoolean, isFunction } from '@eqian/utils-vue';
 import { computed, ref } from 'vue';
 import type { DialogPropsWithEmits } from '../type';
-import { useDialogProps } from './useDialogProps.ts';
+import { useDialogProps } from './useDialogProps';
 
 export const useDialog = (props: DialogPropsWithEmits) => {
   // const instance = getCurrentInstance()!;

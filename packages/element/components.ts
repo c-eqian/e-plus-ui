@@ -17,3 +17,5 @@ export * from './components/comment-layout';
 export * from './components/comment';
 
 export * from './components/auth-page';
+
+export * from './components/dialog';

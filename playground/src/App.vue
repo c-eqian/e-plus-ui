@@ -1,15 +1,14 @@
 <script setup lang="ts">
+import { EpDialog, useDialogModel, type DialogComponentProps } from '@e-plus-ui/element';
 import { ElMessage } from 'element-plus';
-import { ref } from 'vue';
-import Dialog from './components/dialog/Dialog';
-import type { DialogComponentProps } from './components/dialog/type';
+import { h, ref } from 'vue';
 const visible = ref(false);
 const dialogProps: DialogComponentProps = {
   modal: true,
   closeOnClickModal: false,
   title: '组件式弹窗'
 };
-const handleConfirm = () => {
+const handleConfirm = (): Promise<boolean> => {
   return new Promise(resolve => {
     setTimeout(() => {
       ElMessage.success('确定');
@@ -28,28 +27,42 @@ const handleClose = () => {
 const handleOpened = () => {
   console.log('打开后');
 };
+const { open } = useDialogModel({
+  render: () =>
+    h('div', null, {
+      default: () => '韩时尚'
+    }),
+  beforeConfirm: handleConfirm,
+  footerProps: {
+    isUseConfirmLoading: true
+  }
+});
 </script>
 
 <template>
-  <Dialog
-    v-model:visible="visible"
-    :dialog-props="dialogProps"
-    :is-use-full-screen="true"
-    :footer-props="{
-      position: 'center',
-      isUseConfirmLoading: true
-    }"
-    :before-confirm="handleConfirm"
-    :before-close="handleClose"
-    @opened="handleOpened"
-  >
-    <div>默认内容</div>
-    <div>默认内容</div>
-    <div>默认内容</div>
-    <div>默认内容</div>
-  </Dialog>
-
-  <el-button @click="visible = true">组件式-打开</el-button>
+  <div>
+    <EpDialog
+      v-model:visible="visible"
+      :dialog-props="dialogProps"
+      :is-use-full-screen="true"
+      :footer-props="{
+        position: 'center',
+        isUseConfirmLoading: true
+      }"
+      :before-confirm="handleConfirm"
+      :before-close="handleClose"
+      @opened="handleOpened"
+    >
+      <div>默认内容</div>
+      <div>默认内容</div>
+      <div>默认内容</div>
+      <div>默认内容</div>
+    </EpDialog>
+    <el-button @click="visible = true">组件式-打开</el-button>
+  </div>
+  <div class="ep-m-2">
+    <el-button @click="() => open()">函数式-打开</el-button>
+  </div>
 </template>
 
 <style scoped>

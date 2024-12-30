@@ -1,5 +1,5 @@
 import type { ButtonProps, DialogProps as ElDialogProps } from 'element-plus';
-import type { VNode } from 'vue';
+import type { ComponentInternalInstance, ShallowRef, VNode } from 'vue';
 
 type Btn = 'confirm' | 'cancel';
 type Render = () => VNode;
@@ -39,7 +39,7 @@ export type RenderHeader = (
  */
 export type RenderFooter = (done: CallbackVoid) => VNode | VNode[] | Element | Element[] | string;
 
-export type BeforeConfirm = () => boolean | undefined | Promise<void>;
+export type BeforeConfirm = () => boolean | undefined | Promise<unknown>;
 /**
  * 提取`el-dialog`参数，取消`modelValue`
  */
@@ -111,12 +111,12 @@ export type DialogSlots = {
  */
 export type DialogEmits = {
   'onUpdate:visible': (v: boolean) => void;
-  onOpen: () => boolean;
-  onOpened: () => boolean;
-  onClose: () => boolean;
-  onClosed: () => boolean;
-  onOpenAutoFocus: () => boolean;
-  onCloseAutoFocus: () => boolean;
+  onOpen: () => void;
+  onOpened: () => void;
+  onClose: () => void;
+  onClosed: () => void;
+  onOpenAutoFocus: () => void;
+  onCloseAutoFocus: () => void;
 };
 
 export type SlotsKey = keyof DialogSlots;
@@ -150,3 +150,48 @@ export type FooterProps = {
 };
 
 export type DialogPropsWithEmits = DialogEmits & DialogProps;
+
+/**
+ * useDialog返回类型
+ */
+export type UseDialogReturn = {
+  /**
+   * 打开回调
+   */
+  open: CallbackVoid;
+  /**
+   * 关闭回调
+   */
+  close: CallbackVoid;
+  /**
+   * 销毁回调
+   */
+  destroy: CallbackVoid;
+  /**
+   * 当前dialog实例
+   */
+  modelInstance: ShallowRef<ComponentInternalInstance | null>;
+};
+/**
+ * 弹窗渲染
+ */
+export type UseDialogRender = () => VNode | VNode[] | string;
+/**
+ * 弹窗参数配置
+ */
+export type UseDialogModelOptions = {
+  render: UseDialogRender;
+  /**
+   * 立即打开
+   * @default false
+   */
+  immediate?: boolean;
+  slots?: {
+    footer?: (...args: any[]) => VNode | VNode[];
+    header?: (...args: any[]) => VNode | VNode[];
+    default?: (...args: any[]) => VNode | VNode[];
+  };
+} & Omit<DialogProps, 'visible'> &
+  Partial<Omit<DialogEmits, 'onUpdate:visible'>>;
+
+// export type UseDialogModelComponentProps =

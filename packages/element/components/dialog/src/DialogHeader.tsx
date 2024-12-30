@@ -2,7 +2,7 @@ import { Close, FullScreen } from '@e-plus-ui/icons';
 import { EpLine } from '@e-plus-ui/pure/components/line';
 import { ElIcon } from 'element-plus';
 import { computed, defineComponent } from 'vue';
-import type { HeaderProps } from './type.ts';
+import type { HeaderProps } from './type';
 export default defineComponent({
   name: 'DialogHeader',
   setup(props, { attrs }) {
@@ -16,10 +16,7 @@ export default defineComponent({
   render() {
     // 渲染标题
     const renderTitle = () => {
-      if (this.propsRef.title) {
-        return <h3 id={this.propsRef.titleId}>{this.propsRef.title}</h3>;
-      }
-      return null;
+      return <h3 id={this.propsRef.titleId}>{this.propsRef.title || '信息弹窗'}</h3>;
     };
     const renderCustom = () => {
       const isShowClose = this.propsRef.isShowClose === void 0 ? true : !!this.propsRef.isShowClose;

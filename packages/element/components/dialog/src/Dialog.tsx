@@ -4,7 +4,7 @@ import { defineComponent, type SlotsType } from 'vue';
 import DialogFooter from './DialogFooter';
 import DialogHeader from './DialogHeader';
 import { dialogProps } from './dialogProps';
-import { useDialog } from './hooks/useDialog.ts';
+import { useDialog } from './hooks/useDialog';
 import { useDialogProps } from './hooks/useDialogProps';
 import type { DialogSlots, SlotsKey } from './type';
 
@@ -51,8 +51,9 @@ export default defineComponent({
           renderHeader.value.renderHeader?.(close, titleId, titleClass);
       }
       return (...args: any[]) => {
-        const headerProps = this.getHeaderProps(...args);
-        return <DialogHeader {...headerProps}></DialogHeader>;
+        const ops = args[0];
+        const headerProps = this.getHeaderProps();
+        return <DialogHeader {...headerProps} {...ops}></DialogHeader>;
       };
     };
     // 渲染底部内容
