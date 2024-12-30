@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { defineTableColumns } from 'e-plus-ui';
+import { defineTableColumns, EpTable, useDialogModel } from 'e-plus-ui';
 import { ElMessage } from 'element-plus';
-import { ref } from 'vue';
+import { h, ref } from 'vue';
+import FormDialog from './dialog-form.vue';
+const formDialogRef = ref<InstanceType<typeof FormDialog>>();
+const rowData = ref<any>({});
 const tableData = ref([
   {
     date: '2016-05-03',
     name: 'Tom'
   },
   {
-    date: '2016-05-02',
-    name: 'Tom'
+    date: '2018-07-10',
+    name: '张媃'
   }
 ]);
 const column = defineTableColumns<(typeof tableData.value)[0]>([
@@ -30,7 +33,23 @@ const column = defineTableColumns<(typeof tableData.value)[0]>([
     fixed: 'right'
   }
 ]);
+const { open } = useDialogModel({
+  render: () => {
+    return h(FormDialog, { ref: (_ref: any) => (formDialogRef.value = _ref) });
+  },
+  footerProps: {
+    isUseConfirmLoading: true
+  },
+  async onConfirmed() {
+    await formDialogRef.value?.validate();
+  },
+  onOpened() {
+    formDialogRef.value?.setFieldsValues(rowData.value);
+  }
+});
 const handleClickedEdit = (row: any, index: number) => {
+  rowData.value = row;
+  open();
   ElMessage.success(`修改-${row.name}-${index}`);
 };
 const handleClickedDelete = (row: any, index: number) => {
