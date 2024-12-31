@@ -17,9 +17,12 @@ export function useDialogModel(options: UseDialogModelOptions): UseDialogReturn 
   const { render: _render, immediate, slots, ...ops } = options as UseDialogModelOptions;
   // 弹窗的元素节点片段
   let fragment: Element | null = null;
+  let closeFlag: boolean | null;
   const modelInstance = shallowRef<ComponentInternalInstance | null>(null);
   const close = () => {
+    // closeFlag 避免重复关闭
     if (modelInstance.value) modelInstance.value.props.visible = false;
+    closeFlag = true;
     return true;
   };
   // 关闭并卸载组件
@@ -39,6 +42,7 @@ export function useDialogModel(options: UseDialogModelOptions): UseDialogReturn 
     if (modelInstance.value) {
       destroy();
     }
+    closeFlag = false;
     // 弹窗的元素节点片段
     fragment = document.createDocumentFragment() as unknown as Element;
     const dialogNode = h(
@@ -47,7 +51,7 @@ export function useDialogModel(options: UseDialogModelOptions): UseDialogReturn 
         ...ops,
         visible: true,
         'onUpdate:visible': (visible: boolean) => {
-          if (!visible) {
+          if (!visible && !closeFlag) {
             close();
           }
         }
