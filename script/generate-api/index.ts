@@ -10,15 +10,24 @@ import type {
   HtmlTagSlot,
   JSONSchemaForWebTypes
 } from '../web-types/types';
-
+const NORMAL_LIST = ['boolean', 'number', 'string'];
+function prettierDefault(item: any) {
+  if ((Array.isArray(item.value.type) || NORMAL_LIST.includes(item.value.type)) && item.default) {
+    return `\`${(item.default || '').replaceAll("'", '')}\``;
+  }
+  return '-';
+}
+function funcToFunction(func: string) {
+  return func === 'func' ? 'function' : func;
+}
 const replaceSplice = (str: unknown) => {
   if (Array.isArray(str)) {
-    return str[0].replaceAll('|', ' \\|').replaceAll('"', '');
+    return funcToFunction(str[0].replaceAll('|', ' \\| ').replaceAll('"', ''));
   }
   if (typeof str === 'string') {
-    return str.replaceAll('|', '\\|').replaceAll('"', '');
+    return funcToFunction(str.replaceAll('|', ' \\| ').replaceAll('"', ''));
   }
-  return str ?? '';
+  return funcToFunction((str as string) ?? '');
 };
 
 function clearLineBreak(text: unknown) {
@@ -30,10 +39,10 @@ function clearLineBreak(text: unknown) {
 function parameterMd(title: string, attributes: HtmlTagAttribute[]) {
   let table = `# ${title}\n`;
   table += `## Parameter 参数\n`;
-  table += '| 参数 | 类型 | 可选 | 描述 |\n';
-  table += '| --- | --- | --- | --- |\n';
+  table += '| 参数 | 类型 | 可选 | 描述 | 默认值 |\n';
+  table += '| --- | --- | --- | --- | --- |\n';
   attributes.forEach(attribute => {
-    table += `| ${attribute.name} | \`${replaceSplice((attribute.value as any)?.type)}\` | \`${attribute.required ?? false}\` | ${clearLineBreak(attribute.description) ?? ''}\n`;
+    table += `| ${attribute.name} | \`${replaceSplice((attribute.value as any)?.type)}\` | \`${attribute.required ?? false}\` | ${clearLineBreak(attribute.description) ?? ''} | ${prettierDefault(attribute)}\n`;
   });
   return table;
 }

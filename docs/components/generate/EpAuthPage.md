@@ -1,8 +1,8 @@
 # EpAuthPage
 ## Parameter 参数
-| 参数 | 类型 | 可选 | 描述 |
-| --- | --- | --- | --- |
-| config | `AuthPageProps` | `false` | 参数配置
+| 参数 | 类型 | 可选 | 描述 | 默认值 |
+| --- | --- | --- | --- | --- |
+| config | `AuthPageProps` | `false` | 参数配置 | -
 ## Slots 插槽
 | 插槽名 | 描述 |
 |  ---  | --- |

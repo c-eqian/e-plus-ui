@@ -1,11 +1,11 @@
 # EpComment
 ## Parameter 参数
-| 参数 | 类型 | 可选 | 描述 |
-| --- | --- | --- | --- |
-| data | `ICommentData` | `false` | 
-| config | `ICommentConfig` | `false` | 
-| beforeReply | `func` | `false` | 点击回复之前，如果返回false,则不会进行回复
-| load | `CommentLoadFn` | `false` | 
+| 参数 | 类型 | 可选 | 描述 | 默认值 |
+| --- | --- | --- | --- | --- |
+| data | `ICommentData` | `false` |  | -
+| config | `ICommentConfig` | `false` |  | -
+| beforeReply | `function` | `false` | 点击回复之前，如果返回false,则不会进行回复 | -
+| load | `CommentLoadFn` | `false` |  | -
 ## Slots 插槽
 | 插槽名 | 描述 |
 |  ---  | --- |
