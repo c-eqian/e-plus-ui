@@ -18,6 +18,7 @@
     "build:gulp": "pnpm run -C script start",
     "global": "tsx ./script/build/generate.global.ts",
     "web-api": "tsx script/web-types/vue-docgen.ts",
+    "generate:api": "pnpm run -C script generate:api",
     "lint:fix": "eslint --cache --fix",
     "lint": "eslint --ext .ts,.js,.jsx,.vue .",
     "version": "standard-version",

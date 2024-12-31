@@ -2,10 +2,12 @@
   "name": "@e-plus-ui/script",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node --require tsx/cjs ../node_modules/gulp-cli/bin/gulp.js -f gulpfile.ts",
     "release": "node --require tsx/cjs ../node_modules/gulp-cli/bin/gulp.js -f publish-task.ts",
+    "generate:api": "tsx  generate-api/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

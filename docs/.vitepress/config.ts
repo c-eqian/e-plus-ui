@@ -30,7 +30,7 @@ export default defineConfig({
       },
       {
         text: 'API',
-        link: '/components/generate/modules'
+        link: '/components/generate/index'
       },
       {
         text: '更新日志',
@@ -47,7 +47,6 @@ export default defineConfig({
           text: '使用',
           link: '/guide/install'
         },
-
         {
           text: 'Basic 基础组件',
           link: '',
@@ -67,6 +66,13 @@ export default defineConfig({
           text: 'hooks',
           link: '',
           items: generateSidebar('hooks')
+        }
+      ],
+      '/components/generate/': [
+        {
+          text: '组件API',
+          link: '',
+          items: generateSidebar('generate')
         }
       ]
     },

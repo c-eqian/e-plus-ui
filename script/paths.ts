@@ -38,3 +38,6 @@ export const styleCssPath = resolve(packagesPath, 'styles');
 export const globalPath = resolve(projectRoot, 'types', 'global.d.ts');
 
 export const tsBuildCachePath = resolve(projectRoot, 'tsconfig.build.tsbuildinfo');
+
+// docs
+export const apiDocs = resolve(projectRoot, 'docs', 'components', 'generate');

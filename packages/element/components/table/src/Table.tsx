@@ -52,8 +52,7 @@ export default defineComponent({
       default: false
     },
     /**
-     * 配置highlightCurrentRow时需要
-     * 单选框
+     * 配置highlightCurrentRow时需要单选框
      */
     idKey: {
       type: String,
@@ -106,9 +105,7 @@ export default defineComponent({
       default: () => [10, 20, 30, 50]
     },
     /**
-     * 分页其他属性，
-     * 不常用的统一放在此处
-     * 必须以pa开头，如需要设置pagerCount属性，则paPagerCount
+     * 分页其他属性，不常用的统一放在此处,必须以pa开头，如需要设置pagerCount属性，则paPagerCount
      */
     paExtra: {
       type: Object as PropType<Record<string, any>>,
