@@ -6,12 +6,19 @@
  * @LastEditors: 十三
  * @LastEditTime: 2022-10-18 22:14:16
 -->
+# 版本
+![NPM dev or peer Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/peer/vue)
+![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/co-utils-vue)
+![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/e-plus-ui/element-plus)
+
+
 # 介绍
-`EPlus-UI`，一个精心打造的基于`element-plus`的组件库，`EPlus-UI`旨在消除冗余代码，让开发过程变得更为高效、流畅，强调灵活性和可配置性。
-它允许开发者通过简单的配置操作，轻松调整组件的行为和交互逻辑。在开发过程中，EPlus-UI提供了丰富的文档和示例代码，帮助开发者快速上手并理解组件的使用方法和最佳实践
+![NPM Version](https://img.shields.io/npm/v/e-plus-ui)![NPM Downloads](https://img.shields.io/npm/dm/e-plus-ui)
+
+
+`EPlus-UI`，一个基于`element-plus`的组件库，`EPlus-UI`旨在消除冗余代码，通过简单配置即可生成业务组件，让开发过程变得更为高效、灵活。
 
 # 安装使用
-
 本节将介绍如何在项目中使用 EPlus-UI
 
 ## 安装
@@ -36,7 +43,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 // 导入组件库
 import EPlusUI from 'e-plus-ui';
-import 'e-plus-ui/lib/index.css'
+import 'e-plus-ui/styles/index.css'
 
 const app = createApp(App);
 app.use(EPlusUI);
@@ -49,10 +56,18 @@ app.mount('#app');
 
 #### 至此 EPlus-UI 就引入完成并且可以使用了。
 
-```html
-<!-- html -->
-<ep-button>默认按钮</ep-button>
-<ep-button type="primary">主要按钮</ep-button>
+```vue
+<script setup lang="ts"></script>
+
+<template>
+  <div class="ep-h-full">
+    <ep-card title="标题">
+      这是卡片
+      <template #title> 自定义标题 </template>
+    </ep-card>
+  </div>
+</template>
+
 ```
 
 <br/>
@@ -61,16 +76,42 @@ app.mount('#app');
 
 #### 您可以根据个人需要使用按需引用组件，按需引用时不需要使用 `app.use()` 方法注册。
 
-```js
-/*js*/
-import { EpButton } from 'e-plus-ui';
+
+```vue
+<script setup lang="ts">
+  import { EpCard } from 'e-plus-ui';
+</script>
+
+<template>
+  <div class="ep-h-full">
+    <ep-card title="标题">
+      这是卡片
+      <template #title> 自定义标题 </template>
+    </ep-card>
+  </div>
+</template>
 ```
 
 <br/>
 
-```html
-<!-- html -->
-<ep-button>点击</ep-button>
-```
+## 自动导入
+支持使用`unplugin-vue-components`完成自动导入组件
 
-<br/>
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx';
+
+// 自动导入插件
+import Components from 'unplugin-vue-components/vite'
+import { EPlusUIResolver  } from 'e-plus-ui/resolver'
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [vue(), vueJsx(), Components({
+    resolvers: [
+      EPlusUIResolver()
+    ]
+  })],
+})
+
+```
