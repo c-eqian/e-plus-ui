@@ -1,0 +1,1 @@
+import{p as s}from"./theme.mhYuHzPt.js";import{i as m}from"./emoji.Cx1VpAIv.js";import{d as t,r as n,o as i,I as l,u as a}from"./framework.S1p1NghW.js";const c=t({__name:"index",setup(u){const e=n("");return(p,o)=>(i(),l(a(s),{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=r=>e.value=r),"use-emojis":"",emojis:a(m)()},null,8,["modelValue","emojis"]))}});export{c as default};
