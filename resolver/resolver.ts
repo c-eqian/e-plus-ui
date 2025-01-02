@@ -1,17 +1,19 @@
-import {
-  kebabCase,
-  type ComponentInfo,
-  type ComponentResolver,
-  type SideEffectsInfo
-} from 'unplugin-vue-components';
+import type { ComponentInfo, ComponentResolver, SideEffectsInfo } from './type';
 export type EPlusUIOptions = {
   importStyle?: boolean | 'css';
+  importBaseStyles?: boolean;
 };
+function kebabCase(key: string) {
+  const result = key.replace(/([A-Z])/g, ' $1').trim();
+  return result.split(' ').join('-').toLowerCase();
+}
 function getSideEffects(partialName: string, options: EPlusUIOptions): SideEffectsInfo {
-  const { importStyle = true } = options;
+  const { importStyle = true, importBaseStyles = true } = options;
   if (!importStyle) return;
   const stylesFolder = 'e-plus-ui/styles';
-  return `${stylesFolder}/${partialName}/${partialName}.css`;
+  return importBaseStyles
+    ? [`${stylesFolder}/${partialName}/${partialName}.css`, `${stylesFolder}/base.css`]
+    : `${stylesFolder}/${partialName}/${partialName}.css`;
 }
 function resolverComponents(name: string, options: EPlusUIOptions): ComponentInfo | undefined {
   if (!name.match(/^Ep[A-Z]/)) return undefined;
@@ -28,7 +30,7 @@ function resolverComponents(name: string, options: EPlusUIOptions): ComponentInf
     sideEffects: getSideEffects(partialName, options)
   };
 }
-export function EPlusUIReSolver(options: EPlusUIOptions = {} as EPlusUIOptions): ComponentResolver {
+export function EPlusUIResolver(options: EPlusUIOptions = {} as EPlusUIOptions): ComponentResolver {
   return {
     type: 'component',
     resolve: name => {

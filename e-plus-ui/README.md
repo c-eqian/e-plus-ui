@@ -48,10 +48,23 @@ app.mount('#app');
 
 #### 至此 EPlus-UI 就引入完成并且可以使用了。
 
-```html
-<!-- html -->
-<ep-button>默认按钮</ep-button>
-<ep-button type="primary">主要按钮</ep-button>
+```vue
+<script setup lang="ts">
+  
+</script>
+
+<template>
+  <div class="ep-h-full">
+    <ep-card title="标题">
+      这是卡片
+      <template #title> 自定义标题 </template>
+    </ep-card>
+  </div>
+</template>
+
+<style scoped lang="scss">
+</style>
+
 ```
 
 <br/>
@@ -62,14 +75,70 @@ app.mount('#app');
 
 ```js
 /*js*/
-import { EpButton } from 'e-plus-ui';
+import { EpCard } from 'e-plus-ui';
 ```
 
 <br/>
 
-```html
-<!-- html -->
-<ep-button>点击</ep-button>
+```vue
+<script setup lang="ts">
+  
+</script>
+
+<template>
+  <div class="ep-h-full">
+    <ep-card title="标题">
+      这是卡片
+      <template #title> 自定义标题 </template>
+    </ep-card>
+  </div>
+</template>
+
+<style scoped lang="scss">
+</style>
+
 ```
 
 <br/>
+
+## 自动导入
+支持使用 `unplugin-auto-import` 插件来自动导入组件
+
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx';
+
+// 导入插件
+import Components from 'unplugin-vue-components/vite'
+import { EPlusUIResolver  } from 'e-plus-ui/resolver'
+export default defineConfig({
+  plugins: [vue(), vueJsx(), 
+    Components({
+    resolvers: [
+      EPlusUIResolver()
+    ]
+  })],
+})
+```
+
+<br/>
+
+```vue
+<script setup lang="ts">
+  
+</script>
+
+<template>
+  <div class="ep-h-full">
+    <ep-card title="标题">
+      这是卡片
+      <template #title> 自定义标题 </template>
+    </ep-card>
+  </div>
+</template>
+
+<style scoped lang="scss">
+</style>
+
+```

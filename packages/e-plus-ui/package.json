@@ -10,6 +10,13 @@
   "jsdelivr": "umd/index.js",
   "types": "types/index.d.ts",
   "style": "styles/index.css",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./*"
+      ]
+    }
+  },
   "vetur": {
     "tags": "types/tags.json",
     "attributes": "types/attributes.json"
@@ -49,7 +56,11 @@
       "types": "./global.d.ts"
     },
     "./lib/": "./lib/",
-    "./resolver/": "./resolver.mjs",
+    "./resolver": {
+      "import": "./resolver.mjs",
+      "require": "./resolver.cjs",
+      "types": "./resolver.d.ts"
+    },
     "./es/": "./es/",
     "./*": "./*",
     "./types/*": [

@@ -8,8 +8,12 @@ async function copyPackageFile() {
   await copy(readme, path.resolve(outDir, 'README.md'));
   const packageJson = path.resolve(buildEnterPath, 'package.json');
   await copy(packageJson, path.resolve(outDir, 'package.json'));
-  const resolver = path.resolve(projectRoot, 'resolver', 'dist', 'resolver.mjs');
-  await copy(resolver, path.resolve(outDir, 'resolver.mjs'));
+  const resolverExtname = ['.d.ts', '.mjs', '.cjs'];
+  const all = resolverExtname.map(extname => {
+    const resolver = path.resolve(projectRoot, 'resolver', 'dist', `resolver${extname}`);
+    return copy(resolver, path.resolve(outDir, `resolver${extname}`));
+  });
+  await Promise.all(all);
 }
 
 export async function copyFiles() {
