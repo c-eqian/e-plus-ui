@@ -8,7 +8,7 @@ import type { ILineProps } from './type';
 defineOptions({
   name: 'EpLine'
 });
-const slots = useSlots();
+const slots: any = useSlots();
 const hasText = computed(() => {
   if (slots.default) {
     const defaultSlots = slots.default?.();

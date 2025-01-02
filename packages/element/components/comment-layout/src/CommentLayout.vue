@@ -44,7 +44,7 @@ defineExpose({
       </div>
       <!--          二级评论-->
       <div
-        v-if="$slots.default && $slots.default()"
+        v-if="$slots.default"
         :style="computedSubStyle"
         class="ep-bg-[#f8f9fa] dark:ep-bg-[#181818] ep-comment-sub ep-mb-2 ep-p-2 ep-px-4 ep-rounded"
       >

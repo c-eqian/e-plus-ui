@@ -49,6 +49,7 @@
       "types": "./global.d.ts"
     },
     "./lib/": "./lib/",
+    "./resolver/": "./resolver.mjs",
     "./es/": "./es/",
     "./*": "./*",
     "./types/*": [

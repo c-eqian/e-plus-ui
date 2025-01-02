@@ -87,7 +87,7 @@ const _iconColor = computed(() => {
         <span>{{ state.reply ? '取消回复' : '回复' }}</span>
       </div>
     </div>
-    <div v-if="$slots.actions && $slots.actions()">
+    <div v-if="$slots.actions">
       <slot name="actions" />
     </div>
   </div>

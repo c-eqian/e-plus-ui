@@ -55,7 +55,7 @@ watch(
       <slot name="header" />
     </template>
     <template v-if="$slots.aside" #aside>
-      <slot name="header" />
+      <slot name="aside" />
     </template>
     <template v-if="$slots.footer" #footer>
       <slot name="footer" />

@@ -25,7 +25,6 @@
     "@types/prompts": "^2.4.9",
     "kolorist": "^1.8.0",
     "picocolors": "^1.1.1",
-    "prompts": "^2.4.2",
-    "unbuild": "^2.0.0"
+    "prompts": "^2.4.2"
   }
 }

@@ -82,7 +82,7 @@ onUnmounted(() => {
   >
     <!-- 如果没有slot则取text -->
     <span ref="textRef">
-      <slot v-if="$slots?.default?.()" name="default" />
+      <slot v-if="$slots?.default" name="default" />
       <span v-else>{{ val }}</span>
     </span>
     <el-icon v-if="textComputedRef" class="icon" @click="handleCopy">

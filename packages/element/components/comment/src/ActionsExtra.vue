@@ -12,7 +12,7 @@ const emits = defineEmits(['delete', 'complaint']);
         <More />
       </ElIcon>
     </template>
-    <slot v-if="$slots.actions && $slots.actions()" name="actions" />
+    <slot v-if="$slots.actions" name="actions" />
     <div v-else class="ep-flex ep-space-y-1 ep-flex-col">
       <el-button size="small" link type="danger" :icon="Delete" @click="emits('delete', 0)"
         >删 除</el-button

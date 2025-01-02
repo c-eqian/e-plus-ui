@@ -5,7 +5,6 @@ export default eslintPresets([
       'eslint.config.mjs',
       '**/*/components.ts',
       '**/*/*.d.ts',
-      '**/postcss.config.js',
       'web-types.config.js'
     ],
     name: 'test'
