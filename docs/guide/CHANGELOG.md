@@ -1,6 +1,43 @@
 # 更新日志 
 
 
+## [1.6.0](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.3...v1.6.0) (2025-01-02)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* 修复组件循环引用 ([5fd97a2](https://github.com/c-eqian/e-plus-ui/commit/5fd97a212271311b0fb7fdc111e9a196ac10889f))
+
+
+### ✏️ Documentation | 文档
+
+* 添加自动生成文档API脚本 ([fe082e2](https://github.com/c-eqian/e-plus-ui/commit/fe082e24b8ff7ba42f1fba06b6e2686d24b512cf))
+* 添加自动生成文档API脚本 ([1216084](https://github.com/c-eqian/e-plus-ui/commit/1216084fee371fb864e05ff62e11cf3468335c37))
+* 修改文档说明 ([c7a61ad](https://github.com/c-eqian/e-plus-ui/commit/c7a61add73b08fe4b60e37bf0f71ceb4e7c27d92))
+* 修改文档说明 ([df90768](https://github.com/c-eqian/e-plus-ui/commit/df907689cd498d49e0512f89c528fe4990d9456b))
+* **dialog:** 新增文档 ([662e517](https://github.com/c-eqian/e-plus-ui/commit/662e517bfb798edd033755b449797a56d0fbbdb2))
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* 优化dialog类型 ([62b1e1b](https://github.com/c-eqian/e-plus-ui/commit/62b1e1b4175c6ddc810342ad346e0741682db8e9))
+* **dialog:** 优化dialog；支持hooks调用 ([67b5af4](https://github.com/c-eqian/e-plus-ui/commit/67b5af4e9601d6986a4f54c80590befe4c9d906b))
+* **dialog:** 优化dialog按钮事件 ([5baa755](https://github.com/c-eqian/e-plus-ui/commit/5baa755aba50ee43041b3d79175c08a12a1d95d3))
+
+
+### ✨ Features | 新功能
+
+* 添加自动带入插件 ([44236c3](https://github.com/c-eqian/e-plus-ui/commit/44236c37a6e276c3b027265abce9937dedcd54c9))
+* 新增全局类型 ([218f5e5](https://github.com/c-eqian/e-plus-ui/commit/218f5e5a73f242e47b4d12a191f4a8b3fec695c3))
+* 优化自动导入组件插件 ([5aa01e7](https://github.com/c-eqian/e-plus-ui/commit/5aa01e7e17b8efaf4643992f6f1f7d6a9249ec05))
+* 优化dialog逻辑 ([94040f8](https://github.com/c-eqian/e-plus-ui/commit/94040f8e0fe2dda63b5b8c6aac77b2afd74aa158))
+* **dialog:** 标题超出支持显示省略号 ([bb7fc3d](https://github.com/c-eqian/e-plus-ui/commit/bb7fc3d44083878360e0bde0e75ea90d0cb9f352))
+
+
+### 💄 Styles | 风格
+
+* 修改忽略文件生效 ([d198a80](https://github.com/c-eqian/e-plus-ui/commit/d198a808538b5bd35417a7e5fe86933021e4780a))
+
 ## [1.6.0-beta.3](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.2...v1.6.0-beta.3) (2024-12-26)
 
 

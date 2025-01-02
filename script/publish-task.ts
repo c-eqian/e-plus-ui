@@ -13,7 +13,9 @@ export default series(
   removeOutputDir,
   buildResolver,
   series(
-    parallel(buildModules, typesDts, copyFiles, generateDocWebTypes, buildStyles, generateApi)
+    parallel(buildModules, typesDts, copyFiles, buildStyles),
+    generateDocWebTypes,
+    generateApi
   ),
   publish
 );

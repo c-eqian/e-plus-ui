@@ -88,4 +88,3 @@ export const generateApi = async () => {
     consola.success(`Generating ${chalk.blue(`${item.name}`)} for ${item.name}.md`);
   });
 };
-await generateApi();
