@@ -1,15 +1,14 @@
-import type { CallbackVoid } from '@e-plus-ui/utils/types';
+import type { BaseVNode, BaseVNodes, CallbackVoid, RenderVNode } from '@e-plus-ui/utils/types';
 import type { ButtonProps, DialogProps as ElDialogProps } from 'element-plus';
 import type { ComponentInternalInstance, ShallowRef, VNode } from 'vue';
 type Btn = 'confirm' | 'cancel';
-type Render = () => VNode;
 export type FooterBtnMap = {
   /**
    * 按钮类型，如果使用自定义render，随便一个值都可以
    */
   type?: Btn;
   // 自定义渲染
-  render?: Render;
+  render?: RenderVNode;
   /**
    * 按钮文本，如果使用`render`，该值无效
    */
@@ -31,7 +30,7 @@ export type RenderHeader = (
   close: CallbackVoid,
   titleId: string,
   titleClass: string
-) => VNode | VNode[] | Element | Element[] | string;
+) => BaseVNode | BaseVNodes;
 
 /**
  * 底部渲染
