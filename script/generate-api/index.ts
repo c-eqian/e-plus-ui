@@ -36,9 +36,8 @@ function clearLineBreak(text: unknown) {
   }
   return text ?? '';
 }
-function parameterMd(title: string, attributes: HtmlTagAttribute[]) {
-  let table = `# ${title}\n`;
-  table += `## Parameter 参数\n`;
+function parameterMd(attributes: HtmlTagAttribute[]) {
+  let table = `## Parameter 参数\n`;
   table += '| 参数 | 类型 | 可选 | 描述 | 默认值 |\n';
   table += '| --- | --- | --- | --- | --- |\n';
   attributes.forEach(attribute => {
@@ -73,14 +72,16 @@ export const generateApi = async () => {
 
   const data = typesJson.contributions.html?.tags?.map(tag => {
     const { name, events = [], slots = [], attributes = [] } = tag;
-    const paramsTable = attributes.length === 0 ? '' : parameterMd(name, attributes);
+    const paramsTable = attributes.length === 0 ? '' : parameterMd(attributes);
     const slotsTable = slots.length === 0 ? '' : slotsMd(slots);
     const eventsTable = events.length === 0 ? '' : eventsMd(events);
+    const title = `# ${name}\n`;
     return {
       name,
-      markdown: paramsTable + slotsTable + eventsTable
+      markdown: title + paramsTable + slotsTable + eventsTable
     };
   });
+  await fs.ensureDir(apiDocs);
   data?.forEach(item => {
     const outputFilePath = resolve(apiDocs, `${item.name}.md`);
     writeFileSync(outputFilePath, item.markdown, 'utf-8');

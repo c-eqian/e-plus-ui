@@ -1,9 +1,8 @@
+import type { CallbackVoid } from '@e-plus-ui/utils/types';
 import type { ButtonProps, DialogProps as ElDialogProps } from 'element-plus';
 import type { ComponentInternalInstance, ShallowRef, VNode } from 'vue';
-
 type Btn = 'confirm' | 'cancel';
 type Render = () => VNode;
-type CallbackVoid = () => void;
 export type FooterBtnMap = {
   /**
    * 按钮类型，如果使用自定义render，随便一个值都可以

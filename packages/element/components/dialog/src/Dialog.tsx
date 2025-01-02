@@ -7,10 +7,34 @@ import { dialogProps } from './dialogProps';
 import { useDialog } from './hooks/useDialog';
 import { useDialogProps } from './hooks/useDialogProps';
 import type { DialogSlots, SlotsKey } from './type';
+import type { CallbackVoid } from '@e-plus-ui/utils/types';
 
 export default defineComponent({
   name: 'EpDialog',
   props: dialogProps,
+  emits: {
+    'update:visible': (_v: boolean) => true,
+    /**
+     * 确认按钮，如果返回`false`或者返回一个promise,错误时将阻止关闭。或者直接调用done回调进行关闭
+     * */
+    confirmed: (_done: CallbackVoid) => true,
+    /**
+     * 关闭按钮 如果返回`false`或者返回一个promise,错误时将阻止关闭。或者直接调用done回调进行关闭
+     * */
+    canceled: (_done: CallbackVoid) => true,
+    /** 打开前 */
+    open: () => true,
+    /** 打开后*/
+    opened: () => true,
+    /** 关闭前 */
+    close: () => true,
+    /** 关闭后 */
+    closed: () => true,
+    /** 打开聚焦 */
+    openAutoFocus: () => true,
+    /** 关闭聚焦 */
+    closeAutoFocus: () => true
+  },
   slots: Object as SlotsType<DialogSlots>,
   setup(props) {
     const {
@@ -67,8 +91,7 @@ export default defineComponent({
         return <DialogFooter {...footerProps}></DialogFooter>;
       };
     };
-    const getSlots = (name: SlotsKey) => {
-      const slotsContent = this.$slots[name];
+    const prettierSlots = (slotsContent: any) => {
       if (slotsContent !== void 0) {
         return (...args: any[]) => slotsContent(...args);
       }
@@ -77,13 +100,25 @@ export default defineComponent({
     // 渲染插槽
     const renderSlots = () => {
       const _slots = {} as unknown as Record<SlotsKey, any>;
-      const defaultSlot = getSlots('default');
+      /**
+       * @slot 默认插槽
+       */
+      const defaultSlots = this.$slots.default;
+      const defaultSlot = prettierSlots(defaultSlots);
       if (defaultSlot !== void 0) {
         _slots.default = defaultSlot;
       }
-      const headerSlot = getSlots('header');
+      /**
+       * @slot 头部插槽
+       */
+      const headerSlots = this.$slots.header;
+      const headerSlot = prettierSlots(headerSlots);
       _slots.header = headerSlot !== void 0 ? headerSlot : renderHeader();
-      const footerSlot = getSlots('footer');
+      /**
+       * @slot 底部插槽
+       */
+      const footerSlots = this.$slots.footer;
+      const footerSlot = prettierSlots(footerSlots);
       _slots.footer = footerSlot !== void 0 ? footerSlot : renderFooter();
       return _slots;
     };
