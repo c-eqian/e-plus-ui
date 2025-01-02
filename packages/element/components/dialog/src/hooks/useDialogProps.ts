@@ -8,7 +8,7 @@ import type { DialogPropsWithEmits } from '../type.ts';
  * @param keys
  */
 export const useDialogProps = (
-  props: DialogPropsWithEmits,
+  props: Partial<DialogPropsWithEmits>,
   keys: (keyof DialogPropsWithEmits)[]
 ) => {
   return computed(() => {

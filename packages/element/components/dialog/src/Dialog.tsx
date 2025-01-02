@@ -1,17 +1,62 @@
 import { isFunction } from '@eqian/utils-vue';
 import { ElDialog } from 'element-plus';
-import { defineComponent, type SlotsType } from 'vue';
+import { defineComponent, type PropType, type SlotsType } from 'vue';
 import DialogFooter from './DialogFooter';
 import DialogHeader from './DialogHeader';
 import { dialogProps } from './dialogProps';
 import { useDialog } from './hooks/useDialog';
 import { useDialogProps } from './hooks/useDialogProps';
-import type { DialogSlots, SlotsKey } from './type';
+import type { DialogComponentProps, DialogSlots, FooterProps, SlotsKey } from './type';
 import type { CallbackVoid } from '@e-plus-ui/utils/types';
 
 export default defineComponent({
   name: 'EpDialog',
-  props: dialogProps,
+  props: {
+    /**
+     * 是否显示，重写`el-dialog`中的`visible`
+     * @default false
+     */
+    visible: {
+      type: Boolean,
+      required: true
+    },
+    /**
+     * 底部配置参数
+     */
+    footerProps: Object as PropType<FooterProps>,
+    /**
+     * 是否显示关闭图标
+     * @default true
+     */
+    isShowClose: {
+      type: Boolean,
+      default: true
+    },
+    /**
+     * 是否使用全屏
+     * @default false
+     */
+    isUseFullScreen: {
+      type: Boolean,
+      default: false
+    },
+    /**
+     * 是否使用顶部分割线
+     * @default true
+     */
+    isUseHeaderLine: {
+      type: Boolean,
+      default: true
+    },
+    /**
+     * el-dialog参数
+     */
+    dialogProps: {
+      type: Object as PropType<DialogComponentProps>,
+      default: () => ({}) as unknown as DialogComponentProps
+    },
+    ...dialogProps
+  },
   emits: {
     'update:visible': (_v: boolean) => true,
     /**

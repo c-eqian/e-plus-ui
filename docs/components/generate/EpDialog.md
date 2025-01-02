@@ -1,4 +1,13 @@
 # EpDialog
+## Parameter 参数
+| 参数 | 类型 | 可选 | 描述 | 默认值 |
+| --- | --- | --- | --- | --- |
+| visible | `boolean` | `true` | 是否显示，重写`el-dialog`中的`visible` | -
+| footerProps | `FooterProps` | `false` | 底部配置参数 | -
+| isShowClose | `boolean` | `false` | 是否显示关闭图标 | `true`
+| isUseFullScreen | `boolean` | `false` | 是否使用全屏 | `false`
+| isUseHeaderLine | `boolean` | `false` | 是否使用顶部分割线 | `true`
+| dialogProps | `DialogComponentProps` | `false` | el-dialog参数 | -
 ## Slots 插槽
 | 插槽名 | 描述 |
 |  ---  | --- |
