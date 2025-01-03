@@ -46,6 +46,7 @@
     "e-plus-ui": "workspace:*",
     "element-plus": "^2.9.0",
     "rollup-plugin-postcss": "^4.0.2",
+    "create-template": "workspace:*",
     "sass": "^1.81.0",
     "vue": "^3.5.13"
   },

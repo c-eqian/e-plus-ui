@@ -1,4 +1,4 @@
-import { eslintPresets, fileNamingPlugin } from '@eqian/eslint-config-preset';
+import { eslintPresets, fileNamingPlugin, pluginConfigPrettier, pluginPrettier } from '@eqian/eslint-config-preset';
 export default eslintPresets([
   {
     ignores: [
@@ -14,6 +14,19 @@ export default eslintPresets([
     rules: {
       'no-void': 'off'
     }
+  },
+  {
+    name: "prettier",
+    plugins: {
+      prettier: pluginPrettier,
+    },
+    rules: {
+      ...pluginConfigPrettier.rules,
+      ...pluginPrettier.configs.recommended.rules,
+      "prettier/prettier": ["warn", {
+        "endOfLine": "auto"
+      }],
+    },
   },
   {
     name: 'file-naming',

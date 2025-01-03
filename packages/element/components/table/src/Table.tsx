@@ -28,25 +28,48 @@ export default defineComponent({
   inheritAttrs: true,
   props: {
     data: {
-      type: Array as PropType<any[] /** 不知道数据的格式 */>,
+      /**
+       * 数据项
+       */
+      type: Array as PropType<any[]>,
       default: () => []
     },
+    /**
+     * 表格高度
+     * @default 100%
+     */
     height: {
       type: [Number, String],
       default: '100%'
     },
+    /**
+     * 悬浮样式
+     * @default dark
+     */
     tooltipEffect: {
       type: String,
       default: 'dark'
     },
+    /**
+     * 是否使用边框
+     * @default false
+     */
     border: {
       type: Boolean,
       default: false
     },
+    /**
+     * 是否支持排序
+     * @deprecated 暂时不维护
+     */
     sortable: {
       type: Boolean,
       default: false
     },
+    /**
+     * 高亮当前行
+     * @default false
+     */
     highlightCurrentRow: {
       type: Boolean,
       default: false
@@ -58,7 +81,19 @@ export default defineComponent({
       type: String,
       default: ''
     },
+    /**
+     * 数据列配置
+     * @deprecated 使用columns代替
+     * @since 1.7.0
+     */
     column: {
+      type: Array as PropType<TableColumnConfig[]>,
+      default: () => []
+    },
+    /**
+     * 数据列配置
+     */
+    columns: {
       type: Array as PropType<TableColumnConfig[]>,
       default: () => []
     },
@@ -88,18 +123,33 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    /**
+     * 分页总数
+     */
     paTotal: {
       type: Number,
       default: 0
     },
+    /**
+     * 当前页
+     * @default 1
+     */
     paPage: {
       type: Number,
       default: 1
     },
+    /**
+     * 分页大小
+     * @default 20
+     */
     paLimit: {
       type: Number,
       default: 20
     },
+    /**
+     * 可选分页大小
+     * @default [10, 20, 30, 50]
+     */
     paPageSizes: {
       type: Array<number>,
       default: () => [10, 20, 30, 50]
@@ -130,7 +180,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const epFormRef = ref<FormInstance>();
     const epTable = ref<InstanceType<typeof ElTable>>();
-    const columns = ref(props.column);
+    const columns = ref(props.columns ?? props.column);
     const dataComputed = ref(props.data);
     const columnsComputed = computed(() => {
       return columns.value.filter(columnsItem => {
@@ -337,6 +387,7 @@ export default defineComponent({
     const setTableProps = () => {
       const _props = Object.assign({}, this.$props, this.$attrs);
       Reflect.deleteProperty(_props, 'column');
+      Reflect.deleteProperty(_props, 'columns');
       Reflect.deleteProperty(_props, 'data');
       Reflect.deleteProperty(_props, 'formModelExtender');
       Reflect.deleteProperty(_props, 'useFormValidation');
