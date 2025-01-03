@@ -1,5 +1,5 @@
 import { isArray, isNumeric, useResizeObserver } from '@eqian/utils-vue';
-import { onBeforeUnmount, onMounted, type Ref } from 'vue';
+import { onBeforeUnmount, onMounted, unref, type Ref } from 'vue';
 const ensureHasValue = (value: any, defaultValue?: number): number => {
   if (!isNumeric(value)) {
     return parseInt(value, 10);
@@ -10,8 +10,9 @@ const ensureHasValue = (value: any, defaultValue?: number): number => {
  * 计算元素高度，包含内外边距
  * @param instance
  */
-export const useCalcElHeight = (instance: Ref<HTMLDivElement | null>) => {
-  if (!instance.value) {
+export const useCalcElHeight = (instance: HTMLDivElement | Ref<HTMLDivElement | null>) => {
+  const unInstance = unref(instance);
+  if (!unInstance) {
     return {
       pb: 0,
       pt: 0,
@@ -22,8 +23,8 @@ export const useCalcElHeight = (instance: Ref<HTMLDivElement | null>) => {
       ch: 0
     };
   }
-  const offsetHeight = ensureHasValue(instance.value.offsetHeight);
-  const { marginTop, marginBottom, paddingBottom, paddingTop } = getComputedStyle(instance.value);
+  const offsetHeight = ensureHasValue(unInstance.offsetHeight);
+  const { marginTop, marginBottom, paddingBottom, paddingTop } = getComputedStyle(unInstance);
   const pb = ensureHasValue(paddingBottom);
   const pt = ensureHasValue(paddingTop);
   const mb = ensureHasValue(marginTop);
@@ -51,7 +52,7 @@ export const useResizeListener = (fn: (...args) => void, _refs: Ref<HTMLDivEleme
         }
       });
     }
-
+    window.removeEventListener('resize', fn, false);
     window.addEventListener('resize', fn, false);
   });
   onBeforeUnmount(() => {

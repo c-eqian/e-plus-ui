@@ -481,10 +481,18 @@ export default defineComponent({
             Object.assign(paProps, createUpdateModel(__key__));
           }
         });
-        return h(EpPagination, {
-          ...paProps,
-          onPageChange: (...args: any[]) => this.$emit('page-change', ...args)
-        });
+        return h(
+          'div',
+          {
+            class: 'ep-table-pagination ep-min-h-[60px] ep-flex ep-justify-end ep-items-center'
+          },
+          [
+            h(EpPagination, {
+              ...paProps,
+              onPageChange: (...args: any[]) => this.$emit('page-change', ...args)
+            })
+          ]
+        );
       }
     };
     return (

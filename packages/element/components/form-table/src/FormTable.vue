@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { EpAdaptPage } from '@e-plus-ui/element/components/adapt-page';
+import {
+  EpAdaptPage,
+  useCalcElHeight,
+  type AdaptPageProps
+} from '@e-plus-ui/element/components/adapt-page';
 import { EpFormSchema } from '@e-plus-ui/element/components/form-schema';
 import { EpTable } from '@e-plus-ui/element/components/table';
-import { computed } from 'vue';
+import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
 import type { FormTableProps } from './type';
 const props = defineProps<FormTableProps>();
 const formSchema = computed(() => props.formSchema);
@@ -32,10 +36,27 @@ defineSlots<{
 defineOptions({
   name: 'EpFormTable'
 });
+const tableRef = useTemplateRef('tableRef');
+const config = ref<AdaptPageProps['config']>({
+  extraHeight: 0
+});
+const calcPaginationStyle = () => {
+  if (tableRef.value && tableProps.value.pagination) {
+    const paginationDom = tableRef.value.$el?.querySelector('.ep-table-pagination');
+    if (paginationDom) {
+      config.value!.extraHeight = useCalcElHeight(paginationDom)._h;
+    }
+  }
+};
+onMounted(() => {
+  nextTick(() => {
+    calcPaginationStyle();
+  });
+});
 </script>
 
 <template>
-  <EpAdaptPage>
+  <EpAdaptPage :config="config">
     <template #search>
       <slot v-if="$slots.search" name="search"></slot>
       <EpFormSchema v-else :config="formSchema"></EpFormSchema>
@@ -44,6 +65,7 @@ defineOptions({
       <slot v-if="$slots.content" name="content" :height="height"></slot>
       <EpTable
         v-else
+        ref="tableRef"
         :data="tableData"
         :columns="tableColumns"
         :height="height"

@@ -8,7 +8,7 @@ defineOptions({
 const props = withDefaults(defineProps<PaginationProps>(), {
   page: 1,
   limit: 20,
-  size: 'small',
+  size: 'default',
   pageSizes: () => [10, 20, 30, 50],
   pagerCount: 5,
   layout: 'total, sizes, prev, pager, next, jumper',
