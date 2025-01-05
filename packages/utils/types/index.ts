@@ -12,3 +12,5 @@ export type BaseVNodes = BaseVNode[];
  */
 export type RenderVNode<T = any> = (...args: T[]) => BaseVNode;
 export type RenderVNodes<T = any> = (...args: T[]) => BaseVNodes;
+
+export type Recordable<K extends string, V = unknown> = Record<K, V> | null;

@@ -4,14 +4,18 @@ import {
   useCalcElHeight,
   type AdaptPageProps
 } from '@e-plus-ui/element/components/adapt-page';
-import { EpFormSchema } from '@e-plus-ui/element/components/form-schema';
+import { EpFormSchema, useFormSchema } from '@e-plus-ui/element/components/form-schema';
 import { EpTable } from '@e-plus-ui/element/components/table';
+import { tryExecPromise } from '@e-plus-ui/utils';
+import { isFunction } from '@eqian/utils-vue';
 import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
-import type { FormTableProps } from './type';
+import type { FormTableEmits, FormTableProps } from './type';
 const props = defineProps<FormTableProps>();
+const emits = defineEmits<FormTableEmits>();
 const formSchema = computed(() => props.formSchema);
 const tableColumns = computed(() => props.tableConfig.columns);
-const tableData = computed(() => props.tableData);
+const tableData = ref<object[]>([]);
+const tableLoading = ref<boolean>(false);
 const tableProps = computed(() => {
   const { columns, data, column, ...tProps } = props.tableConfig;
   return tProps;
@@ -32,6 +36,16 @@ defineSlots<{
    * @param args
    */
   footer: (...args: any) => any;
+  /**
+   * 头部插槽
+   * @param args
+   */
+  header: (...args: any) => any;
+  /**
+   * 工具栏插槽
+   * @param args
+   */
+  toolbar: (...args: any) => any;
 }>();
 defineOptions({
   name: 'EpFormTable'
@@ -53,21 +67,56 @@ onMounted(() => {
     calcPaginationStyle();
   });
 });
+const { registry } = useFormSchema();
+const { api, params, requestHandler, responseHandler } = props;
+const handleSearch = async (...args: any[]) => {
+  if (isFunction(api)) {
+    let _params: any = {};
+    if (isFunction(requestHandler)) {
+      _params = await tryExecPromise(requestHandler, ...args);
+    }
+    let data = await tryExecPromise(api, { ...params, ..._params });
+    if (isFunction(responseHandler)) {
+      data = await tryExecPromise(responseHandler, data);
+    }
+    tableData.value = data.list ?? [];
+  } else {
+    emits('search', ...args);
+  }
+};
+const handleReset = (...args: any[]) => {
+  emits('reset', ...args);
+};
+defineExpose({});
 </script>
 
 <template>
   <EpAdaptPage :config="config">
+    <template v-if="$slots.header || props.title" #header>
+      <slot v-if="$slots.header" name="header"></slot>
+      <h3 v-else-if="props.title">{{ props.title }}</h3>
+    </template>
+    <template v-if="$slots.toolbar" #toolbar>
+      <slot name="toolbar"></slot>
+    </template>
     <template #search>
       <slot v-if="$slots.search" name="search"></slot>
-      <EpFormSchema v-else :config="formSchema"></EpFormSchema>
+      <EpFormSchema
+        v-else
+        :config="formSchema"
+        @search="handleSearch"
+        @reset="handleReset"
+        @registry="registry"
+      ></EpFormSchema>
     </template>
     <template #content="{ height }">
-      <slot v-if="$slots.content" name="content" :height="height"></slot>
+      <slot v-if="$slots.content" name="content" :height="height" :table-data="tableData"></slot>
       <EpTable
         v-else
         ref="tableRef"
         :data="tableData"
         :columns="tableColumns"
+        :loading="tableLoading"
         :height="height"
         v-bind="{ ...$attrs, ...tableProps }"
       ></EpTable>
