@@ -4,6 +4,11 @@
 | --- | --- | --- | --- | --- |
 | model | `FormContext['model']` | `false` |  | -
 | config | `FormSchema` | `false` |  | -
+## Slots 插槽
+| 插槽名 | 描述 |
+|  ---  | --- |
+| `query-buttons` | - |
+| `query-add` | - |
 ## Events 事件
 | 事件名 | 类型 |  描述 |
 | --- | --- |  --- |

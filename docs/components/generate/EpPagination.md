@@ -2,7 +2,7 @@
 ## Parameter 参数
 | 参数 | 类型 | 可选 | 描述 | 默认值 |
 | --- | --- | --- | --- | --- |
-| size | `large \| default \| small` | `false` | 分页大小 | `small`
+| size | `large \| default \| small` | `false` | 分页大小 | `default`
 | total | `number` | `true` | 数量总数 | -
 | page | `number` | `false` | 当前分页 | `1`
 | limit | `number` | `false` | 每页大小 | `20`
@@ -15,5 +15,5 @@
 | 事件名 | 类型 |  描述 |
 | --- | --- |  --- |
 | update:page | - |  |
-| pagination | - |  |
+| pageChange | - |  |
 | update:limit | - |  |

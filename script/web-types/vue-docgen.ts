@@ -1,12 +1,14 @@
 import { writeFile } from 'fs/promises';
 import path from 'path';
+import { isEmpty } from '@eqian/utils-vue';
 import chalk from 'chalk';
 import chalkLog from 'consola';
 import glob from 'fast-glob';
 import vueDoc from 'vue-docgen-api';
 import { outDir, packagesPath } from '../paths.ts';
 import { excludeFiles, getVersion } from '../utils.ts';
-import type { ExtraType, JSONSchemaForWebTypes } from './types.ts';
+import { defineParseMeta } from './parse-meta';
+import type { JSONSchemaForWebTypes, VueComponentDoc } from './types.ts';
 
 function handleMultiTypes(type: Record<string, any>) {
   switch (type.name) {
@@ -31,7 +33,9 @@ export async function generateDocWebTypes() {
     );
   };
   const files = await getVueFiles();
+  const { parseComponentMeta, getList } = defineParseMeta();
   const parseAll = files.map(async file => {
+    parseComponentMeta(file);
     return await vueDoc.parse(file, {
       addScriptHandlers: [
         // 添加自定义处理注释文件，获取组件说明
@@ -40,12 +44,13 @@ export async function generateDocWebTypes() {
             const leadingComments = componentDefinition.leadingComments[0];
             _documentation.set('description', leadingComments.value);
           }
+          _documentation.set('file', file);
           return Promise.resolve();
         }
       ]
     });
   });
-  const content: (ExtraType & vueDoc.ComponentDoc)[] = await Promise.all(parseAll);
+  const content: VueComponentDoc[] = await Promise.all(parseAll);
   /**
    * 写入包信息
    * 版本等
@@ -76,7 +81,7 @@ export async function generateDocWebTypes() {
           {
             name: doc.name ?? doc.displayName,
             description,
-            attributes: doc.props?.map(prop => {
+            attributes: (isEmpty(doc.props) ? getList(doc.file!).props : doc.props)?.map(prop => {
               return {
                 name: prop.name,
                 required: prop.required,
@@ -88,11 +93,11 @@ export async function generateDocWebTypes() {
                 default: prop.defaultValue?.value
               };
             }),
-            events: doc.events?.map(event => ({
+            events: (isEmpty(doc.events) ? getList(doc.file!).events : doc.events)?.map(event => ({
               name: event.name,
               description: event.description
             })),
-            slots: doc.slots?.map(slot => ({
+            slots: (isEmpty(doc.slots) ? getList(doc.file!).slots : doc.slots)?.map(slot => ({
               name: slot.name,
               description: slot.description
             })),

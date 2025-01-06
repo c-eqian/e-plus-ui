@@ -1,11 +1,15 @@
+import type vueDoc from 'vue-docgen-api';
+
 export type Name = string;
 export type Aliases = string[];
 export type Description = string;
 export type DocUrl = string;
 export type HtmlAttributeDefault = string;
 export type HtmlAttributeRequired = boolean;
+export type VueComponentDoc = ExtraType & vueDoc.ComponentDoc;
 export type ExtraType = {
   name?: string;
+  file?: string;
 };
 export type HtmlAttributeValue =
   | {

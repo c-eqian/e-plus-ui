@@ -26,7 +26,8 @@
     "gulp": "^5.0.0",
     "gulp-autoprefixer": "^9.0.0",
     "gulp-sass": "^6.0.0",
-    "magic-string": "^0.30.15"
+    "magic-string": "^0.30.15",
+    "vue-component-meta": "^2.2.0"
   },
   "dependencies": {
     "rollup": "^4.28.1",
