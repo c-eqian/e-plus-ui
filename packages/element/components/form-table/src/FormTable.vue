@@ -98,11 +98,11 @@ const handleCurrentPage = async () => {
 
 <template>
   <EpAdaptPage :config="config">
-    <template v-if="$slots.header || props.title" #header>
-      <slot v-if="$slots.header" name="header"></slot>
+    <template v-if="!!$slots.header || props.title" #header>
+      <slot v-if="!!$slots.header" name="header"></slot>
       <h3 v-else-if="props.title">{{ props.title }}</h3>
     </template>
-    <template v-if="$slots.toolbar" #toolbar>
+    <template v-if="!!$slots.toolbar" #toolbar>
       <slot name="toolbar"></slot>
     </template>
     <template #search>
@@ -128,7 +128,7 @@ const handleCurrentPage = async () => {
         @page-change="handleCurrentPage"
       ></EpTable>
     </template>
-    <template v-if="$slots.footer" #footer>
+    <template v-if="!!$slots.footer" #footer>
       <slot name="footer"></slot>
     </template>
   </EpAdaptPage>
