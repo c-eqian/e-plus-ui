@@ -2,6 +2,7 @@ packages:
   - 'play'
   - 'docs'
   - 'packages/**'
+  - '!packages/e-plus-ui'
   - 'create-template'
   - 'script'
   - 'resolver'

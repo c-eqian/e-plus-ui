@@ -76,7 +76,7 @@
   },
   "dependencies": {
     "@e-plus-ui/icons": "^1.3.1",
-    "@eqian/utils-vue": "^3.1.0"
+    "@eqian/utils-vue": "^3.1.4"
   },
   "browserslist": [
     "current node",
