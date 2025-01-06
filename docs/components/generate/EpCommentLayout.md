@@ -6,10 +6,10 @@
 ## Slots 插槽
 | 插槽名 | 描述 |
 |  ---  | --- |
+| `actions` | - |
 | `avatar` | - |
+| `content` | - |
+| `default` | - |
+| `editor-reply` | - |
 | `left` | - |
 | `right` | - |
-| `content` | - |
-| `actions` | - |
-| `editor-reply` | - |
-| `default` | - |

@@ -9,7 +9,7 @@
 ## Slots 插槽
 | 插槽名 | 描述 |
 |  ---  | --- |
-| `main` | - |
-| `header` | - |
 | `aside` | - |
 | `footer` | - |
+| `header` | - |
+| `main` | - |

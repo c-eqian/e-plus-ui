@@ -50,7 +50,7 @@ function slotsMd(slots: HtmlTagSlot[]) {
   table += '| 插槽名 | 描述 |\n';
   table += '|  ---  | --- |\n';
   slots.forEach(slot => {
-    table += `| \`${slot.name}\` | - |\n`;
+    table += `| \`${slot.name}\` | ${slot.description ?? '-'} |\n`;
   });
   return table;
 }

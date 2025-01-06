@@ -1,6 +1,6 @@
 import { writeFile } from 'fs/promises';
 import path from 'path';
-import { isEmpty } from '@eqian/utils-vue';
+import { useSort } from '@eqian/utils-vue';
 import chalk from 'chalk';
 import chalkLog from 'consola';
 import glob from 'fast-glob';
@@ -10,6 +10,31 @@ import { excludeFiles, getVersion } from '../utils.ts';
 import { defineParseMeta } from './parse-meta';
 import type { JSONSchemaForWebTypes, VueComponentDoc } from './types.ts';
 
+function mergeProps(props1: any[], props2: any[]) {
+  if (props1.length === 0) return props2;
+  if (props2.length === 0) return props1;
+  props1 = useSort(props1, {
+    order: 'asc',
+    key: 'name'
+  });
+  props2 = useSort(props2, {
+    order: 'asc',
+    key: 'name'
+  });
+  const [_props1, _props2] = props1.length > props2.length ? [props2, props1] : [props1, props2];
+  for (let i = 0; i < _props1.length; i++) {
+    const description = _props1[i].description;
+    const name = _props1[i].name;
+    const index = _props2?.findLastIndex(item => item.name === name);
+
+    if (description) {
+      if (index > -1 && !_props2[index].description) {
+        _props2[index].description = description;
+      }
+    }
+  }
+  return _props2;
+}
 function handleMultiTypes(type: Record<string, any>) {
   switch (type.name) {
     case 'union':
@@ -81,7 +106,7 @@ export async function generateDocWebTypes() {
           {
             name: doc.name ?? doc.displayName,
             description,
-            attributes: (isEmpty(doc.props) ? getList(doc.file!).props : doc.props)?.map(prop => {
+            attributes: mergeProps(getList(doc.file!).props ?? [], doc.props ?? [])?.map(prop => {
               return {
                 name: prop.name,
                 required: prop.required,
@@ -93,11 +118,11 @@ export async function generateDocWebTypes() {
                 default: prop.defaultValue?.value
               };
             }),
-            events: (isEmpty(doc.events) ? getList(doc.file!).events : doc.events)?.map(event => ({
+            events: mergeProps(getList(doc.file!).events ?? [], doc.events ?? [])?.map(event => ({
               name: event.name,
               description: event.description
             })),
-            slots: (isEmpty(doc.slots) ? getList(doc.file!).slots : doc.slots)?.map(slot => ({
+            slots: mergeProps(getList(doc.file!).slots ?? [], doc.slots ?? [])?.map(slot => ({
               name: slot.name,
               description: slot.description
             })),

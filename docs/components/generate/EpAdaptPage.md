@@ -6,8 +6,8 @@
 ## Slots 插槽
 | 插槽名 | 描述 |
 |  ---  | --- |
+| `content` | - |
+| `footer` | - |
 | `header` | - |
 | `search` | - |
 | `toolbar` | - |
-| `content` | - |
-| `footer` | - |

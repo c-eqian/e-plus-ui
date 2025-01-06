@@ -16,6 +16,6 @@
 ## Slots 插槽
 | 插槽名 | 描述 |
 |  ---  | --- |
-| `header` | - |
-| `toolbar` | - |
-| `footer` | - |
+| `footer` | 底部插槽 |
+| `header` | 头部插槽 |
+| `toolbar` | 工具栏插槽 |
