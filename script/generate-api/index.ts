@@ -39,16 +39,16 @@ function clearLineBreak(text: unknown) {
 function parameterMd(attributes: HtmlTagAttribute[]) {
   let table = `## Parameter 参数\n`;
   table += '| 参数 | 类型 | 可选 | 描述 | 默认值 |\n';
-  table += '| --- | --- | --- | --- | --- |\n';
+  table += '| :-------: | :-------: | :-------: | :-------: | :-------: |\n';
   attributes.forEach(attribute => {
-    table += `| ${attribute.name} | \`${replaceSplice((attribute.value as any)?.type)}\` | \`${attribute.required ?? false}\` | ${clearLineBreak(attribute.description) ?? ''} | ${prettierDefault(attribute)}\n`;
+    table += `| ${attribute.name} | \`${replaceSplice((attribute.value as any)?.type)}\` | \`${attribute.required ?? false}\` | ${clearLineBreak(attribute.description) ?? ''} | ${prettierDefault(attribute)}|\n`;
   });
   return table;
 }
 function slotsMd(slots: HtmlTagSlot[]) {
   let table = `## Slots 插槽\n`;
-  table += '| 插槽名 | 描述 |\n';
-  table += '|  ---  | --- |\n';
+  table += '|    插槽名    |  描述   |\n';
+  table += '|:---------:|:-----:|\n';
   slots.forEach(slot => {
     table += `| \`${slot.name}\` | ${slot.description ?? '-'} |\n`;
   });
@@ -56,8 +56,8 @@ function slotsMd(slots: HtmlTagSlot[]) {
 }
 function eventsMd(events: HtmlTagEvent[]) {
   let table = `## Events 事件\n`;
-  table += '| 事件名 | 类型 |  描述 |\n';
-  table += '| --- | --- |  --- |\n';
+  table += '|   事件名   |   类型     |  描述      |\n';
+  table += '| :-------: | :-------: | :-------: |\n';
   events.forEach(event => {
     table += `| ${event.name} | - | ${clearLineBreak(event.description)} |\n`;
   });
