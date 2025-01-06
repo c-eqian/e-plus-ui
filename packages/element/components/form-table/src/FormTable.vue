@@ -6,31 +6,17 @@ import {
 } from '@e-plus-ui/element/components/adapt-page';
 import { EpFormSchema, useFormSchema } from '@e-plus-ui/element/components/form-schema';
 import { EpTable } from '@e-plus-ui/element/components/table';
-import { tryExecPromise } from '@e-plus-ui/utils';
-import { isFunction } from '@eqian/utils-vue';
+import { isFunction, useTableList } from '@eqian/utils-vue';
 import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
-import type { FormTableEmits, FormTableProps } from './type';
+import type { FormTableProps } from './type';
 const props = defineProps<FormTableProps>();
-const emits = defineEmits<FormTableEmits>();
 const formSchema = computed(() => props.formSchema);
 const tableColumns = computed(() => props.tableConfig.columns);
-const tableData = ref<object[]>([]);
-const tableLoading = ref<boolean>(false);
 const tableProps = computed(() => {
   const { columns, data, column, ...tProps } = props.tableConfig;
   return tProps;
 });
 defineSlots<{
-  /**
-   * 搜索表单插槽
-   * @param args
-   */
-  search: (...args: any) => any;
-  /**
-   * 表格内容插槽
-   * @param args
-   */
-  content: (...args: any) => any;
   /**
    * 底部插槽
    * @param args
@@ -50,6 +36,39 @@ defineSlots<{
 defineOptions({
   name: 'EpFormTable'
 });
+const {
+  api,
+  params: _params,
+  requestHandler,
+  responseHandler,
+  listKey = 'list',
+  totalKey = 'total',
+  pageNumKey = 'pageNum',
+  pageSizeKey = 'pageSize'
+} = props;
+const { tableData, tableLoading, tableTotal, params, handleSearch, handleReset } = useTableList({
+  request: {
+    api,
+    params: {
+      [pageNumKey]: 1,
+      [pageSizeKey]: 10,
+      ..._params
+    },
+    pageNumKey,
+    pageSizeKey,
+    handleParams: $params => {
+      if (isFunction(requestHandler)) {
+        return requestHandler($params);
+      }
+      return $params;
+    }
+  },
+  response: {
+    responseHandler,
+    listKey,
+    totalKey
+  }
+});
 const tableRef = useTemplateRef('tableRef');
 const config = ref<AdaptPageProps['config']>({
   extraHeight: 0
@@ -68,26 +87,13 @@ onMounted(() => {
   });
 });
 const { registry } = useFormSchema();
-const { api, params, requestHandler, responseHandler } = props;
-const handleSearch = async (...args: any[]) => {
-  if (isFunction(api)) {
-    let _params: any = {};
-    if (isFunction(requestHandler)) {
-      _params = await tryExecPromise(requestHandler, ...args);
-    }
-    let data = await tryExecPromise(api, { ...params, ..._params });
-    if (isFunction(responseHandler)) {
-      data = await tryExecPromise(responseHandler, data);
-    }
-    tableData.value = data.list ?? [];
-  } else {
-    emits('search', ...args);
-  }
+const handleSearchClick = async (args: any) => {
+  params.value = { ...params.value, ...args };
+  await handleSearch();
 };
-const handleReset = (...args: any[]) => {
-  emits('reset', ...args);
+const handleCurrentPage = async () => {
+  await handleSearch();
 };
-defineExpose({});
 </script>
 
 <template>
@@ -100,25 +106,26 @@ defineExpose({});
       <slot name="toolbar"></slot>
     </template>
     <template #search>
-      <slot v-if="$slots.search" name="search"></slot>
       <EpFormSchema
-        v-else
         :config="formSchema"
-        @search="handleSearch"
+        @search="handleSearchClick"
         @reset="handleReset"
         @registry="registry"
       ></EpFormSchema>
     </template>
     <template #content="{ height }">
-      <slot v-if="$slots.content" name="content" :height="height" :table-data="tableData"></slot>
       <EpTable
-        v-else
         ref="tableRef"
+        v-bind="{ ...$attrs, ...tableProps }"
+        v-model:pa-limit="params[pageSizeKey] as number"
+        v-model:pa-page="params[pageNumKey] as number"
+        v-loading="tableLoading"
         :data="tableData"
         :columns="tableColumns"
-        :loading="tableLoading"
+        pagination
+        :pa-total="tableTotal"
         :height="height"
-        v-bind="{ ...$attrs, ...tableProps }"
+        @page-change="handleCurrentPage"
       ></EpTable>
     </template>
     <template v-if="$slots.footer" #footer>

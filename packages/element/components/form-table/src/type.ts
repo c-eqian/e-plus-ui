@@ -9,8 +9,8 @@ type TableConfig = {
   columns: TableColumnConfig[];
 } & ExtractPropTypes<typeof EpTable>;
 
-type PromiseAble = <T = unknown>() => Promise<T>;
-type RequestHandler = <T = any>(...args: T[]) => Recordable<string>;
+type PromiseAble<T = unknown> = () => Promise<T>;
+type RequestHandler = <T = object>(params: T) => NonNullable<Recordable<string>>;
 export type ResponseList<T extends object> = {
   list: T[];
   total: number;
@@ -29,11 +29,51 @@ export type UseFormTable = {
   /**
    * API
    */
-  api?: PromiseAble;
+  api: PromiseAble;
   /**
    * 请求固定参数，如果时动态参数，请使用 `beforeRequest`
    */
   params?: Recordable<string>;
+  /**
+   * 数据列表键，支持链式
+   * @default list
+   * @example
+   * ```js
+   * response = {
+   * data:{
+   *    list: [],
+   *    total:0
+   *    }
+   * }
+   * listKey='data.list'
+   * ```
+   */
+  listKey?: string;
+  /**
+   * 数据分页键
+   * @default total
+   * @example
+   * ```js
+   * response = {
+   * data:{
+   *    list: [],
+   *    total:0
+   *    }
+   * }
+   * totalKey='data.total'
+   * ```
+   */
+  totalKey?: string;
+  /**
+   * 分页页码键
+   * @default pageNum
+   */
+  pageNumKey?: string;
+  /**
+   * 分页大小键
+   * @default pageSize
+   */
+  pageSizeKey?: string;
   /**
    * 请求前处理
    */
@@ -55,10 +95,6 @@ export type FormTableProps = {
    * 表格配置
    */
   tableConfig: TableConfig;
-  /**
-   * 数据列表
-   */
-  tableData: any[];
   /**
    * 标题
    */

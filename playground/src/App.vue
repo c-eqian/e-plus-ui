@@ -135,10 +135,20 @@ const tableData = [
     address: 'No. 189, Grove St, Los Angeles'
   }
 ];
+const simulateRequest = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({
+        list: tableData,
+        total: tableData.length
+      });
+    }, 3000);
+  });
+};
 </script>
 
 <template>
-  <EpFormTable :form-schema="formSchema" :table-data="tableData" :table-config="tableConfig">
+  <EpFormTable :api="simulateRequest" :form-schema="formSchema" :table-config="tableConfig">
   </EpFormTable>
 </template>
 

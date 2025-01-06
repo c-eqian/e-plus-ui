@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   hidden: false
 });
 
-const emit = defineEmits(['update:page', 'pagination', 'update:limit']);
+const emit = defineEmits(['update:page', 'pageChange', 'update:limit']);
 const currentPage = computed({
   get() {
     return props.page;
@@ -37,10 +37,10 @@ function handleSizeChange(val: any) {
   if (currentPage.value * val > props.total) {
     currentPage.value = 1;
   }
-  emit('pagination', { page: currentPage.value, limit: val });
+  emit('pageChange', { page: currentPage.value, limit: val });
 }
 function handleCurrentChange(val: number) {
-  emit('pagination', { page: val, limit: pageSize.value });
+  emit('pageChange', { page: val, limit: pageSize.value });
 }
 </script>
 
