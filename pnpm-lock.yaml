@@ -30,8 +30,8 @@ importers:
         specifier: '>=2.3.1'
         version: 2.3.1(vue@3.5.13(typescript@5.6.2))
       '@eqian/utils-vue':
-        specifier: ^3.1.2
-        version: 3.1.2(vue@3.5.13(typescript@5.6.2))
+        specifier: ^3.1.4
+        version: 3.1.4
       create-template:
         specifier: workspace:*
         version: link:create-template
@@ -624,6 +624,9 @@ packages:
 
   '@eqian/utils-vue@3.1.2':
     resolution: {integrity: sha512-2F5r5ZuZFsxjIOoOo+2KbLYHzpW/epCyzlpHZKZrFfiIF1zzL/xO3d0eJncW4b5hsu8yNvpl7N9o0tQVG75k4A==}
+
+  '@eqian/utils-vue@3.1.4':
+    resolution: {integrity: sha512-DChKjMMTuTP8OFgW2FAsPIaXBD/Qycz03pzimjHl82ds3s4QIywvcR0kzTe0hN0+6Fh4QmTChqzctpMvl9cAHg==}
 
   '@esbuild/aix-ppc64@0.19.12':
     resolution: {integrity: sha512-bmoCYyWdEL3wDQIVbcyzRyeKLgk2WtWLTWz1ZIAZF/EGbNOwSA6ew3PftJ1PqMiOOGu0OyFMzG53L0zqIpPeNA==}
@@ -6527,6 +6530,8 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  '@eqian/utils-vue@3.1.4': {}
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true
