@@ -1,13 +1,9 @@
 import type { FormSchema } from '@e-plus-ui/element/components/form-schema';
 import type { EpTable, TableColumnConfig } from '@e-plus-ui/element/components/table';
-import type { Recordable } from '@e-plus-ui/utils';
-import type { Component, VNodeProps } from 'vue';
-type ExtractPropTypes<T extends Component> = T extends new (...args: any) => any
-  ? Omit<InstanceType<T>['$props'], keyof VNodeProps>
-  : never;
+import type { ComponentProps, Recordable } from '@e-plus-ui/utils';
 type TableConfig = {
   columns: TableColumnConfig[];
-} & ExtractPropTypes<typeof EpTable>;
+} & ComponentProps<typeof EpTable>;
 
 type PromiseAble<T = unknown> = () => Promise<T>;
 type RequestHandler = <T = object>(params: T) => NonNullable<Recordable<string>>;
