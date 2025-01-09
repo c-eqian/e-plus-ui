@@ -7,7 +7,7 @@ import { useProps } from './hooks/useProps';
 import type { OperationType, TableColumnConfig } from './type';
 
 export default defineComponent({
-  name: 'EpButtons',
+  name: 'Buttons',
   props: {
     column: {
       type: Object as PropType<TableColumnConfig>,

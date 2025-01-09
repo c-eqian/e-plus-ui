@@ -17,7 +17,7 @@ import GroupComponent from './GroupBy';
 import { useColProps, useFormItemProps, useFormProps } from './hooks/useFormItem';
 import type { FormItemsSchema, FormSchemaType, IGroupOptions } from './type';
 export default defineComponent({
-  name: 'EpFormItem',
+  name: 'FormItem',
   props: {
     item: {
       type: Object as PropType<FormItemsSchema>,
