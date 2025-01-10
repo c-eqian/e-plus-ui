@@ -17,12 +17,12 @@
 
 # 开发
 交互式创建组件模板
-## 本地安装
-项目根目录下运行
+## 本地安装（默认pnpm install 时已经运行）
+项目根目录下运行 如果没有执行`pnpm run build:create`，可手动执行
 ```shell
 pnpm run build:create
 ```
-## 链接
+## 或者链接
 项目根目录下运行
 ```shell
 npm link ./create-template

@@ -26,6 +26,7 @@
     "beta": "pnpm run version --prerelease beta && pnpm run -C script release",
     "release": "pnpm run version && pnpm run -C script release",
     "prepare": "husky",
+    "postinstall": "pnpm run build:create",
     "commit": "git add . && git-cz && git push"
   },
   "packageManager": "pnpm@9.13.2",
