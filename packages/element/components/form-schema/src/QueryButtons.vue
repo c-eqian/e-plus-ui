@@ -21,7 +21,7 @@ const handleUnfolding = () => {
 </script>
 
 <template>
-  <div>
+  <div class="ep-flex ep-justify-end">
     <slot name="query-buttons" />
     <template v-if="!$slots['query-buttons']">
       <ElButton type="primary" icon="Search" @click="emits('search')">搜索</ElButton>

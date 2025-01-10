@@ -10,6 +10,7 @@ import {
   reactive,
   ref,
   toRef,
+  watch,
   type PropType,
   type Ref,
   type SlotsType,
@@ -48,6 +49,8 @@ export default defineComponent({
     );
     const epFormSchemaRef = ref<FormInstance>();
     const listenerEvents = ref();
+    const isToggle = ref(false);
+    const filterSpan = ref(24);
     /**
      * 如果不传入model
      * 内部自动根据表单项创建，使用useFormSchema方法获取值
@@ -117,14 +120,27 @@ export default defineComponent({
     const listener = (args: Record<string, any>) => {
       listenerEvents.value = args;
     };
+    // todo 应该动态计算搜索按钮所占宽度设置
+    const calcFilterButtonsSpan = () => {
+      if (renderItems.value.length < 3) return 8;
+      if ((renderItems.value.length + 1) % 3 === 0) return 8;
+      return 24;
+    };
     onMounted(() => {
       emit('registry', getInstance);
     });
+    watch(
+      () => isToggle.value,
+      () => {
+        filterSpan.value = calcFilterButtonsSpan();
+      }
+    );
     return {
       formModel,
       formProps,
       renderItems,
       needToggle,
+      isToggle,
       emit,
       epFormSchemaRef,
       updateSearchSchema,
@@ -140,6 +156,7 @@ export default defineComponent({
       createModel,
       listener,
       resetFields,
+      filterSpan,
       clearValidate,
       validateField
     };
@@ -157,26 +174,36 @@ export default defineComponent({
       }
       return true;
     };
-    const createItemRender = (isSearch: boolean) => {
-      return h(ElRow, null, () => {
-        const columns = this.formProps.columns;
-        return this.renderItems.map((item: FormItemsSchema) => {
-          return renderDynamicShow(item)
-            ? h(
-                FormItem,
-                {
-                  item,
-                  key: item.prop || item.label,
-                  isSearch,
-                  columns
-                },
-                {
-                  ...this.$slots
-                }
-              )
-            : undefined;
-        });
-      });
+    const createItemRender = (isSearch: boolean, inline: boolean) => {
+      return h(
+        ElRow,
+        {
+          class: 'ep-form-schema-row'
+        },
+        () => {
+          const columns = this.formProps.columns;
+          const itemsNode: any[] = this.renderItems.map((item: FormItemsSchema) => {
+            return renderDynamicShow(item)
+              ? h(
+                  FormItem,
+                  {
+                    item,
+                    key: item.prop || item.label,
+                    isSearch,
+                    columns
+                  },
+                  {
+                    ...this.$slots
+                  }
+                )
+              : undefined;
+          });
+          if (isSearch && inline) {
+            itemsNode.push(<ElCol span={this.filterSpan}>{createRenderFilter()}</ElCol>);
+          }
+          return itemsNode;
+        }
+      );
     };
     const createRenderFilter = () => {
       return h(
@@ -190,6 +217,7 @@ export default defineComponent({
             this.emit('reset', this.formModel);
           },
           onToggle: (v: boolean) => {
+            this.isToggle = v;
             this.updateSearchSchema(v);
           }
         },
@@ -200,20 +228,12 @@ export default defineComponent({
     };
     const createRow = () => {
       const isSearch = !!this.formProps.isSearch;
-      const inline = !!this.formProps.inline;
+      const inline = this.formProps.inline === void 0 ? true : !!this.formProps.inline;
       const renderNodes: VNode[] = [];
-      const formItemsRender = createItemRender(isSearch);
-      if (isSearch && inline) {
-        return (
-          <div class={'ep-flex ep-w-full'}>
-            <div class={'ep-flex-1'}>{formItemsRender}</div>
-            {createRenderFilter()}
-          </div>
-        );
-      }
+      const formItemsRender = createItemRender(isSearch, inline);
       renderNodes.push(formItemsRender);
       // 处理查询
-      if (isSearch) {
+      if (isSearch && !inline) {
         const row = (
           <ElRow>
             <ElCol class={'!ep-flex ep-justify-end ep-w-100%'}>{createRenderFilter()}</ElCol>

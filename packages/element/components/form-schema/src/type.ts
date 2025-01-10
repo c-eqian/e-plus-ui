@@ -227,7 +227,7 @@ export type FormSchema<T = any> = {
   columns?: number;
   /**
    * 搜索按钮是否与搜索框在同一行
-   * @default false
+   * @default true
    */
   inline?: boolean;
   /**
