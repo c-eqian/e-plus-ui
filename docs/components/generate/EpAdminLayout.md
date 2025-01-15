@@ -13,3 +13,4 @@
 | `footer` | - |
 | `header` | - |
 | `main` | - |
+| `tab-bar` | - |

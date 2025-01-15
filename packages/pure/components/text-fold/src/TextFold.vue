@@ -55,12 +55,11 @@ onUnmounted(() => {
         <slot />
       </div>
     </div>
-    <div class="ep-text__action ep-select-none">
-      <div
-        v-if="isMaxLine && computedIsFold && props.position === 'left'"
-        class="ep-text__btn"
-        @click="currentIsFold = !currentIsFold"
-      >
+    <div
+      v-if="isMaxLine && computedIsFold && props.position === 'left'"
+      class="ep-text__action ep-select-none"
+    >
+      <div class="ep-text__btn" @click="currentIsFold = !currentIsFold">
         <slot name="expand" :is-fold="currentIsFold">
           <el-button type="primary" plain link>{{ currentIsFold ? '展开' : '收起' }}</el-button>
         </slot>

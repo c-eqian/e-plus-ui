@@ -12,6 +12,7 @@ const props = useComputedProps();
       <ElHeader :class="props.classNames?.headerClass">
         <slot name="header" />
       </ElHeader>
+      <slot name="tab-bar"></slot>
       <ElContainer>
         <slot v-if="$slots.aside" name="aside" />
         <Aside v-else :class="props.classNames?.asideClass" />

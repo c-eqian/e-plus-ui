@@ -36,6 +36,7 @@
   .ep-text-box {
     display: flex;
     > div {
+      width: 100%;
       &::before {
         content: '';
         float: right;

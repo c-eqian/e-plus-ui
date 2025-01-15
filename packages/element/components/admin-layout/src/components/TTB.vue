@@ -12,6 +12,7 @@ const props = useComputedProps();
         <ElHeader :class="props.classNames?.headerClass">
           <slot name="header" />
         </ElHeader>
+        <slot name="tab-bar"></slot>
         <ElMain
           v-if="$slots.main"
           class="ep-w-full ep-h-full"

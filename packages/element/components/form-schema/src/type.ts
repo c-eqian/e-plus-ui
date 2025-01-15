@@ -60,7 +60,7 @@ export type ComponentTypeProps = {
 export type ComponentPropsByType<P> = P extends keyof ComponentTypeProps
   ? ComponentTypeProps[P]
   : Record<string, any>;
-export type ComponentSlots = {
+type ComponentSlots = {
   slots: {
     [name: string]: Slot | undefined;
   };

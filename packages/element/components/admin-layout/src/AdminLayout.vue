@@ -54,6 +54,9 @@ watch(
     <template v-if="$slots.header" #header>
       <slot name="header" />
     </template>
+    <template v-if="$slots['tab-bar']" #tab-bar>
+      <slot name="tab-bar" />
+    </template>
     <template v-if="$slots.aside" #aside>
       <slot name="aside" />
     </template>
