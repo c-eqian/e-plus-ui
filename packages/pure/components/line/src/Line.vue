@@ -59,7 +59,7 @@ const styleName = computed(() => {
 <template>
   <div :style="varStyles">
     <div class="ep-line" :class="styleName">
-      <span :class="{ 'ep-line-text': hasText }">
+      <span v-if="hasText" :class="{ 'ep-line-text': hasText }">
         <slot name="default" />
       </span>
     </div>

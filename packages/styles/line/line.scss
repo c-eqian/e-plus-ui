@@ -18,11 +18,11 @@
   }
   &-vertical {
     position: relative;
-    top: -.06em;
+    top: calc((100% - 1rem) / 2 - 2px);
     display: inline-block;
     height: 1rem;
     margin: var(--ep-line-margin);
-    vertical-align: middle;
+    //vertical-align: middle;
     border-top: 0;
     border-inline-start: var(--ep-line-border-width) solid var(--ep-line-border-color);
   }
