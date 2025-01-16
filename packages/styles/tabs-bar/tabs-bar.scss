@@ -1,0 +1,29 @@
+.ep-tabs-scroll {
+  mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+}
+.ep-tab-name {
+  position: relative;
+  width: 100%;
+  margin-top: 2px;
+  text-align: center;
+  box-sizing: content-box;
+  padding: 0 4px;
+}
+.ep-tab-name .ep-text-fold .ep-text-box {
+  word-break: break-all!important;
+}
+.is-active {
+  .ep-tab-name {
+    color: #3a70e4;
+    background-color: #e0e9fb;
+  }
+}
+.ep-tabs {
+  &--item {
+    height: 36px;
+    position: relative;
+    &:hover:not(.is-active) {
+      background-color: var(--el-fill-color-light);
+    }
+  }
+}

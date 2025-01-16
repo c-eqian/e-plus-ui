@@ -21,3 +21,5 @@ export * from './components/auth-page';
 export * from './components/dialog';
 
 export * from './components/form-table';
+
+export * from './components/tabs-bar';
