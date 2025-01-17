@@ -102,60 +102,62 @@ const handleItem = (path: string, tab: any) => {
       }"
     >
       <div class="ep-w-full ep-flex-1 ep-tabs ep-flex ep-px-2.5">
-        <div
-          v-for="(tab, index) in computeTabs"
-          :key="tab.path"
-          :data-tab-index="index"
-          :data-tab-active="ableGetterValue === tab.path"
-          :class="ableGetterValue === tab.path ? 'is-active' : ''"
-          :style="props.tabStyle"
-          class="ep-tabs--item ep-flex ep-flex-shrink-0 ep-min-w-24 ep-max-w-[var(--ep-tab-max-width)] ep-cursor-pointer ep-transition-opacity ep-duration-150"
-          @click="() => handleItem(tab.path, tab)"
-        >
+        <TransitionGroup name="ep-slide-left">
           <div
-            :class="
-              ableGetterValue === tab.path
-                ? 'is-active ep-z-10 ep-bg-[var(--el-color-primary)]/15'
-                : 'ep-z-0'
-            "
-            class="ep-tab-name ep-rounded-tr-lg ep-rounded-tl-lg ep-group ep-select-none ep-w-full ep-flex ep-items-center"
+            v-for="(tab, index) in computeTabs"
+            :key="tab.path"
+            :data-tab-index="index"
+            :data-tab-active="ableGetterValue === tab.path"
+            :class="ableGetterValue === tab.path ? 'is-active' : ''"
+            :style="props.tabStyle"
+            class="ep-tabs--item ep-flex ep-flex-shrink-0 ep-min-w-24 ep-max-w-[var(--ep-tab-max-width)] ep-cursor-pointer ep-transition-opacity ep-duration-150"
+            @click="() => handleItem(tab.path, tab)"
           >
-            <ep-icon width="14" height="14">
-              <component :is="tab.icon" />
-            </ep-icon>
-            <ep-text-fold
-              class="ep-flex-1 ep-pl-1 ep-flex ep-items-center"
-              :line="1"
-              :title="tab.name"
-            >
-              {{ tab.name }}
-            </ep-text-fold>
             <div
-              v-if="props.closeable"
-              class="hover:ep-scale-125 ep-ml-1 ep-close-btn"
-              @click="removeTab($event, tab)"
+              :class="
+                ableGetterValue === tab.path
+                  ? 'is-active ep-z-10 ep-bg-[var(--el-color-primary)]/15'
+                  : 'ep-z-0'
+              "
+              class="ep-tab-name ep-rounded-tr-lg ep-rounded-tl-lg ep-group ep-select-none ep-w-full ep-flex ep-items-center"
             >
               <ep-icon width="14" height="14">
-                <Close />
+                <component :is="tab.icon" />
               </ep-icon>
+              <ep-text-fold
+                class="ep-flex-1 ep-pl-1 ep-flex ep-items-center"
+                :line="1"
+                :title="tab.name"
+              >
+                {{ tab.name }}
+              </ep-text-fold>
+              <div
+                v-if="props.closeable"
+                class="hover:ep-scale-125 ep-ml-1 ep-close-btn"
+                @click="removeTab($event, tab)"
+              >
+                <ep-icon width="14" height="14">
+                  <Close />
+                </ep-icon>
+              </div>
+              <svg
+                class="ep-absolute ep-bottom-0 group-[.is-active]:ep-fill-[#e0e9fb] -ep-left-[7px] ep-fill-transparent ep-transition-all ep-duration-150"
+                height="7"
+                width="7"
+              >
+                <path d="M 0 7 A 7 7 0 0 0 7 0 L 7 7 Z" />
+              </svg>
+              <svg
+                class="ep-absolute ep-bottom-0 group-[.is-active]:ep-fill-[#e0e9fb] -ep-right-[7px] ep-fill-transparent ep-transition-all ep-duration-150"
+                height="7"
+                width="7"
+              >
+                <path d="M 0 0 A 7 7 0 0 0 7 7 L 0 7 Z" />
+              </svg>
             </div>
-            <svg
-              class="ep-absolute ep-bottom-0 group-[.is-active]:ep-fill-[#e0e9fb] -ep-left-[7px] ep-fill-transparent ep-transition-all ep-duration-150"
-              height="7"
-              width="7"
-            >
-              <path d="M 0 7 A 7 7 0 0 0 7 0 L 7 7 Z" />
-            </svg>
-            <svg
-              class="ep-absolute ep-bottom-0 group-[.is-active]:ep-fill-[#e0e9fb] -ep-right-[7px] ep-fill-transparent ep-transition-all ep-duration-150"
-              height="7"
-              width="7"
-            >
-              <path d="M 0 0 A 7 7 0 0 0 7 7 L 0 7 Z" />
-            </svg>
+            <ep-line color="#e4e4e7" margin="2" direction="vertical" />
           </div>
-          <ep-line color="#e4e4e7" margin="2" direction="vertical" />
-        </div>
+        </TransitionGroup>
       </div>
     </div>
     <el-button

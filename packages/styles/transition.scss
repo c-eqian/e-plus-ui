@@ -1,0 +1,9 @@
+.ep-slide-left-enter-active,
+.ep-slide-left-leave-active {
+  transition: 0.25s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
+.ep-slide-left-enter-from,
+.ep-slide-left-leave-to {
+  opacity: 0;
+  transform: translate(-15px);
+}
