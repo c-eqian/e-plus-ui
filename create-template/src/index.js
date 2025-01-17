@@ -16,7 +16,8 @@ import {
   createType,
   createVueTemplate,
   getSrcDir,
-  updateComponentFile
+  updateComponentFile,
+  updateGlobalComponentFile
 } from './template.js';
 /**
  * 默认项目名称
@@ -75,8 +76,7 @@ function isEmpty(_path) {
 }
 async function init() {
   // 获取不带前缀的参数，即组件目录名称， 如button，同时，也会创建一个名为Button.(vue,tsx)组件
-  const argComponentName = formatTargetDir(argv._[0]);
-  let componentName = argComponentName;
+  let componentName = formatTargetDir(argv._[0]);
   let componentType;
   let result;
   try {
@@ -168,6 +168,7 @@ async function init() {
   const basePath = getSrcDir(_componentType, newComponentName);
   const enterPath = resolve(basePath, 'index.ts');
   const typePath = resolve(basePath, 'src', 'type.ts');
+  const globalPath = resolve(process.cwd(), 'types', 'global.d.ts');
   const codePath = resolve(basePath, 'src', `${__componentName}.${framework}`);
   const stylePath = resolve(
     process.cwd(),
@@ -182,7 +183,8 @@ async function init() {
     framework === 'tsx'
       ? createTsxTemplate(__componentName, _exportName, codePath, desc)
       : createVueTemplate(__componentName, _exportName, codePath, desc),
-    updateComponentFile(_componentType, newComponentName)
+    updateComponentFile(_componentType, newComponentName),
+    updateGlobalComponentFile(globalPath, _componentType, _exportName)
   ]);
   if (useCss) {
     await createStyle(stylePath);

@@ -1,4 +1,4 @@
-import { appendFile, writeFile } from 'fs/promises';
+import { appendFile, readFile, writeFile } from 'fs/promises';
 import { dirname, resolve } from 'node:path';
 import { ensureDir, ensureFile } from 'fs-extra';
 
@@ -122,4 +122,97 @@ export async function updateComponentFile(componentType, componentName) {
   const base = resolve(process.cwd(), 'packages', componentType, 'components.ts');
   await ensureFile(base);
   await appendFile(base, `\n\nexport * from './components/${componentName}';`);
+}
+
+// 更新全局组件声明
+/**
+ *
+ * @param code{string}
+ * @return {{[p: string]: *}}
+ */
+function extractImports(code) {
+  return Object.fromEntries(
+    Array.from(code.matchAll(/['"]?([^\s'"]+)['"]?\s*:\s*(.+?)[,;\n]/g)).map(i => [i[1], i[2]])
+  );
+}
+
+/**
+ *
+ * @param code
+ * @return {any}
+ */
+function parseDeclaration(code) {
+  if (!code) return;
+  const multilineCommentsRE = /\/\*.*?\*\//gs;
+  const singleLineCommentsRE = /\/\/.*$/gm;
+  code = code.replace(multilineCommentsRE, '').replace(singleLineCommentsRE, '');
+
+  const imports = {
+    component: {},
+    directive: {}
+  };
+  const componentDeclaration = /export\s+interface\s+GlobalComponents\s*\{.*?\}/s.exec(code)?.[0];
+  if (componentDeclaration) imports.component = extractImports(componentDeclaration);
+
+  const directiveDeclaration = /export\s+interface\s+ComponentCustomProperties\s*\{.*?\}/s.exec(
+    code
+  )?.[0];
+  if (directiveDeclaration) imports.directive = extractImports(directiveDeclaration);
+
+  return imports;
+}
+function stringifyDeclarationImports(imports) {
+  return Object.entries(imports)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([name, v]) => {
+      if (!/^\w+$/.test(name)) name = `'${name}'`;
+      return `${name}: ${v}`;
+    });
+}
+/**
+ *
+ * @return {any}
+ */
+function getDeclaration(originalImports, componentType, exportName) {
+  const entry = `typeof import('@e-plus-ui/${componentType}/components')['${exportName}']`;
+  const declarations = {
+    component: stringifyDeclarationImports({ ...originalImports?.component, [exportName]: entry }),
+    directive: stringifyDeclarationImports({ ...originalImports?.directive })
+  };
+
+  let code = `
+export {}
+ // 全局类型组件
+/* prettier-ignore */
+declare module 'vue' {`;
+
+  if (Object.keys(declarations.component).length > 0) {
+    code += `
+  export interface GlobalComponents {
+    ${declarations.component.join('\n    ')}
+  }`;
+  }
+  if (Object.keys(declarations.directive).length > 0) {
+    code += `
+  export interface ComponentCustomProperties {
+    ${declarations.directive.join('\n    ')}
+  }`;
+  }
+  code += '\n}\n';
+  return code;
+}
+/**
+ * 更新全局组件声明
+ * @param path{string} 全局组件声明
+ * @param componentType{string} 组件类型
+ * @param exportName{string} 导出名
+ * @return {Promise<void>}
+ */
+export async function updateGlobalComponentFile(path, componentType, exportName) {
+  await ensureFile(path);
+  const originalContent = await readFile(path, 'utf-8');
+  const originalImports = parseDeclaration(originalContent);
+  const code = getDeclaration(originalImports, componentType, exportName);
+  if (!code) return;
+  if (code !== originalContent) await writeFile(path, code);
 }
