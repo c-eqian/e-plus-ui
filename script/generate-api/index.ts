@@ -38,11 +38,22 @@ function clearLineBreak(text: unknown) {
 }
 function parameterMd(attributes: HtmlTagAttribute[]) {
   let table = `## Parameter 参数\n`;
-  table += '| 参数 | 类型 | 可选 | 描述 | 默认值 |\n';
+  table += '| 参数 | 类型 | 必选 | 描述 | 默认值 |\n';
   table += '| :-------: | :-------: | :-------: | :-------: | :-------: |\n';
-  attributes.forEach(attribute => {
-    table += `| ${attribute.name} | \`${replaceSplice((attribute.value as any)?.type)}\` | \`${attribute.required ?? false}\` | ${clearLineBreak(attribute.description) ?? ''} | ${prettierDefault(attribute)}|\n`;
-  });
+  attributes
+    .sort((a, b) => {
+      // 如果a.required不存在（即undefined），则将其视为false；同理处理b.required
+      const aRequired = a.required ?? false;
+      const bRequired = b.required ?? false;
+
+      // 排序：required为true的对象排在前面
+      if (aRequired && !bRequired) return -1; // a排在b前
+      if (!aRequired && bRequired) return 1; // b排在a前
+      return 0; // 位置不变
+    })
+    .forEach(attribute => {
+      table += `| ${attribute.name} | \`${replaceSplice((attribute.value as any)?.type)}\` | \`${attribute.required ?? false}\` | ${clearLineBreak(attribute.description) ?? ''} | ${prettierDefault(attribute)}|\n`;
+    });
   return table;
 }
 function slotsMd(slots: HtmlTagSlot[]) {
