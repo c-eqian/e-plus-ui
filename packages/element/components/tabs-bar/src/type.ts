@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'vue';
 export type TabsBarItem = {
   /**
    * 路由路径
@@ -27,6 +28,10 @@ export type TabsBarProps = {
    * @default 150px
    */
   maxTabWidth?: number | string;
+  /**
+   * tab样式
+   */
+  tabStyle?: CSSProperties;
   /**
    * 是否可关闭
    * @default false

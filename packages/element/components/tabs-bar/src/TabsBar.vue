@@ -31,8 +31,19 @@ const emits = defineEmits<{
    */
   (event: 'update:modelValue', v: string): void;
 }>();
+defineSlots<{
+  /**
+   * 右侧插槽
+   */
+  right: () => void;
+  /**
+   * 左侧插槽
+   */
+  left: () => void;
+}>();
 const props = withDefaults(defineProps<TabsBarProps>(), {
   modelValue: '',
+  tabs: () => [],
   showScrollButton: true
 });
 const ableGetterValue = computed({
@@ -43,7 +54,7 @@ const ableGetterValue = computed({
     emits('update:modelValue', value);
   }
 });
-const tabs = computed(() => {
+const computeTabs = computed(() => {
   return props.tabs;
 });
 const calcTabWidth = computed(() => {
@@ -59,7 +70,7 @@ const {
   isAbleLeftButton,
   isAbleRightButton,
   removeTab
-} = useTabs();
+} = useTabs(ableGetterValue);
 const handleItem = (path: string, tab: any) => {
   ableGetterValue.value = path;
   currentTabView();
@@ -69,11 +80,12 @@ const handleItem = (path: string, tab: any) => {
 
 <template>
   <div
-    v-if="tabs.length > 0"
+    v-if="computeTabs.length > 0"
     :class="showButton && showScrollButton ? '' : 'ep-px-2.5'"
     :style="calcTabWidth"
     class="ep-flex ep-w-full ep-items-center ep-space-x-1 ep-border-b ep-border-[#f1f3f6] ep-bg-white ep-select-none"
   >
+    <slot name="left" />
     <el-button
       v-show="showButton && showScrollButton"
       text
@@ -91,11 +103,12 @@ const handleItem = (path: string, tab: any) => {
     >
       <div class="ep-w-full ep-flex-1 ep-tabs ep-flex ep-px-2.5">
         <div
-          v-for="(tab, index) in tabs"
+          v-for="(tab, index) in computeTabs"
           :key="tab.path"
           :data-tab-index="index"
           :data-tab-active="ableGetterValue === tab.path"
           :class="ableGetterValue === tab.path ? 'is-active' : ''"
+          :style="props.tabStyle"
           class="ep-tabs--item ep-flex ep-flex-shrink-0 ep-min-w-24 ep-max-w-[var(--ep-tab-max-width)] ep-cursor-pointer ep-transition-opacity ep-duration-150"
           @click="() => handleItem(tab.path, tab)"
         >
@@ -105,7 +118,7 @@ const handleItem = (path: string, tab: any) => {
                 ? 'is-active ep-z-10 ep-bg-[var(--el-color-primary)]/15'
                 : 'ep-z-0'
             "
-            class="ep-tab-name ep-group ep-select-none ep-w-full ep-flex ep-items-center"
+            class="ep-tab-name ep-rounded-tr-lg ep-rounded-tl-lg ep-group ep-select-none ep-w-full ep-flex ep-items-center"
           >
             <ep-icon width="14" height="14">
               <component :is="tab.icon" />
@@ -153,6 +166,7 @@ const handleItem = (path: string, tab: any) => {
       :disabled="isAbleRightButton"
       @click="scrollDirection('right')"
     />
+    <slot name="right" />
   </div>
 </template>
 

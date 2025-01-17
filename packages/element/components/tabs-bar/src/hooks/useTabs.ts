@@ -1,6 +1,6 @@
 import { useDebounce, useResizeObserver } from '@eqian/utils-vue';
-import { getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue';
-export const useTabs = () => {
+import { getCurrentInstance, nextTick, onMounted, ref, watch, type ComputedRef } from 'vue';
+export const useTabs = (ableGetterValue: ComputedRef<string>) => {
   const instance = getCurrentInstance();
   const emits = instance?.emit;
   const isAbleLeftButton = ref(false);
@@ -21,7 +21,6 @@ export const useTabs = () => {
     e.stopPropagation();
     emits?.('deleteTab', tab);
   }
-  const currentActiveTab = ref('');
   function getElement(): HTMLDivElement | null {
     return instance?.proxy?.$el;
   }
@@ -58,7 +57,7 @@ export const useTabs = () => {
     calcShowButton();
   }
   watch(
-    () => currentActiveTab.value,
+    () => ableGetterValue.value,
     () => {
       currentTabView().then();
     }
@@ -83,7 +82,6 @@ export const useTabs = () => {
   });
   return {
     currentTabView,
-    currentActiveTab,
     showButton,
     isAbleLeftButton,
     isAbleRightButton,

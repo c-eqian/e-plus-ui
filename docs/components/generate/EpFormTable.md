@@ -4,8 +4,8 @@
 | :-------: | :-------: | :-------: | :-------: | :-------: |
 | formSchema | `FormSchema` | `true` | 表单配置 | -|
 | tableConfig | `TableConfig` | `true` | 表格配置 | -|
-| title | `string  \|  undefined` | `false` | 标题 | -|
 | api | `PromiseAble<unknown>` | `true` | API | -|
+| title | `string  \|  undefined` | `false` | 标题 | -|
 | params | `Recordable<string>  \|  undefined` | `false` | 请求固定参数，如果时动态参数，请使用 `beforeRequest` | -|
 | listKey | `string  \|  undefined` | `false` | 数据列表键，支持链式 | -|
 | totalKey | `string  \|  undefined` | `false` | 数据分页键 | -|
