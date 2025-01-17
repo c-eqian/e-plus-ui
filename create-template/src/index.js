@@ -1,6 +1,6 @@
 import fs from 'node:fs'; // 用于着色stdinstdout的小实用程序,可以将颜色放入stdin和stdout中
 import { resolve } from 'node:path';
-import { useCamelize } from '@eqian/utils-vue';
+import { isKebabCase, useCamelize } from '@eqian/utils-vue';
 import { consola } from 'consola/basic';
 import pc from 'picocolors';
 // 文件处理
@@ -116,6 +116,8 @@ async function init() {
             if (fs.existsSync(absPath) && !isEmpty(absPath)) {
               return `当前${componentType}下已存在${componentName}，请重新输入组件名称`;
             }
+            if (!isKebabCase(componentName))
+              return `组件【${componentName}】必须以短杆形式，如 button-group`;
             return true;
           }
         },
