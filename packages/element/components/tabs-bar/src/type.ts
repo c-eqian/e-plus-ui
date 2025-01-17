@@ -23,6 +23,16 @@ export type TabsBarProps = {
    */
   showScrollButton?: boolean;
   /**
+   * 最大tab宽度
+   * @default 150px
+   */
+  maxTabWidth?: number | string;
+  /**
+   * 是否可关闭
+   * @default false
+   */
+  closeable?: boolean;
+  /**
    * 当前绑定值
    */
   modelValue?: string;

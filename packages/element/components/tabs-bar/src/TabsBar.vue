@@ -3,6 +3,8 @@ import { ArrowLeft, ArrowRight, Close } from '@e-plus-ui/icons';
 import { EpIcon } from '@e-plus-ui/pure/components/icon';
 import { EpLine } from '@e-plus-ui/pure/components/line';
 import { EpTextFold } from '@e-plus-ui/pure/components/text-fold';
+import { pixelUnits } from '@e-plus-ui/utils/pixel-units';
+import { ElButton } from 'element-plus';
 import { computed } from 'vue';
 import { useTabs } from './hooks/useTabs';
 import type { TabsBarProps } from './type';
@@ -44,6 +46,12 @@ const ableGetterValue = computed({
 const tabs = computed(() => {
   return props.tabs;
 });
+const calcTabWidth = computed(() => {
+  const w = props.maxTabWidth ? pixelUnits(props.maxTabWidth) : '150px';
+  return {
+    '--ep-tab-max-width': w
+  };
+});
 const {
   currentTabView,
   scrollDirection,
@@ -62,66 +70,71 @@ const handleItem = (path: string, tab: any) => {
 <template>
   <div
     v-if="tabs.length > 0"
-    :class="showButton && showScrollButton ? '' : 'cz-px-2.5'"
-    class="cz-flex cz-w-full cz-items-center cz-space-x-1 cz-border-b cz-border-[#f1f3f6] cz-bg-white cz-select-none"
+    :class="showButton && showScrollButton ? '' : 'ep-px-2.5'"
+    :style="calcTabWidth"
+    class="ep-flex ep-w-full ep-items-center ep-space-x-1 ep-border-b ep-border-[#f1f3f6] ep-bg-white ep-select-none"
   >
     <el-button
       v-show="showButton && showScrollButton"
       text
-      class="cz-px-2 cz-h-full cz-flex cz-items-center cz-cursor-pointer"
+      class="ep-px-2 ep-h-full ep-flex ep-items-center ep-cursor-pointer"
       :icon="ArrowLeft"
       :disabled="isAbleLeftButton"
       @click="scrollDirection('left')"
     />
     <div
-      class="ep-tabs-scroll cz-flex-1 cz-w-full cz-overflow-hidden"
+      class="ep-tabs-scroll ep-flex-1 ep-w-full ep-overflow-hidden"
       :class="{
-        '!cz-mr-5': !showButton,
-        '!cz-ml-5': !showButton
+        '!ep-mr-5': !showButton,
+        '!ep-ml-5': !showButton
       }"
     >
-      <div class="cz-w-full cz-flex-1 ep-tabs cz-flex cz-px-2.5">
+      <div class="ep-w-full ep-flex-1 ep-tabs ep-flex ep-px-2.5">
         <div
           v-for="(tab, index) in tabs"
           :key="tab.path"
           :data-tab-index="index"
           :data-tab-active="ableGetterValue === tab.path"
           :class="ableGetterValue === tab.path ? 'is-active' : ''"
-          class="ep-tabs--item cz-flex cz-flex-shrink-0 cz-min-w-24 cz-max-w-[150px] cz-cursor-pointer cz-transition-opacity cz-duration-150"
+          class="ep-tabs--item ep-flex ep-flex-shrink-0 ep-min-w-24 ep-max-w-[var(--ep-tab-max-width)] ep-cursor-pointer ep-transition-opacity ep-duration-150"
           @click="() => handleItem(tab.path, tab)"
         >
           <div
             :class="
               ableGetterValue === tab.path
-                ? 'is-active cz-z-10 cz-bg-[var(--el-color-primary)]/15'
-                : 'cz-z-0'
+                ? 'is-active ep-z-10 ep-bg-[var(--el-color-primary)]/15'
+                : 'ep-z-0'
             "
-            class="ep-tab-name cz-group cz-select-none cz-w-full cz-flex cz-items-center"
+            class="ep-tab-name ep-group ep-select-none ep-w-full ep-flex ep-items-center"
           >
             <ep-icon width="14" height="14">
               <component :is="tab.icon" />
             </ep-icon>
             <ep-text-fold
-              class="cz-flex-1 cz-pl-1 cz-flex cz-items-center"
+              class="ep-flex-1 ep-pl-1 ep-flex ep-items-center"
               :line="1"
               :title="tab.name"
             >
               {{ tab.name }}
             </ep-text-fold>
-            <div class="hover:cz-scale-125 cz-ml-1 ep-close-btn" @click="removeTab($event, tab)">
+            <div
+              v-if="props.closeable"
+              class="hover:ep-scale-125 ep-ml-1 ep-close-btn"
+              @click="removeTab($event, tab)"
+            >
               <ep-icon width="14" height="14">
                 <Close />
               </ep-icon>
             </div>
             <svg
-              class="cz-absolute cz-bottom-0 group-[.is-active]:cz-fill-[#e0e9fb] -cz-left-[7px] cz-fill-transparent cz-transition-all cz-duration-150"
+              class="ep-absolute ep-bottom-0 group-[.is-active]:ep-fill-[#e0e9fb] -ep-left-[7px] ep-fill-transparent ep-transition-all ep-duration-150"
               height="7"
               width="7"
             >
               <path d="M 0 7 A 7 7 0 0 0 7 0 L 7 7 Z" />
             </svg>
             <svg
-              class="cz-absolute cz-bottom-0 group-[.is-active]:cz-fill-[#e0e9fb] -cz-right-[7px] cz-fill-transparent cz-transition-all cz-duration-150"
+              class="ep-absolute ep-bottom-0 group-[.is-active]:ep-fill-[#e0e9fb] -ep-right-[7px] ep-fill-transparent ep-transition-all ep-duration-150"
               height="7"
               width="7"
             >
@@ -135,7 +148,7 @@ const handleItem = (path: string, tab: any) => {
     <el-button
       v-show="showButton && showScrollButton"
       text
-      class="cz-px-2 cz-h-full cz-flex cz-items-center cz-cursor-pointer"
+      class="ep-px-2 ep-h-full ep-flex ep-items-center ep-cursor-pointer"
       :icon="ArrowRight"
       :disabled="isAbleRightButton"
       @click="scrollDirection('right')"
