@@ -12,12 +12,13 @@ const props = withDefaults(defineProps<ContextMenuProps>(), {
 });
 const contextListRef = useTemplateRef('contextListRef');
 const contextMenus = computed(() => props.contextMenus);
-const { x, y, isOpen } = useContextMenu(contextListRef);
+const { x, y, isOpen, isHide } = useContextMenu(contextListRef);
 const computedStyle = computed<CSSProperties>(() => {
   return {
     left: `${x.value}px`,
     top: `${y.value}px`,
-    zIndex: props.zIndex
+    zIndex: props.zIndex,
+    visibility: isHide.value ? 'hidden' : 'revert'
   };
 });
 </script>
@@ -25,17 +26,15 @@ const computedStyle = computed<CSSProperties>(() => {
 <template>
   <div class="ep-context-root ep-size-fit">
     <slot />
-    <Transition name="ep-bounce">
-      <teleport v-if="isOpen" to="body">
-        <div
-          ref="contextListRef"
-          class="ep-context-menus ep-text-xs ep-shadow-xl ep-bg-white"
-          :style="computedStyle"
-        >
-          <ContextRender :context-menus="contextMenus" />
-        </div>
-      </teleport>
-    </Transition>
+    <teleport v-if="isOpen" to="body">
+      <div
+        ref="contextListRef"
+        class="ep-context-menus ep-text-xs ep-shadow-xl ep-bg-white"
+        :style="computedStyle"
+      >
+        <ContextRender :context-menus="contextMenus" />
+      </div>
+    </teleport>
   </div>
 </template>
 

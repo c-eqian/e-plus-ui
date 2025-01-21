@@ -1,3 +1,4 @@
+import { useDebounce } from '@eqian/utils-vue';
 import { getCurrentInstance, onMounted, onUnmounted, onUpdated, ref, type ShallowRef } from 'vue';
 
 export const useContextMenu = (contextListRef: Readonly<ShallowRef<HTMLDivElement | null>>) => {
@@ -10,7 +11,7 @@ export const useContextMenu = (contextListRef: Readonly<ShallowRef<HTMLDivElemen
   const cx = ref(0);
   const cy = ref(0);
   const isOpen = ref(false);
-
+  const isHide = ref(false);
   const calcCoordinate = () => {
     if (x.value + cx.value >= wx.value) {
       x.value = x.value - (wx.value - x.value);
@@ -19,14 +20,16 @@ export const useContextMenu = (contextListRef: Readonly<ShallowRef<HTMLDivElemen
       y.value = y.value - (wy.value - y.value);
     }
   };
+  const debounceCalcCoordinate = useDebounce(calcCoordinate, 50);
   const openChange = (v: boolean) => {
+    isHide.value = v;
     isOpen.value = v;
   };
   const contextMenuHandler = (event: MouseEvent) => {
     x.value = event.clientX;
     y.value = event.clientY;
     openChange(true);
-    calcCoordinate();
+    debounceCalcCoordinate();
     event.stopPropagation();
     event.preventDefault();
   };
@@ -50,7 +53,7 @@ export const useContextMenu = (contextListRef: Readonly<ShallowRef<HTMLDivElemen
   onUpdated(() => {
     cx.value = contextListRef.value?.offsetWidth ?? 0;
     cy.value = contextListRef.value?.offsetHeight ?? 0;
-    calcCoordinate();
+    debounceCalcCoordinate();
   });
   onMounted(() => {
     vm = instance?.proxy?.$el as HTMLElement;
@@ -71,6 +74,7 @@ export const useContextMenu = (contextListRef: Readonly<ShallowRef<HTMLDivElemen
   return {
     x,
     y,
-    isOpen
+    isOpen,
+    isHide
   };
 };
