@@ -1,0 +1,14 @@
+
+.ep-context-menus {
+  position: fixed;
+  border-radius: 2px;
+  padding: 2px;
+  user-select: none;
+  z-index: 2000;
+  .ep-context-list{
+    .ep-context--item__disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+}

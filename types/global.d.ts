@@ -1,29 +1,31 @@
-declare module 'vue' {
-    // 全局类型组件
-    export interface GlobalComponents {
-        EpLine: typeof import('@e-plus-ui/pure/components')['EpLine'];
-        EpDiamondLoading: typeof import('@e-plus-ui/pure/components')['EpDiamondLoading'];
-        EpIcon: typeof import('@e-plus-ui/pure/components')['EpIcon'];
-        EpLetterLoading: typeof import('@e-plus-ui/pure/components')['EpLetterLoading'];
-        EpNoticeBar: typeof import('@e-plus-ui/pure/components')['EpNoticeBar'];
-        EpSkeleton: typeof import('@e-plus-ui/pure/components')['EpSkeleton'];
-        EpSlideLoading: typeof import('@e-plus-ui/pure/components')['EpSlideLoading'];
-        EpTextFold: typeof import('@e-plus-ui/pure/components')['EpTextFold'];
-        EpVirtualList: typeof import('@e-plus-ui/pure/components')['EpVirtualList'];
-        EpAdaptPage: typeof import('@e-plus-ui/element/components')['EpAdaptPage'];
-        EpAdminLayout: typeof import('@e-plus-ui/element/components')['EpAdminLayout'];
-        EpCopyText: typeof import('@e-plus-ui/element/components')['EpCopyText'];
-        EpEditor: typeof import('@e-plus-ui/element/components')['EpEditor'];
-        EpFormSchema: typeof import('@e-plus-ui/element/components')['EpFormSchema'];
-        EpMenu: typeof import('@e-plus-ui/element/components')['EpMenu'];
-        EpPagination: typeof import('@e-plus-ui/element/components')['EpPagination'];
-        EpTable: typeof import('@e-plus-ui/element/components')['EpTable'];
-        EpCommentLayout: typeof import('@e-plus-ui/element/components')['EpCommentLayout'];
-        EpComment: typeof import('@e-plus-ui/element/components')['EpComment'];
-        EpCard: typeof import('@e-plus-ui/pure/components')['EpCard'];
-        EpAuthPage: typeof import('@e-plus-ui/element/components')['EpAuthPage'];
-        EpTabsBar: typeof import('@e-plus-ui/element/components')['EpTabsBar'];
-    }
-}
 
 export {}
+ // 全局类型组件
+/* prettier-ignore */
+declare module 'vue' {
+  export interface GlobalComponents {
+    EpAdaptPage: typeof import('@e-plus-ui/element/components')['EpAdaptPage']
+    EpAdminLayout: typeof import('@e-plus-ui/element/components')['EpAdminLayout']
+    EpAuthPage: typeof import('@e-plus-ui/element/components')['EpAuthPage']
+    EpCard: typeof import('@e-plus-ui/pure/components')['EpCard']
+    EpComment: typeof import('@e-plus-ui/element/components')['EpComment']
+    EpCommentLayout: typeof import('@e-plus-ui/element/components')['EpCommentLayout']
+    EpContextMenu: typeof import('@e-plus-ui/pure/components')['EpContextMenu']
+    EpCopyText: typeof import('@e-plus-ui/element/components')['EpCopyText']
+    EpDiamondLoading: typeof import('@e-plus-ui/pure/components')['EpDiamondLoading']
+    EpEditor: typeof import('@e-plus-ui/element/components')['EpEditor']
+    EpFormSchema: typeof import('@e-plus-ui/element/components')['EpFormSchema']
+    EpIcon: typeof import('@e-plus-ui/pure/components')['EpIcon']
+    EpLetterLoading: typeof import('@e-plus-ui/pure/components')['EpLetterLoading']
+    EpLine: typeof import('@e-plus-ui/pure/components')['EpLine']
+    EpMenu: typeof import('@e-plus-ui/element/components')['EpMenu']
+    EpNoticeBar: typeof import('@e-plus-ui/pure/components')['EpNoticeBar']
+    EpPagination: typeof import('@e-plus-ui/element/components')['EpPagination']
+    EpSkeleton: typeof import('@e-plus-ui/pure/components')['EpSkeleton']
+    EpSlideLoading: typeof import('@e-plus-ui/pure/components')['EpSlideLoading']
+    EpTable: typeof import('@e-plus-ui/element/components')['EpTable']
+    EpTabsBar: typeof import('@e-plus-ui/element/components')['EpTabsBar']
+    EpTextFold: typeof import('@e-plus-ui/pure/components')['EpTextFold']
+    EpVirtualList: typeof import('@e-plus-ui/pure/components')['EpVirtualList']
+  }
+}

@@ -1,6 +1,6 @@
 # EpNoticeBar
 ## Parameter 参数
-| 参数 | 类型 | 可选 | 描述 | 默认值 |
+| 参数 | 类型 | 必选 | 描述 | 默认值 |
 | :-------: | :-------: | :-------: | :-------: | :-------: |
 | closeable | `boolean` | `false` | 是否可关闭 | -|
 | customStyle | `CSSProperties` | `false` | 自定义样式 | -|

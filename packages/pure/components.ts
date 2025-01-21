@@ -18,3 +18,5 @@ export * from './components/slide-loading';
 export * from './components/image';
 
 export * from './components/card';
+
+export * from './components/context-menu';
