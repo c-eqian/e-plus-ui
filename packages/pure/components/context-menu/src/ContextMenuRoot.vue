@@ -25,15 +25,17 @@ const computedStyle = computed<CSSProperties>(() => {
 <template>
   <div class="ep-context-root ep-size-fit">
     <slot />
-    <teleport v-if="isOpen" to="body">
-      <div
-        ref="contextListRef"
-        class="ep-context-menus ep-text-xs ep-shadow-xl ep-bg-white"
-        :style="computedStyle"
-      >
-        <ContextRender :context-menus="contextMenus" />
-      </div>
-    </teleport>
+    <Transition name="ep-bounce">
+      <teleport v-if="isOpen" to="body">
+        <div
+          ref="contextListRef"
+          class="ep-context-menus ep-text-xs ep-shadow-xl ep-bg-white"
+          :style="computedStyle"
+        >
+          <ContextRender :context-menus="contextMenus" />
+        </div>
+      </teleport>
+    </Transition>
   </div>
 </template>
 

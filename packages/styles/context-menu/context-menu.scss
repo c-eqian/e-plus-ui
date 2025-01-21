@@ -4,11 +4,21 @@
   border-radius: 2px;
   padding: 2px;
   user-select: none;
-  z-index: 2000;
   .ep-context-list{
     .ep-context--item__disabled {
       cursor: not-allowed;
       opacity: 0.5;
     }
+  }
+  .ep-context-sub__show {
+    display: block;
+  }
+  .ep-context-sub__left {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  .ep-context-sub__right {
+    right: 0;
+    transform: translateX(100%);
   }
 }
