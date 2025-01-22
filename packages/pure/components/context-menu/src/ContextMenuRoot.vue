@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { pixelUnits } from '@e-plus-ui/utils/pixel-units';
 import { computed, useTemplateRef, type CSSProperties } from 'vue';
 import ContextRender from './ContextMenu.vue';
 import { useContextMenu } from './hooks/useContextMenu';
@@ -8,7 +9,8 @@ defineOptions({
 });
 const props = withDefaults(defineProps<ContextMenuProps>(), {
   contextMenus: () => [],
-  zIndex: 2000
+  zIndex: 2000,
+  menuWidth: 'auto'
 });
 const contextListRef = useTemplateRef('contextListRef');
 const contextMenus = computed(() => props.contextMenus);
@@ -18,6 +20,7 @@ const computedStyle = computed<CSSProperties>(() => {
     left: `${x.value}px`,
     top: `${y.value}px`,
     zIndex: props.zIndex,
+    width: props.menuWidth === 'auto' ? `fit-content` : pixelUnits(props.menuWidth),
     visibility: isHide.value ? 'hidden' : 'revert'
   };
 });
@@ -31,6 +34,7 @@ const computedStyle = computed<CSSProperties>(() => {
         ref="contextListRef"
         class="ep-context-menus ep-text-xs ep-shadow-xl ep-bg-white"
         :style="computedStyle"
+        :class="props.menuClass"
       >
         <ContextRender :context-menus="contextMenus" />
       </div>

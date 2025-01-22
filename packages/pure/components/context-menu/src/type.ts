@@ -40,4 +40,13 @@ export type ContextMenuProps = {
    * 分割样式
    */
   separatorStyle?: CSSProperties;
+  /**
+   * 菜单宽度 如果设置为`auto`，在边界情况下不是很理想时，可以指定宽度
+   * @default auto
+   */
+  menuWidth?: string | number | 'auto';
+  /**
+   * 菜单类名
+   */
+  menuClass?: string;
 };
