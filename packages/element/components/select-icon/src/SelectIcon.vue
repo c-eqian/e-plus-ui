@@ -70,7 +70,7 @@ watch(
 </script>
 
 <template>
-  <div class="ep-select-icon">
+  <div class="ep-select-icon ep-w-full">
     <ElPopover :visible="visible" :width="pixelUnits(props.popoverWidth)" :teleported="false">
       <template #reference>
         <ElInput
@@ -78,6 +78,7 @@ watch(
           v-click-outside="onClickOutside"
           v-bind="props.componentProps"
           clearable
+          style="width: 100%"
           @click="() => toggleVisible(true)"
           @focus="() => toggleVisible(true)"
         >

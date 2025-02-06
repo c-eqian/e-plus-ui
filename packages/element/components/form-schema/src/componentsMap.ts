@@ -1,3 +1,4 @@
+import { EpSelectIcon } from '@e-plus-ui/element/components/select-icon';
 import {
   ElAutocomplete,
   ElCascader,
@@ -43,5 +44,5 @@ componentsMap.set('select-group', ElSelect);
 /**
  * 扩展组件
  */
-
+componentsMap.set('select-icon', EpSelectIcon);
 export { componentsMap };

@@ -52,6 +52,11 @@ export type ComponentTypeProps = {
   rate: ExtractPropTypes<(typeof import('element-plus/es'))['ElRate']>;
   // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   divider: ExtractPropTypes<(typeof import('element-plus/es'))['ElDivider']>;
+
+  'select-icon': ExtractPropTypes<
+    // eslint-disable-next-line @typescript-eslint/consistent-type-imports
+    (typeof import('@e-plus-ui/element/components/select-icon'))['EpSelectIcon']
+  >;
 };
 
 /**
@@ -118,7 +123,9 @@ export type GroupOptionsApi = {
 /**
  * el-基础控件
  */
-export type FormSchemaType = ('radio-button-group' | 'select-group') | keyof ComponentTypeProps;
+export type FormSchemaType =
+  | ('radio-button-group' | 'select-group' | 'select-icon')
+  | keyof ComponentTypeProps;
 
 /**
  * 扩展组件参数

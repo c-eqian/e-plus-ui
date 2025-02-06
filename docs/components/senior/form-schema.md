@@ -19,6 +19,13 @@
    form-schema/events
    :::
 
+
+## 自定义组件
+除了`el`组件外，还可以支持内置自定义组件，例如图标组件
+:::demo
+form-schema/custom
+:::
+
 ## 组件关联
 
 目前支持通过某个组件来控制另一个组件的状态，如`dynamicDisable`动态配置禁用
