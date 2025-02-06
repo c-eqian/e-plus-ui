@@ -1,11 +1,12 @@
 .ep-select-icon {
   /* 设置滚动条轨道的样式 */
-  .ep-icon-container::-webkit-scrollbar {
+  .ep-icon-wrapper::-webkit-scrollbar {
     width: 4px; /* 滚动条的宽度 */
+    background-color: transparent!important;
   }
   /* 设置滚动条滑块的样式 */
-  .ep-icon-container::-webkit-scrollbar-thumb {
-    background-color: #0003;
+  .ep-icon-wrapper::-webkit-scrollbar-thumb {
+    background-color: #0003!important;
     border-radius: 10px;
     transition: all .2s ease-in-out;
   }

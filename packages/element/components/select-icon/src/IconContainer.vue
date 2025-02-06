@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { EpIcon } from '@e-plus-ui/pure/components/icon';
 import { isString } from '@eqian/utils-vue';
+import { ElInput } from 'element-plus';
 import { inject } from 'vue';
 import type { IconData } from './type';
 const icons = inject<IconData[]>('ICONS-SELECTOR', []);
@@ -33,7 +34,7 @@ const props = defineProps({
       placeholder="输入关键字搜索"
     >
     </el-input>
-    <main class="ep-w-full main-container ep-mt-2 ep-max-h-96 ep-overflow-auto">
+    <main class="ep-w-full ep-icon-wrapper ep-mt-2 ep-max-h-96 ep-overflow-auto">
       <div v-if="icons.length > 0" class="ep-flex ep-py-2 ep-flex-wrap">
         <div
           v-for="icon in icons"
