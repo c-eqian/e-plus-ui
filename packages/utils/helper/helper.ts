@@ -1,4 +1,5 @@
 import { isArray, isFunction } from '@eqian/utils-vue';
+import { getCurrentScope, onScopeDispose } from 'vue';
 type AnyFunction = (...args: any[]) => any;
 /**
  * 是否为promise
@@ -25,3 +26,14 @@ export const tryCall = <A extends any[]>(fns: AnyFunction[] | AnyFunction, ...ar
     fns(...args);
   }
 };
+
+export function tryOnScopeDispose(fn: any) {
+  if (getCurrentScope()) {
+    onScopeDispose(fn);
+    return true;
+  }
+  return false;
+}
+export function toArray<T>(value: T): T extends readonly any[] ? T : [T] {
+  return Array.isArray(value) ? (value as any) : ([value] as [T]);
+}

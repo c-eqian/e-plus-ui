@@ -1,3 +1,4 @@
+import { useEventListener } from '@e-plus-ui/utils/helper/eventListener';
 import { useDebounce } from '@eqian/utils-vue';
 import { getCurrentInstance, onMounted, onUnmounted, onUpdated, ref, type ShallowRef } from 'vue';
 
@@ -19,6 +20,7 @@ export const useContextMenu = (contextListRef: Readonly<ShallowRef<HTMLDivElemen
     if (y.value + cy.value >= wy.value) {
       y.value = y.value - (wy.value - y.value);
     }
+    isHide.value = false;
   };
   const debounceCalcCoordinate = useDebounce(calcCoordinate, 50);
   const openChange = (v: boolean) => {
@@ -57,19 +59,23 @@ export const useContextMenu = (contextListRef: Readonly<ShallowRef<HTMLDivElemen
   });
   onMounted(() => {
     vm = instance?.proxy?.$el as HTMLElement;
-    vm?.addEventListener('contextmenu', contextMenuHandler);
+    useEventListener(vm, 'contextmenu', contextMenuHandler);
+
     // 点击时，先关闭显示，并在捕获句柄时执行，防止阻止冒泡后，无法触发
-    window.addEventListener('click', e => clickHandler(e, () => openChange(false)), true);
-    window.addEventListener('contextmenu', () => openChange(false), true);
-    window.addEventListener('resize', getWindowSize);
+    useEventListener(
+      window,
+      ['contextmenu', 'click', 'scroll'],
+      [
+        (e: any) => clickHandler(e, () => openChange(false)),
+        () => openChange(false),
+        () => openChange(false)
+      ],
+      true
+    );
+    useEventListener(window, 'resize', getWindowSize);
   });
   onUnmounted(() => {
-    vm?.removeEventListener('contextmenu', contextMenuHandler);
     vm = null;
-    // 点击时，先关闭显示，并在捕获句柄时执行，防止阻止冒泡后，无法触发
-    window.removeEventListener('click', e => clickHandler(e, () => openChange(false)), true);
-    window.removeEventListener('contextmenu', () => openChange(false), true);
-    window.removeEventListener('resize', getWindowSize);
   });
   return {
     x,
