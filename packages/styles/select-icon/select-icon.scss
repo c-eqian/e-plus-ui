@@ -1,0 +1,27 @@
+.ep-select-icon {
+  /* 设置滚动条轨道的样式 */
+  .ep-icon-container::-webkit-scrollbar {
+    width: 4px; /* 滚动条的宽度 */
+  }
+  /* 设置滚动条滑块的样式 */
+  .ep-icon-container::-webkit-scrollbar-thumb {
+    background-color: #0003;
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+  }
+
+  .ep-icon-container {
+    .ep-icon-title {
+      position: relative;
+      width: fit-content;
+      &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        background-color: #87a9ee;
+      }
+    }
+  }
+}
