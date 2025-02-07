@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { icons } from '@e-plus-ui/icons/global';
 import { EpSelectIcon } from 'e-plus-ui';
+import { ref, watchEffect } from 'vue';
+const icon = ref('');
+watchEffect(
+  () => {
+    console.log(icon.value);
+  },
+  {
+    flush: 'post'
+  }
+);
 </script>
 
 <template>
   <div class="cz-w-96">
-    <EpSelectIcon :icons="Object.keys(icons)"></EpSelectIcon>
+    <EpSelectIcon v-model="icon" :icons="Object.keys(icons)"></EpSelectIcon>
   </div>
 </template>
 
