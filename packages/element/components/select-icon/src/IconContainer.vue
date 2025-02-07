@@ -45,7 +45,7 @@ const props = defineProps({
         >
           <span class="ep-inline-block ep-my-0 ep-mx-auto">
             <ep-icon width="20" height="20" color="blue">
-              <component :is="icon" />
+              <component :is="isString(icon) ? icon : icon.icon" />
             </ep-icon>
           </span>
           <span class="ep-text-xs ep-text-center">{{ isString(icon) ? icon : icon.name }}</span>
