@@ -15,7 +15,7 @@ const tableData = ref([
     name: '张媃'
   }
 ]);
-const column = defineTableColumns<(typeof tableData.value)[0]>([
+const columns = defineTableColumns<(typeof tableData.value)[0]>([
   {
     label: '名称',
     prop: 'name',
@@ -66,7 +66,7 @@ const handleClickedView = (row: any, index: number) => {
 <template>
   <ep-table
     :data="tableData"
-    :column
+    :columns
     @click-row-edit="handleClickedEdit"
     @click-row-add="handleClickedAdd"
     @click-row-delete="handleClickedDelete"

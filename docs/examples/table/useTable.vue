@@ -40,7 +40,7 @@ const tableData = [
     dynamicName: '动态列'
   }
 ];
-const column = defineTableColumns<Partial<(typeof tableData)[0]>>([
+const columns = defineTableColumns<Partial<(typeof tableData)[0]>>([
   {
     type: 'selection',
     width: 50
@@ -163,7 +163,7 @@ const selectionBatch2 = () => {
       >
     </div>
     <el-divider />
-    <EpTable row-key="id" :data="tableData" :column @registry="registry" />
+    <EpTable row-key="id" :data="tableData" :columns @registry="registry" />
   </div>
 </template>
 

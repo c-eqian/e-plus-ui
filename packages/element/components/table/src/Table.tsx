@@ -83,15 +83,6 @@ export default defineComponent({
     },
     /**
      * 数据列配置
-     * @deprecated 使用columns代替
-     * @since 1.7.0
-     */
-    column: {
-      type: Array as PropType<TableColumnConfig[]>,
-      default: () => []
-    },
-    /**
-     * 数据列配置
      */
     columns: {
       type: Array as PropType<TableColumnConfig[]>,
@@ -180,7 +171,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const epFormRef = ref<FormInstance>();
     const epTable = ref<InstanceType<typeof ElTable>>();
-    const columns = ref(props.columns ?? props.column);
+    const columns = ref(props.columns);
     const dataComputed = ref(props.data);
     const columnsComputed = computed(() => {
       return columns.value.filter(columnsItem => {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineTableColumns } from 'e-plus-ui';
+import { defineTableColumns, EpTable } from 'e-plus-ui';
 const tableData = [
   {
     date: '2016-05-03',
@@ -22,7 +22,7 @@ const tableData = [
     address: '北京'
   }
 ];
-const column = defineTableColumns<(typeof tableData)[0]>([
+const columns = defineTableColumns<(typeof tableData)[0]>([
   {
     label: '名称',
     prop: 'name'
@@ -40,7 +40,7 @@ const column = defineTableColumns<(typeof tableData)[0]>([
 </script>
 
 <template>
-  <ep-table :data="tableData" :column>
+  <ep-table :data="tableData" :columns>
     <template #name="{ row }">
       <div>{{ row.name }}-默认插槽</div>
     </template>

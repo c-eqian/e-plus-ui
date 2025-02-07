@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<FormTableProps>(), {
 const formSchema = computed(() => props.formSchema);
 const tableColumns = computed(() => props.tableConfig.columns);
 const tableProps = computed(() => {
-  const { columns, data, column, ...tProps } = props.tableConfig;
+  const { columns, data, ...tProps } = props.tableConfig;
   return tProps;
 });
 defineSlots<{

@@ -35,7 +35,7 @@ const tableData = ref([
     status: '0'
   }
 ]);
-const column = defineTableColumns<(typeof tableData.value)[0]>([
+const columns = defineTableColumns<(typeof tableData.value)[0]>([
   {
     label: '名称',
     prop: 'name',
@@ -89,7 +89,7 @@ const handleCurrentClickRow = (row: any) => {
       :data="tableData"
       id-key="id"
       highlight-current-row
-      :column
+      :columns
       @click-row-delete="handleClickedDelete"
       @db-click-row="handleDbClickRow"
       @current-change="handleCurrentClickRow"

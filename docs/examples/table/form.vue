@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineTableColumns } from 'e-plus-ui';
+import { defineTableColumns, EpTable } from 'e-plus-ui';
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
 const epTableRef = ref();
@@ -13,7 +13,7 @@ const tableData = ref([
     name: 'Tom'
   }
 ]);
-const column = defineTableColumns<(typeof tableData.value)[0]>([
+const columns = defineTableColumns<(typeof tableData.value)[0]>([
   {
     label: '名称',
     prop: 'name',
@@ -34,7 +34,7 @@ const handleEdit = async () => {
 
 <template>
   <el-button type="primary" @click="handleEdit">提交</el-button>
-  <ep-table ref="epTableRef" use-form-validation :data="tableData" :column>
+  <ep-table ref="epTableRef" use-form-validation :data="tableData" :columns>
     <template #name="scope">
       <el-input v-model="scope.row.name" clearable />
     </template>

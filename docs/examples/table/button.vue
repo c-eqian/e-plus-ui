@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineTableColumns } from 'e-plus-ui';
+import { defineTableColumns, EpTable } from 'e-plus-ui';
 import { ElCheckbox, ElMessage } from 'element-plus';
 import { h, ref } from 'vue';
 const hasPermission = ref(true);
@@ -14,7 +14,7 @@ const tableData = ref([
     name: 'Tom'
   }
 ]);
-const column = defineTableColumns([
+const columns = defineTableColumns([
   {
     label: '名称',
     prop: 'name',
@@ -79,7 +79,7 @@ const handleClickedBtn = (type: string, row: any, index: number) => {
 <template>
   <div>
     <el-button @click="switchPermission">切换权限</el-button>
-    <ep-table :data="tableData" :column @click-btn="handleClickedBtn" />
+    <ep-table :data="tableData" :columns @click-btn="handleClickedBtn" />
   </div>
 </template>
 

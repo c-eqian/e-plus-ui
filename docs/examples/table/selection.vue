@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineTableColumns } from 'e-plus-ui';
+import { defineTableColumns, EpTable } from 'e-plus-ui';
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
 const epTableRef = ref();
@@ -31,7 +31,7 @@ const tableData = ref([
     status: '0'
   }
 ]);
-const column = defineTableColumns<(typeof tableData.value)[0]>([
+const columns = defineTableColumns<(typeof tableData.value)[0]>([
   {
     type: 'selection',
     width: '50',
@@ -89,7 +89,7 @@ const handleClear = () => {
     <ep-table
       ref="epTableRef"
       :data="tableData"
-      :column
+      :columns
       @click-row-delete="handleClickedDelete"
       @selection-change="handleClickSelect"
     />

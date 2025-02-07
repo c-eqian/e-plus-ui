@@ -33,7 +33,7 @@ const tableData = ref([
     status: '0'
   }
 ]);
-const column = defineTableColumns<(typeof tableData.value)[0]>([
+const columns = defineTableColumns<(typeof tableData.value)[0]>([
   {
     label: '名称',
     prop: 'name',
@@ -83,7 +83,7 @@ const handlePageChange = (val: any) => {
       :data="tableData"
       pagination
       :pa-total="tableData.length"
-      :column
+      :columns
       @page-change="handlePageChange"
     />
   </div>

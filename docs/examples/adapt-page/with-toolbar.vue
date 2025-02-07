@@ -83,7 +83,7 @@ const tableData = [
     address: 'No. 189, Grove St, Los Angeles'
   }
 ];
-const column = defineTableColumns<(typeof tableData)[0]>([
+const columns = defineTableColumns<(typeof tableData)[0]>([
   {
     label: '名称',
     prop: 'name'
@@ -114,7 +114,7 @@ const column = defineTableColumns<(typeof tableData)[0]>([
           </div>
         </template>
         <template #content="{ height }">
-          <ep-table :height="height" :data="tableData" :column />
+          <ep-table :height="height" :data="tableData" :columns />
         </template>
       </ep-adapt-page>
     </div>

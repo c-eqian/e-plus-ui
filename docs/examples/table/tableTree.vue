@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineTableColumns } from 'e-plus-ui';
+import { defineTableColumns, EpTable } from 'e-plus-ui';
 import { ElTableColumn } from 'element-plus';
 import { h, ref } from 'vue';
 const epTableRef = ref();
@@ -35,7 +35,7 @@ const tableData = ref([
     ]
   }
 ]);
-const column = defineTableColumns([
+const columns = defineTableColumns([
   {
     label: '用户信息',
     prop: '',
@@ -58,7 +58,7 @@ const column = defineTableColumns([
 </script>
 
 <template>
-  <ep-table ref="epTableRef" :data="tableData" row-key="id" :column />
+  <ep-table ref="epTableRef" :data="tableData" row-key="id" :columns />
 </template>
 
 <style scoped lang="scss"></style>
