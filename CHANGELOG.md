@@ -1,6 +1,32 @@
 # 更新日志 
 
 
+## [1.7.0](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0...v1.7.0) (2025-02-07)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* **components:** 修复Line组件垂直模式下不居中问题 ([2141c53](https://github.com/c-eqian/e-plus-ui/commit/2141c5374e3917e6c64c3c87bfd73731a3e17621))
+
+
+### 💄 Styles | 风格
+
+* **transition:** 添加动画css文件 ([6094845](https://github.com/c-eqian/e-plus-ui/commit/60948454d0f2b275923a05548cc7dbf8e461d23c))
+
+
+### ✨ Features | 新功能
+
+* 新增form-table组件 ([11e0352](https://github.com/c-eqian/e-plus-ui/commit/11e0352c41cafc94941fb99f53c7271b27cbb692))
+* **components:** 新增context-menu菜单 ([35c8cc5](https://github.com/c-eqian/e-plus-ui/commit/35c8cc5f4f88a650a53b3284809431b6168929b4))
+* **components:** 新增select-icon图标选择器组件 ([b725058](https://github.com/c-eqian/e-plus-ui/commit/b725058d12df9f9f61ab0cd4a08d41c73e1c95c8))
+* **components:** 新增tabs-bar组件 ([6d28b60](https://github.com/c-eqian/e-plus-ui/commit/6d28b60736de205aa41758912907033e40aca85e))
+* **components:** admin-layout组件支持tabbar插槽 ([e41293f](https://github.com/c-eqian/e-plus-ui/commit/e41293fd6127b95d88c3958dd641259ad36d559f))
+* **components:** context-menu菜单支持二级 ([b1725ff](https://github.com/c-eqian/e-plus-ui/commit/b1725ffed73064a1fed6b4e8a6bfb6236798f335))
+* **components:** context-menu新增菜单属性 ([55125de](https://github.com/c-eqian/e-plus-ui/commit/55125de1afc5385c1d6bc9a430597b560773de7a))
+* **components:** form-schema组件支持select-icon组件 ([ed8d31f](https://github.com/c-eqian/e-plus-ui/commit/ed8d31fee3b78204ef6e838af296f559e890979f))
+* **components:** tabs-bar支持插槽 ([1934d3c](https://github.com/c-eqian/e-plus-ui/commit/1934d3cf21932ba33ffcfde93f96d90b554ea80b))
+* **components:** tabs-bar组件优化，新增相关属性 ([11777ff](https://github.com/c-eqian/e-plus-ui/commit/11777ff0582e56c9984ed2f4b6a1df3d83ca34e3))
+
 ## [1.6.0](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0-beta.3...v1.6.0) (2025-01-02)
 
 
