@@ -15,6 +15,7 @@ declare module 'vue' {
     EpDiamondLoading: typeof import('@e-plus-ui/pure/components')['EpDiamondLoading']
     EpEditor: typeof import('@e-plus-ui/element/components')['EpEditor']
     EpFormSchema: typeof import('@e-plus-ui/element/components')['EpFormSchema']
+    EpFormTable: typeof import('@e-plus-ui/element/components')['EpFormTable']
     EpIcon: typeof import('@e-plus-ui/pure/components')['EpIcon']
     EpLetterLoading: typeof import('@e-plus-ui/pure/components')['EpLetterLoading']
     EpLine: typeof import('@e-plus-ui/pure/components')['EpLine']

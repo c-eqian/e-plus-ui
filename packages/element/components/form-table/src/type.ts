@@ -23,11 +23,16 @@ type APIResponse =
 type ResponseHandler = (data: APIResponse) => ResponseList<any>;
 export type UseFormTable = {
   /**
-   * API
+   * API接口请求
    */
   api: PromiseAble;
   /**
-   * 请求固定参数，如果时动态参数，请使用 `beforeRequest`
+   * 立即请求
+   * @default true
+   */
+  immediate?: boolean;
+  /**
+   * 请求固定参数，如果时动态参数，请使用 `requestHandler`
    */
   params?: Recordable<string>;
   /**

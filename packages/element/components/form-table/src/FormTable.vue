@@ -9,7 +9,13 @@ import { EpTable } from '@e-plus-ui/element/components/table';
 import { isFunction, useTableList } from '@eqian/utils-vue';
 import { computed, nextTick, onMounted, ref, useTemplateRef } from 'vue';
 import type { FormTableProps } from './type';
-const props = defineProps<FormTableProps>();
+const props = withDefaults(defineProps<FormTableProps>(), {
+  listKey: 'list',
+  totalKey: 'total',
+  pageNumKey: 'pageNum',
+  pageSizeKey: 'pageSize',
+  immediate: true
+});
 const formSchema = computed(() => props.formSchema);
 const tableColumns = computed(() => props.tableConfig.columns);
 const tableProps = computed(() => {
@@ -36,37 +42,27 @@ defineSlots<{
 defineOptions({
   name: 'EpFormTable'
 });
-const {
-  api,
-  params: _params,
-  requestHandler,
-  responseHandler,
-  listKey = 'list',
-  totalKey = 'total',
-  pageNumKey = 'pageNum',
-  pageSizeKey = 'pageSize'
-} = props;
 const { tableData, tableLoading, tableTotal, params, handleSearch, handleReset } = useTableList({
   request: {
-    api,
+    api: props.api,
     params: {
-      [pageNumKey]: 1,
-      [pageSizeKey]: 10,
-      ..._params
+      [props.pageNumKey]: 1,
+      [props.pageSizeKey]: 10,
+      ...props.params
     },
-    pageNumKey,
-    pageSizeKey,
+    pageNumKey: props.pageNumKey,
+    pageSizeKey: props.pageSizeKey,
     handleParams: $params => {
-      if (isFunction(requestHandler)) {
-        return requestHandler($params);
+      if (isFunction(props.requestHandler)) {
+        return props.requestHandler($params);
       }
       return $params;
     }
   },
   response: {
-    responseHandler,
-    listKey,
-    totalKey
+    responseHandler: props.responseHandler,
+    listKey: props.listKey,
+    totalKey: props.totalKey
   }
 });
 const tableRef = useTemplateRef('tableRef');
@@ -82,6 +78,9 @@ const calcPaginationStyle = () => {
   }
 };
 onMounted(() => {
+  if (props.immediate) {
+    handleReset();
+  }
   nextTick(() => {
     calcPaginationStyle();
   });
