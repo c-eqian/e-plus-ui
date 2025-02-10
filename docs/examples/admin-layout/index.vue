@@ -36,7 +36,7 @@ const _config: Ref<AdminBasicProps> = ref({
     ]
   }),
   classNames: {
-    headerClass: 'ep-bg-[#cae1fe]'
+    headerClass: 'ep-bg-[#cae1fe] dark:ep-bg-[var(--ep-bg-color)]'
   }
 });
 const handleClick = (cmd: string) => {

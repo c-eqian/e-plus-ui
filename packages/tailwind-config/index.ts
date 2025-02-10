@@ -14,7 +14,15 @@ export const DEFAULT_CONFIG = {
       colors: {
         dark: '#0a0a0a',
         'dark-1': '#141414',
-        'dark-2': '#1d1e1f'
+        'dark-2': '#1d1e1f',
+        page: 'var(--ep-bg-color-page)',
+        base: 'var(--ep-bg-color)',
+        overlay: 'var(--ep-bg-color-overlay)'
+      },
+      backgroundColor: {
+        page: 'var(--ep-bg-color-page)',
+        base: 'var(--ep-bg-color)',
+        overlay: 'var(--ep-bg-color-overlay)'
       },
       textColor: {
         sub: '#a0a0a0'

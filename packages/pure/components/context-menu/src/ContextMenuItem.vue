@@ -35,7 +35,7 @@ const { mouseLeaveHandler, mouseEnterHandler } = useContextMenuSub();
           <span class="ep-inline-block">{{ item?.label }}</span>
           <ContextMenuIcon :icon="ArrowRight" />
           <ContextRender
-            class="ep-absolute ep-context-sub ep-hidden ep-bg-white ep-shadow-xl ep-rounded-[2px]"
+            class="ep-absolute ep-context-sub ep-hidden ep-bg-page ep-shadow-xl ep-rounded-[2px]"
             :context-menus="item.children"
             is-sub
           />

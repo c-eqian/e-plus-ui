@@ -83,7 +83,7 @@ const handleItem = (path: string, tab: any) => {
     v-if="computeTabs.length > 0"
     :class="showButton && showScrollButton ? '' : 'ep-px-2.5'"
     :style="calcTabWidth"
-    class="ep-flex ep-w-full ep-items-center ep-space-x-1 ep-border-b ep-border-[#f1f3f6] ep-bg-white ep-select-none"
+    class="ep-flex ep-w-full ep-items-center ep-space-x-1 ep-border-b ep-border-[#f1f3f6] ep-bg-overlay ep-select-none"
   >
     <slot name="left" />
     <el-button

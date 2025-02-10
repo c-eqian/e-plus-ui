@@ -32,7 +32,7 @@ const computedStyle = computed<CSSProperties>(() => {
     <teleport v-if="isOpen" to="body">
       <div
         ref="contextListRef"
-        class="ep-context-menus ep-text-xs ep-shadow-xl ep-bg-white"
+        class="ep-context-menus ep-text-xs ep-shadow-xl ep-bg-page"
         :style="computedStyle"
         :class="props.menuClass"
       >

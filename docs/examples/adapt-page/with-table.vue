@@ -101,7 +101,7 @@ const columns = defineTableColumns<(typeof tableData)[0]>([
 
 <template>
   <div class="play">
-    <div class="ep-w-full ep-h-full ep-bg-white ep-p-3">
+    <div class="ep-w-full ep-h-full ep-p-3">
       <ep-adapt-page>
         <template #header>
           <div>

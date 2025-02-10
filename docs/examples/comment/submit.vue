@@ -129,7 +129,7 @@ const fieldsConfig: ICommentConfig = {
   },
   // 修改子评论盒子的背景色
   subStyle: {
-    background: '#eee'
+    background: 'var(--el-fill-color-light)'
   },
   // 修改新增时，排序方法，默认desc，表示在前面插入数据（降序）
   sortType: 'desc',

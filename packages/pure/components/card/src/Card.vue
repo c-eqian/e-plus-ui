@@ -21,7 +21,7 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div class="ep-card ep-bg-white dark:ep-bg-dark-2" :class="classes">
+  <div class="ep-card ep-bg-page" :class="classes">
     <div v-if="$slots.title || title || $slots.extra" class="ep-card-header ep-space-x-1">
       <div class="ep-card-header-wrapper ep-space-x-1">
         <div v-if="$slots.avatar || avatar" class="ep-flex ep-items-center">
