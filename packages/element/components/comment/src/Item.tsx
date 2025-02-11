@@ -257,7 +257,7 @@ export default defineComponent({
           _VNode = _VNode(this.getSlotsParameter());
         }
         return (
-          <div class="ep-border ep-my-1 ep-text-[12px] ep-text-gray-600">
+          <div class="ep-border dark:ep-border-[var(--ep-border-color)] ep-my-1 ep-text-[12px] dark:ep-text-[var(--global-neutral-color-8)] ep-text-gray-600">
             <div class="ep-p-2" v-html={_VNode}></div>
           </div>
         );
