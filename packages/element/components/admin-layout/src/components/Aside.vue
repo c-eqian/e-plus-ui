@@ -25,7 +25,7 @@ const asideWidth = computed(() => {
       <EpMenu class="ep-h-full ep-layout-aside" :menu-config="menus" />
     </ElScrollbar>
     <div
-      class="ep-absolute ep-top-1/2 ep-border ep-bg-[var(--el-color-white)] ep-border-[var(--el-border-color-light)] ep-flex ep-items-center ep-justify-center ep-rounded-full ep-right-0 ep-z-10 ep-h-6 ep-w-6 ep-translate-x-1/2"
+      class="ep-absolute ep-top-1/2 ep-border ep-bg-white dark:ep-bg-overlay ep-border-[var(--el-border-color-light)] ep-flex ep-items-center ep-justify-center ep-rounded-full ep-right-0 ep-z-10 ep-h-6 ep-w-6 ep-translate-x-1/2"
     >
       <ElIcon class="ep-cursor-pointer" @click="isFoldMenu = !isFoldMenu">
         <ArrowLeft v-show="!isFoldMenu" />

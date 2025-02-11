@@ -39,7 +39,7 @@ const varStyles = computed(() => {
         ? `${pixelUnits(props.margin)} 0`
         : `0 ${pixelUnits(props.margin)}`,
     '--ep-line-border-width': pixelUnits(props.borderWidth),
-    '--ep-line-border-color': props.color || 'var(--global-neutral-color-5)'
+    '--ep-line-border-color': props.color || 'var(--ep-line-color)'
   };
 });
 const styleName = computed(() => {

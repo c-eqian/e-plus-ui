@@ -75,10 +75,13 @@
 
   --darkreader-border--global-checked-color: var(--global-checked-color) !important;
 
+  --ep-line-color: var(--global-neutral-color-5) !important;
+
 }
 html.dark {
   --ep-bg-color: var(--el-bg-color,  #141414);
   --ep-bg-color-page: var(--el-bg-color-page, #0a0a0a);
   --ep-bg-color-overlay: var(--el-bg-color-overlay, #1d1e1f);
   --ep-border-color: var(--el-border-color,  #2e2e32);
+  --ep-line-color: var(--el-border-color) !important;
 }
