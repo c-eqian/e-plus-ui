@@ -1,0 +1,33 @@
+@mixin text-gradient($color) {
+  background:
+          radial-gradient(circle at center, #fffc, #f000) -200% 50% /200% 100% no-repeat,
+          $color;
+}
+.ep-slider-verify {
+  user-select: none;
+  .ep-slider-modal,
+  .ep-slider-block {
+    border-radius: var(--slider-border-radius, 12px) 0 0 var(--slider-border-radius, 12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ep-slider-block.is-success {
+    border-radius: 0 var(--slider-border-radius, 12px) var(--slider-border-radius, 12px) 0;
+  }
+  &:has(.is-success) .ep-slider-content__text {
+    @include text-gradient(#fff);
+  }
+  &:not(:has(.is-success)) .ep-slider-content__text {
+    animation: 2s linear 0s infinite normal none running shine;
+    @include text-gradient(#000);
+  }
+}
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

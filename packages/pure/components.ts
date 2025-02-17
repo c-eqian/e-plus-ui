@@ -20,3 +20,5 @@ export * from './components/image';
 export * from './components/card';
 
 export * from './components/context-menu';
+
+export * from './components/slider-verify';
