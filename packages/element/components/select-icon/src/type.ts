@@ -36,6 +36,16 @@ export type SelectIconProps = {
    */
   showTotal?: boolean;
   /**
+   * 是否使用懒加载图标
+   * @default true
+   */
+  lazyLoadable?: boolean;
+  /**
+   * 当使用懒加载时，需要的初始值
+   * @default 100
+   */
+  lazyLoadValue?: number;
+  /**
    * 图标数据
    */
   icons?: IconData[];

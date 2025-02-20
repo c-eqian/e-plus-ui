@@ -23,6 +23,8 @@ const props = withDefaults(defineProps<SelectIconProps>(), {
   popoverWidth: 500,
   searchable: true,
   showTotal: true,
+  lazyLoadValue: 100,
+  lazyLoadable: true,
   icons: () => []
 });
 const { visible, toggleVisible } = useIconSelect();
@@ -93,6 +95,8 @@ watch(
         v-model="searchIcon"
         :searchable="props.searchable"
         :show-total="props.showTotal"
+        :lazy-load-value="props.lazyLoadValue"
+        :lazy-loadable="props.lazyLoadable"
         @select-icon="handleSelect"
       ></IconContainer>
     </ElPopover>

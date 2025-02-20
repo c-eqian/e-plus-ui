@@ -24,6 +24,16 @@ select-icon/search
 select-icon/custom
 :::
 
+## 懒加载
+如果是一次性传入大量图标情况下，可能会导致性能问题。
+当需要大量图标时，可以设置`lazyLoadable`开启懒加载，以及懒加载的数量`lazyLoadValue`
+> 当图标数量不大于lazyLoadValue值时，不会开启懒加载
+
+:::demo
+select-icon/lazy
+:::
+
+
 ::: warning
 自定义图标可通过组件（h、component）形式，如果是一个对象，需要提供一个图标名字`name`、以及需要渲染图标`icon`的字段
 :::

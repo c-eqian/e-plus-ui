@@ -1,16 +1,16 @@
-<script lang="ts" setup>
+<script lang="ts" setup generic="T">
 import { isNumber } from '@eqian/utils-vue';
 import { computed, onUpdated, reactive, ref, unref, watchEffect } from 'vue';
 import type { VirtualListProps } from './type';
 
-const props = withDefaults(defineProps<VirtualListProps>(), {
+const props = withDefaults(defineProps<VirtualListProps<T>>(), {
   height: 500,
   width: '100%',
   itemHeight: 30,
   isDynamic: false,
   cache: 2,
   data: () => {
-    return [];
+    return [] as T[];
   }
 });
 defineOptions({
@@ -65,7 +65,7 @@ const clientCount = computed(() => {
 });
 
 // 当前屏幕显示的数据
-const clientData = computed(() => {
+const clientData = computed<T[]>(() => {
   return props.data.slice(state.start, state.end);
 });
 

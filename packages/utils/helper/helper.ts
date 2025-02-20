@@ -37,3 +37,11 @@ export function tryOnScopeDispose(fn: any) {
 export function toArray<T>(value: T): T extends readonly any[] ? T : [T] {
   return Array.isArray(value) ? (value as any) : ([value] as [T]);
 }
+
+/**
+ * 魔法对象，当尝试从一个可选对象中获取某个属性时，或许有用
+ * @param obj
+ */
+export function magicObject<T>(obj: T): NonNullable<T> {
+  return obj ?? (Object.create(null) as unknown as NonNullable<T>);
+}
