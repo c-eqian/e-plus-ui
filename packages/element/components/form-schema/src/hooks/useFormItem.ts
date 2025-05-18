@@ -31,33 +31,30 @@ export const useFilterProps = (props: FormItemsSchema) => {
  * 获取表单参数
  * @param props
  * @param columns
- * @param isSearch
+ * @param colSpan
  */
 export const useColProps = (
   props: FormItemsSchema,
   columns: ComputedRef<number>,
-  isSearch: ComputedRef<boolean>
+  colSpan: number
 ) => {
   const _columns = unref(columns);
-  if (!isSearch.value) {
-    const DEFAULT = { xs: 24, sm: 24, md: 24, lg: 24, xl: 24 };
-    const { col = {} } = props;
-    if (isNumber(col)) {
-      return {
-        span: col
-      };
-    } else if (isEmpty(col)) {
-      return {
-        span:
-          isNumeric(_columns) && +_columns > 0 && +_columns < 24 ? Math.floor(24 / +_columns) : 24
-      };
-    }
-    return useMerge({}, DEFAULT, col);
+  const DEFAULT = { xs: 24, sm: 24, md: 24, lg: 24, xl: 24 };
+  const { col = {} } = props;
+  if (isNumber(col)) {
+    return {
+      span: col
+    };
+  } else if (isEmpty(col)) {
+    return {
+      span: colSpan
+        ? colSpan
+        : isNumeric(_columns) && +_columns > 0 && +_columns < 24
+          ? Math.floor(24 / +_columns)
+          : 24
+    };
   }
-  const cols = isNumeric(_columns) ? _columns : 3;
-  return {
-    span: Math.floor(24 / cols)
-  };
+  return useMerge({}, DEFAULT, col);
 };
 /**
  * 获取表单参数

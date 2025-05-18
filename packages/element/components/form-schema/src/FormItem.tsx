@@ -27,6 +27,10 @@ export default defineComponent({
       type: Number,
       default: 3
     },
+    colSpan: {
+      type: Number,
+      default: 8
+    },
     isSearch: {
       type: Boolean,
       default: false
@@ -145,7 +149,7 @@ export default defineComponent({
     const createCol = () => {
       return h(
         ElCol,
-        { ...useColProps(computedItem.value, columns, isSearch) },
+        { ...useColProps(computedItem.value, columns, props.colSpan) },
         {
           default: () =>
             h(

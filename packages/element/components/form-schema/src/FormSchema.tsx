@@ -10,7 +10,6 @@ import {
   reactive,
   ref,
   toRef,
-  watch,
   type PropType,
   type Ref,
   type SlotsType,
@@ -42,15 +41,10 @@ export default defineComponent({
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
     const items: any = toRef(props.config.items);
-    const { itemsCaches, configItems, renderItems, needToggle } = useItemsProps(
-      items,
-      formProps.value.isSearch,
-      formProps.value.columns
-    );
+    const { itemsCaches, configItems, renderItems, needToggle } = useItemsProps(items, formProps);
     const epFormSchemaRef = ref<FormInstance>();
     const listenerEvents = ref();
     const isToggle = ref(false);
-    const filterSpan = ref(24);
     /**
      * 如果不传入model
      * 内部自动根据表单项创建，使用useFormSchema方法获取值
@@ -120,21 +114,9 @@ export default defineComponent({
     const listener = (args: Record<string, any>) => {
       listenerEvents.value = args;
     };
-    // todo 应该动态计算搜索按钮所占宽度设置
-    const calcFilterButtonsSpan = () => {
-      if (renderItems.value.length < 3) return 8;
-      if ((renderItems.value.length + 1) % 3 === 0) return 8;
-      return 24;
-    };
     onMounted(() => {
       emit('registry', getInstance);
     });
-    watch(
-      () => isToggle.value,
-      () => {
-        filterSpan.value = calcFilterButtonsSpan();
-      }
-    );
     return {
       formModel,
       formProps,
@@ -156,7 +138,6 @@ export default defineComponent({
       createModel,
       listener,
       resetFields,
-      filterSpan,
       clearValidate,
       validateField
     };
@@ -178,10 +159,11 @@ export default defineComponent({
       return h(
         ElRow,
         {
-          class: 'ep-form-schema-row'
+          class: 'ep-form-schema-row ep-flex'
         },
         () => {
           const columns = this.formProps.columns;
+          const colSpan = this.formProps.colSpan;
           const itemsNode: any[] = this.renderItems.map((item: FormItemsSchema) => {
             return renderDynamicShow(item)
               ? h(
@@ -189,6 +171,7 @@ export default defineComponent({
                   {
                     item,
                     key: item.prop || item.label,
+                    colSpan,
                     isSearch,
                     columns
                   },
@@ -199,7 +182,9 @@ export default defineComponent({
               : undefined;
           });
           if (isSearch && inline) {
-            itemsNode.push(<ElCol span={this.filterSpan}>{createRenderFilter()}</ElCol>);
+            itemsNode.push(
+              <ElCol class={'ep-flex-1 ep-justify-end'}>{createRenderFilter()}</ElCol>
+            );
           }
           return itemsNode;
         }

@@ -190,11 +190,12 @@ export type FormItemsSchema<T = any> = {
    */
   render?: Render<T, FormItemsSchema<T>>;
   /**
-   * 栅格的布局方式
+   * 栅格的布局方式，将会被覆盖父级`colSpan`
    */
   col?: FormItemCol;
   /**
    * 是否折叠,只对isSearch搜索有效
+   * @deprecated 废弃 默认根据columns、rows计算
    */
   collapse?: boolean;
   /**
@@ -228,15 +229,25 @@ export type FormSchema<T = any> = {
    */
   isSearch?: boolean | number;
   /**
-   * 显示列数
+   * 显示列数 仅提供查询模式有效
    * @default 3
    */
   columns?: number;
+  /**
+   * 显示列数 仅提供查询模式有效
+   * @default 1
+   */
+  rows?: number;
   /**
    * 搜索按钮是否与搜索框在同一行
    * @default true
    */
   inline?: boolean;
+  /**
+   * 统一列宽 如item子项配置了`col`属性，则将会被覆盖
+   * @default 8
+   */
+  colSpan?: number;
   /**
    * 表单项配置
    */

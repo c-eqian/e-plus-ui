@@ -1,22 +1,19 @@
 <script setup lang="ts">
 import { EpFormTable, type FormTableProps } from '@e-plus-ui/element';
 const formSchema: FormTableProps['formSchema'] = {
-  isSearch: 1,
+  isSearch: true,
   labelWidth: '90px',
-  columns: 3,
   items: [
     {
       type: 'input',
       label: '框架名称',
       defaultValue: '哈哈哈哈',
-      prop: 'name',
-      col: 12
+      prop: 'name'
     },
     {
       type: 'input',
       label: '框架名称',
-      prop: 'test2',
-      col: 12
+      prop: 'test2'
     },
     {
       type: 'input',
