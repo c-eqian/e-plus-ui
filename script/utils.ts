@@ -1,4 +1,6 @@
 import { readFileSync } from 'fs';
+import { readdir, stat } from 'fs/promises';
+import path from 'path';
 import fs from 'fs-extra';
 import { buildEnterPackage, projectRoot, rootPackage } from './paths';
 import type { OutputOptions, RollupBuild } from 'rollup';
@@ -70,3 +72,27 @@ export const getVersion = async () => {
   const { version } = await fs.readJSON(rootPackage);
   return version;
 };
+
+export async function hasCSSorSCSSFiles(dirPath: string, plugins = false) {
+  try {
+    const files = await readdir(dirPath);
+    for (const file of files) {
+      const filePath = path.join(dirPath, file);
+      const stats = await stat(filePath);
+
+      // 如果是文件并且是以 .css 或 .scss 结尾，则返回 true
+      if (stats.isFile() && /\.(css|scss)$/.test(file)) {
+        return true;
+      } else if (stats.isDirectory() && !plugins) {
+        return hasCSSorSCSSFiles(file);
+      } else if ((stats.isDirectory() && file.endsWith('styles')) || file.endsWith('style')) {
+        return hasCSSorSCSSFiles(file);
+      }
+    }
+  } catch {
+    return false;
+  }
+
+  // 如果没有找到符合条件的文件，则返回 false
+  return false;
+}

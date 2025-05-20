@@ -1,3 +1,4 @@
+import { HAS_STYLES } from './constants';
 import type { ComponentInfo, ComponentResolver, SideEffectsInfo } from './type';
 export type EPlusUIOptions = {
   importStyle?: boolean | 'css';
@@ -10,6 +11,8 @@ function kebabCase(key: string) {
 function getSideEffects(partialName: string, options: EPlusUIOptions): SideEffectsInfo {
   const { importStyle = true, importBaseStyles = true } = options;
   if (!importStyle) return;
+  // 检测是否具有css文件的路径
+  if (!HAS_STYLES.includes(partialName)) return;
   const stylesFolder = 'e-plus-ui/styles';
   return importBaseStyles
     ? [`${stylesFolder}/${partialName}/${partialName}.css`, `${stylesFolder}/base.css`]

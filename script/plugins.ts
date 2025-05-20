@@ -1,8 +1,7 @@
-import { readdir, stat } from 'fs/promises';
 import path from 'path';
 import MagicString from 'magic-string';
 import { packagesPath, PREFIX_PACKAGE_NAME } from './paths';
-import { replaceAll } from './utils';
+import { hasCSSorSCSSFiles, replaceAll } from './utils';
 import type { Plugin as RollupPlugin } from 'rollup';
 import type { Plugin } from 'vite';
 // function extractAllModuleNames(inputString: string): string[] {
@@ -78,27 +77,6 @@ export const rollupReplaceExport = (): RollupPlugin => {
     }
   };
 };
-async function hasCSSorSCSSFiles(dirPath: string) {
-  try {
-    const files = await readdir(dirPath);
-    for (const file of files) {
-      const filePath = path.join(dirPath, file);
-      const stats = await stat(filePath);
-
-      // 如果是文件并且是以 .css 或 .scss 结尾，则返回 true
-      if (stats.isFile() && /\.(css|scss)$/.test(file)) {
-        return true;
-      } else if ((stats.isDirectory() && file.endsWith('styles')) || file.endsWith('style')) {
-        return hasCSSorSCSSFiles(file);
-      }
-    }
-  } catch {
-    return false;
-  }
-
-  // 如果没有找到符合条件的文件，则返回 false
-  return false;
-}
 export const autoImportCss = (): Plugin => {
   return {
     name: 'vite-auto-import-css',
