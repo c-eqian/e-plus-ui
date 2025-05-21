@@ -3,7 +3,6 @@
 | 参数 | 类型 | 必选 | 描述 | 默认值 |
 | :-------: | :-------: | :-------: | :-------: | :-------: |
 | border | `boolean` | `false` | 是否使用边框 | `false`|
-| column | `TableColumnConfig[]` | `false` | 数据列配置 | -|
 | columns | `TableColumnConfig[]` | `false` | 数据列配置 | -|
 | data | `any[]` | `false` |  | -|
 | formModelExtender | `object` | `false` |  | -|

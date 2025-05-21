@@ -14,7 +14,7 @@ import { generateDocWebTypes } from './web-types/vue-docgen';
 const removeOutputDir = async () => await remove(outDir);
 export default series(
   removeOutputDir,
-  series(generateResolveCssPath, buildResolver),
   parallel(buildModules, typesDts, copyFiles, generateDocWebTypes, buildStyles),
-  generateApi
+  generateApi,
+  series(generateResolveCssPath, buildResolver)
 );

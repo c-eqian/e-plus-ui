@@ -4,6 +4,8 @@
 | :-------: | :-------: | :-------: | :-------: | :-------: |
 | componentProps | `Partial<Omit<InputProps, modelValue>>  \|  undefined` | `false` | ElInput 组件参数 | -|
 | icons | `IconData[]  \|  undefined` | `false` | 图标数据 | -|
+| lazyLoadable | `boolean  \|  undefined` | `false` | 是否使用懒加载图标 | -|
+| lazyLoadValue | `number  \|  undefined` | `false` | 当使用懒加载时，需要的初始值 | -|
 | modelValue | `string  \|  undefined` | `false` |  | -|
 | popoverWidth | `string  \|  number  \|  undefined` | `false` | popover组件宽度 | -|
 | searchable | `boolean  \|  undefined` | `false` | 是否使用搜索 | -|

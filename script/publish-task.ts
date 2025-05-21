@@ -18,11 +18,11 @@ const removeOutputDir = async () => await remove(outDir);
 export default series(
   updatePackageVersion,
   removeOutputDir,
-  series(generateResolveCssPath, buildResolver),
   series(
     parallel(buildModules, typesDts, copyFiles, buildStyles),
     generateDocWebTypes,
     generateApi
   ),
+  series(generateResolveCssPath, buildResolver),
   publish
 );
