@@ -3,6 +3,7 @@ import { EpFormTable, type FormTableProps } from '@e-plus-ui/element';
 const formSchema: FormTableProps['formSchema'] = {
   isSearch: true,
   labelWidth: '90px',
+  inlineSearch: false,
   items: [
     {
       type: 'input',

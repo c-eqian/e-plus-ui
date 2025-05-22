@@ -4,6 +4,7 @@ import type { Component } from 'vue';
 
 import './styles/code.scss';
 import '../../../packages/styles/index.scss';
+import '../../../packages/tailwind-config/tailwind.css';
 
 export default VPApp;
 

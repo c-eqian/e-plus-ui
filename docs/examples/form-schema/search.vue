@@ -33,8 +33,8 @@ const formSchema = defineFormSchema<FormModel>({
   labelWidth: '70px',
   // 启用搜索
   isSearch: true,
-  // 搜索按钮在首行固定
-  inline: true,
+  // 搜索按钮是否与同行
+  inlineSearch: true,
   items: [
     {
       type: 'input',

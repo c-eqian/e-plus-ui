@@ -224,7 +224,6 @@ export type FormItemsSchema<T = any> = {
 export type FormSchema<T = any> = {
   /**
    * 是否使用查询表单，设置此参数，表单相关属性会失效，仅提供查询模式
-   * 也可以设置一个number值，如果大于0，默认设置为搜索模式，并且根据该值设置显示几行，否则显示一行
    * @default false
    */
   isSearch?: boolean | number;
@@ -242,7 +241,7 @@ export type FormSchema<T = any> = {
    * 搜索按钮是否与搜索框在同一行
    * @default true
    */
-  inline?: boolean;
+  inlineSearch?: boolean;
   /**
    * 统一列宽 如item子项配置了`col`属性，则将会被覆盖
    * @default 8

@@ -155,7 +155,7 @@ export default defineComponent({
       }
       return true;
     };
-    const createItemRender = (isSearch: boolean, inline: boolean) => {
+    const createItemRender = (isSearch: boolean, inlineSearch: boolean) => {
       return h(
         ElRow,
         {
@@ -181,9 +181,9 @@ export default defineComponent({
                 )
               : undefined;
           });
-          if (isSearch && inline) {
+          if (isSearch && inlineSearch) {
             itemsNode.push(
-              <ElCol class={'ep-flex-1 ep-justify-end'}>{createRenderFilter()}</ElCol>
+              <ElCol class={'!ep-flex-1 ep-justify-end'}>{createRenderFilter()}</ElCol>
             );
           }
           return itemsNode;
@@ -213,12 +213,13 @@ export default defineComponent({
     };
     const createRow = () => {
       const isSearch = !!this.formProps.isSearch;
-      const inline = this.formProps.inline === void 0 ? true : !!this.formProps.inline;
+      const inlineSearch =
+        this.formProps.inlineSearch === void 0 ? true : !!this.formProps.inlineSearch;
       const renderNodes: VNode[] = [];
-      const formItemsRender = createItemRender(isSearch, inline);
+      const formItemsRender = createItemRender(isSearch, inlineSearch);
       renderNodes.push(formItemsRender);
       // 处理查询
-      if (isSearch && !inline) {
+      if (isSearch && !inlineSearch) {
         const row = (
           <ElRow>
             <ElCol class={'!ep-flex ep-justify-end ep-w-100%'}>{createRenderFilter()}</ElCol>
