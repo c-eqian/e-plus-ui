@@ -1,6 +1,26 @@
 # 更新日志 
 
 
+## [1.8.0-beta.0](https://github.com/c-eqian/e-plus-ui/compare/v1.7.0...v1.8.0-beta.0) (2025-05-23)
+
+
+### 💄 Styles | 风格
+
+* 优化暗黑模式样式 ([f21401f](https://github.com/c-eqian/e-plus-ui/commit/f21401f899343aac86f9374f020e1b05f02d0c17))
+* 优化暗黑模式样式 ([4255341](https://github.com/c-eqian/e-plus-ui/commit/42553411585e5b48d5309d56a956732b4746a1b8))
+* 优化暗黑模式样式 ([12e4e81](https://github.com/c-eqian/e-plus-ui/commit/12e4e81ff3300ea04491c9b18429fc15f4ff3436))
+
+
+### ✨ Features | 新功能
+
+* **components:** 添加slider-verify滑块基础组件 ([94f2c8f](https://github.com/c-eqian/e-plus-ui/commit/94f2c8fe12c3c54a3cc13e68fabadf4c71101083))
+* **components:** form-schema组件搜索模式下支持配置列宽等 ([4926b59](https://github.com/c-eqian/e-plus-ui/commit/4926b597770c7c0aea9e4a5ebe2c691865073b6b))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* **form-schema:** 修复搜索按钮位置参数 ([33c968f](https://github.com/c-eqian/e-plus-ui/commit/33c968f8d41fa0da3d35536b9a22758d0a753ae8))
+
 ## [1.7.0](https://github.com/c-eqian/e-plus-ui/compare/v1.6.0...v1.7.0) (2025-02-07)
 
 
