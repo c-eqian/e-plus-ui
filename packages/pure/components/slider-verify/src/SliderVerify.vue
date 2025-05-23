@@ -4,9 +4,12 @@ import { sliderVerifyDefault } from './defaultProps';
 import SliderBase from './SliderBase.vue';
 import type { SliderVerifierProps } from './type';
 const sliderRef = useTemplateRef('sliderRef');
-const emits = defineEmits(['success']);
+const emits = defineEmits(['success', 'reset']);
 const props = withDefaults(defineProps<SliderVerifierProps>(), sliderVerifyDefault);
 
+const resetSliderVerify = () => {
+  sliderRef.value?.resetSliderVerify();
+};
 const verifySuccess = (data: any) => {
   const { sw, sl } = data;
   if (sl >= sw) {
@@ -14,11 +17,14 @@ const verifySuccess = (data: any) => {
     emits('success');
     return;
   }
-  sliderRef.value?.resetSliderVerify();
+  resetSliderVerify();
 };
 const handleStop = (data: any) => {
   verifySuccess(data);
 };
+defineExpose({
+  resetSliderVerify
+});
 </script>
 
 <template>
