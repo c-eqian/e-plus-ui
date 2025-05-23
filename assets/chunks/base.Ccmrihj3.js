@@ -1,0 +1,1 @@
+import{aF as o,ah as a,o as c,c as s,Q as t}from"./framework.SULaAIX3.js";const n={},r={class:"demo-mr"};function _(m,p){const e=a("ep-image");return c(),s("div",r,[t(e,{url:"https://s3.bmp.ovh/imgs/2022/11/23/84077c18f8e3acfa.jpg"})])}const f=o(n,[["render",_],["__scopeId","data-v-c5a54769"]]);export{f as default};

@@ -1,0 +1,1 @@
+import{aF as o,ah as n,o as s,H as a,I as c,M as r}from"./framework.SULaAIX3.js";const _={};function p(x,e){const t=n("ep-copy-text");return s(),a(t,{text:"复制内容"},{default:c(()=>e[0]||(e[0]=[r("点我复制")])),_:1})}const d=o(_,[["render",p]]);export{d as default};
