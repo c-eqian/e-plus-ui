@@ -11,6 +11,21 @@ const { open } = useDialogModel({
     h('div', null, {
       default: () => '韩时尚'
     }),
+  onOpened() {
+    console.log('弹窗被打开之后执行');
+  },
+  onOpen() {
+    console.log('弹窗被打开之前执行');
+  },
+  onClose() {
+    console.log('弹窗被关闭之前执行');
+  },
+  onClosed() {
+    console.log('弹窗被关闭之后执行');
+  },
+  onCanceled() {
+    console.log('弹窗按钮关闭');
+  },
   onConfirmed: handleConfirm
 });
 </script>
