@@ -75,4 +75,9 @@ export type AuthEmits = {
    * @param data 如果有自定义`form-schema`插槽，值将会是`null`
    */
   (e: 'confirm', data: any): void;
+  /**
+   * 找回密码
+   * @param e
+   */
+  (e: 'findPassword'): void;
 };

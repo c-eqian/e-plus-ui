@@ -36,7 +36,7 @@ export const useFilterProps = (props: FormItemsSchema) => {
 export const useColProps = (
   props: FormItemsSchema,
   columns: ComputedRef<number>,
-  colSpan: number
+  colSpan?: number
 ) => {
   const _columns = unref(columns);
   const DEFAULT = { xs: 24, sm: 24, md: 24, lg: 24, xl: 24 };

@@ -2,7 +2,7 @@
 import { EpFormSchema, useFormSchema } from '@e-plus-ui/element/components/form-schema';
 import { pixelUnits } from '@e-plus-ui/utils';
 import { isFunction } from '@eqian/utils-vue';
-import { computed, useSlots } from 'vue';
+import { computed, reactive, useSlots } from 'vue';
 import { authProps } from './authProps';
 import type { AuthEmits, AuthPageConfig } from './type';
 defineOptions({
@@ -11,6 +11,9 @@ defineOptions({
 const emits = defineEmits<AuthEmits>();
 const props = withDefaults(defineProps<AuthPageConfig>(), {
   config: () => authProps
+});
+const stateData = reactive({
+  isRemember: false
 });
 const config = computed(() => {
   return {
@@ -25,15 +28,32 @@ const formSchemaConfig = computed(() => {
   return config.value.formSchema;
 });
 const slots = useSlots();
-const { registry, validate, getFieldsValues } = useFormSchema();
+const { registry, validate, getFieldsValues, setFieldsValues, resetFields } = useFormSchema();
 const handleConfirm = async () => {
   const hasDefaultSlot = slots['form-schema'];
   if (!hasDefaultSlot) {
     await validate();
   }
   const data = hasDefaultSlot ? null : getFieldsValues();
-  emits('confirm', data);
+  emits('confirm', config.value.useRemember ? { ...data, isRemember: stateData.isRemember } : data);
 };
+const setValues = (data: Record<any, any>, isRemember = false) => {
+  setFieldsValues(data);
+  stateData.isRemember = isRemember;
+};
+const getValues = () => {
+  const data = getFieldsValues();
+  return config.value.useRemember ? { ...data, isRemember: stateData.isRemember } : data;
+};
+const resetValues = (isRemember = false) => {
+  resetFields();
+  stateData.isRemember = isRemember;
+};
+defineExpose({
+  getValues,
+  setValues,
+  resetValues
+});
 </script>
 
 <template>
@@ -70,8 +90,12 @@ const handleConfirm = async () => {
                 class="ep-flex ep-items-center ep-w-full"
                 :class="config.useRemember ? 'ep-justify-between' : 'ep-justify-end'"
               >
-                <el-checkbox v-if="config.useRemember">{{ config.rememberText }}</el-checkbox>
-                <el-button plain text type="primary">{{ config.forgetPasswordText }}</el-button>
+                <el-checkbox v-if="config.useRemember" v-model="stateData.isRemember">{{
+                  config.rememberText
+                }}</el-checkbox>
+                <el-button plain text type="primary" @click="emits('findPassword')">{{
+                  config.forgetPasswordText
+                }}</el-button>
               </div>
             </template>
           </EpFormSchema>

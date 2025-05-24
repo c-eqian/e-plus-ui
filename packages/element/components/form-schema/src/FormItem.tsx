@@ -35,8 +35,7 @@ export default defineComponent({
       default: 3
     },
     colSpan: {
-      type: Number,
-      default: 8
+      type: Number
     },
     isSearch: {
       type: Boolean,
