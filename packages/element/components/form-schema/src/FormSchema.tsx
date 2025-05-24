@@ -15,7 +15,7 @@ import {
   type SlotsType,
   type VNode
 } from 'vue';
-import { FORM_SCHEMA_LISTENER, FORM_SCHEMA_MODEL } from './constants';
+import { FORM_SCHEMA_APP_INSTANCE, FORM_SCHEMA_LISTENER, FORM_SCHEMA_MODEL } from './constants';
 import FormItem from './FormItem';
 import { useFormItem } from './hooks/useFormItem';
 import { useFormValidate } from './hooks/useFormValidate';
@@ -95,8 +95,12 @@ export default defineComponent({
     const updateSearchSchema = (isToggle: boolean) => {
       renderItems.value = isToggle ? configItems.value : itemsCaches.value;
     };
+    const getInstance = () => {
+      return getCurrentInstance();
+    };
     provide(FORM_SCHEMA_MODEL, formModel);
     provide(FORM_SCHEMA_LISTENER, listenerEvents);
+    provide(FORM_SCHEMA_APP_INSTANCE, getInstance());
     const { validate, resetFields, clearValidate, validateField, scrollIntoView } = useFormValidate(
       epFormSchemaRef as Ref<FormInstance>
     );
@@ -108,9 +112,6 @@ export default defineComponent({
       getModel,
       updateFieldValue
     );
-    const getInstance = () => {
-      return getCurrentInstance();
-    };
     const listener = (args: Record<string, any>) => {
       listenerEvents.value = args;
     };

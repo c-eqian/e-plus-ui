@@ -1,4 +1,4 @@
-import { isArray, isEmpty, isFunction, isObject, isString } from '@eqian/utils-vue';
+import { isArray, isEmpty, isFunction, isObject, isString, useCamelize } from '@eqian/utils-vue';
 import { ElCol, ElFormItem } from 'element-plus';
 import {
   computed,
@@ -7,12 +7,19 @@ import {
   inject,
   ref,
   unref,
+  type Component,
+  type ComponentInternalInstance,
   type DefineComponent,
   type PropType,
   type Ref
 } from 'vue';
 import { componentsMap } from './componentsMap';
-import { FORM_SCHEMA_LISTENER, FORM_SCHEMA_MODEL, GROUP_LIST } from './constants';
+import {
+  FORM_SCHEMA_APP_INSTANCE,
+  FORM_SCHEMA_LISTENER,
+  FORM_SCHEMA_MODEL,
+  GROUP_LIST
+} from './constants';
 import GroupComponent from './GroupBy';
 import { useColProps, useFormItemProps, useFormProps } from './hooks/useFormItem';
 import type { FormItemsSchema, FormSchemaType, IGroupOptions } from './type';
@@ -40,9 +47,13 @@ export default defineComponent({
     const computedItem = computed(() => props.item);
     const isSearch = computed(() => props.isSearch);
     const columns = computed(() => props.columns);
-    const { type, render, slotKey, ..._props } = computedItem.value;
+    const { type, globalComponent, render, slotKey, ..._props } = computedItem.value;
     const formModel = inject<Ref<any>>(FORM_SCHEMA_MODEL, {} as any);
     const listener = inject<Ref<any>>(FORM_SCHEMA_LISTENER, {} as any);
+    const appInstance = inject<ComponentInternalInstance>(
+      FORM_SCHEMA_APP_INSTANCE,
+      {} as ComponentInternalInstance
+    );
     const getComponentSlots = () => {
       if (computedItem.value?.componentProps?.slots) {
         return computedItem.value?.componentProps?.slots;
@@ -123,13 +134,12 @@ export default defineComponent({
           model: formModel
         });
       }
-      if (isString(type) && componentsMap.has(type as FormSchemaType)) {
-        const com = componentsMap.get(type as FormSchemaType) as DefineComponent;
+      const renderComponent = (com: any) => {
         if (
-          GROUP_LIST.includes(type) ||
+          GROUP_LIST.includes(type as FormSchemaType) ||
           (type === 'select' && !isEmpty(_props.componentProps?.groupOptions))
         ) {
-          return groupBaseRender(type, com);
+          return groupBaseRender(type as FormSchemaType, com);
         }
         return h(
           com,
@@ -143,6 +153,22 @@ export default defineComponent({
           },
           { ...getComponentSlots() }
         );
+      };
+      if (isString(type) && componentsMap.has(type as FormSchemaType)) {
+        const com = componentsMap.get(type as FormSchemaType) as DefineComponent;
+        return renderComponent(com);
+      }
+      if (!isEmpty(globalComponent)) {
+        const components = (appInstance?.appContext?.components ?? {}) as Record<string, Component>;
+        const _components =
+          components[globalComponent!] ?? components[useCamelize(globalComponent!, true)];
+        if (!_components) {
+          console.warn(
+            `请确保组件：${globalComponent}已被Vue应用实列中全局注册，或组件名称是否正确`
+          );
+          return null;
+        }
+        return renderComponent(_components);
       }
       return null;
     };

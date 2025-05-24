@@ -186,6 +186,10 @@ export type FormItemsSchema<T = any> = {
    */
   type?: FormSchemaType;
   /**
+   * 使用`app.components`注册的全局组件，如果设置了type值，该值将被忽略
+   */
+  globalComponent?: string;
+  /**
    * 自定义渲染，优先级低于插槽
    */
   render?: Render<T, FormItemsSchema<T>>;

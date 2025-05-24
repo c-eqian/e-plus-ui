@@ -130,6 +130,14 @@ form-schema/api
 form-schema/slots
 :::
 
+## 使用`app.components`注册的全局组件
+支持配置`globalComponent`字段使用`app.components`注册的全局组件，如果设置了`type`值，该值将被忽略
+**大驼峰或者烤串拼接均可，只要跟全局注册名称一致**
+
+:::demo
+form-schema/global-component
+:::
+
 ## 搜索栏
 
 在该表单的基础上增加了对搜索组件的支持，只需要配置`isSearch`即可。如果没有配置`columns`，默认情况下，只显示三列，如果`isSearch`是一个数值，那么显示行数为该数值,否则默认为`1`；
