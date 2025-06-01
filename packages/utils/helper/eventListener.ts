@@ -1,6 +1,6 @@
 import { isObjectLike } from '@eqian/utils-vue';
 import { computed, toValue, unref, watch, type MaybeRef, type MaybeRefOrGetter } from 'vue';
-import type { Arrayable, CallbackVoid } from '../types';
+import type { CallbackVoid, MaybeArray } from '../types';
 import { toArray, tryOnScopeDispose } from './helper';
 
 export type WindowEventName = keyof WindowEventMap;
@@ -15,8 +15,8 @@ export type HTMLElementEventName = keyof HTMLElementEventMap;
  * @param options
  */
 export function useEventListener<E extends WindowEventName>(
-  event: MaybeRefOrGetter<Arrayable<E>>,
-  listener: MaybeRef<Arrayable<(this: Window, ev: WindowEventMap[E]) => any>>,
+  event: MaybeRefOrGetter<MaybeArray<E>>,
+  listener: MaybeRef<MaybeArray<(this: Window, ev: WindowEventMap[E]) => any>>,
   options?: MaybeRefOrGetter<boolean | AddEventListenerOptions>
 ): CallbackVoid;
 /**
@@ -29,8 +29,8 @@ export function useEventListener<E extends WindowEventName>(
  */
 export function useEventListener<E extends DocumentEventName>(
   target: DocumentOrShadowRoot,
-  event: MaybeRefOrGetter<Arrayable<E>>,
-  listener: MaybeRef<Arrayable<(this: Document, ev: DocumentEventMap[E]) => any>>,
+  event: MaybeRefOrGetter<MaybeArray<E>>,
+  listener: MaybeRef<MaybeArray<(this: Document, ev: DocumentEventMap[E]) => any>>,
   options?: MaybeRefOrGetter<boolean | AddEventListenerOptions>
 ): CallbackVoid;
 /**
@@ -43,8 +43,8 @@ export function useEventListener<E extends DocumentEventName>(
  */
 export function useEventListener<E extends WindowEventName>(
   target: Window,
-  event: MaybeRefOrGetter<Arrayable<E>>,
-  listener: MaybeRef<Arrayable<(this: Window, ev: WindowEventMap[E]) => any>>,
+  event: MaybeRefOrGetter<MaybeArray<E>>,
+  listener: MaybeRef<MaybeArray<(this: Window, ev: WindowEventMap[E]) => any>>,
   options?: MaybeRefOrGetter<boolean | AddEventListenerOptions>
 ): CallbackVoid;
 /**
@@ -56,8 +56,8 @@ export function useEventListener<E extends WindowEventName>(
  * @param options
  */
 export function useEventListener<E extends HTMLElementEventName>(
-  target: MaybeRefOrGetter<Arrayable<HTMLElement> | null | undefined>,
-  event: MaybeRefOrGetter<Arrayable<E>>,
+  target: MaybeRefOrGetter<MaybeArray<HTMLElement> | null | undefined>,
+  event: MaybeRefOrGetter<MaybeArray<E>>,
   listener: MaybeRef<(this: HTMLElement, ev: HTMLElementEventMap[E]) => any>,
   options?: MaybeRefOrGetter<boolean | AddEventListenerOptions>
 ): CallbackVoid;

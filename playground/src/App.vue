@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { EpFormTable, type FormTableProps } from '@e-plus-ui/element';
+import { EpFormTable, useFormTable, type FormTableProps } from '@e-plus-ui/element';
+type TableData = {
+  date: string;
+  name: string;
+  address: string;
+};
 const formSchema: FormTableProps['formSchema'] = {
   isSearch: true,
   labelWidth: '90px',
@@ -33,25 +38,7 @@ const formSchema: FormTableProps['formSchema'] = {
     }
   ]
 };
-const tableConfig: FormTableProps['tableConfig'] = {
-  // 使用分页
-  pagination: true,
-  columns: [
-    {
-      label: '名称',
-      prop: 'name'
-    },
-    {
-      label: '日期',
-      prop: 'date'
-    },
-    {
-      label: '地址',
-      prop: 'address'
-    }
-  ]
-};
-const tableData = [
+const tableData: TableData[] = [
   {
     date: '2016-05-03',
     name: 'Tom',
@@ -143,11 +130,33 @@ const simulateRequest = () => {
     }, 3000);
   });
 };
+const { registry } = useFormTable<TableData>({
+  api: simulateRequest,
+  immediate: true,
+  formSchema,
+  tableSchema: {
+    // 使用分页
+    pagination: true,
+    columns: [
+      {
+        label: '名称',
+        prop: 'name'
+      },
+      {
+        label: '日期',
+        prop: 'date'
+      },
+      {
+        label: '地址',
+        prop: 'address'
+      }
+    ]
+  }
+});
 </script>
 
 <template>
-  <EpFormTable :api="simulateRequest" :form-schema="formSchema" :table-config="tableConfig">
-  </EpFormTable>
+  <EpFormTable @registry="registry"> </EpFormTable>
 </template>
 
 <style scoped>

@@ -1,9 +1,9 @@
 import { computed, ref, toValue, watch, type MaybeRef, type Ref } from 'vue';
 import { magicObject, toArray, tryOnScopeDispose } from '../helper/helper';
-import type { Arrayable } from '../types';
+import type { MaybeArray } from '../types';
 export type WebElement = HTMLElement | HTMLDivElement | Element | null;
 export type MaybeRefWebElement = MaybeRef<WebElement>;
-export type InterObserverTarget = Arrayable<MaybeRefWebElement>;
+export type InterObserverTarget = MaybeArray<MaybeRefWebElement>;
 export type InterObserverReturn = {
   /**
    * 暂停监听
