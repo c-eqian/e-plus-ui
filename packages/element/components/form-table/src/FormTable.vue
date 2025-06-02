@@ -18,7 +18,7 @@ import {
   unref,
   useTemplateRef
 } from 'vue';
-import type { FormTableEmits, FormTableProps, FormTableReturn } from './type';
+import type { FormTableEmits, FormTableProps } from './type';
 import type { Recordable } from '@e-plus-ui/utils';
 const props = withDefaults(defineProps<FormTableProps>(), {
   listKey: 'list',
@@ -134,7 +134,7 @@ const $setFormTableProps = ($props: FormTableProps) => {
     updateApi($props.api);
   }
 };
-defineExpose<Omit<FormTableReturn<T>, 'registry'> & Recordable>({
+defineExpose({
   resetTable: handleReset,
   searchTable,
   $setFormTableProps,

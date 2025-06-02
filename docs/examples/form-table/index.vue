@@ -82,7 +82,7 @@ const simulateRequest = () => {
 
 <template>
   <div class="play">
-    <EpFormTable :api="simulateRequest" :form-schema="formSchema" :table-config="tableConfig">
+    <EpFormTable :api="simulateRequest" :form-schema="formSchema" :table-schema="tableConfig">
     </EpFormTable>
   </div>
 </template>

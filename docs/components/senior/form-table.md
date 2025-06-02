@@ -5,3 +5,8 @@
 :::demo
 form-table/index
 :::
+
+## 使用useFormTable方式
+:::demo
+form-table/use-form-table
+:::
