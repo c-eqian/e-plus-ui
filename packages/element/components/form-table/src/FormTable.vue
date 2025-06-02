@@ -28,6 +28,7 @@ const props = withDefaults(defineProps<FormTableProps>(), {
   immediate: true
 });
 const propsRefs = ref<FormTableProps>(props);
+const selected = ref<any[]>([]);
 const computedRefs = computed({
   get() {
     return propsRefs.value;
@@ -134,6 +135,9 @@ const $setFormTableProps = ($props: FormTableProps) => {
     updateApi($props.api);
   }
 };
+const handleChange = (list: any[]) => {
+  selected.value = list;
+};
 defineExpose({
   resetTable: handleReset,
   searchTable,
@@ -172,6 +176,7 @@ defineExpose({
         :pa-total="tableTotal"
         :height="height"
         @registry="registryTable"
+        @selection-change="handleChange"
         @page-change="handleCurrentPage"
       ></EpTable>
     </template>

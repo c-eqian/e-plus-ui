@@ -12,27 +12,21 @@ type TableSchema<T> = {
 } & ComponentProps<typeof ElTable> &
   ComponentProps<typeof EpTable>;
 
-type PromiseAble<T = unknown> = () => Promise<T>;
+type PromiseAble<R = unknown> = () => Promise<R>;
 type RequestHandler = <T = object>(params: T) => NonNullable<Recordable>;
 export type ResponseList<T extends object> = {
   list: T[];
   total: number;
   [p: string]: unknown;
 };
-// 提取函数的返回类型，同时排除 undefined
-type NonNullableFunction<T> = T extends (...args: any) => infer R ? (...args: any) => R : never;
 
 // 获取 BaseFormTableProps['api'] 的返回类型
-type APIResponse =
-  NonNullableFunction<NonNullable<BaseFormTableProps['api']>> extends (...args: any) => infer R
-    ? R
-    : never;
-type ResponseHandler = (data: APIResponse) => ResponseList<any>;
-export type BaseFormTableProps = {
+type ResponseHandler<R> = (data: R) => ResponseList<any>;
+export type BaseFormTableProps<R> = {
   /**
    * API接口请求
    */
-  api?: PromiseAble;
+  api?: PromiseAble<R>;
   /**
    * 立即请求
    * @default true
@@ -89,12 +83,12 @@ export type BaseFormTableProps = {
   /**
    * 响应成功数据处理
    */
-  responseHandler?: ResponseHandler;
+  responseHandler?: ResponseHandler<R>;
 };
 /**
  * 参数类型
  */
-export type FormTableProps<T = any, F = any> = {
+export type FormTableProps<T = any, F = any, R = any> = {
   /**
    * 表单配置
    */
@@ -107,7 +101,7 @@ export type FormTableProps<T = any, F = any> = {
    * 标题
    */
   title?: string;
-} & BaseFormTableProps;
+} & BaseFormTableProps<R>;
 
 export type FormTableEmits = {
   /**
@@ -146,4 +140,6 @@ export type FormTableReturn<T = any> = {
 /**
  * 搜索表格
  */
-export type UseFormTable = <T = any, F = any>(props: FormTableProps<T, F>) => FormTableReturn<T>;
+export type UseFormTable = <T = any, F = any, R = any>(
+  props: FormTableProps<T, F, R>
+) => FormTableReturn<T>;

@@ -18,6 +18,7 @@ import {
 import { useColumns } from './hooks/useColumns';
 import AdvTableColumn from './TableColumn';
 import type { OperationType, TableColumnConfig } from './type';
+import type { Recordable } from '@e-plus-ui/utils';
 
 // import './style.scss';
 type FormInstance = InstanceType<typeof ElForm>;
@@ -172,6 +173,7 @@ export default defineComponent({
     const epFormRef = ref<FormInstance>();
     const epTable = ref<InstanceType<typeof ElTable>>();
     const columns = ref(props.columns);
+    const selectedRows = ref<Recordable[]>([]);
     const dataComputed = ref(props.data);
     const columnsComputed = computed(() => {
       return columns.value.filter(columnsItem => {
@@ -306,6 +308,7 @@ export default defineComponent({
      * @param list
      */
     const handleSelectionChange = (list: any[]) => {
+      selectedRows.value = list;
       emit('selection-change', list);
     };
     const handleRowDbClick = (row: any) => {
@@ -313,6 +316,9 @@ export default defineComponent({
     };
     const getColumns = () => {
       return columns;
+    };
+    const getSelectedRows = () => {
+      return selectedRows.value;
     };
     const updateColumns = (_data: TableColumnConfig[]) => {
       columns.value = _data;
@@ -345,6 +351,7 @@ export default defineComponent({
       columnsComputed,
       // dictValue,
       getColumns,
+      getSelectedRows,
       getData,
       updateColumns,
       formModels,

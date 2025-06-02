@@ -86,7 +86,9 @@ export const useEpTable = <T = any>(): UseTableReturnType<T> => {
     }
     return tableInstance.value?.toggleRowSelection(row, !!selected);
   };
-
+  const getSelectedRows = () => {
+    return tableInstance.value?.getSelectedRows();
+  };
   return {
     resetFields,
     clearValidate,
@@ -96,6 +98,7 @@ export const useEpTable = <T = any>(): UseTableReturnType<T> => {
     deleteFieldColumns,
     updateFieldColumns,
     clearSelection,
+    getSelectedRows,
     toggleRowSelection,
     registry
   };

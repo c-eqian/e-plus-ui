@@ -40,7 +40,7 @@ export default defineComponent({
   slots: Object as SlotsType<FormSchemaSlots>,
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
-    const items: any = toRef(props.config.items ?? []);
+    const items: any = toRef(props.config?.items ?? []);
     const { itemsCaches, configItems, renderItems, needToggle } = useItemsProps(items, formProps);
     const epFormSchemaRef = ref<FormInstance>();
     const listenerEvents = ref();

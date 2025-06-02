@@ -1,5 +1,6 @@
-import type { FormItemRule, FormValidateCallback } from 'element-plus';
+import type { Recordable } from '@e-plus-ui/utils';
 
+import type { FormItemRule, FormValidateCallback } from 'element-plus';
 import type { ComponentInternalInstance, Ref, VNode } from 'vue';
 
 export type TagType = 'primary' | 'success' | 'info' | 'warning' | 'danger';
@@ -254,4 +255,8 @@ export type UseTableReturnType<T> = {
     columns: TableColumnConfig<T>[] | TableColumnConfig<T>,
     fullUpdate?: boolean
   ) => void;
+  /**
+   * 获取选中行
+   */
+  getSelectedRows: () => Recordable[];
 };
