@@ -192,11 +192,12 @@ export default defineComponent({
       );
     };
     const createRenderFilter = () => {
+      const { serialized = true, filterEmpty = false } = this.formProps;
       return h(
         FilterButtons,
         {
           needToggle: this.needToggle,
-          onSearch: () => this.emit('search', this.getFieldsValues()),
+          onSearch: () => this.emit('search', this.getFieldsValues(serialized, filterEmpty)),
           onReset: () => {
             this.resetFieldsValues();
             this.formModel = this.createModel();

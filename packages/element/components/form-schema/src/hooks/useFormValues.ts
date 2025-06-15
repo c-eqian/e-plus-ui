@@ -1,4 +1,5 @@
-import { isEmpty, isObjectLike, useEmptyObject } from '@eqian/utils-vue';
+import { omitEmpty, type Recordable } from '@e-plus-ui/utils';
+import { isArray, isEmpty, isObjectLike, useEmptyObject } from '@eqian/utils-vue';
 import { unref, type Ref } from 'vue';
 import type { UpdateFieldValue } from '../type';
 function transformFlatObjectToNested(
@@ -18,18 +19,31 @@ function transformFlatObjectToNested(
   currentLevel[pathArray[pathArray.length - 1]] = value;
 }
 
-export const useFormValues = (getModel: () => Ref<object>, updateFieldValue: UpdateFieldValue) => {
+export const useFormValues = (
+  getModel: () => Ref<Recordable>,
+  updateFieldValue: UpdateFieldValue
+) => {
   /**
    * 获取字段值
    * @param serialize 是否需要序列化
+   * @param filterEmpty 是否过滤空值 默认为 `[undefined, null, '']`
    * @default true
    * @example
    * ``` js
    * // 'a.b.c'=> {a:{b: {c:xxx}}}
    * ```
    */
-  const getFieldsValues = <T extends Record<string, any>>(serialize = true): T => {
-    const model = unref(getModel());
+  const getFieldsValues = <T extends Record<string, any>>(
+    serialize = true,
+    filterEmpty?: boolean | unknown[]
+  ): T => {
+    const sourceModel = unref(getModel());
+    const model =
+      filterEmpty === void 0 || filterEmpty === false
+        ? sourceModel
+        : !isArray(filterEmpty) && filterEmpty === true
+          ? omitEmpty(sourceModel)
+          : omitEmpty(sourceModel, filterEmpty);
     if (!isObjectLike(model)) {
       return {} as any;
     }
@@ -56,7 +70,7 @@ export const useFormValues = (getModel: () => Ref<object>, updateFieldValue: Upd
   };
   const resetFieldsValues = () => {
     const model = unref(getModel());
-    setFieldsValues(useEmptyObject(model));
+    setFieldsValues(useEmptyObject(model)!);
   };
   return {
     getFieldsValues,

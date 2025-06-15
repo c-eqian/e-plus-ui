@@ -18,6 +18,7 @@ const formSchema: FormTableProps['formSchema'] = {
   isSearch: true,
   labelWidth: '90px',
   inlineSearch: false,
+  filterEmpty: true, // 过滤空值
   items: [
     {
       type: 'input',
@@ -108,7 +109,7 @@ const isDeletable = computed(() => {
   return !getTableInstance()?.getSelectedRows()?.length;
 });
 const handleFormInstance = async () => {
-  const data = await getFormSchemaInstance().getFieldsValues();
+  const data = await getFormSchemaInstance().getFieldsValues(true, true);
   console.log(data);
 };
 watch(

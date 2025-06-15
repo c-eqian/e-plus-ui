@@ -253,6 +253,20 @@ export type FormSchema<T = any> = {
    */
   colSpan?: number;
   /**
+   * 是否过滤空值, 如果传入`true`默认为 `[undefined, null, '']`
+   * @default false
+   */
+  filterEmpty?: boolean | unknown[];
+  /**
+   *  serialize 是否需要序列化
+   *  @default true
+   * @example
+   * ``` js
+   * // 'a.b.c'=> {a:{b: {c:xxx}}}
+   * ```
+   */
+  serialized?: boolean;
+  /**
    * 表单项配置
    */
   items: FormItemsSchema<T>[];
@@ -273,14 +287,17 @@ export type FormContext<T = Record<string, any>> = {
 export type FormSchemaReturn = {
   /**
    * 获取表单值
-   * @param serialize 是否需要序列化
-   * @default true
+   * @param serialize 是否需要序列化 true
+   * @param filterEmpty 是否过滤空值 默认为 `[undefined, null, '']`
    * @example
    * ``` js
    * // 'a.b.c'=> {a:{b: {c:xxx}}}
    * ```
    */
-  getFieldsValues: (serialize?: boolean) => ReturnPromise<Recordable>;
+  getFieldsValues: (
+    serialize?: boolean,
+    filterEmpty?: boolean | unknown[]
+  ) => ReturnPromise<Recordable>;
   /**
    * 设置表单值
    * @param values

@@ -60,9 +60,9 @@ export const useFormSchema = (_listener?: Record<string, any>): UseFormSchemaRet
       const instance = await getFormInstance();
       return instance?.setFieldsValues(values);
     },
-    getFieldsValues: async <T = any>(serialize = true) => {
+    getFieldsValues: async <T = any>(...args: any) => {
       const instance = await getFormInstance();
-      return instance?.getFieldsValues(serialize) as T;
+      return instance?.getFieldsValues(...args) as T;
     },
     appendFields: async (item, to) => {
       const instance = await getFormInstance();

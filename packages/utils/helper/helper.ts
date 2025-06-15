@@ -1,5 +1,6 @@
-import { isArray, isFunction } from '@eqian/utils-vue';
+import { isArray, isEquals, isFunction, isObject } from '@eqian/utils-vue';
 import { getCurrentScope, onScopeDispose } from 'vue';
+import type { Recordable } from '@e-plus-ui/utils';
 type AnyFunction = (...args: any[]) => any;
 /**
  * 是否为promise
@@ -45,3 +46,27 @@ export function toArray<T>(value: T): T extends readonly any[] ? T : [T] {
 export function magicObject<T>(obj: T): NonNullable<T> {
   return obj ?? (Object.create(null) as unknown as NonNullable<T>);
 }
+
+/**
+ * 剔除空值
+ * @param values
+ * @param emptyValues 默认为 `[undefined, null, '']`
+ */
+export const omitEmpty = (
+  values: Recordable,
+  emptyValues: unknown[] = [undefined, null, '']
+): Recordable => {
+  const result: Record<string, any> = Object.create(null);
+  if (!values || !isObject(values)) return values;
+  const keys = Object.keys(values);
+  keys.forEach(key => {
+    if (Object.prototype.hasOwnProperty.call(values, key)) {
+      const value = values[key];
+      // 如果 value 不在 emptyValues 数组中，则保留该属性
+      if (!emptyValues.some(emptyVal => isEquals(emptyVal, value))) {
+        result[key] = value;
+      }
+    }
+  });
+  return result;
+};
