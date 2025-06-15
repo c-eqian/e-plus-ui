@@ -1,4 +1,7 @@
-import type { FormSchema } from '@e-plus-ui/element/components/form-schema';
+import type {
+  FormSchema,
+  UseFormSchemaReturnType
+} from '@e-plus-ui/element/components/form-schema';
 import type {
   EpTable,
   TableColumnConfig,
@@ -113,6 +116,7 @@ export type FormTableEmits = {
 };
 
 export type OmitTableReturn<T> = Omit<UseTableReturnType<T>, 'registry'>;
+export type OmitFormSchemaReturn = Omit<UseFormSchemaReturnType, 'registry'>;
 /**
  * 搜索表格hooks
  */
@@ -136,6 +140,10 @@ export type FormTableReturn<T = any> = {
    * table实列
    */
   getTableInstance: () => OmitTableReturn<T>;
+  /**
+   * 表单实列
+   */
+  getFormSchemaInstance: () => OmitFormSchemaReturn;
 };
 /**
  * 搜索表格

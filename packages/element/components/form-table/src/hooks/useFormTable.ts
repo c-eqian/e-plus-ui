@@ -1,8 +1,9 @@
 import { isEmpty } from '@eqian/utils-vue';
 import { onBeforeMount, ref, unref, type ComponentInternalInstance } from 'vue';
-import type { FormTableReturn, OmitTableReturn, UseFormTable } from '../type';
+import type { FormTableReturn, OmitFormSchemaReturn, OmitTableReturn, UseFormTable } from '../type';
 import type { Recordable } from '@e-plus-ui/utils';
 let tableInstanceCache: OmitTableReturn<any>;
+let formSchemaInstanceCache: OmitFormSchemaReturn;
 type FormTableReturnKey = keyof FormTableReturn;
 export const useFormTable: UseFormTable = props => {
   const formTableInstance = ref<ComponentInternalInstance>();
@@ -38,13 +39,22 @@ export const useFormTable: UseFormTable = props => {
     run(props);
   };
   /**
-   * 组件实列
+   * table表格组件实列
    */
   const getTableInstance = (): OmitTableReturn<any> => {
     if (!isEmpty(tableInstanceCache)) return tableInstanceCache;
     const run = getInstanceRunKey('getTableInstance', () => null);
     tableInstanceCache = run();
     return tableInstanceCache;
+  };
+  /**
+   * formSchema表单实列
+   */
+  const getFormSchemaInstance = (): OmitFormSchemaReturn => {
+    if (!isEmpty(formSchemaInstanceCache)) return formSchemaInstanceCache;
+    const run = getInstanceRunKey('getFormSchemaInstance', () => null);
+    formSchemaInstanceCache = run();
+    return formSchemaInstanceCache;
   };
   /**
    * 重置表格
@@ -64,6 +74,7 @@ export const useFormTable: UseFormTable = props => {
     registry,
     resetTable,
     searchTable,
-    getTableInstance
+    getTableInstance,
+    getFormSchemaInstance
   };
 };

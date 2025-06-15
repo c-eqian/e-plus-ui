@@ -69,7 +69,7 @@ const simulateRequest = (): Promise<Res> => {
     }, 3000);
   });
 };
-const { registry, getTableInstance } = useFormTable<TableData, any, Res>({
+const { registry, getTableInstance, getFormSchemaInstance } = useFormTable<TableData, any, Res>({
   api: simulateRequest,
   immediate: true,
   formSchema,
@@ -107,6 +107,10 @@ const isSelected = ref(false);
 const isDeletable = computed(() => {
   return !getTableInstance()?.getSelectedRows()?.length;
 });
+const handleFormInstance = async () => {
+  const data = await getFormSchemaInstance().getFieldsValues();
+  console.log(data);
+};
 watch(
   () => isSelected.value,
   () => {
@@ -125,6 +129,9 @@ watch(
           }}</el-button>
           <el-button size="small" type="primary" icon="Plus">新增</el-button>
           <el-button size="small" type="success" icon="FolderAdd">导入</el-button>
+          <el-button size="small" type="success" icon="FolderAdd" @click="handleFormInstance"
+            >获取表单</el-button
+          >
           <el-button :disabled="isDeletable" size="small" type="danger" icon="Delete"
             >删除</el-button
           >

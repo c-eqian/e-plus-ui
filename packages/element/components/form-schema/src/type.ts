@@ -1,3 +1,4 @@
+import type { Recordable, ReturnPromise } from '@e-plus-ui/utils/types';
 import type { ColProps, FormItemRule, FormProps, FormValidateCallback } from 'element-plus';
 import type { Component, ComponentInternalInstance, Ref, Slot, VNode, VNodeProps } from 'vue';
 /**
@@ -279,38 +280,38 @@ export type FormSchemaReturn = {
    * // 'a.b.c'=> {a:{b: {c:xxx}}}
    * ```
    */
-  getFieldsValues: (serialize?: boolean) => Record<string, any>;
+  getFieldsValues: (serialize?: boolean) => ReturnPromise<Recordable>;
   /**
    * 设置表单值
    * @param values
    */
-  setFieldsValues: <T>(values: Record<keyof T, any>) => void;
+  setFieldsValues: <T>(values: Record<keyof T, any>) => ReturnPromise;
   /**
    * 平滑滚动定位到对应的视图
    * @param field
    */
-  scrollIntoView: (field: FormItemsSchema['prop']) => void;
+  scrollIntoView: (field: FormItemsSchema['prop']) => ReturnPromise;
   /**
    * 表单校验
    * @param isScrollToField 是否需要定位到第一个错误字段
    * @param callback 自定义回调函数
    */
-  validate: (isScrollToField?: boolean, callback?: FormValidateCallback) => Promise<any>;
+  validate: (isScrollToField?: boolean, callback?: FormValidateCallback) => ReturnPromise;
   /**
    * 校验表单某个字段验证
    * @param args
    */
-  validateField: (...args: any[]) => Promise<any>;
+  validateField: (...args: any[]) => ReturnPromise;
   /**
    * 重置表单
    * @param args
    */
-  resetFields: (...args: string[]) => void;
+  resetFields: (...args: string[]) => ReturnPromise;
   /**
    * 清空某个字段的表单有验证信息
    * @param args
    */
-  clearValidate: (...args: string[]) => void;
+  clearValidate: (...args: string[]) => ReturnPromise;
   /**
    * 追加组件配置
    * @param item
@@ -319,7 +320,7 @@ export type FormSchemaReturn = {
   appendFields: <T = any>(
     item: FormItemsSchema<T>,
     to?: FormItemsSchema<T>['prop'] | boolean
-  ) => Promise<unknown>;
+  ) => ReturnPromise;
   /**
    * 更新字段属性，如果不存在，将会进行新增
    * @param prop
@@ -329,12 +330,12 @@ export type FormSchemaReturn = {
   updateOrAppendFields: <T = any>(
     prop: FormItemsSchema<T>['prop'],
     item: FormItemsSchema<T>
-  ) => Promise<unknown>;
+  ) => ReturnPromise;
   /**
    * 删除指定表单项
    * @param prop
    */
-  deleteField: <T = any>(prop: FormItemsSchema<T>['prop']) => Promise<void>;
+  deleteField: <T = any>(prop: FormItemsSchema<T>['prop']) => ReturnPromise;
   /**
    * 使用组件的事件
    * 如onChange,回调参数为Scoped
@@ -348,7 +349,7 @@ export type FormSchemaReturn = {
    * })
    * ```
    */
-  listener: (...args: any) => Promise<void>;
+  listener: (...args: any) => ReturnPromise<void>;
 };
 
 /**

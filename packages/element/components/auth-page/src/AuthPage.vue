@@ -34,15 +34,15 @@ const handleConfirm = async () => {
   if (!hasDefaultSlot) {
     await validate();
   }
-  const data = hasDefaultSlot ? null : getFieldsValues();
+  const data = hasDefaultSlot ? null : await getFieldsValues();
   emits('confirm', config.value.useRemember ? { ...data, isRemember: stateData.isRemember } : data);
 };
 const setValues = (data: Record<any, any>, isRemember = false) => {
   setFieldsValues(data);
   stateData.isRemember = isRemember;
 };
-const getValues = () => {
-  const data = getFieldsValues();
+const getValues = async () => {
+  const data = await getFieldsValues();
   return config.value.useRemember ? { ...data, isRemember: stateData.isRemember } : data;
 };
 const resetValues = (isRemember = false) => {

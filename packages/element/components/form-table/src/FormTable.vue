@@ -117,7 +117,7 @@ onMounted(() => {
     calcPaginationStyle();
   });
 });
-const { registry } = useFormSchema();
+const { registry, ...formSchemaExpose } = useFormSchema();
 const { registry: registryTable, ...tableExpose } = useEpTable();
 const handleSearchClick = async (args: any) => {
   params.value = { ...params.value, ...args };
@@ -142,6 +142,7 @@ defineExpose({
   resetTable: handleReset,
   searchTable,
   $setFormTableProps,
+  getFormSchemaInstance: () => formSchemaExpose,
   getTableInstance: () => tableExpose
 });
 </script>
