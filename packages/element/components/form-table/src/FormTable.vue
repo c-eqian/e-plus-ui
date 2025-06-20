@@ -16,6 +16,7 @@ import {
   onMounted,
   ref,
   unref,
+  useSlots,
   useTemplateRef
 } from 'vue';
 import type { FormTableEmits, FormTableProps } from './type';
@@ -138,6 +139,17 @@ const $setFormTableProps = ($props: FormTableProps) => {
 const handleChange = (list: any[]) => {
   selected.value = list;
 };
+const slots = useSlots();
+/**
+ * 获取组件插槽
+ * @param name
+ */
+const getParseFormSlots = (name: 'table' | 'form' = 'table') => {
+  return Object.keys(slots).filter(key => key.startsWith(name));
+};
+const replaceSlotsKey = (key: string) => {
+  return key.replace('form', '').replace('table', '').replace('-', '');
+};
 defineExpose({
   resetTable: handleReset,
   searchTable,
@@ -162,7 +174,15 @@ defineExpose({
         @search="handleSearchClick"
         @reset="handleReset"
         @registry="registry"
-      ></EpFormSchema>
+      >
+        <template
+          v-for="slotKey in getParseFormSlots('form')"
+          #[replaceSlotsKey(slotKey)]="scope"
+          :key="slotKey"
+        >
+          <slot :name="slotKey" v-bind="scope"></slot>
+        </template>
+      </EpFormSchema>
     </template>
     <template #content="{ height }">
       <EpTable
@@ -179,7 +199,15 @@ defineExpose({
         @registry="registryTable"
         @selection-change="handleChange"
         @page-change="handleCurrentPage"
-      ></EpTable>
+      >
+        <template
+          v-for="slotKey in getParseFormSlots('table')"
+          #[replaceSlotsKey(slotKey)]="scope"
+          :key="slotKey"
+        >
+          <slot :name="slotKey" v-bind="scope"></slot>
+        </template>
+      </EpTable>
     </template>
     <template v-if="!!$slots.footer" #footer>
       <slot name="footer"></slot>

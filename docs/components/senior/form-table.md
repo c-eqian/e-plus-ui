@@ -10,3 +10,14 @@ form-table/index
 :::demo
 form-table/use-form-table
 :::
+
+## 使用插槽
+默认支持所有[table](/components/senior/table)组件属性，因此可以通过插槽方式自定义
+
+::: tip 注意
+由于存在form插槽与table插槽，因此在使用插槽时需要添加组件类型前缀（form/table），如table插槽，`table-name` 
+:::
+
+:::demo
+form-table/slots
+:::
