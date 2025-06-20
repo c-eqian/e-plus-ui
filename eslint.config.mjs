@@ -53,8 +53,8 @@ export default eslintPresets([
       'file-naming/filename-naming': [
         'error',
         {
-          'packages/**/*.{ts,js,mts,mjs}': 'CAMEL_CASE', // 对文件统一使用小驼峰
-        }
+          'packages/**/!(test)/*.{ts,js,mts,mjs}': 'CAMEL_CASE', // 对文件统一使用小驼峰,
+        },
       ],
     }
   }
