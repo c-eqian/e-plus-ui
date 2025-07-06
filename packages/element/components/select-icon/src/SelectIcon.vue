@@ -73,7 +73,12 @@ watch(
 
 <template>
   <div class="ep-select-icon ep-w-full">
-    <ElPopover :visible="visible" :width="pixelUnits(props.popoverWidth)" :teleported="false">
+    <ElPopover
+      :fallback-placements="['bottom', 'top', 'right', 'left']"
+      :visible="visible"
+      :width="pixelUnits(props.popoverWidth)"
+      :teleported="false"
+    >
       <template #reference>
         <ElInput
           v-model="value"
