@@ -1,0 +1,138 @@
+.ep-loading-parent {
+  position: relative;
+}
+.ep-loading.ep-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ep-loading-mask-color);
+  display: flex;
+  align-items: center;
+  user-select: none;
+  justify-content: center;
+  z-index: var(--ep-loading-index);
+}
+
+.ep-loading.loading-fullscreen {
+  position: fixed;
+}
+.ep-loading{
+  &-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-text {
+    color: var(--ep-loading-text-color);
+    font-size: 14px;
+  }
+
+  &-icon-dot {
+    display: inline-block;
+    position: relative;
+    &-small{
+      .ep-spin-dot {
+        font-size: 16px;
+      }
+    }
+    &-default{
+      .ep-spin-dot {
+        font-size: 20px;
+      }
+    }
+    &-large{
+      .ep-spin-dot {
+        font-size: 24px;
+      }
+    }
+    .ep-spin-dot {
+      position: relative;
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      transform: rotate(45deg);
+      animation: epRotate 1.2s infinite linear;
+      &-item {
+        position: absolute;
+        display: block;
+        width: 9px;
+        height: 9px;
+        background-color: var(--ep-loading-icon-color);
+        border-radius: 100%;
+        opacity: 0.3;
+        animation: epSpinMove 1s infinite linear alternate;
+        transform: scale(0.75);
+        &:nth-child(1) {
+          top: 0;
+          left: 0;
+        }
+
+        &:nth-child(2) {
+          top: 0;
+          right: 0;
+        }
+
+        &:nth-child(3) {
+          right: 0;
+          bottom: 0;
+        }
+
+        &:nth-child(4) {
+          bottom: 0;
+          left: 0;
+        }
+      }
+      @for $i from 1 through 4 {
+        .ep-spin-dot-item:nth-child(#{$i}) {
+          animation-delay: #{($i - 1) * 0.4}s;
+        }
+      }
+    }
+
+  }
+  &-icon-circle{
+    width: 40px;
+    height: 40px;
+    animation: epCircle 1.2s linear infinite;
+    > svg .path {
+      animation: epCircleDash 1.5s ease-in-out infinite;
+    }
+    > svg circle {
+      stroke: var(--ep-loading-icon-color);
+    }
+  }
+  @keyframes epRotate {
+    100% {
+      transform: rotate(405deg);
+    }
+  }
+
+  @keyframes epSpinMove {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes epCircle {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes epCircleDash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+}

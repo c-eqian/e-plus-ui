@@ -19,16 +19,17 @@ declare module 'vue' {
     EpIcon: typeof import('@e-plus-ui/pure/components')['EpIcon']
     EpLetterLoading: typeof import('@e-plus-ui/pure/components')['EpLetterLoading']
     EpLine: typeof import('@e-plus-ui/pure/components')['EpLine']
+    EpLoading: typeof import('@e-plus-ui/pure/components')['EpLoading']
     EpMenu: typeof import('@e-plus-ui/element/components')['EpMenu']
     EpNoticeBar: typeof import('@e-plus-ui/pure/components')['EpNoticeBar']
     EpPagination: typeof import('@e-plus-ui/element/components')['EpPagination']
     EpSelectIcon: typeof import('@e-plus-ui/element/components')['EpSelectIcon']
     EpSkeleton: typeof import('@e-plus-ui/pure/components')['EpSkeleton']
     EpSlideLoading: typeof import('@e-plus-ui/pure/components')['EpSlideLoading']
+    EpSliderVerify: typeof import('@e-plus-ui/pure/components')['EpSliderVerify']
     EpTable: typeof import('@e-plus-ui/element/components')['EpTable']
     EpTabsBar: typeof import('@e-plus-ui/element/components')['EpTabsBar']
     EpTextFold: typeof import('@e-plus-ui/pure/components')['EpTextFold']
     EpVirtualList: typeof import('@e-plus-ui/pure/components')['EpVirtualList']
-    EpSliderVerify: typeof import('@e-plus-ui/pure/components')['EpSliderVerify']
   }
 }
