@@ -1,6 +1,22 @@
 # 更新日志 
 
 
+## [1.8.0-beta.1](https://github.com/c-eqian/e-plus-ui/compare/v1.8.0-beta.0...v1.8.0-beta.1) (2025-07-12)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* **components:** 修复select-icon组件弹窗位置自动切换 ([a3164c7](https://github.com/c-eqian/e-plus-ui/commit/a3164c7da8898b8a388c047ae8562e5c0e2390d3))
+* **form-schema:** 修复导出类型为promise ([f8e72cc](https://github.com/c-eqian/e-plus-ui/commit/f8e72ccef62a1d954ac9df29a80e8e6b93ef77b7))
+
+
+### ✨ Features | 新功能
+
+* **components:** 新增loading组件 ([d0499e6](https://github.com/c-eqian/e-plus-ui/commit/d0499e6c99df916506fd5d0b40937a9fcacbb035))
+* **form-schema:** 支持使用全局注册表单组件 ([d4a73ea](https://github.com/c-eqian/e-plus-ui/commit/d4a73ea13d64a9a5d2653f7cc0a50397719f56ba))
+* **form-table:** 提供插槽使用方式 ([1966ffb](https://github.com/c-eqian/e-plus-ui/commit/1966ffb8208ddc5189af4619769d991a9c6f90d7))
+* **form-table:** 支持使用hook方式 ([7f77af2](https://github.com/c-eqian/e-plus-ui/commit/7f77af27f5f16ce9a72e9971fbd8534165081d40))
+
 ## [1.8.0-beta.0](https://github.com/c-eqian/e-plus-ui/compare/v1.7.0...v1.8.0-beta.0) (2025-05-23)
 
 

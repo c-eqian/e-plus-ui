@@ -65,7 +65,7 @@ async function command() {
     consola.warn('releaseName为空！！！');
     return;
   }
-  const BASE_COMMAND = 'pnpm run standard-version ';
+  const BASE_COMMAND = 'standard-version ';
   await run(`${BASE_COMMAND + releaseName} && ` + `pnpm run -C script release`, projectRoot);
 }
 command().then();

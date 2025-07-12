@@ -11,6 +11,7 @@ export const HAS_STYLES: string[] = [
   'image',
   'letter-loading',
   'line',
+  'loading',
   'notice-bar',
   'pagination',
   'select-icon',
