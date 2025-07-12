@@ -18,6 +18,7 @@
     "version": "standard-version",
     "beta": "pnpm run version --prerelease beta && pnpm run -C script release",
     "release": "pnpm run version && pnpm run -C script release",
+    "release-patch": "pnpm run -C script release-patch",
     "prepare": "husky",
     "postinstall": "pnpm run build:create",
     "commit": "git add . && git-cz && git push"
