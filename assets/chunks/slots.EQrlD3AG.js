@@ -1,0 +1,1 @@
+import{aF as o,ah as s,o as a,c as n,Q as r,I as c,M as _}from"./framework.SULaAIX3.js";const d={};function l(p,e){const t=s("ep-card");return a(),n("div",null,[r(t,{title:"自定义插槽"},{body:c(()=>e[0]||(e[0]=[_("自定义插槽自定义插槽自定义插槽自定义插槽")])),_:1})])}const i=o(d,[["render",l]]);export{i as default};

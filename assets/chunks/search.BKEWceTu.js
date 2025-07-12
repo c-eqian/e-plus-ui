@@ -1,0 +1,1 @@
+import{v as s,M as o}from"./theme.DqzFMAGb.js";import{d as c,o as a,c as t,Q as n,u as e}from"./framework.SULaAIX3.js";const r={class:"cz-w-96"},f=c({__name:"search",setup(p){return(_,l)=>(a(),t("div",r,[n(e(o),{searchable:!1,icons:Object.keys(e(s))},null,8,["icons"])]))}});export{f as default};
