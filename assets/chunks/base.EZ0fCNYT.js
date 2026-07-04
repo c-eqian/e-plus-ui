@@ -1,0 +1,1 @@
+import{aF as a,ah as n,o as r,c,Q as d,I as t,M as o}from"./framework.SULaAIX3.js";const _={},l={class:"ep-h-full"};function p(f,e){const s=n("ep-card");return r(),c("div",l,[d(s,{title:"标题"},{title:t(()=>e[0]||(e[0]=[o(" 自定义标题 ")])),default:t(()=>[e[1]||(e[1]=o(" 这是卡片 "))]),_:1})])}const m=a(_,[["render",p],["__scopeId","data-v-26301cfa"]]);export{m as default};
