@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:typeorm.io)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(netstat -ano)",
+      "Bash(nc -zv -w 5 43.138.222.187 3306)",
+      "Bash(powershell -Command \"Test-NetConnection -ComputerName 43.138.222.187 -Port 3306 -InformationLevel Quiet\")",
+      "Bash(powershell -Command \"Test-NetConnection -ComputerName 43.138.222.187 -Port 6379 -InformationLevel Quiet\")",
+      "Bash(node scripts/test-db-connection.js)",
+      "Bash(node scripts/quick-db-test.js)",
+      "WebFetch(domain:docs.nestjs.cn)",
+      "WebFetch(domain:docs.nestjs.com)"
+    ]
+  }
+}

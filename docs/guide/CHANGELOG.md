@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.8.1](https://github.com/c-eqian/e-plus-ui/compare/v1.8.0...v1.8.1) (2026-07-04)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* **form-schema:** 修复导出类型为取消promise ([dc6f91b](https://github.com/c-eqian/e-plus-ui/commit/dc6f91b85452156b7bfc1bd0da6575fc874e7533))
+
 ## [1.8.0](https://github.com/c-eqian/e-plus-ui/compare/v1.8.0-beta.1...v1.8.0) (2025-09-19)
 
 ## [1.8.0-beta.1](https://github.com/c-eqian/e-plus-ui/compare/v1.8.0-beta.0...v1.8.0-beta.1) (2025-07-12)
