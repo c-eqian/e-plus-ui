@@ -1,6 +1,5 @@
 import { isObject } from '@eqian/utils-vue';
 import {
-  nextTick,
   onUnmounted,
   ref,
   unref,
@@ -12,16 +11,15 @@ import type { FormSchemaReturn, UseFormSchemaReturnType } from '../type';
 export const useFormSchema = (_listener?: Record<string, any>): UseFormSchemaReturnType => {
   const formInstance = ref<ComponentInternalInstance | null>(null);
   const registeredRef = ref<boolean>(false);
-  const getFormInstance = async () => {
+  const getFormInstance = () => {
     const instance = unref(formInstance);
     if (!instance) {
       console.warn(`获取表单示例失败-----[${instance}]`);
       return null;
     }
-    await nextTick();
     return instance.proxy as FormSchemaReturn & ComponentPublicInstance;
   };
-  const registry = async (getInstance: () => ComponentInternalInstance) => {
+  const registry = (getInstance: () => ComponentInternalInstance) => {
     onUnmounted(() => {
       formInstance.value = null;
     });
@@ -32,52 +30,52 @@ export const useFormSchema = (_listener?: Record<string, any>): UseFormSchemaRet
     formInstance.value = instance;
     registeredRef.value = true;
     if (isObject(_listener)) {
-      await (instance.proxy as FormSchemaReturn & ComponentPublicInstance)?.listener(_listener);
+      (instance.proxy as FormSchemaReturn & ComponentPublicInstance)?.listener(_listener);
     }
   };
   const instanceMethods: FormSchemaReturn = {
-    validate: async (...args) => {
-      const instance = await getFormInstance();
-      return instance?.validate(...args);
+    validate: (...args) => {
+      const instance = getFormInstance();
+      return instance!.validate(...args);
     },
-    validateField: async (...args) => {
-      const instance = await getFormInstance();
-      return instance?.validateField(...args);
+    validateField: (...args) => {
+      const instance = getFormInstance();
+      return instance!.validateField(...args);
     },
-    resetFields: async (...args) => {
-      const instance = await getFormInstance();
+    resetFields: (...args) => {
+      const instance = getFormInstance();
       return instance?.resetFields(...args);
     },
-    clearValidate: async (...args) => {
-      const instance = await getFormInstance();
+    clearValidate: (...args) => {
+      const instance = getFormInstance();
       return instance?.clearValidate(...args);
     },
-    scrollIntoView: async (...args) => {
-      const instance = await getFormInstance();
+    scrollIntoView: (...args) => {
+      const instance = getFormInstance();
       return instance?.scrollIntoView(...args);
     },
-    setFieldsValues: async (values: Record<string, any>) => {
-      const instance = await getFormInstance();
+    setFieldsValues: (values: Record<string, any>) => {
+      const instance = getFormInstance();
       return instance?.setFieldsValues(values);
     },
-    getFieldsValues: async <T = any>(...args: any) => {
-      const instance = await getFormInstance();
+    getFieldsValues: <T = any>(...args: any) => {
+      const instance = getFormInstance();
       return instance?.getFieldsValues(...args) as T;
     },
-    appendFields: async (item, to) => {
-      const instance = await getFormInstance();
+    appendFields: (item, to) => {
+      const instance = getFormInstance();
       return instance?.appendFields(item, to);
     },
-    updateOrAppendFields: async (prop, item) => {
-      const instance = await getFormInstance();
+    updateOrAppendFields: (prop, item) => {
+      const instance = getFormInstance();
       return instance?.updateOrAppendFields(prop, item);
     },
-    deleteField: async (prop: string) => {
-      const instance = await getFormInstance();
+    deleteField: (prop: string) => {
+      const instance = getFormInstance();
       return instance?.deleteField(prop);
     },
-    listener: async (args: Record<string, any>) => {
-      const instance = await getFormInstance();
+    listener: (args: Record<string, any>) => {
+      const instance = getFormInstance();
       return instance?.listener(args);
     }
   };

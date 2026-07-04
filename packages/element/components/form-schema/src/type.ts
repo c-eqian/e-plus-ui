@@ -294,20 +294,17 @@ export type FormSchemaReturn = {
    * // 'a.b.c'=> {a:{b: {c:xxx}}}
    * ```
    */
-  getFieldsValues: (
-    serialize?: boolean,
-    filterEmpty?: boolean | unknown[]
-  ) => ReturnPromise<Recordable>;
+  getFieldsValues: (serialize?: boolean, filterEmpty?: boolean | unknown[]) => Recordable;
   /**
    * 设置表单值
    * @param values
    */
-  setFieldsValues: <T>(values: Record<keyof T, any>) => ReturnPromise;
+  setFieldsValues: <T>(values: Record<keyof T, any>) => any;
   /**
    * 平滑滚动定位到对应的视图
    * @param field
    */
-  scrollIntoView: (field: FormItemsSchema['prop']) => ReturnPromise;
+  scrollIntoView: (field: FormItemsSchema['prop']) => any;
   /**
    * 表单校验
    * @param isScrollToField 是否需要定位到第一个错误字段
@@ -323,12 +320,12 @@ export type FormSchemaReturn = {
    * 重置表单
    * @param args
    */
-  resetFields: (...args: string[]) => ReturnPromise;
+  resetFields: (...args: string[]) => any;
   /**
    * 清空某个字段的表单有验证信息
    * @param args
    */
-  clearValidate: (...args: string[]) => ReturnPromise;
+  clearValidate: (...args: string[]) => any;
   /**
    * 追加组件配置
    * @param item
@@ -337,7 +334,7 @@ export type FormSchemaReturn = {
   appendFields: <T = any>(
     item: FormItemsSchema<T>,
     to?: FormItemsSchema<T>['prop'] | boolean
-  ) => ReturnPromise;
+  ) => any;
   /**
    * 更新字段属性，如果不存在，将会进行新增
    * @param prop
@@ -347,12 +344,12 @@ export type FormSchemaReturn = {
   updateOrAppendFields: <T = any>(
     prop: FormItemsSchema<T>['prop'],
     item: FormItemsSchema<T>
-  ) => ReturnPromise;
+  ) => any;
   /**
    * 删除指定表单项
    * @param prop
    */
-  deleteField: <T = any>(prop: FormItemsSchema<T>['prop']) => ReturnPromise;
+  deleteField: <T = any>(prop: FormItemsSchema<T>['prop']) => void;
   /**
    * 使用组件的事件
    * 如onChange,回调参数为Scoped
@@ -366,13 +363,13 @@ export type FormSchemaReturn = {
    * })
    * ```
    */
-  listener: (...args: any) => ReturnPromise<void>;
+  listener: (...args: any) => void;
 };
 
 /**
  * 表单实例方法
  */
-export type FormSchemaInstance = () => Promise<FormSchemaReturn | null>;
+export type FormSchemaInstance = () => FormSchemaReturn | null;
 
 /**
  * 表单返回类型
