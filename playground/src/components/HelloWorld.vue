@@ -1,38 +1,175 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-defineProps<{ msg: string }>();
-
-const count = ref(0);
+import { EpFormTable, useFormTable, type FormTableProps } from '@e-plus-ui/element';
+type TableData = {
+  date: string;
+  name: string;
+  address: string;
+};
+const formSchema: FormTableProps['formSchema'] = {
+  isSearch: true,
+  labelWidth: '90px',
+  inlineSearch: false,
+  items: [
+    {
+      type: 'input',
+      label: '框架名称',
+      defaultValue: '哈哈哈哈',
+      prop: 'name'
+    },
+    {
+      type: 'input',
+      label: '框架名称',
+      prop: 'test2'
+    },
+    {
+      type: 'input',
+      label: '技术组',
+      prop: 'render'
+    },
+    {
+      type: 'input',
+      label: '技术组1',
+      prop: 'test'
+    },
+    {
+      type: 'input',
+      label: '技术组2',
+      prop: 'test1'
+    }
+  ]
+};
+const tableData: TableData[] = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  }
+];
+const simulateRequest = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({
+        list: tableData,
+        total: tableData.length
+      });
+    }, 3000);
+  });
+};
+const { registry } = useFormTable<TableData>({
+  api: simulateRequest,
+  immediate: true,
+  formSchema,
+  tableSchema: {
+    // 使用分页
+    pagination: true,
+    columns: [
+      {
+        label: '名称',
+        prop: 'name'
+      },
+      {
+        label: '日期',
+        prop: 'date'
+      },
+      {
+        label: '地址',
+        prop: 'address'
+      }
+    ]
+  }
+});
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
-  </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank">create-vue</a>, the
-    official Vue + Vite starter
-  </p>
-  <p>
-    Learn more about IDE Support for Vue in the
-    <a href="https://vuejs.org/guide/scaling-up/tooling.html#ide-support" target="_blank"
-      >Vue Docs Scaling up Guide</a
-    >.
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <EpFormTable @registry="registry"> </EpFormTable>
 </template>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>

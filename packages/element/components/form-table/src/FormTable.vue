@@ -46,6 +46,8 @@ const tableProps = computed(() => {
   const { columns, ...tProps } = computedRefs.value.tableSchema;
   return tProps;
 });
+type TableExtentsSlots = `table${string}`;
+type FormExtentsSlots = `form${string}`;
 defineSlots<{
   /**
    * 底部插槽
@@ -62,6 +64,11 @@ defineSlots<{
    * @param args
    */
   toolbar: (...args: any) => any;
+  /**
+   * 拓展插槽，主要是form、table的插槽
+   */
+  [Ta: TableExtentsSlots]: (...args: any) => any;
+  [F: FormExtentsSlots]: (...args: any) => any;
 }>();
 defineOptions({
   name: 'EpFormTable'
