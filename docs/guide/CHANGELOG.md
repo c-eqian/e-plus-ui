@@ -1,6 +1,13 @@
 # 更新日志 
 
 
+### [1.8.2](https://github.com/c-eqian/e-plus-ui/compare/v1.8.1...v1.8.2) (2026-07-31)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* **form-tbale:** 修复插槽类型提示错误 ([9177f4e](https://github.com/c-eqian/e-plus-ui/commit/9177f4ed6b2baf2e3a3f96bc007afbd1791cee43))
+
 ### [1.8.1](https://github.com/c-eqian/e-plus-ui/compare/v1.8.0...v1.8.1) (2026-07-04)
 
 
