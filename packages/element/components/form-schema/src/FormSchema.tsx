@@ -10,6 +10,7 @@ import {
   reactive,
   ref,
   toRef,
+  watch,
   type PropType,
   type Ref,
   type SlotsType,
@@ -40,11 +41,22 @@ export default defineComponent({
   slots: Object as SlotsType<FormSchemaSlots>,
   setup(props, { emit }) {
     const formProps = computed(() => props.config);
-    const items: any = toRef(props.config?.items ?? []);
-    const { itemsCaches, configItems, renderItems, needToggle } = useItemsProps(items, formProps);
+    const items = ref<FormItemsSchema[]>(props.config?.items ?? []) as Ref<FormItemsSchema[]>;
+    const { renderItems, needToggle, isToggle, updateSearchSchema } = useItemsProps(
+      items,
+      formProps
+    );
+    // 同步外部 props.config.items 引用变化，使内部 items 跟随更新
+    watch(
+      () => props.config?.items,
+      newItems => {
+        if (newItems) {
+          items.value = newItems as FormItemsSchema[];
+        }
+      }
+    );
     const epFormSchemaRef = ref<FormInstance>();
     const listenerEvents = ref();
-    const isToggle = ref(false);
     /**
      * 如果不传入model
      * 内部自动根据表单项创建，使用useFormSchema方法获取值
@@ -91,9 +103,6 @@ export default defineComponent({
     };
     const updateFormSchema = (_items: FormItemsSchema[]) => {
       items.value = _items;
-    };
-    const updateSearchSchema = (isToggle: boolean) => {
-      renderItems.value = isToggle ? configItems.value : itemsCaches.value;
     };
     const getInstance = () => {
       return getCurrentInstance();
