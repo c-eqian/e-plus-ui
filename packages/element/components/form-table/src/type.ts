@@ -10,7 +10,7 @@ import type {
 import type { ComponentProps, Recordable, ReturnPromise } from '@e-plus-ui/utils';
 import type { ElTable } from 'element-plus';
 import type { ComponentInternalInstance } from 'vue';
-type TableSchema<T> = {
+export type TableSchema<T> = {
   columns: TableColumnConfig<T>[];
 } & ComponentProps<typeof ElTable> &
   ComponentProps<typeof EpTable>;

@@ -33,6 +33,7 @@ export const useConfirmDialog = async (config: ConfirmDialog, options?: ElMessag
           }
           if (!resolve) {
             rejectRes();
+            done(); // 关闭
             return;
           }
           if (isBoolean(resolve) && resolve === true) {

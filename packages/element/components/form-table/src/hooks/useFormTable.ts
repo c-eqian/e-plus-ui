@@ -1,9 +1,6 @@
-import { isEmpty } from '@eqian/utils-vue';
-import { onBeforeMount, ref, unref, type ComponentInternalInstance } from 'vue';
+import { onBeforeMount, ref, type ComponentInternalInstance } from 'vue';
 import type { FormTableReturn, OmitFormSchemaReturn, OmitTableReturn, UseFormTable } from '../type';
 import type { Recordable } from '@e-plus-ui/utils';
-let tableInstanceCache: OmitTableReturn<any>;
-let formSchemaInstanceCache: OmitFormSchemaReturn;
 type FormTableReturnKey = keyof FormTableReturn;
 export const useFormTable: UseFormTable = props => {
   const formTableInstance = ref<ComponentInternalInstance>();
@@ -12,7 +9,6 @@ export const useFormTable: UseFormTable = props => {
    * @param instance
    */
   const registry = (instance: ComponentInternalInstance) => {
-    if (unref(formTableInstance)) return;
     formTableInstance.value = instance;
     $setFormTableProps();
   };
@@ -39,22 +35,19 @@ export const useFormTable: UseFormTable = props => {
     run(props);
   };
   /**
-   * table表格组件实列
+   * table 表格组件实列
+   * 每次实时从 formTableInstance.value.exposed 取最新引用，避免 HMR 后拿到陈旧闭包。
    */
   const getTableInstance = (): OmitTableReturn<any> => {
-    if (!isEmpty(tableInstanceCache)) return tableInstanceCache;
     const run = getInstanceRunKey('getTableInstance', () => null);
-    tableInstanceCache = run();
-    return tableInstanceCache;
+    return run();
   };
   /**
-   * formSchema表单实列
+   * formSchema 表单实列
    */
   const getFormSchemaInstance = (): OmitFormSchemaReturn => {
-    if (!isEmpty(formSchemaInstanceCache)) return formSchemaInstanceCache;
     const run = getInstanceRunKey('getFormSchemaInstance', () => null);
-    formSchemaInstanceCache = run();
-    return formSchemaInstanceCache;
+    return run();
   };
   /**
    * 重置表格
