@@ -144,6 +144,15 @@ export type FormTableReturn<T = any> = {
    * 表单实列
    */
   getFormSchemaInstance: () => OmitFormSchemaReturn;
+  /**
+   * 部分更新 props（响应式）
+   * 会合并到组件内部响应式状态；
+   * - formSchema / tableSchema / params / 其他字段：直接写入并触发响应
+   * - api：调用 updateApi 实时更新
+   * - params：触发一次重置查询并刷新列表
+   * @param partial
+   */
+  updateProps: (partial: Partial<FormTableProps<T>>) => void;
 };
 /**
  * 搜索表格

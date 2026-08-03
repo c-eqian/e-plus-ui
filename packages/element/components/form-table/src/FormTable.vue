@@ -143,6 +143,24 @@ const $setFormTableProps = ($props: FormTableProps) => {
     updateApi($props.api);
   }
 };
+/**
+ * 部分更新 props（响应式）
+ * - formSchema / tableSchema：直接写入 computedRefs，下游 computed 自动响应
+ * - api：调用 updateApi 实时更新
+ * - params：合并进 computedRefs.params，并触发 handleReset 让 useTableList 内部 params 重新生效
+ * - 其他字段：直接写入 computedRefs（listKey / totalKey / pageNumKey / pageSizeKey / requestHandler / responseHandler / immediate / title 等）
+ */
+const updateProps = (partial: Partial<FormTableProps>) => {
+  if (!partial || typeof partial !== 'object') return;
+  const next = { ...computedRefs.value, ...partial };
+  computedRefs.value = useOmit(next as FormTableProps, ['api']);
+  if (isFunction((partial as FormTableProps).api)) {
+    updateApi((partial as FormTableProps).api as Parameters<typeof updateApi>[0]);
+  }
+  if ('params' in partial) {
+    handleReset();
+  }
+};
 const handleChange = (list: any[]) => {
   selected.value = list;
 };
@@ -161,6 +179,7 @@ defineExpose({
   resetTable: handleReset,
   searchTable,
   $setFormTableProps,
+  updateProps,
   getFormSchemaInstance: () => formSchemaExpose,
   getTableInstance: () => tableExpose
 });

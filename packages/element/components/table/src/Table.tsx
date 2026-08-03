@@ -189,6 +189,12 @@ export default defineComponent({
     watchEffect(() => {
       dataComputed.value = props.data;
     });
+    watch(
+      () => props.columns,
+      newColumns => {
+        columns.value = newColumns;
+      }
+    );
     provide('EVENT-CLICKED', {
       btn: (...args: any[]) => emit('click-btn', ...args),
       delete: (...args: any[]) => emit('click-row-delete', ...args),

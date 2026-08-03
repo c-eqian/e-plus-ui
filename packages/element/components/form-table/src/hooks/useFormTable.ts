@@ -1,5 +1,11 @@
 import { onBeforeMount, ref, type ComponentInternalInstance } from 'vue';
-import type { FormTableReturn, OmitFormSchemaReturn, OmitTableReturn, UseFormTable } from '../type';
+import type {
+  FormTableProps,
+  FormTableReturn,
+  OmitFormSchemaReturn,
+  OmitTableReturn,
+  UseFormTable
+} from '../type';
 import type { Recordable } from '@e-plus-ui/utils';
 type FormTableReturnKey = keyof FormTableReturn;
 export const useFormTable: UseFormTable = props => {
@@ -63,11 +69,20 @@ export const useFormTable: UseFormTable = props => {
     const run = getInstanceRunKey('searchTable', () => null);
     await run(params);
   };
+  /**
+   * 更新 props
+   * @param partial
+   */
+  const updateProps = (partial: Partial<FormTableProps>) => {
+    const run = getInstanceRunKey('updateProps', () => null);
+    run(partial);
+  };
   return {
     registry,
     resetTable,
     searchTable,
     getTableInstance,
-    getFormSchemaInstance
+    getFormSchemaInstance,
+    updateProps
   };
 };
